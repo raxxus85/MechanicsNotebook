@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import objectmodels.Mechanic;
 import engine.MotoGarageMechanicEngine;
+import javax.swing.ImageIcon;
 import objectmodels.Customer;
 
 /**
@@ -24,12 +25,14 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-        /**
+     /**
      * Creates new form MainWindow
      */
     public MainWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        //this.setIconImage(new ImageIcon(getClass().getResource("/<resource_path" + "/image.png")).getImage());
+        getClass().getResource("/image.png");
     }
 
     /**
@@ -166,18 +169,21 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
         newCustomerButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         createNewMechanicButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        fileMenu = new javax.swing.JMenu();
         newGarageMenuItem = new javax.swing.JMenuItem();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        helpMenu = new javax.swing.JMenu();
+        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mechanic's Notebook");
@@ -210,18 +216,23 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mechanicsLabel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(currentMechanicMiddleNameLabel)
+                        .addGap(30, 30, 30)
+                        .addComponent(mechanicsLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(222, 222, 222)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(currentMechanicMiddleNameLabel)
+                                    .addComponent(currentMechanicLastNameLabel)
+                                    .addComponent(currentMechanicDescription)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(mechanicsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(currentMechanicFirstNameLabel))
-                            .addComponent(currentMechanicLastNameLabel)
-                            .addComponent(currentMechanicDescription))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(currentMechanicFirstNameLabel)))
                         .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(currentMechanicMiddleNameTextField)
@@ -289,14 +300,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(customersLabel))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(customersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(181, 181, 181)
+                        .addComponent(customersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(customerFirstNameLabel)
                             .addComponent(customerMiddleInitialLabel)
@@ -307,21 +315,21 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)
                             .addComponent(currentCustomerFirstNameTextField)
                             .addComponent(currentCustomerMiddleInitialTextField)
-                            .addComponent(currentCustomerLastNameTextField))))
-                .addContainerGap(219, Short.MAX_VALUE))
+                            .addComponent(currentCustomerLastNameTextField)))
+                    .addComponent(customersLabel))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
+                .addComponent(customersLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(customerFirstNameLabel)
                         .addComponent(currentCustomerFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(customersLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(customersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(customersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerMiddleInitialLabel)
@@ -342,6 +350,20 @@ public class MainWindow extends javax.swing.JFrame {
         mechanicsTabbedPane.addTab("Vehicle Maintenance Actions", jTabbedPane2);
         mechanicsTabbedPane.addTab("Maintenance Action Types", jTabbedPane3);
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 572, Short.MAX_VALUE)
+        );
+
+        mechanicsTabbedPane.addTab("tab6", jPanel3);
+        mechanicsTabbedPane.addTab("tab7", jTabbedPane4);
+
         newCustomerButton.setText("New Customer");
         newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,7 +380,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
+        fileMenu.setText("File");
 
         newGarageMenuItem.setText("New");
         newGarageMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -366,7 +388,7 @@ public class MainWindow extends javax.swing.JFrame {
                 newGarageMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(newGarageMenuItem);
+        fileMenu.add(newGarageMenuItem);
 
         openMenuItem.setText("Open");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -374,7 +396,7 @@ public class MainWindow extends javax.swing.JFrame {
                 openMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(openMenuItem);
+        fileMenu.add(openMenuItem);
 
         saveMenuItem.setText("Save");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -382,7 +404,7 @@ public class MainWindow extends javax.swing.JFrame {
                 saveMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(saveMenuItem);
+        fileMenu.add(saveMenuItem);
 
         saveAsMenuItem.setText("Save As");
         saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -390,8 +412,8 @@ public class MainWindow extends javax.swing.JFrame {
                 saveAsMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(saveAsMenuItem);
-        jMenu1.add(jSeparator1);
+        fileMenu.add(saveAsMenuItem);
+        fileMenu.add(jSeparator1);
 
         exitMenuItem.setText("Exit");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -399,12 +421,21 @@ public class MainWindow extends javax.swing.JFrame {
                 exitMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(exitMenuItem);
+        fileMenu.add(exitMenuItem);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(fileMenu);
 
-        jMenu2.setText("About");
-        jMenuBar1.add(jMenu2);
+        helpMenu.setText("Help");
+
+        aboutMenuItem.setText("About");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(aboutMenuItem);
+
+        jMenuBar1.add(helpMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -469,13 +500,6 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMenuItemActionPerformed
-
-    private void mechanicsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicsComboBoxActionPerformed
-        // TODO add your handling code here:
-        // user possibly changed the mechanic, time to refresh
-        this.refresh(); // currenlty does bad things with combo list, doesn't care about seleciton, reverts to orig
-
-    }//GEN-LAST:event_mechanicsComboBoxActionPerformed
 
     /**
      * Private Method to "Save" the garage, should:
@@ -552,6 +576,17 @@ public class MainWindow extends javax.swing.JFrame {
         this.refresh();
     }//GEN-LAST:event_customersComboBoxActionPerformed
 
+    private void mechanicsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicsComboBoxActionPerformed
+        // TODO add your handling code here:
+        // user possibly changed the mechanic, time to refresh
+        this.refresh(); // currenlty does bad things with combo list, doesn't care about seleciton, reverts to orig
+    }//GEN-LAST:event_mechanicsComboBoxActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageMechanicEngine.startAboutWindow();
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -587,6 +622,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton createNewMechanicButton;
     private javax.swing.JTextArea currentCustomerDescriptionTextArea;
     private javax.swing.JTextField currentCustomerFirstNameTextField;
@@ -607,18 +643,20 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox customersComboBox;
     private javax.swing.JLabel customersLabel;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JComboBox mechanicsComboBox;
     private javax.swing.JLabel mechanicsLabel;
     private javax.swing.JTabbedPane mechanicsTabbedPane;

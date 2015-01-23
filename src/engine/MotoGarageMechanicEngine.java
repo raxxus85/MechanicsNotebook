@@ -16,6 +16,7 @@ import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
 import objectmodels.Customer;
+import windows.AboutWindow;
 import windows.MainWindow;
 import windows.NewCustomerWindow;
 import windows.NewMechanicWindow;
@@ -31,6 +32,7 @@ public class MotoGarageMechanicEngine {
     private MainWindow mainWindow;
     private NewMechanicWindow newMechanicWindow;
     private NewCustomerWindow newCustomerWindow;
+    private AboutWindow aboutWindow;
     //Other Variables
     private Garage currentGarage;
     private DialogFactory dialogFactory;
@@ -123,14 +125,7 @@ public class MotoGarageMechanicEngine {
         return true;
     }
     
-    /**
-     * Private method used to start the welcome window
-     * <li> used in the beginning of the program to flash neat graphics, welcome user,  etc
-     */
-    private void startWelcomeWindow(){
-        this.welcomeWindow = new WelcomeWindow(this);
-        this.welcomeWindow.setVisible(true);
-    }  
+
     /**
      * Method called to create a new mechanic
      * <li> should we check to see if mechanic with that name exists!
@@ -218,5 +213,18 @@ public class MotoGarageMechanicEngine {
         this.newCustomerWindow.setVisible(true);
     }
         
+     /**
+     * Private method used to start the welcome window
+     * <li> used in the beginning of the program to flash neat graphics, welcome user,  etc
+     */
+    private void startWelcomeWindow(){
+        this.welcomeWindow = new WelcomeWindow(this);
+        this.welcomeWindow.setVisible(true);
+    }  
+    
+    public void startAboutWindow(){
+        this.aboutWindow = new AboutWindow();
+        this.aboutWindow.setVisible(true);
+    }
     // End Window Creation Methods
 }
