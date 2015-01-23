@@ -15,7 +15,9 @@ import java.io.ObjectOutputStream;
 import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
+import objectmodels.Customer;
 import windows.MainWindow;
+import windows.NewCustomerWindow;
 import windows.NewMechanicWindow;
 import windows.WelcomeWindow;
 
@@ -28,6 +30,7 @@ public class MotoGarageMechanicEngine {
     private WelcomeWindow welcomeWindow;
     private MainWindow mainWindow;
     private NewMechanicWindow newMechanicWindow;
+    private NewCustomerWindow newCustomerWindow;
     //Other Variables
     private Garage currentGarage;
     private DialogFactory dialogFactory;
@@ -85,9 +88,11 @@ public class MotoGarageMechanicEngine {
         }catch(IOException ex){
             System.out.println("WE FAILED ATTEMPTING TO OPEN! SHIT!IO EXCEPTION UP IN HUR");
             ex.printStackTrace();
+            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!");
         }catch(ClassNotFoundException ex){
             System.out.println("WE FAILED ATTEMPTING TO OPEN! SHIT! CLASS NOT FOUND UP IN HUR");
             ex.printStackTrace();
+            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!");
         }
         
     }
@@ -128,16 +133,26 @@ public class MotoGarageMechanicEngine {
     }  
     /**
      * Method called to create a new mechanic
-     * <li> should we check to see if mechanic with that name exists?
+     * <li> should we check to see if mechanic with that name exists!
      * @param incomingMechanic
      * @return true if successful? (NOT IMPLEMENTED YET)
      */
     public boolean createNewMechanic(Mechanic incomingMechanic){       
-        // insert logic here to check to see if mechanic exists?
+        //TODO insert logic here to check to see if mechanic exists?
         this.getGarage().addMechanic(incomingMechanic);
-        for(Mechanic object: this.currentGarage.getMechanics()){
-            System.out.println(object.getFullName());
-        }
+        // TIME TO REFRESH
+        this.mainWindow.refresh();
+        return true;
+    }
+    /**
+     * Method called to create a new customer
+     * <li> should check to see if customer with same name exists!
+     * @param incomingCustomer
+     * @return 
+     */
+    public boolean createNewCustomer(Customer incomingCustomer){
+        //TODO insert logic here to check to see if customer already exists?
+        this.getGarage().addCustomer(incomingCustomer);
         // TIME TO REFRESH
         this.mainWindow.refresh();
         return true;
@@ -148,40 +163,27 @@ public class MotoGarageMechanicEngine {
         return this.currentGarage;
     }
     
-
     /**
-     * Method to return an array of the current mechanics by NAME (firstName + lastName)
-     * @return String[] of mechanic names
-     */
-    public String[] getMechanicNameArray(){
-
-        if(this.getMechanicArray() == null){
-            String[] emptyArray = new String[0];
-            return emptyArray;
-        }
-        Mechanic[] currentMechanicArray = this.getMechanicArray();
-        String[] mechanicNameArray = new String[currentMechanicArray.length];
-        
-        //int counter = currentMechanicArray.length;
-        int counter = 0;
-        while(counter < currentMechanicArray.length){
-            mechanicNameArray[counter] =  currentMechanicArray[counter].getFullName();
-            counter++;
-        }
-        
-        return mechanicNameArray;
-    }
-    
-    /**
-     * Method used to return
+     * Method used to return mechanic array, used for JComboBox
      * @return 
      */
     public Mechanic[] getMechanicArray(){
-        if(this.currentGarage!= null){
             return this.currentGarage.getMechanicsArray();
-        }else{
-            return null;
-        }
+    }
+    
+    /**
+     * Method used to return Customer array, used for JComboBox
+     * @return 
+     */
+    public Customer[] getCustomerArray(){
+        return this.currentGarage.getCustomersArray();
+    }
+    
+    /**
+     * Method used to return customers
+     */
+    public ArrayList<Customer> getCustomers(){
+        return this.currentGarage.getCustomers();
     }
     
     public DialogFactory getDialogFactory(){
@@ -211,6 +213,10 @@ public class MotoGarageMechanicEngine {
         //this.newMechanicWindow.setVisible(true);
     }
     
+    public void startNewCustomerWindow(){
+        this.newCustomerWindow = new NewCustomerWindow(this);
+        this.newCustomerWindow.setVisible(true);
+    }
         
     // End Window Creation Methods
 }

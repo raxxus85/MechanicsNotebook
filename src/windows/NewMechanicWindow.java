@@ -13,7 +13,6 @@ import engine.MotoGarageMechanicEngine;
  * @author Mark
  */
 public class NewMechanicWindow extends javax.swing.JFrame {
-
     private MotoGarageMechanicEngine motoGarageMechanicEngine;
     
     /**
@@ -175,7 +174,7 @@ public class NewMechanicWindow extends javax.swing.JFrame {
 
         boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
         if(mechanicCreated){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic " + this.newMechanicFirstNameTextField.getText() + " created successfully!");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
         } else{
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
         }
