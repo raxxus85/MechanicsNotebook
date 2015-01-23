@@ -20,7 +20,7 @@ import windows.NewMechanicWindow;
 import windows.WelcomeWindow;
 
 /**
- *
+ * MAIN engine for Mechanic's Notebook
  * @author Mark
  */
 public class MotoGarageMechanicEngine {
