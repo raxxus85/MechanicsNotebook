@@ -36,9 +36,11 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public void refresh(){
         this.refreshMechanicsTab();
-        
     }
     
+    /**
+     * Method used to refresh everything within the Mechanics Tab
+     */
     private void refreshMechanicsTab(){
         this.refreshMechanicComboBox();
         this.refreshMechanicInformation();
@@ -46,12 +48,22 @@ public class MainWindow extends javax.swing.JFrame {
     
     /**
      * Method to refresh the Mechanics Combo Box
-     * <li> WARNING current bugged, if someone chooses another mechanic it'll wipe their selection
+     * 
      */
     private void refreshMechanicComboBox(){
+        boolean hasMechanics = false;
+        Mechanic currentMechanic = null;
+        if(this.mechanicsComboBox.getSelectedItem() != null){
+            currentMechanic = (Mechanic)this.mechanicsComboBox.getSelectedItem();
+            hasMechanics = true;
+        }
         this.mechanicsComboBox.removeAllItems();
         //mechanicsComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getMechanicNameArray()));
         mechanicsComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getMechanicArray()));
+        if(hasMechanics){
+            mechanicsComboBox.setSelectedItem(currentMechanic);
+        }
+        
     }
     
     /**
@@ -59,10 +71,17 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void refreshMechanicInformation(){
         Mechanic currentMechanic = (Mechanic)this.mechanicsComboBox.getSelectedItem();
+        if(currentMechanic == null){
+        this.currentMechanicFirstNameTextField.setText("");
+        this.currentMechanicMiddleNameTextField.setText("");
+        this.currentMechanicLastNameTextField.setText("");
+        this.currentMechanicDescriptionTextArea.setText("");
+        }else{
         this.currentMechanicFirstNameTextField.setText(currentMechanic.getFirstName());
         this.currentMechanicMiddleNameTextField.setText(currentMechanic.getMiddleInitial());
         this.currentMechanicLastNameTextField.setText(currentMechanic.getLastName());
-        this.currentMechanicDescriptionTextField.setText(currentMechanic.getDescription());
+        this.currentMechanicDescriptionTextArea.setText(currentMechanic.getDescription());
+        }
     }
     
     /**
@@ -82,10 +101,11 @@ public class MainWindow extends javax.swing.JFrame {
         currentMechanicFirstNameTextField = new javax.swing.JTextField();
         currentMechanicMiddleNameTextField = new javax.swing.JTextField();
         currentMechanicLastNameTextField = new javax.swing.JTextField();
-        currentMechanicDescriptionTextField = new javax.swing.JTextField();
         currentMechanicMiddleNameLabel = new javax.swing.JLabel();
         currentMechanicLastNameLabel = new javax.swing.JLabel();
         currentMechanicDescription = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        currentMechanicDescriptionTextArea = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -125,6 +145,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentMechanicDescription.setText("Description");
 
+        currentMechanicDescriptionTextArea.setColumns(20);
+        currentMechanicDescriptionTextArea.setRows(5);
+        jScrollPane1.setViewportView(currentMechanicDescriptionTextArea);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -147,8 +171,8 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(currentMechanicMiddleNameTextField)
                             .addComponent(currentMechanicFirstNameTextField)
                             .addComponent(currentMechanicLastNameTextField)
-                            .addComponent(currentMechanicDescriptionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(339, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,10 +193,10 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(currentMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(currentMechanicLastNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currentMechanicDescriptionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(currentMechanicDescription))
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(currentMechanicDescription)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
 
         mechanicsTabbedPane.addTab("Mechanics", jPanel1);
@@ -319,7 +343,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void mechanicsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicsComboBoxActionPerformed
         // TODO add your handling code here:
         // user possibly changed the mechanic, time to refresh
-        //this.refresh();
+        this.refresh(); // currenlty does bad things with combo list, doesn't care about seleciton, reverts to orig
 
     }//GEN-LAST:event_mechanicsComboBoxActionPerformed
 
@@ -355,6 +379,8 @@ public class MainWindow extends javax.swing.JFrame {
         // 1) ask to save current data
         // 2) clear all data
         // 3) new garage object! nothing tied to it!
+        this.motoGarageMechanicEngine.createDefaultGarage();
+        this.refresh();
     }//GEN-LAST:event_newGarageMenuItemActionPerformed
 
     /**
@@ -418,7 +444,7 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createNewMechanicButton;
     private javax.swing.JLabel currentMechanicDescription;
-    private javax.swing.JTextField currentMechanicDescriptionTextField;
+    private javax.swing.JTextArea currentMechanicDescriptionTextArea;
     private javax.swing.JLabel currentMechanicFirstNameLabel;
     private javax.swing.JTextField currentMechanicFirstNameTextField;
     private javax.swing.JLabel currentMechanicLastNameLabel;
@@ -433,6 +459,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;

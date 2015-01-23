@@ -155,11 +155,11 @@
                                   <Component id="currentMechanicMiddleNameTextField" max="32767" attributes="0"/>
                                   <Component id="currentMechanicFirstNameTextField" max="32767" attributes="0"/>
                                   <Component id="currentMechanicLastNameTextField" max="32767" attributes="0"/>
-                                  <Component id="currentMechanicDescriptionTextField" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="286" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="339" max="32767" attributes="0"/>
+                      <EmptySpace pref="142" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -185,11 +185,11 @@
                           <Component id="currentMechanicLastNameLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="currentMechanicDescriptionTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="currentMechanicDescription" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="currentMechanicDescription" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="422" max="32767" attributes="0"/>
+                      <EmptySpace pref="307" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -221,8 +221,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="currentMechanicLastNameTextField">
             </Component>
-            <Component class="javax.swing.JTextField" name="currentMechanicDescriptionTextField">
-            </Component>
             <Component class="javax.swing.JLabel" name="currentMechanicMiddleNameLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Middle Name"/>
@@ -238,6 +236,21 @@
                 <Property name="text" type="java.lang.String" value="Description"/>
               </Properties>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="currentMechanicDescriptionTextArea">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">

@@ -54,6 +54,8 @@ public class MotoGarageMechanicEngine {
     
     /**
      * Method used when creating a garage, which is just a container
+     * <li> used when the program first opens, to as a "NEW" garage
+     * <li> used when user hits "NEW" under FILE
      */
     public void createDefaultGarage(){
         Garage newGarage = new Garage();
