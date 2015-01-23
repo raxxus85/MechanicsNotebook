@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package motogaragemechanic;
+package objectmodels;
 
 /**
  *
@@ -10,4 +10,5 @@ package motogaragemechanic;
  */
 public class Consumer {
     
+
 }
