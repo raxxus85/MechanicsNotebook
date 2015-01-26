@@ -10,16 +10,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
 import objectmodels.Customer;
+import objectmodels.Vehicle;
 import windows.AboutWindow;
 import windows.MainWindow;
 import windows.NewCustomerWindow;
 import windows.NewMechanicWindow;
+import windows.NewVehicleWindow;
 import windows.WelcomeWindow;
 
 /**
@@ -27,12 +30,14 @@ import windows.WelcomeWindow;
  * @author Mark
  */
 public class MotoGarageMechanicEngine {
+    
     //Window Variables
     private WelcomeWindow welcomeWindow;
     private MainWindow mainWindow;
     private NewMechanicWindow newMechanicWindow;
     private NewCustomerWindow newCustomerWindow;
     private AboutWindow aboutWindow;
+    private NewVehicleWindow newVehicleWindow;
     //Other Variables
     private Garage currentGarage;
     private DialogFactory dialogFactory;
@@ -87,14 +92,12 @@ public class MotoGarageMechanicEngine {
             this.mainWindow.refresh();
             System.out.println("ATTEMPTING TO OPEN.." + pathOfFileToOpen);
             
-        }catch(IOException ex){
-            System.out.println("WE FAILED ATTEMPTING TO OPEN! SHIT!IO EXCEPTION UP IN HUR");
-            ex.printStackTrace();
-            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!");
         }catch(ClassNotFoundException ex){
-            System.out.println("WE FAILED ATTEMPTING TO OPEN! SHIT! CLASS NOT FOUND UP IN HUR");
             ex.printStackTrace();
-            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!");
+            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!" );
+        }catch(IOException ex){
+            ex.printStackTrace();
+            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file! Version mismatch!");
         }
         
     }
@@ -125,7 +128,7 @@ public class MotoGarageMechanicEngine {
         return true;
     }
     
-
+    
     /**
      * Method called to create a new mechanic
      * <li> should we check to see if mechanic with that name exists!
@@ -163,7 +166,7 @@ public class MotoGarageMechanicEngine {
      * @return 
      */
     public Mechanic[] getMechanicArray(){
-            return this.currentGarage.getMechanicsArray();
+            return this.currentGarage.getMechanicArray();
     }
     
     /**
@@ -171,7 +174,16 @@ public class MotoGarageMechanicEngine {
      * @return 
      */
     public Customer[] getCustomerArray(){
-        return this.currentGarage.getCustomersArray();
+        return this.currentGarage.getCustomerArray();
+    }
+    
+    /**
+     * Method to get Vehicle Array, used for JComboBox
+     * <li> Will get the Vehicle Array for the "current" Customer
+     * @return Vehicle[] from the current Customer
+     */
+    public Vehicle[] getVehicleArray(){
+        return this.currentGarage.getVehicleArray();
     }
     
     /**
@@ -180,6 +192,7 @@ public class MotoGarageMechanicEngine {
     public ArrayList<Customer> getCustomers(){
         return this.currentGarage.getCustomers();
     }
+    
     
     public DialogFactory getDialogFactory(){
         return this.dialogFactory;
@@ -212,6 +225,13 @@ public class MotoGarageMechanicEngine {
         this.newCustomerWindow = new NewCustomerWindow(this);
         this.newCustomerWindow.setVisible(true);
     }
+    
+    public void startNewVehicleWindow(){
+        if(this.newVehicleWindow == null){
+            this.newVehicleWindow = new NewVehicleWindow(this);
+            this.newVehicleWindow.setVisible(true);
+        }
+    }
         
      /**
      * Private method used to start the welcome window
@@ -227,4 +247,36 @@ public class MotoGarageMechanicEngine {
         this.aboutWindow.setVisible(true);
     }
     // End Window Creation Methods
+    
+    /**
+     * Method used to set the current Mechanic
+     * @param incomingMechanic 
+     */
+    public void setCurrentMechanic(Mechanic incomingMechanic){
+        this.currentGarage.setCurrentMechanic(incomingMechanic);
+    }
+    
+    /**
+     * Method used to return the current Mechanic
+     * @return 
+     */
+    public Mechanic getCurrentMechanic(){
+        return this.currentGarage.getCurrentMechanic();
+    }
+    
+    /**
+     * Method to set the current Customer
+     * @param incomingCustomer 
+     */
+    public void setCurrentCustomer(Customer incomingCustomer){
+        this.currentGarage.setCurrentCustomer(incomingCustomer);
+    }
+    
+    /**
+     * Method to get the current Customer
+     * @return current Customer
+     */
+    public Customer getCurrentCustomer(){
+        return this.currentGarage.getCurrentCustomer();
+    }
 }
