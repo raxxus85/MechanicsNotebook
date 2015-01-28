@@ -159,6 +159,12 @@ public class NewMechanicWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    /**
+     * Method used when user hits "Create Mechanic" button
+     * <li> Checks to ensure user actually entered text for FName,MName,LName
+     * 
+     * @param evt 
+     */
     private void createMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createMechanicButtonActionPerformed
         // TODO add your handling code here:
         //newmechanictextfield
@@ -171,7 +177,6 @@ public class NewMechanicWindow extends javax.swing.JFrame {
             return;
         }
         Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
-
         boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
         if(mechanicCreated){
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");

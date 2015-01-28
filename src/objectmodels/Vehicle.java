@@ -4,15 +4,18 @@
  */
 package objectmodels;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mark
  */
-public class Vehicle {
+public class Vehicle implements Serializable{
     //private String vehicleIdentificationNumber;
     private String make;
     private String model;
     private Integer year;
+    private Float odometer;
     private String description;
     
     /**
@@ -63,5 +66,25 @@ public class Vehicle {
         this.year = incomingYear;
     }
     
+    public String getDescription(){
+        return this.description;
+    }
+    
+    public void setDescription(String incomingDescription){
+        this.description = incomingDescription;
+    }
+    
+    public void setOdometer(Float incomingOdometer){
+        this.odometer = incomingOdometer;
+    }
+    
+    public Float getOdometer(){
+        return this.odometer;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getYear() + "," + this.getMake()+ " " + this.getModel();
+  }
     
 }

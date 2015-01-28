@@ -5,6 +5,8 @@
 package windows;
 
 import engine.MotoGarageMechanicEngine;
+import informationwindows.DialogType;
+import objectmodels.Vehicle;
 
 /**
  *
@@ -39,7 +41,7 @@ public class NewVehicleWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         newVehicleInformationLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        createVehicleButton = new javax.swing.JButton();
         newVehicleCancelButton = new javax.swing.JButton();
         newVehicleMakeLabel = new javax.swing.JLabel();
         newVehicleModelLabel = new javax.swing.JLabel();
@@ -57,7 +59,12 @@ public class NewVehicleWindow extends javax.swing.JFrame {
 
         newVehicleInformationLabel.setText("New Vehicle Information");
 
-        jButton1.setText("Create Vehicle");
+        createVehicleButton.setText("Create Vehicle");
+        createVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createVehicleButtonActionPerformed(evt);
+            }
+        });
 
         newVehicleCancelButton.setText("Cancel");
         newVehicleCancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +111,7 @@ public class NewVehicleWindow extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(jButton1)
+                .addComponent(createVehicleButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(newVehicleCancelButton)
                 .addGap(91, 91, 91))
@@ -137,7 +144,7 @@ public class NewVehicleWindow extends javax.swing.JFrame {
                         .addGap(30, 30, 30)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newVehicleCancelButton)
-                    .addComponent(jButton1))
+                    .addComponent(createVehicleButton))
                 .addContainerGap())
         );
 
@@ -149,6 +156,39 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_newVehicleCancelButtonActionPerformed
+
+    private void createVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVehicleButtonActionPerformed
+        // TODO add your handling code here:
+        Integer newVehicleYear;
+        // check to ensure at least the make, model, and year are ENTERED and accurate
+        String newVehicleMake = this.newVehicleMakeTextField.getText();
+        String newVehicleModel = this.newVehicleModelTextField.getText();
+        
+        String newVehicleDescription = this.newVehicleDescriptionTextArea.getText();
+        if(newVehicleMake.equals("")||newVehicleModel.equals("")){
+            System.out.println("huh");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must specify a Make, Model and Year before creating a Vehicle!");
+            //if(newVehicleYear
+            return;
+        }else{
+            // now try the year
+            try{
+                newVehicleYear = Integer.parseInt(this.newVehicleYearTextField.getText());
+            }catch(NumberFormatException ex){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
+                return;
+            }
+            Vehicle newVehicle = new Vehicle(newVehicleMake,newVehicleModel,newVehicleYear,newVehicleDescription);
+            boolean vehicleCreated = this.motoGarageMechanicEngine.createNewVehicle(newVehicle);
+            if(vehicleCreated){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been created!");
+            }else{
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle was not created!");
+            }
+            this.dispose();           
+        }
+
+    }//GEN-LAST:event_createVehicleButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,7 +225,7 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton createVehicleButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newVehicleCancelButton;
     private javax.swing.JLabel newVehicleDescriptionLabel;

@@ -38,6 +38,7 @@ public class MotoGarageMechanicEngine {
     private NewCustomerWindow newCustomerWindow;
     private AboutWindow aboutWindow;
     private NewVehicleWindow newVehicleWindow;
+
     //Other Variables
     private Garage currentGarage;
     private DialogFactory dialogFactory;
@@ -142,6 +143,8 @@ public class MotoGarageMechanicEngine {
         this.mainWindow.refresh();
         return true;
     }
+    
+    
     /**
      * Method called to create a new customer
      * <li> should check to see if customer with same name exists!
@@ -154,6 +157,18 @@ public class MotoGarageMechanicEngine {
         // TIME TO REFRESH
         this.mainWindow.refresh();
         return true;
+    }
+    
+    /**
+     * Method used to create a new Vehicle, picks current Customer by default
+     * @param incomingVehicle
+     * @return true if added, false if not (typically when there is no current customer)
+     */
+    public boolean createNewVehicle(Vehicle incomingVehicle){
+        // 
+        boolean vehicleAdded = this.getGarage().addVehicle(incomingVehicle);
+        this.mainWindow.refresh();
+        return vehicleAdded;
     }
     
     //ACCESSORS and GETTORS
@@ -227,10 +242,8 @@ public class MotoGarageMechanicEngine {
     }
     
     public void startNewVehicleWindow(){
-        if(this.newVehicleWindow == null){
-            this.newVehicleWindow = new NewVehicleWindow(this);
-            this.newVehicleWindow.setVisible(true);
-        }
+        this.newVehicleWindow = new NewVehicleWindow(this);
+        this.newVehicleWindow.setVisible(true);       
     }
         
      /**
@@ -278,5 +291,13 @@ public class MotoGarageMechanicEngine {
      */
     public Customer getCurrentCustomer(){
         return this.currentGarage.getCurrentCustomer();
+    }
+    
+    public void setCurrentVehicle(Vehicle incomingVehicle){
+        this.currentGarage.setCurrentVehicle(incomingVehicle);
+    }
+    
+    public Vehicle getCurrentVehicle(){
+        return this.currentGarage.getCurrentVehicle();
     }
 }

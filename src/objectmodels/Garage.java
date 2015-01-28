@@ -112,9 +112,28 @@ public class Garage implements Serializable{
      */
     public void addCustomer(Customer incomingCustomer){
         this.customers.add(incomingCustomer);
+        // If it's the first Customer to be added, it needs to be the "current" Customer
         if(this.customers.size()==1){
             this.currentCustomer = incomingCustomer;
         }
+    }
+    
+    /**
+     * Method to add a Vehicle, picks the CURRENT Customer
+     * @param incomingVehicle
+     * @return if there is a Customer, return true after adding Vehicle, else return false
+     */
+    public boolean addVehicle(Vehicle incomingVehicle){
+        if(this.currentCustomer!=null){
+            this.currentCustomer.addVehicle(incomingVehicle);
+            if(this.currentCustomer.getVehicles().size()==1){
+                this.currentVehicle = incomingVehicle;
+            }
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     
     /**
@@ -143,7 +162,7 @@ public class Garage implements Serializable{
      * @return Vehicle[] for that Customer else NULL if no current customer or no vehicles for said customer
      */
     public Vehicle[] getVehicleArray(){
-        if(this.currentCustomer!= null && this.currentCustomer.getVehicles().size()>1){
+        if(this.currentCustomer!= null && this.currentCustomer.getVehicles().size()>0){
             ArrayList<Vehicle> vehicleArrayList = this.currentCustomer.getVehicles();
             Vehicle[] vehicleArray = vehicleArrayList.toArray(new Vehicle[vehicleArrayList.size()]);
             return vehicleArray;
