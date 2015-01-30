@@ -256,10 +256,19 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentMechanicFirstNameTextField">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentMechanicMiddleNameTextField">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentMechanicLastNameTextField">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="currentMechanicMiddleNameLabel">
               <Properties>
@@ -287,6 +296,7 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -401,13 +411,22 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentCustomerFirstNameTextField">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="currentCustomerFirstNameTextFieldActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="currentCustomerMiddleInitialTextField">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentCustomerLastNameTextField">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
               <AuxValues>
@@ -420,6 +439,7 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -542,12 +562,24 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleMakeTextField">
+                      <Properties>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleModelTextField">
+                      <Properties>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleYearTextField">
+                      <Properties>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleOdometerTextField">
+                      <Properties>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="vehicleMakeLabel">
                       <Properties>
@@ -580,6 +612,7 @@
                           <Properties>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="rows" type="int" value="5"/>
+                            <Property name="focusable" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                       </SubComponents>

@@ -5,6 +5,7 @@
 package objectmodels;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Vehicle implements Serializable{
     private Integer year;
     private Float odometer;
     private String description;
+    private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<MaintenanceAction>();
     
     /**
      * Main Constructor for Vehicle
@@ -40,6 +42,18 @@ public class Vehicle implements Serializable{
      */
     public Vehicle(String incomingMake, String incomingModel, Integer incomingYear){
         this(incomingMake,incomingModel,incomingYear, "");
+    }
+    
+    public ArrayList<MaintenanceAction> getMaintenanceActions(){
+        return this.maintenanceActions;
+    }
+    
+    public void addMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
+        this.maintenanceActions.add(incomingMaintenanceAction);
+    }
+    
+    public void removeMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
+        this.maintenanceActions.remove(incomingMaintenanceAction);
     }
     
     public String getMake(){

@@ -1,10 +1,12 @@
 package objectmodels;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mark
  */
-public class MaintenanceAction {
+public class MaintenanceAction implements Serializable{
     private Vehicle vehicle;
     private MaintenanceType maintenanceType;
     private Integer odometer;

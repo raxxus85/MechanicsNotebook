@@ -4,11 +4,13 @@
  */
 package objectmodels;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mark
  */
-public class MaintenanceType {
+public class MaintenanceType implements Serializable{
     private String maintenanceTypeName;
     private String description;
     private int mileageInterval;

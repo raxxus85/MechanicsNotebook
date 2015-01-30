@@ -301,6 +301,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentMechanicFirstNameLabel.setText("First Name");
 
+        currentMechanicFirstNameTextField.setFocusable(false);
+
+        currentMechanicMiddleNameTextField.setFocusable(false);
+
+        currentMechanicLastNameTextField.setFocusable(false);
+
         currentMechanicMiddleNameLabel.setText("Middle Name");
 
         currentMechanicLastNameLabel.setText("Last Name");
@@ -309,6 +315,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentMechanicDescriptionTextArea.setColumns(20);
         currentMechanicDescriptionTextArea.setRows(5);
+        currentMechanicDescriptionTextArea.setFocusable(false);
         jScrollPane1.setViewportView(currentMechanicDescriptionTextArea);
 
         javax.swing.GroupLayout mechanicsPanelLayout = new javax.swing.GroupLayout(mechanicsPanel);
@@ -383,14 +390,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         customerDescriptionLabel.setText("Description");
 
+        currentCustomerFirstNameTextField.setFocusable(false);
         currentCustomerFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 currentCustomerFirstNameTextFieldActionPerformed(evt);
             }
         });
 
+        currentCustomerMiddleInitialTextField.setFocusable(false);
+
+        currentCustomerLastNameTextField.setFocusable(false);
+
         currentCustomerDescriptionTextArea.setColumns(20);
         currentCustomerDescriptionTextArea.setRows(5);
+        currentCustomerDescriptionTextArea.setFocusable(false);
         jScrollPane2.setViewportView(currentCustomerDescriptionTextArea);
 
         javax.swing.GroupLayout customersPanelLayout = new javax.swing.GroupLayout(customersPanel);
@@ -454,6 +467,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentVehicleJComboBoxLabel.setText("Customer Vehicles");
 
+        currentVehicleMakeTextField.setFocusable(false);
+
+        currentVehicleModelTextField.setFocusable(false);
+
+        currentVehicleYearTextField.setFocusable(false);
+
+        currentVehicleOdometerTextField.setFocusable(false);
+
         vehicleMakeLabel.setText("Make");
 
         vehicleModelLabel.setText("Model");
@@ -464,6 +485,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentVehicleDescriptionTextArea.setColumns(20);
         currentVehicleDescriptionTextArea.setRows(5);
+        currentVehicleDescriptionTextArea.setFocusable(false);
         jScrollPane4.setViewportView(currentVehicleDescriptionTextArea);
 
         vehicleDescriptionLabel.setText("Description");
