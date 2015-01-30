@@ -550,8 +550,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(maintenanceActionsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(126, Short.MAX_VALUE))
         );
 
