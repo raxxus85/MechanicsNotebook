@@ -49,6 +49,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Welcome to MotoGarage Mechanic's Application!");
+        jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         startButton.setText("Start");
@@ -61,6 +62,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
         jTextField1.setBackground(new java.awt.Color(240, 240, 240));
         jTextField1.setText("MotoGarage Mechanic Application");
         jTextField1.setBorder(null);
+        jTextField1.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,7 +90,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(startButton)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         pack();

@@ -41,6 +41,12 @@ public class Garage implements Serializable{
      */
     public void setCurrentCustomer(Customer incomingCustomer){
         this.currentCustomer = incomingCustomer;
+        // should we place logic here to get a vehicle then?
+        if(this.currentCustomer.getVehicles().size()== 0){
+            this.currentVehicle = null;
+        }else{
+            this.currentVehicle = this.currentCustomer.getVehicles().get(0);
+        }
     }
     
     /**
