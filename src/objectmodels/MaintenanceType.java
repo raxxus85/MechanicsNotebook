@@ -13,8 +13,20 @@ import java.io.Serializable;
 public class MaintenanceType implements Serializable{
     private String maintenanceTypeName;
     private String description;
-    private int mileageInterval;
+    private Integer mileageInterval;
     // private Date timeInterval?
+    
+    /**
+     * Main Constructor
+     * @param incomingMaintenanceTypeName
+     * @param incomingDescription
+     * @param incomingMileageInterval 
+     */
+    public MaintenanceType(String incomingMaintenanceTypeName, Integer incomingMileageInterval,String incomingDescription){
+        this.maintenanceTypeName=incomingMaintenanceTypeName;
+        this.description = incomingDescription;
+        this.mileageInterval = incomingMileageInterval;
+    }
     
     public String getMaintenanceTypeName() {
         return maintenanceTypeName;
@@ -24,7 +36,7 @@ public class MaintenanceType implements Serializable{
         return description;
     }
 
-    public int getMileageInterval() {
+    public Integer getMileageInterval() {
         return mileageInterval;
     }
     

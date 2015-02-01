@@ -18,7 +18,7 @@ public class Vehicle implements Serializable{
     private Integer year;
     private Float odometer;
     private String description;
-    private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<MaintenanceAction>();
+    private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();
     
     /**
      * Main Constructor for Vehicle
@@ -46,6 +46,13 @@ public class Vehicle implements Serializable{
     
     public ArrayList<MaintenanceAction> getMaintenanceActions(){
         return this.maintenanceActions;
+    }
+    
+    public MaintenanceAction[] getMaintenanceActionsArray(){
+        Vehicle currentVehicle = this;
+        ArrayList<MaintenanceAction> maintenanceActionArrayList = currentVehicle.getMaintenanceActions();
+        MaintenanceAction[] maintenanceActionArray = maintenanceActionArrayList.toArray(new MaintenanceAction[maintenanceActionArrayList.size()]);
+        return maintenanceActionArray;
     }
     
     public void addMaintenanceAction(MaintenanceAction incomingMaintenanceAction){

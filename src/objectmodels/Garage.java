@@ -12,12 +12,46 @@ public class Garage implements Serializable{
     private Mechanic currentMechanic=null;
     private Customer currentCustomer=null;
     private Vehicle currentVehicle=null;
+
     
     // attached data
-    private ArrayList<Mechanic> mechanics = new ArrayList<Mechanic>();
-    private ArrayList<Customer> customers = new ArrayList<Customer>();
+    private ArrayList<Mechanic> mechanics = new ArrayList<>();
+    private ArrayList<Customer> customers = new ArrayList<>();
+    private ArrayList<MaintenanceType> maintenanceTypes = new ArrayList<>();
+    
     
     // current object manipulation methods
+   
+    /**
+     * Method to add a new MaintenanceType to the Garage
+     * @param incomingMaintenanceType 
+     */
+    public void addMaintenanceType(MaintenanceType incomingMaintenanceType){
+        this.maintenanceTypes.add(incomingMaintenanceType);
+    }
+    
+
+    /**
+     * Method to return an ARRAY of the Maintenance Type, used to populate ComboBoxes, etc
+     * @return 
+     */
+    public MaintenanceType[] getMaintenaceTypeArray(){
+        ArrayList<MaintenanceType> maintenanceTypeArrayList = this.maintenanceTypes;
+        MaintenanceType[] maintenanceTypeArray = maintenanceTypeArrayList.toArray(new MaintenanceType[maintenanceTypeArrayList.size()]);
+        return maintenanceTypeArray;
+    }
+    
+    /**
+     * Method to return an [] of the current Vehicles Maintenance Actions, converted from Array List
+     * @return MaintenanceAction[]
+     */
+    public MaintenanceAction[] getMaintenanceActions(){
+        Vehicle currentVehicle = this.currentVehicle;
+        ArrayList<MaintenanceAction> maintenanceActionArrayList = currentVehicle.getMaintenanceActions();
+        MaintenanceAction[] maintenanceActionArray = maintenanceActionArrayList.toArray(new MaintenanceAction[maintenanceActionArrayList.size()]);
+        return maintenanceActionArray;
+    }
+    
     
     /**
      * Method to set the current Mechanic

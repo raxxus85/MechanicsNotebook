@@ -17,10 +17,13 @@ import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
 import objectmodels.Customer;
+import objectmodels.MaintenanceAction;
+import objectmodels.MaintenanceType;
 import objectmodels.Vehicle;
 import windows.AboutWindow;
 import windows.MainWindow;
 import windows.NewCustomerWindow;
+import windows.NewMaintenanceTypeWindow;
 import windows.NewMechanicWindow;
 import windows.NewVehicleWindow;
 import windows.WelcomeWindow;
@@ -38,6 +41,7 @@ public class MotoGarageMechanicEngine {
     private NewCustomerWindow newCustomerWindow;
     private AboutWindow aboutWindow;
     private NewVehicleWindow newVehicleWindow;
+    private NewMaintenanceTypeWindow newMaintenanceTypeWindow;
 
     //Other Variables
     private Garage currentGarage;
@@ -60,6 +64,11 @@ public class MotoGarageMechanicEngine {
         MotoGarageMechanicEngine motoGarageMechanicEngine = new MotoGarageMechanicEngine();
         // create a DEFAULT GARAGE as program just opened
         motoGarageMechanicEngine.createDefaultGarage();
+        //add some maintenance TYPES
+        MaintenanceType oilChange = new MaintenanceType("Oil Change", 3000,"Simple Oil Change");
+        MaintenanceType rotateTires = new MaintenanceType("Tire Rotation", 5000,"Rotating the tires (LF-> LR, LR->LF, etc)");
+        motoGarageMechanicEngine.addMaintenanceType(oilChange);
+        motoGarageMechanicEngine.addMaintenanceType(rotateTires);
         motoGarageMechanicEngine.startWelcomeWindow();
     }
     
@@ -144,12 +153,29 @@ public class MotoGarageMechanicEngine {
         return true;
     }
     
+    /**
+     * Method called to create a new Maintenance Type
+     * @param incomingMaintenanceType
+     * @return true if successful (not implemented YET!)
+     */
+    public boolean createNewMaintenanceType(MaintenanceType incomingMaintenanceType){
+        this.currentGarage.addMaintenanceType(incomingMaintenanceType);
+        // TIME TO REFRESH
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean addMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
+        this.currentGarage.getCurrentVehicle().addMaintenanceAction(incomingMaintenanceAction);
+        return true;
+    }
+    
     
     /**
      * Method called to create a new customer
      * <li> should check to see if customer with same name exists!
      * @param incomingCustomer
-     * @return 
+     * @return true if successful (not implemented YET!)
      */
     public boolean createNewCustomer(Customer incomingCustomer){
         //TODO insert logic here to check to see if customer already exists?
@@ -172,6 +198,15 @@ public class MotoGarageMechanicEngine {
     }
     
     //ACCESSORS and GETTORS
+    
+    public MaintenanceType[] getMaintenaceTypeArray(){
+        return this.currentGarage.getMaintenaceTypeArray();
+    }
+    
+    public void addMaintenanceType(MaintenanceType incomingMaintenanceType){
+        this.currentGarage.addMaintenanceType(incomingMaintenanceType);
+    }
+    
     private Garage getGarage(){
         return this.currentGarage;
     }
@@ -222,6 +257,7 @@ public class MotoGarageMechanicEngine {
     public void startMainWindow(){
         this.mainWindow = new MainWindow(this);
         this.mainWindow.setVisible(true);
+        this.mainWindow.refresh();
     }
     
     /**
@@ -258,6 +294,11 @@ public class MotoGarageMechanicEngine {
     public void startAboutWindow(){
         this.aboutWindow = new AboutWindow();
         this.aboutWindow.setVisible(true);
+    }
+    
+    public void startNewMaintenanceTypeWindow(){
+        this.newMaintenanceTypeWindow = new NewMaintenanceTypeWindow(this);
+        this.newMaintenanceTypeWindow.setVisible(true);
     }
     // End Window Creation Methods
     
