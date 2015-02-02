@@ -23,9 +23,11 @@ import objectmodels.Vehicle;
 import windows.AboutWindow;
 import windows.MainWindow;
 import windows.NewCustomerWindow;
+import windows.NewMaintenanceActionWindow;
 import windows.NewMaintenanceTypeWindow;
 import windows.NewMechanicWindow;
 import windows.NewVehicleWindow;
+import windows.UpdateMileageWindow;
 import windows.WelcomeWindow;
 
 /**
@@ -42,6 +44,8 @@ public class MotoGarageMechanicEngine {
     private AboutWindow aboutWindow;
     private NewVehicleWindow newVehicleWindow;
     private NewMaintenanceTypeWindow newMaintenanceTypeWindow;
+    private NewMaintenanceActionWindow newMaintenenaceActionWindow;
+    private UpdateMileageWindow updateMileageWindow;
 
     //Other Variables
     private Garage currentGarage;
@@ -167,6 +171,8 @@ public class MotoGarageMechanicEngine {
     
     public boolean addMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
         this.currentGarage.getCurrentVehicle().addMaintenanceAction(incomingMaintenanceAction);
+        // TIME TO REFRESH
+        this.mainWindow.refresh();
         return true;
     }
     
@@ -250,6 +256,11 @@ public class MotoGarageMechanicEngine {
     
     // Window Creation Methods
     
+    public void startNewUpdateMileageWindow(){
+        this.updateMileageWindow = new UpdateMileageWindow(this);
+        this.updateMileageWindow.setVisible(true);
+    }
+    
     /**
      * Method to create the main window, essential for the program
      * <li> connection between main window and engine vital for program at this point
@@ -300,6 +311,12 @@ public class MotoGarageMechanicEngine {
         this.newMaintenanceTypeWindow = new NewMaintenanceTypeWindow(this);
         this.newMaintenanceTypeWindow.setVisible(true);
     }
+    
+    public void startNewMaintenanceActionWindow(){
+        this.newMaintenenaceActionWindow = new NewMaintenanceActionWindow(this);
+        this.newMaintenenaceActionWindow.setVisible(true);
+    }
+    
     // End Window Creation Methods
     
     /**

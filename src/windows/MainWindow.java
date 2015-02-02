@@ -99,6 +99,7 @@ public class MainWindow extends javax.swing.JFrame {
             MaintenanceAction[] currentMaintenanceActions = this.motoGarageMechanicEngine.getCurrentVehicle().getMaintenanceActionsArray();
             for(MaintenanceAction maintenanceAction : currentMaintenanceActions){
                 this.maintenanceActionList.add(maintenanceAction.toString());
+                //this.maintenanceActionList.
                 //this.maintenanceActionList.add(maintenanceAction.toString());
             }
         }
@@ -118,7 +119,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.currentVehicleMakeTextField.setText(currentVehicle.getMake());
         this.currentVehicleModelTextField.setText(currentVehicle.getModel());
         this.currentVehicleYearTextField.setText(currentVehicle.getYear().toString());
-        this.currentVehicleOdometerTextField.setText("");
+        this.currentVehicleOdometerTextField.setText(currentVehicle.getOdometer().toString());
         this.currentVehicleDescriptionTextArea.setText(currentVehicle.getDescription());
         }
     }
@@ -310,7 +311,7 @@ public class MainWindow extends javax.swing.JFrame {
         vehicleMaintenanceActionsPanel = new javax.swing.JPanel();
         maintenanceActionsLabel = new javax.swing.JLabel();
         maintenanceActionList = new java.awt.List();
-        jButton1 = new javax.swing.JButton();
+        updateMileageButton = new javax.swing.JButton();
         addMaintenanceActionButton = new javax.swing.JButton();
         vehicleWarrantiesPanel = new javax.swing.JPanel();
         maintenanceActionsTypes = new javax.swing.JPanel();
@@ -605,9 +606,19 @@ public class MainWindow extends javax.swing.JFrame {
 
         maintenanceActionsLabel.setText("Maintenace Actions");
 
-        jButton1.setText("Update Mileage");
+        updateMileageButton.setText("Update Mileage");
+        updateMileageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMileageButtonActionPerformed(evt);
+            }
+        });
 
         addMaintenanceActionButton.setText("Add Maintenance Action");
+        addMaintenanceActionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMaintenanceActionButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout vehicleMaintenanceActionsPanelLayout = new javax.swing.GroupLayout(vehicleMaintenanceActionsPanel);
         vehicleMaintenanceActionsPanel.setLayout(vehicleMaintenanceActionsPanelLayout);
@@ -619,14 +630,14 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(326, 326, 326)
                         .addComponent(maintenanceActionsLabel))
                     .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(maintenanceActionList, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
                         .addGap(201, 201, 201)
-                        .addComponent(jButton1)
+                        .addComponent(updateMileageButton)
                         .addGap(178, 178, 178)
                         .addComponent(addMaintenanceActionButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
+            .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         vehicleMaintenanceActionsPanelLayout.setVerticalGroup(
             vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,11 +646,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(maintenanceActionsLabel)
                 .addGap(17, 17, 17)
                 .addGroup(vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(updateMileageButton)
                     .addComponent(addMaintenanceActionButton))
-                .addGap(41, 41, 41)
-                .addComponent(maintenanceActionList, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
         );
 
         vehiclesTabbedPane.addTab("Vehicle Maintenance Actions", vehicleMaintenanceActionsPanel);
@@ -1077,6 +1087,25 @@ public class MainWindow extends javax.swing.JFrame {
         this.refresh();
     }//GEN-LAST:event_maintenanceTypesComboBoxActionPerformed
 
+    private void addMaintenanceActionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceActionButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.motoGarageMechanicEngine.getCurrentVehicle()==null){
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must have a Vehicle to add a Maintenance Action!");
+            return;
+        }else{
+            this.motoGarageMechanicEngine.startNewMaintenanceActionWindow();
+        }
+    }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed
+
+    private void updateMileageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.motoGarageMechanicEngine.getCurrentVehicle()==null){
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must have a Vehicle to add a Maintenance Action!");
+        }else{
+            this.motoGarageMechanicEngine.startNewUpdateMileageWindow();
+        }
+    }//GEN-LAST:event_updateMileageButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1151,7 +1180,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1178,6 +1206,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JButton updateMileageButton;
     private javax.swing.JLabel vehicleDescriptionLabel;
     private javax.swing.JPanel vehicleInfoPanel;
     private javax.swing.JPanel vehicleMaintenanceActionsPanel;

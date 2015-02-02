@@ -16,7 +16,7 @@ public class Vehicle implements Serializable{
     private String make;
     private String model;
     private Integer year;
-    private Float odometer;
+    private Integer odometer;
     private String description;
     private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();
     
@@ -53,6 +53,10 @@ public class Vehicle implements Serializable{
         ArrayList<MaintenanceAction> maintenanceActionArrayList = currentVehicle.getMaintenanceActions();
         MaintenanceAction[] maintenanceActionArray = maintenanceActionArrayList.toArray(new MaintenanceAction[maintenanceActionArrayList.size()]);
         return maintenanceActionArray;
+    }
+    
+    public void updateMileage(Integer incomingMileage){
+        this.odometer = incomingMileage;
     }
     
     public void addMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
@@ -95,11 +99,11 @@ public class Vehicle implements Serializable{
         this.description = incomingDescription;
     }
     
-    public void setOdometer(Float incomingOdometer){
+    public void setOdometer(Integer incomingOdometer){
         this.odometer = incomingOdometer;
     }
     
-    public Float getOdometer(){
+    public Integer getOdometer(){
         return this.odometer;
     }
     

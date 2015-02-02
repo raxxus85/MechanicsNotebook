@@ -5,6 +5,9 @@
 package windows;
 
 import engine.MotoGarageMechanicEngine;
+import informationwindows.DialogType;
+import objectmodels.MaintenanceAction;
+import objectmodels.MaintenanceType;
 
 /**
  *
@@ -26,6 +29,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
     public NewMaintenanceActionWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine= incomingMotoGarageMechanicEngine;
         initComponents();
+        this.currentVehicleTextField.setText(this.motoGarageMechanicEngine.getCurrentVehicle().toString());
     }
 
     /**
@@ -50,7 +54,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         currentVehicleTextField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("New Maintenance Action");
 
@@ -62,6 +66,11 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
         });
 
         addMaintenanceActionButton.setText("Add Maintenance Action");
+        addMaintenanceActionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMaintenanceActionButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Maintenance Type");
 
@@ -76,6 +85,8 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(maintenanceActionNotesTextArea);
 
         jLabel5.setText("Vehicle ");
+
+        currentVehicleTextField.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,12 +148,25 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void addMaintenanceActionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceActionButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.maintenenaceActionMileageTextField.equals("") || this.maintenanceActionNotesTextArea.equals("")){
+            System.out.println("FAIL");
+            return;
+        }else{
+            MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageMechanicEngine.getCurrentVehicle(),(MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.maintenanceActionNotesTextArea.getText());
+            this.motoGarageMechanicEngine.addMaintenanceAction(newMaintenanceAction);
+        }
+        this.dispose();
+    }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed
 
     /**
      * @param args the command line arguments
