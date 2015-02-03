@@ -27,10 +27,11 @@ public class Vehicle implements Serializable{
      * @param incomingYear
      * @param incomingDescription 
      */
-    public Vehicle(String incomingMake, String incomingModel,Integer incomingYear, String incomingDescription){
+    public Vehicle(String incomingMake, String incomingModel,Integer incomingYear, Integer incomingOdometer, String incomingDescription){
         this.make = incomingMake;
         this.model = incomingModel;
         this.year = incomingYear;
+        this.odometer = incomingOdometer;
         this.description = incomingDescription;
     }
     
@@ -40,8 +41,8 @@ public class Vehicle implements Serializable{
      * @param incomingModel
      * @param incomingYear 
      */
-    public Vehicle(String incomingMake, String incomingModel, Integer incomingYear){
-        this(incomingMake,incomingModel,incomingYear, "");
+    public Vehicle(String incomingMake, String incomingModel, Integer incomingYear, Integer incomingOdometer){
+        this(incomingMake,incomingModel,incomingYear,incomingOdometer, "");
     }
     
     public ArrayList<MaintenanceAction> getMaintenanceActions(){

@@ -176,6 +176,11 @@ public class MotoGarageMechanicEngine {
         return true;
     }
     
+    public boolean updateVehicleMileage(Integer incomingMileage){
+        this.currentGarage.getCurrentVehicle().updateMileage(incomingMileage);
+        this.mainWindow.refresh();
+        return true;
+    }
     
     /**
      * Method called to create a new customer

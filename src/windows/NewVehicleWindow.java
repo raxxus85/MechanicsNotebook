@@ -52,6 +52,8 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         newVehicleYearTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         newVehicleDescriptionTextArea = new javax.swing.JTextArea();
+        odometerLabel = new javax.swing.JLabel();
+        newVehicleOdometerTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -85,36 +87,38 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         newVehicleDescriptionTextArea.setRows(5);
         jScrollPane1.setViewportView(newVehicleDescriptionTextArea);
 
+        odometerLabel.setText("Odometer");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(newVehicleModelLabel)
-                    .addComponent(newVehicleMakeLabel)
-                    .addComponent(newVehicleYearLabel)
-                    .addComponent(newVehicleDescriptionLabel))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(newVehicleInformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(newVehicleMakeTextField)
-                            .addComponent(newVehicleModelTextField)
-                            .addComponent(newVehicleYearTextField))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane1)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(createVehicleButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(newVehicleCancelButton)
                 .addGap(91, 91, 91))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(odometerLabel)
+                    .addComponent(newVehicleModelLabel)
+                    .addComponent(newVehicleMakeLabel)
+                    .addComponent(newVehicleYearLabel)
+                    .addComponent(newVehicleDescriptionLabel))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(newVehicleInformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(newVehicleMakeTextField)
+                            .addComponent(newVehicleModelTextField)
+                            .addComponent(newVehicleYearTextField)
+                            .addComponent(newVehicleOdometerTextField))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,18 +137,19 @@ public class NewVehicleWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newVehicleYearLabel)
                     .addComponent(newVehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(odometerLabel)
+                    .addComponent(newVehicleOdometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(newVehicleDescriptionLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newVehicleCancelButton)
-                    .addComponent(createVehicleButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newVehicleCancelButton)
+                            .addComponent(createVehicleButton)))
+                    .addComponent(newVehicleDescriptionLabel))
                 .addContainerGap())
         );
 
@@ -160,6 +165,7 @@ public class NewVehicleWindow extends javax.swing.JFrame {
     private void createVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVehicleButtonActionPerformed
         // TODO add your handling code here:
         Integer newVehicleYear;
+        Integer newVehicleOdometer;
         // check to ensure at least the make, model, and year are ENTERED and accurate
         String newVehicleMake = this.newVehicleMakeTextField.getText();
         String newVehicleModel = this.newVehicleModelTextField.getText();
@@ -174,11 +180,12 @@ public class NewVehicleWindow extends javax.swing.JFrame {
             // now try the year
             try{
                 newVehicleYear = Integer.parseInt(this.newVehicleYearTextField.getText());
+                newVehicleOdometer = Integer.parseInt(this.newVehicleOdometerTextField.getText());
             }catch(NumberFormatException ex){
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
                 return;
             }
-            Vehicle newVehicle = new Vehicle(newVehicleMake,newVehicleModel,newVehicleYear,newVehicleDescription);
+            Vehicle newVehicle = new Vehicle(newVehicleMake,newVehicleModel,newVehicleYear,newVehicleOdometer,newVehicleDescription);
             boolean vehicleCreated = this.motoGarageMechanicEngine.createNewVehicle(newVehicle);
             if(vehicleCreated){
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been created!");
@@ -235,7 +242,9 @@ public class NewVehicleWindow extends javax.swing.JFrame {
     private javax.swing.JTextField newVehicleMakeTextField;
     private javax.swing.JLabel newVehicleModelLabel;
     private javax.swing.JTextField newVehicleModelTextField;
+    private javax.swing.JTextField newVehicleOdometerTextField;
     private javax.swing.JLabel newVehicleYearLabel;
     private javax.swing.JTextField newVehicleYearTextField;
+    private javax.swing.JLabel odometerLabel;
     // End of variables declaration//GEN-END:variables
 }

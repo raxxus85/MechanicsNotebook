@@ -42,7 +42,7 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
         updateMileageLabel = new javax.swing.JLabel();
         updateMileageTextField = new javax.swing.JTextField();
         updateMileageButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        updateMileageCancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -58,7 +58,12 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cancel");
+        updateMileageCancelButton.setText("Cancel");
+        updateMileageCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMileageCancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +84,7 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(updateMileageButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                                .addComponent(jButton2)))))
+                                .addComponent(updateMileageCancelButton)))))
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
@@ -94,7 +99,7 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateMileageButton)
-                    .addComponent(jButton2))
+                    .addComponent(updateMileageCancelButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -104,15 +109,22 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
 
     private void updateMileageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageButtonActionPerformed
         // TODO add your handling code here:
-        if(this.updateMileageTextField.getText() == ""){
+        if(this.updateMileageTextField.getText().equals("")){
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must specify a mileage to update the current vehicle!");
             return;
         }else{
             Integer mileage= Integer.parseInt(this.updateMileageTextField.getText());
-            this.motoGarageMechanicEngine.getCurrentVehicle().updateMileage(mileage);
+            //this.motoGarageMechanicEngine.getCurrentVehicle().updateMileage(mileage);
+            this.motoGarageMechanicEngine.updateVehicleMileage(mileage);
+            this.dispose();
         }
 
     }//GEN-LAST:event_updateMileageButtonActionPerformed
+
+    private void updateMileageCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageCancelButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_updateMileageCancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,8 +161,8 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton updateMileageButton;
+    private javax.swing.JButton updateMileageCancelButton;
     private javax.swing.JLabel updateMileageLabel;
     private javax.swing.JTextField updateMileageTextField;
     private javax.swing.JLabel updateVehicleMileageLabel;

@@ -713,10 +713,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(maintenanceTypesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(maintenanceTypeTextField)
-                        .addComponent(maintenenaceTypeMileageIntervalTextField)
-                        .addComponent(jScrollPane5)))
+                    .addComponent(maintenanceTypeTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(maintenenaceTypeMileageIntervalTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(431, Short.MAX_VALUE))
         );
         maintenanceActionsTypesLayout.setVerticalGroup(
@@ -1092,7 +1091,12 @@ public class MainWindow extends javax.swing.JFrame {
         if(this.motoGarageMechanicEngine.getCurrentVehicle()==null){
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must have a Vehicle to add a Maintenance Action!");
             return;
-        }else{
+        }else if(this.motoGarageMechanicEngine.getCurrentMechanic() == null){
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must have a current Mechanic to create a Maintenance Action!");
+        }
+        
+        
+        else{
             this.motoGarageMechanicEngine.startNewMaintenanceActionWindow();
         }
     }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed
