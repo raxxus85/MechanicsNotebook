@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import objectmodels.Garage;
@@ -159,15 +158,22 @@ public class MotoGarageMechanicEngine {
         return true;
     }
     
+    /**
+     * Method to delete the current Mechanic
+     * @return true if successful
+     */
     public boolean deleteCurrentMechanic(){
-        Mechanic mechanicToDelete = this.getCurrentMechanic();
-  
-        this.getGarage().deleteMechanic(mechanicToDelete);
-        this.setCurrentMechanic(null);
+        if(this.getCurrentMechanic()!=null){
+            Mechanic mechanicToDelete = this.getCurrentMechanic();
+            this.getGarage().deleteMechanic(mechanicToDelete);
+            this.setCurrentMechanic(null);
         // implement checks?
         
-        this.mainWindow.refresh();
-        return true;
+            this.mainWindow.refresh();
+            return true;
+        }else{
+            return false;
+        }
     }
     
     /**

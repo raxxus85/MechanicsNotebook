@@ -70,19 +70,20 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(deleteMechanicLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(84, 84, 84)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(mechanicToDeleteTextField)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(deleteMechanicButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                        .addComponent(cancelButton)))
+                .addComponent(mechanicToDeleteTextField)
                 .addGap(73, 73, 73))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(deleteMechanicLabel)
+                .addGap(124, 124, 124))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 64, Short.MAX_VALUE)
+                .addComponent(deleteMechanicButton)
+                .addGap(42, 42, 42)
+                .addComponent(cancelButton)
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,11 +103,21 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * User hit the cancel button, kill the window
+     * @param evt 
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    /**
+     * User hit the Delete Mechanic Button
+     * <li> Pop up Confirm Dialog to ENSURE they really want to delete mechainc
+     * <li> Delete the Mechanic
+     * @param evt 
+     */
     private void deleteMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMechanicButtonActionPerformed
         // TODO add your handling code here:
         //boolean sureToDelete = false;

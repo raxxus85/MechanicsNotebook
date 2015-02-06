@@ -16,6 +16,8 @@ public class Vehicle implements Serializable{
     private String make;
     private String model;
     private Integer year;
+    private String color;
+    private String vin;
     private Integer odometer;
     private String description;
     private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();
@@ -27,22 +29,30 @@ public class Vehicle implements Serializable{
      * @param incomingYear
      * @param incomingDescription 
      */
-    public Vehicle(String incomingMake, String incomingModel,Integer incomingYear, Integer incomingOdometer, String incomingDescription){
+    public Vehicle(String incomingMake, String incomingModel,Integer incomingYear,String incomingColor, String incomingVIN,  Integer incomingOdometer, String incomingDescription){
         this.make = incomingMake;
         this.model = incomingModel;
         this.year = incomingYear;
+        this.color = incomingColor;
+        this.vin = incomingVIN;
         this.odometer = incomingOdometer;
         this.description = incomingDescription;
     }
     
-    /**
-     * Secondary Constructor for Vehicle
-     * @param incomingMake
-     * @param incomingModel
-     * @param incomingYear 
-     */
-    public Vehicle(String incomingMake, String incomingModel, Integer incomingYear, Integer incomingOdometer){
-        this(incomingMake,incomingModel,incomingYear,incomingOdometer, "");
+    public void setColor(String incomingColor){
+        this.color = incomingColor;
+    }      
+    
+    public String getColor(){
+        return this.color;
+    }
+            
+    public void setVIN(String incomingVIN){
+        this.vin = incomingVIN;
+    }
+    
+    public String getVIN(){
+        return this.vin;
     }
     
     public ArrayList<MaintenanceAction> getMaintenanceActions(){

@@ -16,7 +16,7 @@ public class InformationDialog implements DialogInterface{
      */
     public void create(String message){
         JOptionPane jOptionPane = new JOptionPane(message,JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog = jOptionPane.createDialog("Message!");
+        JDialog dialog = jOptionPane.createDialog("Information");
         dialog.setAlwaysOnTop(true);
         dialog.setModal(true);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

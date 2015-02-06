@@ -16,7 +16,7 @@ public class WarningDialog implements DialogInterface{
      */
     public void create(String message){
         JOptionPane jOptionPane = new JOptionPane(message,JOptionPane.WARNING_MESSAGE);
-        JDialog dialog = jOptionPane.createDialog("Warning Message!");
+        JDialog dialog = jOptionPane.createDialog("Warning!");
         dialog.setAlwaysOnTop(true);
         dialog.setModal(true);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -41,7 +41,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveAsMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="fileMenuSeparator">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
@@ -533,11 +533,16 @@
                               <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="vehicleMakeLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="63" max="32767" attributes="0"/>
+                                      <Component id="currentVehicleMakeTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                               <Component id="vehicleDescriptionLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                              <EmptySpace pref="35" max="32767" attributes="0"/>
                                               <Component id="jScrollPane4" min="-2" pref="200" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
@@ -551,18 +556,23 @@
                                               <Component id="currentVehicleYearTextField" min="-2" pref="200" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="vehicleOdometerLabel" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="vehicleOdometerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="currentVehicleColorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="currentVehicleOdometerTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="currentVehicleColorTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="currentVehicleVINLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="currentVehicleOdometerTextField" pref="200" max="32767" attributes="0"/>
+                                                  <Component id="currentVehicleVINTextField" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                       <EmptySpace pref="57" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="vehicleMakeLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="currentVehicleMakeTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -584,19 +594,9 @@
                                           <Component id="vehicleModelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="currentVehicleYearTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="vehicleYearLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="currentVehicleOdometerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="vehicleOdometerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                                          <Component id="vehicleDescriptionLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentVehicleYearTextField" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="vehicleYearLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -608,7 +608,27 @@
                                       <Component id="newVehicleButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="250" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="currentVehicleColorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentVehicleColorTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="currentVehicleVINLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentVehicleVINTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="currentVehicleOdometerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="vehicleOdometerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="vehicleDescriptionLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="154" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -697,6 +717,20 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newVehicleButtonActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="currentVehicleColorLabel">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Color"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="currentVehicleColorTextField">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="currentVehicleVINLabel">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="VIN"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="currentVehicleVINTextField">
                     </Component>
                   </SubComponents>
                 </Container>

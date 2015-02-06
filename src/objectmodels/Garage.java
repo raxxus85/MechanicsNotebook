@@ -146,6 +146,10 @@ public class Garage implements Serializable{
         }
     }
     
+    /**
+     * Method to delete a Mechanic
+     * @param incomingMechanic 
+     */
     public void deleteMechanic(Mechanic incomingMechanic){
         //TODO implement checking to ensure mechainc actually exists. just to be safe i supposed
         this.mechanics.remove(incomingMechanic);
