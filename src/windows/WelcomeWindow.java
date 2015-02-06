@@ -4,14 +4,23 @@
  */
 package windows;
 
-import engine.MotoGarageMechanicEngine;
+import engine.MechanicsNotebookEngine;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Mark
  */
 public class WelcomeWindow extends javax.swing.JFrame {
-    private MotoGarageMechanicEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private Image iconImage;
+    private BufferedImage image;
     
     /**
      * Creates new form WelcomeWindow
@@ -23,8 +32,31 @@ public class WelcomeWindow extends javax.swing.JFrame {
      /**
      * Creates new form WelcomeWindow
      */
-    public WelcomeWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
+    public WelcomeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        String pathName = (getClass().getResource("/image.png")).toString();
+        java.net.URL testUrl = getClass().getResource("/image.png");
+        System.out.println(pathName);
+        System.out.println(testUrl.toString());
+       try {                
+          iconImage = ImageIO.read(new File(pathName));
+       } catch (IOException ex) {
+            // handle exception...
+       }
+       //System.out.println(image.getHeight());
+        //URL url = new URL("com/xyz/resources/camera.png");
+
+        //java.net.URL url = ClassLoader.getSystemResource(pathName);
+        //ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MotoGarageLogo_tm_black_Page_1-SHRUNK.png"));
+        //Toolkit kit = Toolkit.getDefaultToolkit();
+        //System.out.println(url.toString());
+        //Image img = kit.createImage(testUrl);
+        
+        //iconImage = img;
+        //image = img;
+        
+        //iconImage = (Image)test;
+        //getFrame().setIconImage(img);
         initComponents();
     }
 
@@ -45,6 +77,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(this.iconImage);
         setResizable(false);
 
         startButton.setText("Start");

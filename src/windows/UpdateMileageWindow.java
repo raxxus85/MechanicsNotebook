@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageMechanicEngine;
+import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
 
 /**
@@ -12,7 +12,7 @@ import informationwindows.DialogType;
  * @author Mark
  */
 public class UpdateMileageWindow extends javax.swing.JFrame {
-    private MotoGarageMechanicEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine motoGarageMechanicEngine;
 
     /**
      * Creates new form UpdateMileageWindow
@@ -24,7 +24,7 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
         /**
      * Creates new form UpdateMileageWindow
      */
-    public UpdateMileageWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
+    public UpdateMileageWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
     }

@@ -7,7 +7,7 @@ package windows;
 import java.io.File;
 import javax.swing.JFileChooser;
 import objectmodels.Mechanic;
-import engine.MotoGarageMechanicEngine;
+import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
 import javax.swing.ImageIcon;
 import objectmodels.Customer;
@@ -20,7 +20,7 @@ import objectmodels.Vehicle;
  * @author Mark
  */
 public class MainWindow extends javax.swing.JFrame {
-    private MotoGarageMechanicEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine motoGarageMechanicEngine;
     
     /**
      * Creates new form MainWindow
@@ -32,7 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
      /**
      * Creates new form MainWindow
      */
-    public MainWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
+    public MainWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         //this.setIconImage(new ImageIcon(getClass().getResource("/<resource_path" + "/image.png")).getImage());
@@ -371,10 +371,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentMechanicFirstNameLabel.setText("First Name");
 
+        currentMechanicFirstNameTextField.setEditable(false);
         currentMechanicFirstNameTextField.setFocusable(false);
 
+        currentMechanicMiddleNameTextField.setEditable(false);
         currentMechanicMiddleNameTextField.setFocusable(false);
 
+        currentMechanicLastNameTextField.setEditable(false);
         currentMechanicLastNameTextField.setFocusable(false);
 
         currentMechanicMiddleNameLabel.setText("Middle Name");
@@ -383,6 +386,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentMechanicDescription.setText("Description");
 
+        currentMechanicDescriptionTextArea.setEditable(false);
         currentMechanicDescriptionTextArea.setColumns(20);
         currentMechanicDescriptionTextArea.setRows(5);
         currentMechanicDescriptionTextArea.setFocusable(false);
@@ -490,6 +494,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         customerDescriptionLabel.setText("Description");
 
+        currentCustomerFirstNameTextField.setEditable(false);
         currentCustomerFirstNameTextField.setFocusable(false);
         currentCustomerFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,10 +502,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        currentCustomerMiddleInitialTextField.setEditable(false);
         currentCustomerMiddleInitialTextField.setFocusable(false);
 
+        currentCustomerLastNameTextField.setEditable(false);
         currentCustomerLastNameTextField.setFocusable(false);
 
+        currentCustomerDescriptionTextArea.setEditable(false);
         currentCustomerDescriptionTextArea.setColumns(20);
         currentCustomerDescriptionTextArea.setRows(5);
         currentCustomerDescriptionTextArea.setFocusable(false);
@@ -577,12 +585,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentVehicleJComboBoxLabel.setText("Customer Vehicles");
 
+        currentVehicleMakeTextField.setEditable(false);
         currentVehicleMakeTextField.setFocusable(false);
 
+        currentVehicleModelTextField.setEditable(false);
         currentVehicleModelTextField.setFocusable(false);
 
+        currentVehicleYearTextField.setEditable(false);
         currentVehicleYearTextField.setFocusable(false);
 
+        currentVehicleOdometerTextField.setEditable(false);
         currentVehicleOdometerTextField.setFocusable(false);
 
         vehicleMakeLabel.setText("Make");
@@ -593,6 +605,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         vehicleOdometerLabel.setText("Odometer");
 
+        currentVehicleDescriptionTextArea.setEditable(false);
         currentVehicleDescriptionTextArea.setColumns(20);
         currentVehicleDescriptionTextArea.setRows(5);
         currentVehicleDescriptionTextArea.setFocusable(false);
@@ -609,7 +622,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentVehicleColorLabel.setText("Color");
 
+        currentVehicleColorTextField.setEditable(false);
+        currentVehicleColorTextField.setFocusable(false);
+
         currentVehicleVINLabel.setText("VIN");
+
+        currentVehicleVINTextField.setEditable(false);
+        currentVehicleVINTextField.setFocusable(false);
 
         javax.swing.GroupLayout vehicleInfoPanelLayout = new javax.swing.GroupLayout(vehicleInfoPanel);
         vehicleInfoPanel.setLayout(vehicleInfoPanelLayout);
@@ -626,39 +645,37 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(newVehicleButton)))
                 .addGap(217, 217, 217)
-                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
                         .addComponent(vehicleMakeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                        .addComponent(currentVehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))
-                    .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                        .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                                .addComponent(vehicleDescriptionLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                                .addComponent(vehicleModelLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(currentVehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                                .addComponent(vehicleYearLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(currentVehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(vehicleOdometerLabel)
-                                    .addComponent(currentVehicleColorLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(currentVehicleColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                                .addComponent(currentVehicleVINLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(currentVehicleOdometerTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(currentVehicleVINTextField))))
-                        .addContainerGap(57, Short.MAX_VALUE))))
+                        .addComponent(currentVehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                            .addComponent(vehicleDescriptionLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vehicleInfoPanelLayout.createSequentialGroup()
+                            .addComponent(vehicleModelLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(currentVehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                            .addComponent(vehicleYearLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(currentVehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                            .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(vehicleOdometerLabel)
+                                .addComponent(currentVehicleColorLabel))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(currentVehicleColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                            .addComponent(currentVehicleVINLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(currentVehicleOdometerTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addComponent(currentVehicleVINTextField)))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         vehicleInfoPanelLayout.setVerticalGroup(
             vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -803,10 +820,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionMileageIntervalLabel.setText("Mileage Interval");
 
+        maintenanceTypeTextField.setEditable(false);
+        maintenanceTypeTextField.setFocusable(false);
+
+        maintenenaceTypeMileageIntervalTextField.setEditable(false);
+        maintenenaceTypeMileageIntervalTextField.setFocusable(false);
+
         actionDescriptionLabel.setText("Description");
 
+        maintenanceTypeDescriptionTextArea.setEditable(false);
         maintenanceTypeDescriptionTextArea.setColumns(20);
         maintenanceTypeDescriptionTextArea.setRows(5);
+        maintenanceTypeDescriptionTextArea.setFocusable(false);
         jScrollPane5.setViewportView(maintenanceTypeDescriptionTextArea);
 
         newMaintenanceTypeButton.setText("New Maintenance Action Type");

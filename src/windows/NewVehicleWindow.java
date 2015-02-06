@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageMechanicEngine;
+import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
 import objectmodels.Vehicle;
 
@@ -13,7 +13,7 @@ import objectmodels.Vehicle;
  * @author Mark
  */
 public class NewVehicleWindow extends javax.swing.JFrame {
-    private MotoGarageMechanicEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine motoGarageMechanicEngine;
     
     /**
      * Creates new form NewVehicleWindow
@@ -26,7 +26,7 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         /**
      * Creates new form NewVehicleWindow
      */
-    public NewVehicleWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
+    public NewVehicleWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
     }

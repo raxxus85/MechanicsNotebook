@@ -257,16 +257,19 @@
             </Component>
             <Component class="javax.swing.JTextField" name="currentMechanicFirstNameTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentMechanicMiddleNameTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentMechanicLastNameTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -294,6 +297,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="currentMechanicDescriptionTextArea">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -437,6 +441,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="currentCustomerFirstNameTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -445,11 +450,13 @@
             </Component>
             <Component class="javax.swing.JTextField" name="currentCustomerMiddleInitialTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="currentCustomerLastNameTextField">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -462,6 +469,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="currentCustomerDescriptionTextArea">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -531,50 +539,47 @@
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="vehicleMakeLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace pref="63" max="32767" attributes="0"/>
                                       <Component id="currentVehicleMakeTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="vehicleDescriptionLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="35" max="32767" attributes="0"/>
-                                              <Component id="jScrollPane4" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="vehicleDescriptionLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="35" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane4" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="vehicleModelLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="currentVehicleModelTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="vehicleYearLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="currentVehicleYearTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="vehicleOdometerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="currentVehicleColorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="vehicleModelLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="currentVehicleModelTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="vehicleYearLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="currentVehicleYearTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="vehicleOdometerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="currentVehicleColorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="currentVehicleColorTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="currentVehicleVINLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="currentVehicleOdometerTextField" pref="200" max="32767" attributes="0"/>
-                                                  <Component id="currentVehicleVINTextField" max="32767" attributes="0"/>
-                                              </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="currentVehicleColorTextField" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="currentVehicleVINLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="currentVehicleOdometerTextField" pref="200" max="32767" attributes="0"/>
+                                              <Component id="currentVehicleVINTextField" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="57" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="57" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -651,21 +656,25 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleMakeTextField">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleModelTextField">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleYearTextField">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleOdometerTextField">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
@@ -698,6 +707,7 @@
                       <SubComponents>
                         <Component class="javax.swing.JTextArea" name="currentVehicleDescriptionTextArea">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="rows" type="int" value="5"/>
                             <Property name="focusable" type="boolean" value="false"/>
@@ -724,6 +734,10 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleColorTextField">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="currentVehicleVINLabel">
                       <Properties>
@@ -731,6 +745,10 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="currentVehicleVINTextField">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -937,8 +955,16 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="maintenanceTypeTextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="maintenenaceTypeMileageIntervalTextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="actionDescriptionLabel">
               <Properties>
@@ -954,8 +980,10 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="maintenanceTypeDescriptionTextArea">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>

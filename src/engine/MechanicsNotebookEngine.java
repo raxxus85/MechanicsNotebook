@@ -34,7 +34,7 @@ import windows.WelcomeWindow;
  * MAIN engine for Mechanic's Notebook
  * @author Mark
  */
-public class MotoGarageMechanicEngine {
+public class MechanicsNotebookEngine {
     
     //Window Variables
     private WelcomeWindow welcomeWindow;
@@ -53,7 +53,7 @@ public class MotoGarageMechanicEngine {
     private DialogFactory dialogFactory;
     private Boolean saved;
     
-    public MotoGarageMechanicEngine(){
+    public MechanicsNotebookEngine(){
         // TESTING CODE NEW TO REMOVE ONCE WE IMPLEMENT CREATE/ OPEN/ SAVE
         //Garage testGarage = new Garage();
         //this.currentGarage = testGarage;
@@ -66,7 +66,7 @@ public class MotoGarageMechanicEngine {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MotoGarageMechanicEngine motoGarageMechanicEngine = new MotoGarageMechanicEngine();
+        MechanicsNotebookEngine motoGarageMechanicEngine = new MechanicsNotebookEngine();
         // create a DEFAULT GARAGE as program just opened
         motoGarageMechanicEngine.createDefaultGarage();
         //add some maintenance TYPES

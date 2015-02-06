@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageMechanicEngine;
+import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
@@ -14,7 +14,7 @@ import objectmodels.MaintenanceType;
  * @author Mark
  */
 public class NewMaintenanceActionWindow extends javax.swing.JFrame {
-    private MotoGarageMechanicEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine motoGarageMechanicEngine;
 
     /**
      * Creates new form NewMaintenanceActionWindow
@@ -26,7 +26,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
      /**
      * Creates new form NewMaintenanceActionWindow
      */
-    public NewMaintenanceActionWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
+    public NewMaintenanceActionWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine= incomingMotoGarageMechanicEngine;
         initComponents();
         this.currentVehicleTextField.setText(this.motoGarageMechanicEngine.getCurrentVehicle().toString());
