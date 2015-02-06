@@ -21,6 +21,7 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Vehicle;
 import windows.AboutWindow;
+import windows.DeleteMechanicWindow;
 import windows.MainWindow;
 import windows.NewCustomerWindow;
 import windows.NewMaintenanceActionWindow;
@@ -46,6 +47,7 @@ public class MotoGarageMechanicEngine {
     private NewMaintenanceTypeWindow newMaintenanceTypeWindow;
     private NewMaintenanceActionWindow newMaintenenaceActionWindow;
     private UpdateMileageWindow updateMileageWindow;
+    private DeleteMechanicWindow deleteMechanicWindow;
 
     //Other Variables
     private Garage currentGarage;
@@ -157,6 +159,17 @@ public class MotoGarageMechanicEngine {
         return true;
     }
     
+    public boolean deleteCurrentMechanic(){
+        Mechanic mechanicToDelete = this.getCurrentMechanic();
+  
+        this.getGarage().deleteMechanic(mechanicToDelete);
+        this.setCurrentMechanic(null);
+        // implement checks?
+        
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     /**
      * Method called to create a new Maintenance Type
      * @param incomingMaintenanceType
@@ -261,6 +274,11 @@ public class MotoGarageMechanicEngine {
     
     // Window Creation Methods
     
+    public void startDeleteMechanicWindow(){
+        this.deleteMechanicWindow = new DeleteMechanicWindow(this);
+        this.deleteMechanicWindow.setVisible(true);
+    }
+    
     public void startNewUpdateMileageWindow(){
         this.updateMileageWindow = new UpdateMileageWindow(this);
         this.updateMileageWindow.setVisible(true);
@@ -280,19 +298,21 @@ public class MotoGarageMechanicEngine {
      * Method to create a new mechanic window, which prompts user for new mechanic details
      */
     public void startNewMechanicWindow(){
-
         this.newMechanicWindow = new NewMechanicWindow(this);
         this.newMechanicWindow.setVisible(true);
-        
-        //this.newMechanicWindow = new NewMechanicWindow(this);
-        //this.newMechanicWindow.setVisible(true);
     }
     
+    /**
+     * Method to create a new Customer Window, which prompts user for new Customer details
+     */
     public void startNewCustomerWindow(){
         this.newCustomerWindow = new NewCustomerWindow(this);
         this.newCustomerWindow.setVisible(true);
     }
     
+    /**
+     * Method to create a new Vehicle Window, which prompts the user for new Vehicle details
+     */
     public void startNewVehicleWindow(){
         this.newVehicleWindow = new NewVehicleWindow(this);
         this.newVehicleWindow.setVisible(true);       

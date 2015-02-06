@@ -18,8 +18,14 @@ public class DialogFactory {
         }else if(dialogType == dialogType.INFORMATION_MESSAGE){
             InformationDialog newInformationDialog = new InformationDialog();
             newInformationDialog.create(message);
+        }else if(dialogType == dialogType.CONFIRM){
+            ConfirmDeleteDialog newConfirmDialog = new ConfirmDeleteDialog();
+            newConfirmDialog.createConfirmDelete(message);
         }
-
-
-    }  
+    }
+    
+    public boolean createConfirmMessage(String message){
+        ConfirmDeleteDialog newConfirmDialog = new ConfirmDeleteDialog();
+        return newConfirmDialog.createConfirmDelete(message);
+    }
 }

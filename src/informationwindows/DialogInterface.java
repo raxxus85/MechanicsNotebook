@@ -7,4 +7,5 @@ package informationwindows;
 public interface DialogInterface {
     
     public void create(String message);
+
 }

@@ -146,6 +146,11 @@ public class Garage implements Serializable{
         }
     }
     
+    public void deleteMechanic(Mechanic incomingMechanic){
+        //TODO implement checking to ensure mechainc actually exists. just to be safe i supposed
+        this.mechanics.remove(incomingMechanic);
+    }
+    
     /**
      * Method to add a Customer to the Garage
      * @param incomingCustomer 

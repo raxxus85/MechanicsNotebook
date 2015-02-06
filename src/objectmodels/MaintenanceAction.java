@@ -11,6 +11,7 @@ public class MaintenanceAction implements Serializable{
     private MaintenanceType maintenanceType;
     private Integer odometer;
     private String notes;
+    private Mechanic mechanic;
     // private DATE???
     
     /**
@@ -20,7 +21,8 @@ public class MaintenanceAction implements Serializable{
      * @param incomingOdometer
      * @param incomingNotes 
      */
-    public MaintenanceAction(Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer, String incomingNotes){
+    public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer, String incomingNotes){
+        this.mechanic = incomingMechanic;
         this.vehicle=incomingVehicle;
         this.maintenanceType = incomingMaintenanceType;
         this.odometer = incomingOdometer;
@@ -33,11 +35,20 @@ public class MaintenanceAction implements Serializable{
      * @param incomingMaintenanceType
      * @param incomingOdometer 
      */
-    public MaintenanceAction(Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer){
+    public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer){
+        this.mechanic = incomingMechanic;
         this.vehicle=incomingVehicle;
         this.maintenanceType = incomingMaintenanceType;
         this.odometer = incomingOdometer;
         this.notes = "";
+    }
+    
+    public Mechanic getMechanic(){
+        return this.mechanic;
+    }
+    
+    public void setMechanic(Mechanic incomingMechanic){
+        this.mechanic = incomingMechanic;
     }
     
     public Vehicle getVehicle(){
@@ -74,7 +85,7 @@ public class MaintenanceAction implements Serializable{
     
     @Override
     public String toString(){
-        String returnString = this.maintenanceType.getMaintenanceTypeName() + ","+this.getOdometer() + ", " + this.getNotes();
+        String returnString = this.maintenanceType.getMaintenanceTypeName() + ","+this.getOdometer() + ", " + this.getNotes() +". Mechanic =" + this.getMechanic();
         return returnString;
     }
 }

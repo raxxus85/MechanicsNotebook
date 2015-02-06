@@ -22,7 +22,7 @@ public class NewMechanicWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-        /**
+    /**
      * Creates new form NewMechanicWindow
      */
     public NewMechanicWindow(MotoGarageMechanicEngine incomingMotoGarageMechanicEngine) {
@@ -154,8 +154,12 @@ public class NewMechanicWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Method used when a user presses the Cancel button
+     * @param evt 
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
+        // Dispose of the Window, as the user has pressed cancel
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

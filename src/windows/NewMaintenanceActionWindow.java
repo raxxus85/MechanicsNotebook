@@ -186,7 +186,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
             System.out.println("FAIL");
             return;
         }else{
-            MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageMechanicEngine.getCurrentVehicle(),(MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.maintenanceActionNotesTextArea.getText());
+            MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageMechanicEngine.getCurrentMechanic(),this.motoGarageMechanicEngine.getCurrentVehicle(),(MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.maintenanceActionNotesTextArea.getText());
             this.motoGarageMechanicEngine.addMaintenanceAction(newMaintenanceAction);
         }
         this.dispose();

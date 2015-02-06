@@ -280,6 +280,9 @@ public class MainWindow extends javax.swing.JFrame {
         currentMechanicDescription = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentMechanicDescriptionTextArea = new javax.swing.JTextArea();
+        editMechanicButton = new javax.swing.JButton();
+        deleteMechanicButton = new javax.swing.JButton();
+        createNewMechanicButton = new javax.swing.JButton();
         customersPanel = new javax.swing.JPanel();
         customersLabel = new javax.swing.JLabel();
         customersComboBox = new javax.swing.JComboBox();
@@ -292,6 +295,7 @@ public class MainWindow extends javax.swing.JFrame {
         currentCustomerLastNameTextField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         currentCustomerDescriptionTextArea = new javax.swing.JTextArea();
+        newCustomerButton = new javax.swing.JButton();
         vehiclesPanel = new javax.swing.JPanel();
         vehiclesTabbedPane = new javax.swing.JTabbedPane();
         vehicleInfoPanel = new javax.swing.JPanel();
@@ -308,6 +312,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         currentVehicleDescriptionTextArea = new javax.swing.JTextArea();
         vehicleDescriptionLabel = new javax.swing.JLabel();
+        newVehicleButton = new javax.swing.JButton();
         vehicleMaintenanceActionsPanel = new javax.swing.JPanel();
         maintenanceActionsLabel = new javax.swing.JLabel();
         maintenanceActionList = new java.awt.List();
@@ -324,16 +329,13 @@ public class MainWindow extends javax.swing.JFrame {
         actionDescriptionLabel = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         maintenanceTypeDescriptionTextArea = new javax.swing.JTextArea();
-        newCustomerButton = new javax.swing.JButton();
-        newVehicleButton = new javax.swing.JButton();
-        createNewMechanicButton = new javax.swing.JButton();
+        newMaintenanceTypeButton = new javax.swing.JButton();
         currentMechanicLabel = new javax.swing.JLabel();
         currentMechanicTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         currentCustomerTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         currentVehicleTextField = new javax.swing.JTextField();
-        newMaintenanceTypeButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newGarageMenuItem = new javax.swing.JMenuItem();
@@ -377,33 +379,51 @@ public class MainWindow extends javax.swing.JFrame {
         currentMechanicDescriptionTextArea.setFocusable(false);
         jScrollPane1.setViewportView(currentMechanicDescriptionTextArea);
 
+        editMechanicButton.setText("Edit Mechanic");
+
+        deleteMechanicButton.setText("Delete Mechanic");
+        deleteMechanicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMechanicButtonActionPerformed(evt);
+            }
+        });
+
+        createNewMechanicButton.setText(" New Mechanic");
+        createNewMechanicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createNewMechanicButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mechanicsPanelLayout = new javax.swing.GroupLayout(mechanicsPanel);
         mechanicsPanel.setLayout(mechanicsPanelLayout);
         mechanicsPanelLayout.setHorizontalGroup(
             mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mechanicsPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mechanicsLabel)
                     .addGroup(mechanicsPanelLayout.createSequentialGroup()
-                        .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(mechanicsPanelLayout.createSequentialGroup()
-                                .addGap(222, 222, 222)
-                                .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(currentMechanicMiddleNameLabel)
-                                    .addComponent(currentMechanicLastNameLabel)
-                                    .addComponent(currentMechanicDescription)))
-                            .addGroup(mechanicsPanelLayout.createSequentialGroup()
-                                .addComponent(mechanicsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(currentMechanicFirstNameLabel)))
+                        .addGap(30, 30, 30)
+                        .addComponent(mechanicsLabel))
+                    .addGroup(mechanicsPanelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(mechanicsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(editMechanicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteMechanicButton, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(createNewMechanicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(currentMechanicFirstNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(currentMechanicMiddleNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(currentMechanicLastNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(currentMechanicDescription, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(55, 55, 55)
                         .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(currentMechanicMiddleNameTextField)
                             .addComponent(currentMechanicFirstNameTextField)
                             .addComponent(currentMechanicLastNameTextField)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         mechanicsPanelLayout.setVerticalGroup(
             mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,19 +435,31 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(mechanicsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(currentMechanicFirstNameLabel)
                     .addComponent(currentMechanicFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currentMechanicMiddleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(currentMechanicMiddleNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(currentMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(currentMechanicLastNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(currentMechanicDescription)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(272, Short.MAX_VALUE))
+                    .addGroup(mechanicsPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(currentMechanicMiddleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(currentMechanicMiddleNameLabel)
+                            .addComponent(createNewMechanicButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(currentMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(currentMechanicLastNameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mechanicsPanelLayout.createSequentialGroup()
+                        .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mechanicsPanelLayout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(currentMechanicDescription)
+                                .addGap(5, 5, 5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mechanicsPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editMechanicButton)
+                                .addGap(18, 18, 18)))
+                        .addComponent(deleteMechanicButton)))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Mechanics", mechanicsPanel);
@@ -465,6 +497,13 @@ public class MainWindow extends javax.swing.JFrame {
         currentCustomerDescriptionTextArea.setFocusable(false);
         jScrollPane2.setViewportView(currentCustomerDescriptionTextArea);
 
+        newCustomerButton.setText("New Customer");
+        newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCustomerButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout customersPanelLayout = new javax.swing.GroupLayout(customersPanel);
         customersPanel.setLayout(customersPanelLayout);
         customersPanelLayout.setHorizontalGroup(
@@ -473,7 +512,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(customersPanelLayout.createSequentialGroup()
-                        .addComponent(customersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(customersComboBox, 0, 184, Short.MAX_VALUE)
+                            .addComponent(newCustomerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(65, 65, 65)
                         .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(customerFirstNameLabel)
@@ -503,7 +544,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerMiddleInitialLabel)
-                    .addComponent(currentCustomerMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(currentCustomerMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newCustomerButton))
                 .addGap(18, 18, 18)
                 .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerLastNameLabel)
@@ -512,7 +554,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(customerDescriptionLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Customers", customersPanel);
@@ -549,6 +591,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         vehicleDescriptionLabel.setText("Description");
 
+        newVehicleButton.setText("New Vehicle");
+        newVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newVehicleButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout vehicleInfoPanelLayout = new javax.swing.GroupLayout(vehicleInfoPanel);
         vehicleInfoPanel.setLayout(vehicleInfoPanelLayout);
         vehicleInfoPanelLayout.setHorizontalGroup(
@@ -556,55 +605,85 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(currentVehicleJComboBoxLabel)
-                    .addComponent(vehicleMakeLabel)
-                    .addComponent(vehicleModelLabel)
-                    .addComponent(vehicleYearLabel)
-                    .addComponent(vehicleOdometerLabel)
-                    .addComponent(vehicleDescriptionLabel))
-                .addGap(112, 112, 112)
-                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(currentVehicleMakeTextField)
-                    .addComponent(currentVehicleModelTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(currentVehicleYearTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(currentVehicleOdometerTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(vehiclesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 363, Short.MAX_VALUE))
+                    .addComponent(vehiclesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(currentVehicleJComboBoxLabel))
+                    .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(newVehicleButton)))
+                .addGap(217, 217, 217)
+                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                        .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(vehicleDescriptionLabel)
+                                .addGap(25, 25, 25)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vehicleInfoPanelLayout.createSequentialGroup()
+                                .addComponent(vehicleModelLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(currentVehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vehicleInfoPanelLayout.createSequentialGroup()
+                                .addComponent(vehicleYearLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(currentVehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vehicleInfoPanelLayout.createSequentialGroup()
+                                .addComponent(vehicleOdometerLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(currentVehicleOdometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(57, Short.MAX_VALUE))
+                    .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                        .addComponent(vehicleMakeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(currentVehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))))
         );
         vehicleInfoPanelLayout.setVerticalGroup(
             vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(vehiclesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(currentVehicleJComboBoxLabel))
-                .addGap(18, 18, 18)
                 .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(currentVehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vehicleMakeLabel))
-                .addGap(18, 18, 18)
-                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currentVehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vehicleModelLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currentVehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vehicleYearLabel))
-                .addGap(18, 18, 18)
-                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currentVehicleOdometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vehicleOdometerLabel))
-                .addGap(18, 18, 18)
-                .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vehicleDescriptionLabel))
-                .addContainerGap(210, Short.MAX_VALUE))
+                    .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(currentVehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleMakeLabel))
+                        .addGap(16, 16, 16)
+                        .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(currentVehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleModelLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(currentVehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleYearLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(currentVehicleOdometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleOdometerLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleDescriptionLabel)))
+                    .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(currentVehicleJComboBoxLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(vehiclesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(newVehicleButton)))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         vehiclesTabbedPane.addTab("Vehicle Info", vehicleInfoPanel);
 
         maintenanceActionsLabel.setText("Maintenace Actions");
+
+        maintenanceActionList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maintenanceActionListActionPerformed(evt);
+            }
+        });
 
         updateMileageButton.setText("Update Mileage");
         updateMileageButton.addActionListener(new java.awt.event.ActionListener() {
@@ -627,17 +706,20 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
                 .addGroup(vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                        .addGap(326, 326, 326)
-                        .addComponent(maintenanceActionsLabel))
+                        .addGroup(vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
+                                .addGap(326, 326, 326)
+                                .addComponent(maintenanceActionsLabel))
+                            .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(updateMileageButton)
+                                .addGap(178, 178, 178)
+                                .addComponent(addMaintenanceActionButton)))
+                        .addGap(0, 127, Short.MAX_VALUE))
                     .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(updateMileageButton)
-                        .addGap(178, 178, 178)
-                        .addComponent(addMaintenanceActionButton)))
-                .addContainerGap(137, Short.MAX_VALUE))
-            .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         vehicleMaintenanceActionsPanelLayout.setVerticalGroup(
             vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -649,7 +731,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(updateMileageButton)
                     .addComponent(addMaintenanceActionButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         vehiclesTabbedPane.addTab("Vehicle Maintenance Actions", vehicleMaintenanceActionsPanel);
@@ -662,7 +744,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         vehicleWarrantiesPanelLayout.setVerticalGroup(
             vehicleWarrantiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
 
         vehiclesTabbedPane.addTab("Vehicle Warranties", vehicleWarrantiesPanel);
@@ -699,6 +781,13 @@ public class MainWindow extends javax.swing.JFrame {
         maintenanceTypeDescriptionTextArea.setRows(5);
         jScrollPane5.setViewportView(maintenanceTypeDescriptionTextArea);
 
+        newMaintenanceTypeButton.setText("New Maintenance Action Type");
+        newMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMaintenanceTypeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout maintenanceActionsTypesLayout = new javax.swing.GroupLayout(maintenanceActionsTypes);
         maintenanceActionsTypes.setLayout(maintenanceActionsTypesLayout);
         maintenanceActionsTypesLayout.setHorizontalGroup(
@@ -716,15 +805,18 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(maintenanceTypeTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(maintenenaceTypeMileageIntervalTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(431, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(newMaintenanceTypeButton)
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         maintenanceActionsTypesLayout.setVerticalGroup(
             maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(56, 56, 56)
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(actionTypesLable)
-                    .addComponent(maintenanceTypesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maintenanceTypesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newMaintenanceTypeButton))
                 .addGap(18, 18, 18)
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(actionTypeNameLabel)
@@ -740,31 +832,10 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Maintenance Action Types", maintenanceActionsTypes);
-
-        newCustomerButton.setText("New Customer");
-        newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newCustomerButtonActionPerformed(evt);
-            }
-        });
-
-        newVehicleButton.setText("New Vehicle");
-        newVehicleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newVehicleButtonActionPerformed(evt);
-            }
-        });
-
-        createNewMechanicButton.setText(" New Mechanic");
-        createNewMechanicButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createNewMechanicButtonActionPerformed(evt);
-            }
-        });
 
         currentMechanicLabel.setText("Mechanic");
 
@@ -778,13 +849,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentVehicleTextField.setAutoscrolls(false);
         currentVehicleTextField.setFocusable(false);
-
-        newMaintenanceTypeButton.setText("New Maintenance Action Type");
-        newMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newMaintenanceTypeButtonActionPerformed(evt);
-            }
-        });
 
         fileMenu.setText("File");
 
@@ -852,29 +916,18 @@ public class MainWindow extends javax.swing.JFrame {
             .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(createNewMechanicButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(newCustomerButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(newVehicleButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(newMaintenanceTypeButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(currentMechanicLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(currentMechanicTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(currentCustomerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(currentVehicleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(currentMechanicLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(currentMechanicTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(currentCustomerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(currentVehicleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -887,14 +940,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(currentCustomerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(currentVehicleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newVehicleButton)
-                    .addComponent(newCustomerButton)
-                    .addComponent(createNewMechanicButton)
-                    .addComponent(newMaintenanceTypeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainTabbedPane)
                 .addContainerGap())
         );
 
@@ -924,6 +971,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.motoGarageMechanicEngine.openGarage(testFile);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
+    /**
+     * Method used when a user hits the Create New Mechanic Button
+     * @param evt 
+     */
     private void createNewMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewMechanicButtonActionPerformed
         // TODO add your handling code here:
         this.motoGarageMechanicEngine.startNewMechanicWindow();
@@ -995,13 +1046,21 @@ public class MainWindow extends javax.swing.JFrame {
         this.motoGarageMechanicEngine.saveGarage(testFile);
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
+    /**
+     * Method used when a user pressed the new Customer Button
+     * @param evt 
+     */
     private void newCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerButtonActionPerformed
-        // TODO add your handling code here:
+        // User pressed the new customer button, time to enact
         this.motoGarageMechanicEngine.startNewCustomerWindow();
     }//GEN-LAST:event_newCustomerButtonActionPerformed
 
+    /**
+     * Method used when a customer hits the About Menu Item
+     * @param evt 
+     */
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        // TODO add your handling code here:
+        // Time to open the About Window
         this.motoGarageMechanicEngine.startAboutWindow();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
@@ -1110,6 +1169,27 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateMileageButtonActionPerformed
 
+    private void maintenanceActionListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionListActionPerformed
+        // TODO add your handling code here:
+        System.out.println("The maintenance actions list is reporting action, " + evt.getActionCommand());
+    }//GEN-LAST:event_maintenanceActionListActionPerformed
+
+    
+    /**
+     * Method used when a user pressed the Delete Mechanic button
+     * <li> first, ensure there is a CURRENT mechanic
+     * @param evt 
+     */
+    private void deleteMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMechanicButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.motoGarageMechanicEngine.getCurrentMechanic()== null){
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You have no Mechanics to delete!");
+            return;
+        }else{
+            this.motoGarageMechanicEngine.startDeleteMechanicWindow();
+        }
+    }//GEN-LAST:event_deleteMechanicButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1181,6 +1261,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox customersComboBox;
     private javax.swing.JLabel customersLabel;
     private javax.swing.JPanel customersPanel;
+    private javax.swing.JButton deleteMechanicButton;
+    private javax.swing.JButton editMechanicButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
