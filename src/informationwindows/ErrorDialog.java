@@ -1,5 +1,6 @@
 package informationwindows;
 
+import java.awt.Toolkit;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -20,6 +21,7 @@ public class ErrorDialog implements DialogInterface{
         dialog.setAlwaysOnTop(true);
         dialog.setModal(true);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
         dialog.setVisible(true);
     }
 }

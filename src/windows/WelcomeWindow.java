@@ -5,6 +5,7 @@
 package windows;
 
 import engine.MechanicsNotebookEngine;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -27,37 +28,21 @@ public class WelcomeWindow extends javax.swing.JFrame {
      */
     public WelcomeWindow() {
         initComponents();
+        this.setIcon();
     }
     
      /**
      * Creates new form WelcomeWindow
      */
     public WelcomeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+        this.getContentPane().setBackground(Color.black);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
-        String pathName = (getClass().getResource("/image.png")).toString();
-        java.net.URL testUrl = getClass().getResource("/image.png");
-        System.out.println(pathName);
-        System.out.println(testUrl.toString());
-       try {                
-          iconImage = ImageIO.read(new File(pathName));
-       } catch (IOException ex) {
-            // handle exception...
-       }
-       //System.out.println(image.getHeight());
-        //URL url = new URL("com/xyz/resources/camera.png");
-
-        //java.net.URL url = ClassLoader.getSystemResource(pathName);
-        //ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MotoGarageLogo_tm_black_Page_1-SHRUNK.png"));
-        //Toolkit kit = Toolkit.getDefaultToolkit();
-        //System.out.println(url.toString());
-        //Image img = kit.createImage(testUrl);
-        
-        //iconImage = img;
-        //image = img;
-        
-        //iconImage = (Image)test;
-        //getFrame().setIconImage(img);
         initComponents();
+        this.setIcon();
+    }
+    
+    private void setIcon(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
     }
 
     /**

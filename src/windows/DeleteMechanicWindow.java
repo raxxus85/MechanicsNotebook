@@ -6,6 +6,7 @@ package windows;
 
 import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
+import java.awt.Toolkit;
 
 /**
  *
@@ -27,6 +28,11 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
     public DeleteMechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setIcon();
+    }
+    
+    private void setIcon(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
     }
 
     /**

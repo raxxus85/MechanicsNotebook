@@ -6,6 +6,7 @@ package windows;
 
 import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
+import java.awt.Toolkit;
 import objectmodels.MaintenanceType;
 
 /**
@@ -28,6 +29,11 @@ public class NewMaintenanceTypeWindow extends javax.swing.JFrame {
     public NewMaintenanceTypeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine= incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setIcon();
+    }
+    
+    private void setIcon(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
     }
 
     /**
