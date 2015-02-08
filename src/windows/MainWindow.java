@@ -11,10 +11,16 @@ import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JList;
 import objectmodels.Customer;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
+import objectmodels.MouseAdapter2;
 import objectmodels.Vehicle;
 
 /**
@@ -22,7 +28,9 @@ import objectmodels.Vehicle;
  * @author Mark
  */
 public class MainWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine mechanicsNotebookEngine;
+    DefaultListModel model = new DefaultListModel();
+    //JList maintenanceActionList2;
     
     /**
      * Creates new form MainWindow
@@ -36,10 +44,28 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         
+        MouseListener mouseListener = new MouseAdapter2(this.mechanicsNotebookEngine) {
+        public void mouseClicked(MouseEvent mouseEvent) {
+            JList theList = (JList) mouseEvent.getSource();
+            if (mouseEvent.getClickCount() == 2) {
+                int index = theList.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0) {
+                        Object o = theList.getModel().getElementAt(index);
+                        System.out.println("Double-clicked on: " + o.toString());
+                        // Time to have the ENGINE OPEN THE MAINTENANCE ACTION EDIT WINDOW!!!
+                        mechanicsNotebookEngine.startMaintenanceActionWindow((MaintenanceAction)o);
+
+                    }
+            }
+            
+        }
+    };
+            
         //this.mainTabbedPane.setBackground(Color.black);
 
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        this.mechanicsNotebookEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        maintenanceActionList2.addMouseListener(mouseListener);
         /**
         this.getContentPane().setBackground(Color.gray);
         this.mainTabbedPane.setBackground(Color.gray);
@@ -90,10 +116,10 @@ public class MainWindow extends javax.swing.JFrame {
         if(this.maintenanceTypesComboBox.getSelectedItem()!=null){
             MaintenanceType currentMaintenanceType = (MaintenanceType)this.maintenanceTypesComboBox.getSelectedItem();
             this.maintenanceTypesComboBox.removeAllItems();
-            maintenanceTypesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getMaintenaceTypeArray()));
+            maintenanceTypesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getMaintenaceTypeArray()));
             this.maintenanceTypesComboBox.setSelectedItem(currentMaintenanceType);
         }else{
-            maintenanceTypesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getMaintenaceTypeArray()));
+            maintenanceTypesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getMaintenaceTypeArray()));
         }
     }
     
@@ -107,21 +133,35 @@ public class MainWindow extends javax.swing.JFrame {
      * One of the most important Refresh methods, refeshes all the maintenance actions for current vehicle
      */
     private void refreshMaintenanceActions(){
-        this.maintenanceActionList.removeAll();
-        if(this.motoGarageMechanicEngine.getCurrentVehicle()!=null){
-            MaintenanceAction[] currentMaintenanceActions = this.motoGarageMechanicEngine.getCurrentVehicle().getMaintenanceActionsArray();
+        this.maintenanceActionList2.removeAll();
+        model.removeAllElements();
+        //this.maintenanceActionList2.removeAll();
+        //this.model.removeAllElements();
+        //model = new DefaultListModel();
+        maintenanceActionList2 = new JList(model);
+        
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null){
+            MaintenanceAction[] currentMaintenanceActions = this.mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
             for(MaintenanceAction maintenanceAction : currentMaintenanceActions){
-                this.maintenanceActionList.add(maintenanceAction.toString());
-                //this.maintenanceActionList.
-                //this.maintenanceActionList.add(maintenanceAction.toString());
+                // NEW
+                model.addElement(maintenanceAction);
+                //maintenanceActionList2 = new JList(model);
+
+
             }
         }
     }
     
+    /**
+     * SUPER IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * **/
+    
+
+    
     private void refreshVehiclesInformation(){
         System.out.println("REFRESH VEHICLES INFO BIENG CALLED");
         //Vehicle currentVehicle = (Vehicle)this.customersComboBox.getSelectedItem();
-        Vehicle currentVehicle = this.motoGarageMechanicEngine.getCurrentVehicle();
+        Vehicle currentVehicle = this.mechanicsNotebookEngine.getCurrentVehicle();
         if(currentVehicle == null){
         this.currentVehicleMakeTextField.setText("");
         this.currentVehicleModelTextField.setText("");
@@ -152,7 +192,7 @@ public class MainWindow extends javax.swing.JFrame {
             hasVehicles = true;
         }
         this.vehiclesComboBox.removeAllItems();
-        vehiclesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getVehicleArray()));
+        vehiclesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getVehicleArray()));
         if(hasVehicles){
             vehiclesComboBox.setSelectedItem(currentVehicle);
         }
@@ -164,20 +204,20 @@ public class MainWindow extends javax.swing.JFrame {
     private void refreshCurrentObjects(){
         System.out.println("REFRESH CURRENT OBJECTS BEING CALLED");
         // Refresh Mechanic 
-        if(this.motoGarageMechanicEngine.getCurrentMechanic()!= null){
-            this.currentMechanicTextField.setText(this.motoGarageMechanicEngine.getCurrentMechanic().toString());
+        if(this.mechanicsNotebookEngine.getCurrentMechanic()!= null){
+            this.currentMechanicTextField.setText(this.mechanicsNotebookEngine.getCurrentMechanic().toString());
         }else{
             this.currentMechanicTextField.setText("");
         }
         // Refresh Customer
-        if(this.motoGarageMechanicEngine.getCurrentCustomer()!= null){
-            this.currentCustomerTextField.setText(this.motoGarageMechanicEngine.getCurrentCustomer().toString());
+        if(this.mechanicsNotebookEngine.getCurrentCustomer()!= null){
+            this.currentCustomerTextField.setText(this.mechanicsNotebookEngine.getCurrentCustomer().toString());
         }else{
             this.currentCustomerTextField.setText("");
         }
         // Refresh Vehicle
-        if(this.motoGarageMechanicEngine.getCurrentVehicle()!= null){
-            this.currentVehicleTextField.setText(this.motoGarageMechanicEngine.getCurrentVehicle().toString());
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()!= null){
+            this.currentVehicleTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().toString());
         }else{
             this.currentVehicleTextField.setText("");
         }
@@ -203,7 +243,7 @@ public class MainWindow extends javax.swing.JFrame {
             hasCustomers = true;
         }
         this.customersComboBox.removeAllItems();
-        customersComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getCustomerArray()));
+        customersComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getCustomerArray()));
         if(hasCustomers){
             customersComboBox.setSelectedItem(currentCustomer);
         }
@@ -251,7 +291,7 @@ public class MainWindow extends javax.swing.JFrame {
  
         }
         this.mechanicsComboBox.removeAllItems();
-        mechanicsComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getMechanicArray()));
+        mechanicsComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getMechanicArray()));
         if(hasMechanics){
             mechanicsComboBox.setSelectedItem(currentMechanic);
         }
@@ -337,9 +377,10 @@ public class MainWindow extends javax.swing.JFrame {
         currentVehicleVINTextField = new javax.swing.JTextField();
         vehicleMaintenanceActionsPanel = new javax.swing.JPanel();
         maintenanceActionsLabel = new javax.swing.JLabel();
-        maintenanceActionList = new java.awt.List();
         updateMileageButton = new javax.swing.JButton();
         addMaintenanceActionButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        maintenanceActionList2 = new javax.swing.JList();
         vehicleWarrantiesPanel = new javax.swing.JPanel();
         maintenanceActionsTypes = new javax.swing.JPanel();
         maintenanceTypesComboBox = new javax.swing.JComboBox();
@@ -373,7 +414,7 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle("Mechanic's Notebook");
         setMinimumSize(new java.awt.Dimension(800, 600));
 
-        mechanicsComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getMechanicArray()));
+        mechanicsComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getMechanicArray()));
         mechanicsComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mechanicsComboBoxActionPerformed(evt);
@@ -492,7 +533,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         customersLabel.setText("Customers");
 
-        customersComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getCustomerArray()));
+        customersComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getCustomerArray()));
         customersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 customersComboBoxActionPerformed(evt);
@@ -589,7 +630,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Customers", customersPanel);
 
-        vehiclesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageMechanicEngine.getVehicleArray()));
+        vehiclesComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getVehicleArray()));
         vehiclesComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vehiclesComboBoxActionPerformed(evt);
@@ -736,12 +777,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         maintenanceActionsLabel.setText("Maintenace Actions");
 
-        maintenanceActionList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maintenanceActionListActionPerformed(evt);
-            }
-        });
-
         updateMileageButton.setText("Update Mileage");
         updateMileageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -755,6 +790,19 @@ public class MainWindow extends javax.swing.JFrame {
                 addMaintenanceActionButtonActionPerformed(evt);
             }
         });
+
+        maintenanceActionList2.setModel(model);
+        maintenanceActionList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                maintenanceActionList2MouseClicked(evt);
+            }
+        });
+        maintenanceActionList2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                maintenanceActionList2ValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(maintenanceActionList2);
 
         javax.swing.GroupLayout vehicleMaintenanceActionsPanelLayout = new javax.swing.GroupLayout(vehicleMaintenanceActionsPanel);
         vehicleMaintenanceActionsPanel.setLayout(vehicleMaintenanceActionsPanelLayout);
@@ -775,7 +823,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(0, 127, Short.MAX_VALUE))
                     .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3)))
                 .addContainerGap())
         );
         vehicleMaintenanceActionsPanelLayout.setVerticalGroup(
@@ -788,7 +836,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(updateMileageButton)
                     .addComponent(addMaintenanceActionButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(maintenanceActionList, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         vehiclesTabbedPane.addTab("Vehicle Maintenance Actions", vehicleMaintenanceActionsPanel);
@@ -819,7 +868,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Vehicles", vehiclesPanel);
 
-        maintenanceTypesComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageMechanicEngine.getMaintenaceTypeArray()));
+        maintenanceTypesComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray()));
         maintenanceTypesComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 maintenanceTypesComboBoxActionPerformed(evt);
@@ -904,14 +953,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentMechanicLabel.setText("Mechanic");
 
+        currentMechanicTextField.setEditable(false);
         currentMechanicTextField.setFocusable(false);
 
         currentCustomerLabel.setText("Customer");
 
+        currentCustomerTextField.setEditable(false);
         currentCustomerTextField.setFocusable(false);
 
         currentVehicleLabel.setText("Vehicle");
 
+        currentVehicleTextField.setEditable(false);
         currentVehicleTextField.setAutoscrolls(false);
         currentVehicleTextField.setFocusable(false);
 
@@ -1033,7 +1085,7 @@ public class MainWindow extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-        this.motoGarageMechanicEngine.openGarage(testFile);
+        this.mechanicsNotebookEngine.openGarage(testFile);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     /**
@@ -1042,7 +1094,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void createNewMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewMechanicButtonActionPerformed
         // User hit create new Mechanic button, let's do it!
-        this.motoGarageMechanicEngine.startNewMechanicWindow();
+        this.mechanicsNotebookEngine.startNewMechanicWindow();
     }//GEN-LAST:event_createNewMechanicButtonActionPerformed
 
     /**
@@ -1075,7 +1127,7 @@ public class MainWindow extends javax.swing.JFrame {
                 System.out.println("dialog must have closed?");
                 ex.printStackTrace();
             }
-            this.motoGarageMechanicEngine.saveGarage(testFile);
+            this.mechanicsNotebookEngine.saveGarage(testFile);
         }
         
     }//GEN-LAST:event_saveMenuItemActionPerformed
@@ -1088,7 +1140,7 @@ public class MainWindow extends javax.swing.JFrame {
         // 2) clear all data
         // 3) new garage object! nothing tied to it!
         
-        this.motoGarageMechanicEngine.createDefaultGarage();
+        this.mechanicsNotebookEngine.createDefaultGarage();
         this.refresh();
     }//GEN-LAST:event_newGarageMenuItemActionPerformed
 
@@ -1113,7 +1165,7 @@ public class MainWindow extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-        this.motoGarageMechanicEngine.saveGarage(testFile);
+        this.mechanicsNotebookEngine.saveGarage(testFile);
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
     /**
@@ -1122,7 +1174,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void newCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerButtonActionPerformed
         // User pressed the new customer button, time to enact
-        this.motoGarageMechanicEngine.startNewCustomerWindow();
+        this.mechanicsNotebookEngine.startNewCustomerWindow();
     }//GEN-LAST:event_newCustomerButtonActionPerformed
 
     /**
@@ -1131,7 +1183,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         // Time to open the About Window
-        this.motoGarageMechanicEngine.startAboutWindow();
+        this.mechanicsNotebookEngine.startAboutWindow();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void currentCustomerFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentCustomerFirstNameTextFieldActionPerformed
@@ -1148,10 +1200,10 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:      
         if(this.customersComboBox.getSelectedItem()!=null){
             Customer customerSelected = (Customer)this.customersComboBox.getSelectedItem();
-            if(customerSelected.equals(this.motoGarageMechanicEngine.getCurrentCustomer())){
+            if(customerSelected.equals(this.mechanicsNotebookEngine.getCurrentCustomer())){
                 return;
             }else{
-                this.motoGarageMechanicEngine.setCurrentCustomer(customerSelected);
+                this.mechanicsNotebookEngine.setCurrentCustomer(customerSelected);
                 //this.customersComboBox.setSelectedItem(customerSelected); // necessary?
                 this.refresh();
             }  
@@ -1168,10 +1220,10 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(this.mechanicsComboBox.getSelectedItem()!=null){
             Mechanic mechanicSelected = (Mechanic)this.mechanicsComboBox.getSelectedItem();
-            if(mechanicSelected.equals(this.motoGarageMechanicEngine.getCurrentMechanic())){
+            if(mechanicSelected.equals(this.mechanicsNotebookEngine.getCurrentMechanic())){
                 return;
             }else{
-                this.motoGarageMechanicEngine.setCurrentMechanic(mechanicSelected);
+                this.mechanicsNotebookEngine.setCurrentMechanic(mechanicSelected);
                 this.refresh();
             }  
         }
@@ -1184,10 +1236,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void newVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVehicleButtonActionPerformed
         // TODO add your handling code here:
         // check to ensure we have a current Customer, required
-        if(this.motoGarageMechanicEngine.getCurrentCustomer()== null){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must first have a Customer in order to add a Vehicle! Please create a Customer first.");
+        if(this.mechanicsNotebookEngine.getCurrentCustomer()== null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must first have a Customer in order to add a Vehicle! Please create a Customer first.");
         }else{
-            this.motoGarageMechanicEngine.startNewVehicleWindow();
+            this.mechanicsNotebookEngine.startNewVehicleWindow();
         }
     }//GEN-LAST:event_newVehicleButtonActionPerformed
 
@@ -1195,10 +1247,10 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(this.vehiclesComboBox.getSelectedItem()!= null){
             Vehicle vehicleSelected = (Vehicle) this.vehiclesComboBox.getSelectedItem();
-            if(vehicleSelected.equals(this.motoGarageMechanicEngine.getCurrentVehicle())){
+            if(vehicleSelected.equals(this.mechanicsNotebookEngine.getCurrentVehicle())){
                 return;
             }else{
-                this.motoGarageMechanicEngine.setCurrentVehicle(vehicleSelected);
+                this.mechanicsNotebookEngine.setCurrentVehicle(vehicleSelected);
                 this.refresh();;
             }
         }
@@ -1206,7 +1258,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void newMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMaintenanceTypeButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageMechanicEngine.startNewMaintenanceTypeWindow();
+        this.mechanicsNotebookEngine.startNewMaintenanceTypeWindow();
     }//GEN-LAST:event_newMaintenanceTypeButtonActionPerformed
 
     private void maintenanceTypesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceTypesComboBoxActionPerformed
@@ -1217,32 +1269,27 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void addMaintenanceActionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceActionButtonActionPerformed
         // TODO add your handling code here:
-        if(this.motoGarageMechanicEngine.getCurrentVehicle()==null){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()==null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
             return;
-        }else if(this.motoGarageMechanicEngine.getCurrentMechanic() == null){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
+        }else if(this.mechanicsNotebookEngine.getCurrentMechanic() == null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
         }
         
         
         else{
-            this.motoGarageMechanicEngine.startNewMaintenanceActionWindow();
+            this.mechanicsNotebookEngine.startNewMaintenanceActionWindow();
         }
     }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed
 
     private void updateMileageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageButtonActionPerformed
         // TODO add your handling code here:
-        if(this.motoGarageMechanicEngine.getCurrentVehicle()==null){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()==null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
         }else{
-            this.motoGarageMechanicEngine.startNewUpdateMileageWindow();
+            this.mechanicsNotebookEngine.startNewUpdateMileageWindow();
         }
     }//GEN-LAST:event_updateMileageButtonActionPerformed
-
-    private void maintenanceActionListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionListActionPerformed
-        // TODO add your handling code here:
-        System.out.println("The maintenance actions list is reporting action, " + evt.getActionCommand());
-    }//GEN-LAST:event_maintenanceActionListActionPerformed
 
     
     /**
@@ -1253,12 +1300,37 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void deleteMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMechanicButtonActionPerformed
         // TODO add your handling code here:
-        if(this.motoGarageMechanicEngine.getCurrentMechanic()== null){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have no Mechanics to delete!");
+        if(this.mechanicsNotebookEngine.getCurrentMechanic()== null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have no Mechanics to delete!");
         }else{
-            this.motoGarageMechanicEngine.startDeleteMechanicWindow();
+            this.mechanicsNotebookEngine.startDeleteMechanicWindow();
         }
     }//GEN-LAST:event_deleteMechanicButtonActionPerformed
+
+    private void maintenanceActionList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_maintenanceActionList2ValueChanged
+        // TODO add your handling code here:
+        //System.out.println("TESTING HERE!!!!!!!!!!!!!!" + evt.toString());
+        //System.out.println(this.maintenanceActionList2.getSelectedValue().toString() + " !!!!!!!!!!!!" );
+        //if(evt.getFirstIndex()!=evt.getLastIndex()){
+        //    int latestIndex = evt.getLastIndex();
+        //    MaintenanceAction selectedMaintenanceAction  = (MaintenanceAction)model.getElementAt(latestIndex);
+         //   System.out.println(selectedMaintenanceAction);
+        //}
+
+    }//GEN-LAST:event_maintenanceActionList2ValueChanged
+
+    private void maintenanceActionList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceActionList2MouseClicked
+        // TODO add your handling code here:
+        //mouseClicked;
+        //JList theList = (JList) mouseClicked.getSource();
+        //if (mouseEvent.getClickCount() == 2) {
+        //  int index = theList.locationToIndex(mouseEvent.getPoint());
+        //  if (index >= 0) {
+         //   Object o = theList.getModel().getElementAt(index);
+         //   System.out.println("Double-clicked on: " + o.toString());
+         // }
+        
+    }//GEN-LAST:event_maintenanceActionList2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1345,10 +1417,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane mainTabbedPane;
-    private java.awt.List maintenanceActionList;
+    private javax.swing.JList maintenanceActionList2;
     private javax.swing.JLabel maintenanceActionsLabel;
     private javax.swing.JPanel maintenanceActionsTypes;
     private javax.swing.JTextArea maintenanceTypeDescriptionTextArea;

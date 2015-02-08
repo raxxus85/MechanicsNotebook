@@ -22,6 +22,7 @@ import objectmodels.Vehicle;
 import windows.AboutWindow;
 import windows.DeleteMechanicWindow;
 import windows.MainWindow;
+import windows.MaintenanceActionWindow;
 import windows.NewCustomerWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.NewMaintenanceTypeWindow;
@@ -47,6 +48,7 @@ public class MechanicsNotebookEngine {
     private NewMaintenanceActionWindow newMaintenenaceActionWindow;
     private UpdateMileageWindow updateMileageWindow;
     private DeleteMechanicWindow deleteMechanicWindow;
+    private MaintenanceActionWindow maintenanceActionWindow;
 
     //Other Variables
     private Garage currentGarage;
@@ -348,6 +350,10 @@ public class MechanicsNotebookEngine {
         this.newMaintenenaceActionWindow.setVisible(true);
     }
     
+    public void startMaintenanceActionWindow(MaintenanceAction incomingMaintenanceAction){
+        this.maintenanceActionWindow = new MaintenanceActionWindow(this, incomingMaintenanceAction);
+        this.maintenanceActionWindow.setVisible(true);
+    }
     // End Window Creation Methods
     
     /**
