@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Mechanic;
+import objectmodels.Vehicle;
 
 /**
  *
@@ -16,6 +17,7 @@ import objectmodels.Mechanic;
  */
 public class MaintenanceActionWindow extends javax.swing.JFrame {
     MechanicsNotebookEngine mechanicsNotebookEngine;
+    MaintenanceAction maintenanceAction;
     
     /**
      * Creates new form MaintenanceActionWindow
@@ -29,6 +31,7 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
      */
     public MaintenanceActionWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine, MaintenanceAction incomingMaintenanceAction) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.maintenanceAction = incomingMaintenanceAction;
         initComponents();
         this.setIcon();
         // Update Fields
@@ -60,8 +63,8 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         vehicleLabel = new javax.swing.JLabel();
         vehicleTextField = new javax.swing.JTextField();
         maintenanceTypeLabel = new javax.swing.JLabel();
@@ -78,14 +81,19 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setText("Cancel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Save");
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         vehicleLabel.setText("Vehicle");
 
@@ -98,7 +106,7 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
 
         mechanicLabel.setText("Mechanic");
 
-        mechanicJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        mechanicJComboBox.setModel(new javax.swing.DefaultComboBoxModel());
 
         maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel());
 
@@ -116,15 +124,12 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(jButton2)
+                .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(cancelButton)
                 .addGap(66, 66, 66))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(editMaintenaneActionLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +144,10 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
                             .addComponent(mechanicJComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(odometerTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(vehicleTextField))))
+                            .addComponent(vehicleTextField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(editMaintenaneActionLabel)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -169,8 +177,8 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(cancelButton)
+                    .addComponent(saveButton))
                 .addGap(24, 24, 24))
         );
 
@@ -178,10 +186,22 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        Vehicle newVehicle = this.maintenanceAction.getVehicle();
+        MaintenanceType newMaintenanceType = (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem();
+        Mechanic newMechanic = (Mechanic) this.mechanicJComboBox.getSelectedItem();
+        Integer newOdometer = Integer.parseInt(this.odometerTextField.getText());
+        String newNotes = this.notesTextArea.getText().toString();
+        MaintenanceAction newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newMaintenanceType,newOdometer,newNotes );
+        this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
+        this.dispose();
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,9 +238,8 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel editMaintenaneActionLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox maintenanceTypeJComboBox;
     private javax.swing.JLabel maintenanceTypeLabel;
@@ -230,6 +249,7 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea notesTextArea;
     private javax.swing.JLabel odometerLabel;
     private javax.swing.JTextField odometerTextField;
+    private javax.swing.JButton saveButton;
     private javax.swing.JLabel vehicleLabel;
     private javax.swing.JTextField vehicleTextField;
     // End of variables declaration//GEN-END:variables

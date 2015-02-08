@@ -190,6 +190,12 @@ public class MechanicsNotebookEngine {
         return true;
     }
     
+    public boolean editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction newMaintenanceAction){
+        this.getCurrentVehicle().editMaintenanceAction(existingMaintenanceAction, newMaintenanceAction); 
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     public boolean addMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
         this.currentGarage.getCurrentVehicle().addMaintenanceAction(incomingMaintenanceAction);
         // TIME TO REFRESH

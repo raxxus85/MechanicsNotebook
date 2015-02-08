@@ -88,4 +88,30 @@ public class MaintenanceAction implements Serializable{
         String returnString = this.maintenanceType.getMaintenanceTypeName() + ","+this.getOdometer() + ", " + this.getNotes() +". Mechanic =" + this.getMechanic();
         return returnString;
     }
+    
+    /**
+     @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 31). // two randomly chosen prime numbers
+            // if deriving: appendSuper(super.hashCode()).
+            append(name).
+            append(age).
+            toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        boolean result = false;
+        if (object == null || object.getClass() != getClass()) {
+            result = false;
+	} else {
+            MaintenanceAction maintenanceAction = (MaintenanceAction) object;
+                if (this.color == tiger.getColor()
+		&& this.stripePattern == tiger.getStripePattern()) {
+		result = true;
+			}
+		}
+		return result;
+	}
+        * **/
 }

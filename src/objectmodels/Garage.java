@@ -29,7 +29,7 @@ public class Garage implements Serializable{
     public void addMaintenanceType(MaintenanceType incomingMaintenanceType){
         this.maintenanceTypes.add(incomingMaintenanceType);
     }
-    
+        
 
     /**
      * Method to return an ARRAY of the Maintenance Type, used to populate ComboBoxes, etc

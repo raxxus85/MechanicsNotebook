@@ -39,6 +39,18 @@ public class Vehicle implements Serializable{
         this.description = incomingDescription;
     }
     
+    public void editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction updatedMaintenanceAction){
+        //int indexOfExistingMaintenanceAction = this.maintenanceActions.get(1);
+        int indexOfExistingMaintenanceAction = this.maintenanceActions.indexOf(existingMaintenanceAction);
+        //MaintenanceAction tempMaintenanceAction = this.maintenanceActions.get(indexOfExistingMaintenanceAction);
+        this.maintenanceActions.get(indexOfExistingMaintenanceAction).setMaintenanceType(updatedMaintenanceAction.getMaintenanceType());
+        this.maintenanceActions.get(indexOfExistingMaintenanceAction).setMechanic(updatedMaintenanceAction.getMechanic());
+        this.maintenanceActions.get(indexOfExistingMaintenanceAction).setNotes(updatedMaintenanceAction.getNotes());
+        this.maintenanceActions.get(indexOfExistingMaintenanceAction).setOdometer(updatedMaintenanceAction.getOdometer());
+        this.maintenanceActions.get(indexOfExistingMaintenanceAction).setVehicle(updatedMaintenanceAction.getVehicle());
+        
+    }
+    
     public void setColor(String incomingColor){
         this.color = incomingColor;
     }      
