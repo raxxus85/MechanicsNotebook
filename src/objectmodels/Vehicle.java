@@ -6,6 +6,7 @@ package objectmodels;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Vehicle implements Serializable{
     private String description;
     private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();
     
+    private ImageIcon imageIcon;
     /**
      * Main Constructor for Vehicle
      * @param incomingMake
@@ -49,6 +51,14 @@ public class Vehicle implements Serializable{
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setOdometer(updatedMaintenanceAction.getOdometer());
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setVehicle(updatedMaintenanceAction.getVehicle());
         
+    }
+    
+    public void setImageIcon(ImageIcon incomingImageIcon){
+        this.imageIcon = incomingImageIcon;
+    }
+    
+    public ImageIcon getImageIcon(){
+        return this.imageIcon;
     }
     
     public void setColor(String incomingColor){

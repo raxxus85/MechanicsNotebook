@@ -182,7 +182,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="156" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="mechanicPictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -192,42 +194,47 @@
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="mechanicsLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="mechanicsComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="currentMechanicFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="currentMechanicFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="currentMechanicMiddleNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentMechanicMiddleNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="createNewMechanicButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="mechanicsComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentMechanicFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentMechanicFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="currentMechanicLastNameTextField" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentMechanicLastNameLabel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="135" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                      <Component id="currentMechanicDescription" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="currentMechanicMiddleNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentMechanicMiddleNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="createNewMechanicButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="editMechanicButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="currentMechanicLastNameTextField" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentMechanicLastNameLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" min="-2" pref="135" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                                              <Component id="currentMechanicDescription" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="editMechanicButton" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="deleteMechanicButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="deleteMechanicButton" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="mechanicPictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="303" max="32767" attributes="0"/>
                   </Group>
@@ -326,6 +333,8 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createNewMechanicButtonActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JLabel" name="mechanicPictureLabel">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="customersPanel">
@@ -398,7 +407,7 @@
                           <Component id="customerDescriptionLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="317" max="32767" attributes="0"/>
+                      <EmptySpace pref="337" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -631,7 +640,7 @@
                                   <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
                                   <Component id="vehicleDescriptionLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="154" max="32767" attributes="0"/>
+                              <EmptySpace pref="174" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -937,7 +946,7 @@
                               <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="303" max="32767" attributes="0"/>
+                      <EmptySpace pref="323" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

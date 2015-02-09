@@ -85,7 +85,7 @@ public class MaintenanceAction implements Serializable{
     
     @Override
     public String toString(){
-        String returnString = this.maintenanceType.getMaintenanceTypeName() + ","+this.getOdometer() + ", " + this.getNotes() +". Mechanic =" + this.getMechanic();
+        String returnString = this.maintenanceType.getMaintenanceTypeName() + ","+this.getOdometer() + ", " + this.getNotes();
         return returnString;
     }
     

@@ -1,6 +1,8 @@
 package objectmodels;
 
+import java.awt.Image;
 import java.io.Serializable;
+import javax.swing.ImageIcon;
 
 /**
  * Mechanic Class
@@ -12,7 +14,7 @@ public class Mechanic implements Serializable{
     private String lastName;
     //private String name;
     private String description;
-    
+    private ImageIcon imageIcon;
 
         
     public Mechanic(String incomingFirstName, String incomingMiddleInitial, String incomingLastName){
@@ -29,6 +31,13 @@ public class Mechanic implements Serializable{
     }
     
 
+    public void setImageIcon(ImageIcon incomingImageIcon){
+        this.imageIcon = incomingImageIcon;
+    }
+    
+    public ImageIcon getImageIcon(){
+        return this.imageIcon;
+    }
     
     public String getFullName(){
         return this.firstName + " " + middleInitial + " " + lastName;

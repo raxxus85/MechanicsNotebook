@@ -6,6 +6,7 @@ package objectmodels;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Customer implements Serializable{
     private String description;
     // attached info
     private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+    private ImageIcon imageIcon;
     
     // CONSTRUCTORS
     
@@ -35,6 +37,15 @@ public class Customer implements Serializable{
     }
     
     // END CONSTRUCTORS
+    
+    public void setImageIcon(ImageIcon incomingImageIcon){
+        this.imageIcon= incomingImageIcon;
+    }
+    
+    public ImageIcon getImageIcon(){
+        return this.imageIcon;
+    }
+    
     public String getFirstName(){
         return this.firstName;
     }

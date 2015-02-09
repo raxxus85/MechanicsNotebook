@@ -7,7 +7,18 @@ package windows;
 import informationwindows.DialogType;
 import objectmodels.Mechanic;
 import engine.MechanicsNotebookEngine;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,6 +26,7 @@ import java.awt.Toolkit;
  */
 public class NewMechanicWindow extends javax.swing.JFrame {
     private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private ImageIcon imageIcon;
     
     /**
      * Creates new form NewMechanicWindow
@@ -57,6 +69,9 @@ public class NewMechanicWindow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         newMechanicMiddleInitialTextField = new javax.swing.JTextField();
         newMechanicLastNameTextField = new javax.swing.JTextField();
+        openMechanicPictureButton = new javax.swing.JButton();
+        mechanicPictureLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create New Mechanic");
@@ -78,7 +93,7 @@ public class NewMechanicWindow extends javax.swing.JFrame {
 
         newMechanicFirstNameLabel.setText("First Name");
 
-        newMechanicDescriptionLabel.setText("New Mechanic Description");
+        newMechanicDescriptionLabel.setText("Description");
 
         newMechanicDescriptionTextArea.setColumns(20);
         newMechanicDescriptionTextArea.setRows(5);
@@ -96,33 +111,50 @@ public class NewMechanicWindow extends javax.swing.JFrame {
             }
         });
 
+        openMechanicPictureButton.setText("Open  Picture");
+        openMechanicPictureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMechanicPictureButtonActionPerformed(evt);
+            }
+        });
+
+        mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
+
+        jLabel4.setText("Mechanic Picture");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(newMechanicFirstNameLabel)
+                    .addComponent(jLabel2)
+                    .addComponent(newMechanicDescriptionLabel)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newMechanicMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newMechanicFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(mechanicPictureLabel)
+                    .addComponent(openMechanicPictureButton))
+                .addGap(82, 82, 82))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(94, 94, 94))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(createMechanicButton)
-                                .addGap(92, 92, 92)
-                                .addComponent(cancelButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(newMechanicFirstNameLabel)
-                                    .addComponent(newMechanicDescriptionLabel)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(newMechanicLastNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(newMechanicFirstNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                        .addComponent(newMechanicMiddleInitialTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(92, 92, 92)
+                        .addComponent(createMechanicButton)
+                        .addGap(78, 78, 78)
+                        .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addComponent(jLabel1)))
@@ -133,27 +165,35 @@ public class NewMechanicWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newMechanicFirstNameLabel)
-                    .addComponent(newMechanicFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(newMechanicMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(newMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newMechanicDescriptionLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newMechanicFirstNameLabel)
+                            .addComponent(newMechanicFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(newMechanicMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(newMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newMechanicDescriptionLabel)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mechanicPictureLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(openMechanicPictureButton)))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createMechanicButton)
                     .addComponent(cancelButton))
-                .addGap(28, 28, 28))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,6 +227,9 @@ public class NewMechanicWindow extends javax.swing.JFrame {
             return;
         }
         Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
+        if(this.imageIcon!=null){
+            newMechanic.setImageIcon(imageIcon);
+        }
         boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
         if(mechanicCreated){
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
@@ -199,6 +242,31 @@ public class NewMechanicWindow extends javax.swing.JFrame {
     private void newMechanicLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMechanicLastNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newMechanicLastNameTextFieldActionPerformed
+
+    private void openMechanicPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMechanicPictureButtonActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File testFile = chooser.getSelectedFile();
+        String filePath="";
+        if(testFile != null){
+            filePath = testFile.getAbsolutePath();
+            try {
+                BufferedImage myPicture=null;
+                try {
+                    myPicture = ImageIO.read(new File(filePath));
+                } catch (IOException ex) {
+                Logger.getLogger(NewMechanicWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ImageIcon icon = new ImageIcon(myPicture); 
+                this.mechanicPictureLabel.setIcon(icon);
+                // set the class imageIcon to this now for absorbtion
+                this.imageIcon = icon;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_openMechanicPictureButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,12 +308,15 @@ public class NewMechanicWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel mechanicPictureLabel;
     private javax.swing.JLabel newMechanicDescriptionLabel;
     private javax.swing.JTextArea newMechanicDescriptionTextArea;
     private javax.swing.JLabel newMechanicFirstNameLabel;
     private javax.swing.JTextField newMechanicFirstNameTextField;
     private javax.swing.JTextField newMechanicLastNameTextField;
     private javax.swing.JTextField newMechanicMiddleInitialTextField;
+    private javax.swing.JButton openMechanicPictureButton;
     // End of variables declaration//GEN-END:variables
 }
