@@ -69,6 +69,21 @@ public class Garage implements Serializable{
         return this.currentMechanic;
     }
     
+    public void updateCurrentMechanic(Mechanic updatedMechanic){
+        //this.currentMechanic = updatedMechanic;
+        this.currentMechanic.setFirstName(updatedMechanic.getFirstName());
+        this.currentMechanic.setMiddleName(updatedMechanic.getMiddleName());
+        this.currentMechanic.setLastName(updatedMechanic.getLastName());
+        this.currentMechanic.setDescription(updatedMechanic.getDescription());
+        //this.currentCustomer.setImageIcon(updatedMechanic.getImageIcon());
+        if(updatedMechanic.getImageIcon()== null){
+            this.currentMechanic.setImageIcon(null);
+        }else{
+            System.out.println(" DOESN'T APPEAR TO BE NULL...");
+            this.currentMechanic.setImageIcon(updatedMechanic.getImageIcon());
+        }
+    }
+    
     /**
      * Method to set the current Customer
      * @param incomingCustomer 
@@ -76,10 +91,12 @@ public class Garage implements Serializable{
     public void setCurrentCustomer(Customer incomingCustomer){
         this.currentCustomer = incomingCustomer;
         // should we place logic here to get a vehicle then?
-        if(this.currentCustomer.getVehicles().size()== 0){
-            this.currentVehicle = null;
-        }else{
-            this.currentVehicle = this.currentCustomer.getVehicles().get(0);
+        if(this.currentCustomer!=null){
+            if(this.currentCustomer.getVehicles().size()== 0){
+                this.currentVehicle = null;
+            }else{
+                this.currentVehicle = this.currentCustomer.getVehicles().get(0);
+            }
         }
     }
     
@@ -153,6 +170,10 @@ public class Garage implements Serializable{
     public void deleteMechanic(Mechanic incomingMechanic){
         //TODO implement checking to ensure mechainc actually exists. just to be safe i supposed
         this.mechanics.remove(incomingMechanic);
+    }
+    
+    public void deleteCustomer(Customer incomingCustomer){
+        this.customers.remove(incomingCustomer);
     }
     
     /**

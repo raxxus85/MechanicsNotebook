@@ -20,13 +20,14 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Vehicle;
 import windows.AboutWindow;
+import windows.DeleteCustomerWindow;
 import windows.DeleteMechanicWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
 import windows.NewCustomerWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.NewMaintenanceTypeWindow;
-import windows.NewMechanicWindow;
+import windows.MechanicWindow;
 import windows.NewVehicleWindow;
 import windows.UpdateMileageWindow;
 import windows.WelcomeWindow;
@@ -40,7 +41,7 @@ public class MechanicsNotebookEngine {
     //Window Variables
     private WelcomeWindow welcomeWindow;
     private MainWindow mainWindow;
-    private NewMechanicWindow newMechanicWindow;
+    private MechanicWindow mechanicWindow;
     private NewCustomerWindow newCustomerWindow;
     private AboutWindow aboutWindow;
     private NewVehicleWindow newVehicleWindow;
@@ -49,6 +50,7 @@ public class MechanicsNotebookEngine {
     private UpdateMileageWindow updateMileageWindow;
     private DeleteMechanicWindow deleteMechanicWindow;
     private MaintenanceActionWindow maintenanceActionWindow;
+    private DeleteCustomerWindow deleteCustomerWindow;
 
     //Other Variables
     private Garage currentGarage;
@@ -160,6 +162,16 @@ public class MechanicsNotebookEngine {
         return true;
     }
     
+    public boolean updateMechanic(Mechanic incomingMechanic){
+        System.out.println(this.getGarage().getCurrentMechanic().toString());
+        this.getGarage().updateCurrentMechanic(incomingMechanic);
+        System.out.println(this.getGarage().getCurrentMechanic().toString());
+
+        // TIME TO REFRESH
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     /**
      * Method to delete the current Mechanic
      * @return true if successful
@@ -170,7 +182,20 @@ public class MechanicsNotebookEngine {
             this.getGarage().deleteMechanic(mechanicToDelete);
             this.setCurrentMechanic(null);
         // implement checks?
-        
+            this.mainWindow.refresh();
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean deleteCurrentCustomer(){
+        if(this.getCurrentCustomer()!=null){
+            Customer customerToDelete = this.getCurrentCustomer();
+            this.getGarage().deleteCustomer(customerToDelete);
+            this.setCurrentCustomer(null);
+            // TESTING
+            this.setCurrentVehicle(null);
             this.mainWindow.refresh();
             return true;
         }else{
@@ -293,6 +318,11 @@ public class MechanicsNotebookEngine {
         this.deleteMechanicWindow.setVisible(true);
     }
     
+    public void startDeleteCustomerWindow(){
+        this.deleteCustomerWindow = new DeleteCustomerWindow(this);
+        this.deleteCustomerWindow.setVisible(true);
+    }
+    
     public void startNewUpdateMileageWindow(){
         this.updateMileageWindow = new UpdateMileageWindow(this);
         this.updateMileageWindow.setVisible(true);
@@ -312,8 +342,13 @@ public class MechanicsNotebookEngine {
      * Method to create a new mechanic window, which prompts user for new mechanic details
      */
     public void startNewMechanicWindow(){
-        this.newMechanicWindow = new NewMechanicWindow(this);
-        this.newMechanicWindow.setVisible(true);
+        this.mechanicWindow = new MechanicWindow(this);
+        this.mechanicWindow.setVisible(true);
+    }
+    
+    public void startUpdateMechanicWindow(Mechanic incomingMechanic){
+        this.mechanicWindow = new MechanicWindow(this, incomingMechanic);
+        this.mechanicWindow.setVisible(true);
     }
     
     /**

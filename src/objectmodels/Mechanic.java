@@ -10,23 +10,23 @@ import javax.swing.ImageIcon;
  */
 public class Mechanic implements Serializable{
     private String firstName;
-    private String middleInitial;
+    private String middleName;
     private String lastName;
     //private String name;
     private String description;
     private ImageIcon imageIcon;
 
         
-    public Mechanic(String incomingFirstName, String incomingMiddleInitial, String incomingLastName){
+    public Mechanic(String incomingFirstName, String incomingMiddleName, String incomingLastName){
         this.firstName = incomingFirstName;
-        this.middleInitial = incomingMiddleInitial;
+        this.middleName = incomingMiddleName;
         this.lastName = incomingLastName;
     }    
     
-    public Mechanic(String incomingFirstName, String incomingMiddleInitial, String incomingLastName, String incomingDescription){
+    public Mechanic(String incomingFirstName, String incomingMiddleName, String incomingLastName, String incomingDescription){
         this.description = incomingDescription;
         this.firstName = incomingFirstName;
-        this.middleInitial = incomingMiddleInitial;
+        this.middleName = incomingMiddleName;
         this.lastName= incomingLastName;
     }
     
@@ -40,7 +40,7 @@ public class Mechanic implements Serializable{
     }
     
     public String getFullName(){
-        return this.firstName + " " + middleInitial + " " + lastName;
+        return this.firstName + " " + this.middleName + " " + lastName;
     }
     
     public String getFirstName(){
@@ -51,12 +51,12 @@ public class Mechanic implements Serializable{
         this.firstName = incomingFirstName;
     }
     
-    public String getMiddleInitial(){
-        return this.middleInitial;
+    public String getMiddleName(){
+        return this.middleName;
     }
     
-    public void setMiddleInitial(String incomingMiddleInitial){
-        this.middleInitial = incomingMiddleInitial;
+    public void setMiddleName(String incomingMiddleName){
+        this.middleName = incomingMiddleName;
     }
     
     public String getLastName(){
@@ -81,6 +81,6 @@ public class Mechanic implements Serializable{
      */
   @Override
   public String toString() {
-    return this.getFirstName() + " " + this.getMiddleInitial() + " " + this.getLastName();
+    return this.getFirstName() + " " + this.getMiddleName() + " " + this.getLastName();
   }
 }

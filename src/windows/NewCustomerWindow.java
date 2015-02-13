@@ -7,6 +7,14 @@ package windows;
 import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import objectmodels.Customer;
 import objectmodels.Mechanic;
 
@@ -16,6 +24,7 @@ import objectmodels.Mechanic;
  */
 public class NewCustomerWindow extends javax.swing.JFrame {
     private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private ImageIcon imageIcon;
     /**
      * Creates new form NewCustomerWindow
      */
@@ -54,6 +63,9 @@ public class NewCustomerWindow extends javax.swing.JFrame {
         newCustomerDescriptionTextArea = new javax.swing.JTextArea();
         newCustomerCreateCustomerButton = new javax.swing.JButton();
         newCustomerCancelButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        customerPictureLabel = new javax.swing.JLabel();
+        openPictureButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -86,57 +98,84 @@ public class NewCustomerWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Customer Picture");
+
+        customerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
+
+        openPictureButton.setText("Open Picture");
+        openPictureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openPictureButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(newCustomerCreateCustomerButton)
+                .addGap(76, 76, 76)
+                .addComponent(newCustomerCancelButton)
+                .addContainerGap(216, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(newCustomerInformationLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(54, 54, 54))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newCustomerFirstNameLabel)
+                    .addComponent(newCustomerMiddleInitialLabel)
+                    .addComponent(newCustomerLastNameLabel)
+                    .addComponent(newCustomerDescriptionLabel))
+                .addGap(85, 85, 85)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(newCustomerFirstNameTextField)
+                    .addComponent(newCustomerMiddleInitialTextField)
+                    .addComponent(newCustomerLastNameTextField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customerPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(newCustomerInformationLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newCustomerFirstNameLabel)
-                            .addComponent(newCustomerMiddleInitialLabel)
-                            .addComponent(newCustomerLastNameLabel)
-                            .addComponent(newCustomerDescriptionLabel))
-                        .addGap(85, 85, 85)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(newCustomerFirstNameTextField)
-                            .addComponent(newCustomerMiddleInitialTextField)
-                            .addComponent(newCustomerLastNameTextField)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(newCustomerCreateCustomerButton)
-                        .addGap(76, 76, 76)
-                        .addComponent(newCustomerCancelButton)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addComponent(openPictureButton)))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(newCustomerInformationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newCustomerFirstNameLabel)
-                    .addComponent(newCustomerFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newCustomerMiddleInitialLabel)
-                    .addComponent(newCustomerMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newCustomerLastNameLabel)
-                    .addComponent(newCustomerLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(newCustomerInformationLabel)
+                    .addComponent(jLabel1))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newCustomerDescriptionLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newCustomerFirstNameLabel)
+                            .addComponent(newCustomerFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newCustomerMiddleInitialLabel)
+                            .addComponent(newCustomerMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newCustomerLastNameLabel)
+                            .addComponent(newCustomerLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(newCustomerDescriptionLabel)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(customerPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(openPictureButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newCustomerCreateCustomerButton)
                     .addComponent(newCustomerCancelButton))
@@ -163,7 +202,11 @@ public class NewCustomerWindow extends javax.swing.JFrame {
             return;
         }
         Customer newCustomer = new Customer(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
+        if(this.imageIcon!=null){
+            newCustomer.setImageIcon(imageIcon);
+        }
         boolean customerCreated = this.motoGarageMechanicEngine.createNewCustomer(newCustomer);
+
         if(customerCreated){
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", created successfully!");
         } else{
@@ -171,6 +214,32 @@ public class NewCustomerWindow extends javax.swing.JFrame {
         }
         this.dispose();
     }//GEN-LAST:event_newCustomerCreateCustomerButtonActionPerformed
+
+    private void openPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPictureButtonActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File testFile = chooser.getSelectedFile();
+        String filePath="";
+        if(testFile != null){
+            filePath = testFile.getAbsolutePath();
+            try {
+                BufferedImage myPicture=null;
+                try {
+                    myPicture = ImageIO.read(new File(filePath));
+                } catch (IOException ex) {
+                Logger.getLogger(MechanicWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ImageIcon icon = new ImageIcon(myPicture); 
+                this.customerPictureLabel.setIcon(icon);
+                // set the class imageIcon to this now for absorbtion
+                this.imageIcon = icon;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_openPictureButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,6 +276,8 @@ public class NewCustomerWindow extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel customerPictureLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newCustomerCancelButton;
     private javax.swing.JButton newCustomerCreateCustomerButton;
@@ -219,5 +290,6 @@ public class NewCustomerWindow extends javax.swing.JFrame {
     private javax.swing.JTextField newCustomerLastNameTextField;
     private javax.swing.JLabel newCustomerMiddleInitialLabel;
     private javax.swing.JTextField newCustomerMiddleInitialTextField;
+    private javax.swing.JButton openPictureButton;
     // End of variables declaration//GEN-END:variables
 }

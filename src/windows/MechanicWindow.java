@@ -24,23 +24,45 @@ import javax.swing.JPanel;
  *
  * @author Mark
  */
-public class NewMechanicWindow extends javax.swing.JFrame {
+public class MechanicWindow extends javax.swing.JFrame {
     private MechanicsNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
+    private boolean updateMechanic = false;
     
     /**
-     * Creates new form NewMechanicWindow
+     * Creates new form MechanicWindow
      */
-    public NewMechanicWindow() {
+    public MechanicWindow() {
         initComponents();
     }
     
     /**
-     * Creates new form NewMechanicWindow
+     * Creates new form MechanicWindow
      */
-    public NewMechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+    public MechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setIcon();
+        this.createOrUpdateMechanicButton.setText("Create Mechanic");
+        this.setTitle("Create Mechanic");
+    }
+    
+    /**
+     * Creates new form MechanicWindow for UPDATING mechanic
+     */
+    public MechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
+        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        initComponents();
+        this.mechanicFirstNameTextField.setText(incomingMechanic.getFirstName());
+        this.mechanicMiddleNameTextField.setText(incomingMechanic.getMiddleName());
+        this.mechanicLastNameTextField.setText(incomingMechanic.getLastName());
+        this.mechanicDescriptionTextArea.setText(incomingMechanic.getDescription());
+        if(incomingMechanic.getImageIcon()!=null){
+            this.mechanicPictureLabel.setIcon(incomingMechanic.getImageIcon());
+        }
+        this.createOrUpdateMechanicButton.setText("Update Mechanic");
+        this.updateMechanic = true;
+        this.setTitle("Update Mechanic");
         this.setIcon();
     }
     
@@ -57,18 +79,18 @@ public class NewMechanicWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        createMechanicButton = new javax.swing.JButton();
+        createOrUpdateMechanicButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         newMechanicFirstNameLabel = new javax.swing.JLabel();
-        newMechanicFirstNameTextField = new javax.swing.JTextField();
-        newMechanicDescriptionLabel = new javax.swing.JLabel();
+        mechanicFirstNameTextField = new javax.swing.JTextField();
+        mechanicDescriptionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        newMechanicDescriptionTextArea = new javax.swing.JTextArea();
+        mechanicDescriptionTextArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        newMechanicMiddleInitialTextField = new javax.swing.JTextField();
-        newMechanicLastNameTextField = new javax.swing.JTextField();
+        mechanicLastNameLabel = new javax.swing.JLabel();
+        mechanicMiddleNameTextField = new javax.swing.JTextField();
+        mechanicLastNameTextField = new javax.swing.JTextField();
         openMechanicPictureButton = new javax.swing.JButton();
         mechanicPictureLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -77,10 +99,10 @@ public class NewMechanicWindow extends javax.swing.JFrame {
         setTitle("Create New Mechanic");
         setResizable(false);
 
-        createMechanicButton.setText("Create Mechanic");
-        createMechanicButton.addActionListener(new java.awt.event.ActionListener() {
+        createOrUpdateMechanicButton.setText("Create or Update Mechanic");
+        createOrUpdateMechanicButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createMechanicButtonActionPerformed(evt);
+                createOrUpdateMechanicButtonActionPerformed(evt);
             }
         });
 
@@ -93,21 +115,21 @@ public class NewMechanicWindow extends javax.swing.JFrame {
 
         newMechanicFirstNameLabel.setText("First Name");
 
-        newMechanicDescriptionLabel.setText("Description");
+        mechanicDescriptionLabel.setText("Description");
 
-        newMechanicDescriptionTextArea.setColumns(20);
-        newMechanicDescriptionTextArea.setRows(5);
-        jScrollPane1.setViewportView(newMechanicDescriptionTextArea);
+        mechanicDescriptionTextArea.setColumns(20);
+        mechanicDescriptionTextArea.setRows(5);
+        jScrollPane1.setViewportView(mechanicDescriptionTextArea);
 
-        jLabel1.setText("New Mechanic Information");
+        jLabel1.setText("Mechanic Information");
 
-        jLabel2.setText("Middle Initial");
+        jLabel2.setText("Middle Name");
 
-        jLabel3.setText("Last Name");
+        mechanicLastNameLabel.setText("Last Name");
 
-        newMechanicLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        mechanicLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newMechanicLastNameTextFieldActionPerformed(evt);
+                mechanicLastNameTextFieldActionPerformed(evt);
             }
         });
 
@@ -131,18 +153,19 @@ public class NewMechanicWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(newMechanicFirstNameLabel)
                     .addComponent(jLabel2)
-                    .addComponent(newMechanicDescriptionLabel)
-                    .addComponent(jLabel3))
+                    .addComponent(mechanicDescriptionLabel)
+                    .addComponent(mechanicLastNameLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newMechanicMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newMechanicFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(mechanicPictureLabel)
-                    .addComponent(openMechanicPictureButton))
+                    .addComponent(mechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(mechanicMiddleNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(mechanicFirstNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(openMechanicPictureButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,7 +175,7 @@ public class NewMechanicWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
-                        .addComponent(createMechanicButton)
+                        .addComponent(createOrUpdateMechanicButton)
                         .addGap(78, 78, 78)
                         .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
@@ -172,26 +195,26 @@ public class NewMechanicWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(newMechanicFirstNameLabel)
-                            .addComponent(newMechanicFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mechanicFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(newMechanicMiddleInitialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mechanicMiddleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(newMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mechanicLastNameLabel)
+                            .addComponent(mechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(newMechanicDescriptionLabel)))
+                            .addComponent(mechanicDescriptionLabel)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(mechanicPictureLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(openMechanicPictureButton)))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createMechanicButton)
+                    .addComponent(createOrUpdateMechanicButton)
                     .addComponent(cancelButton))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -215,33 +238,57 @@ public class NewMechanicWindow extends javax.swing.JFrame {
      * 
      * @param evt 
      */
-    private void createMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createMechanicButtonActionPerformed
+    private void createOrUpdateMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateMechanicButtonActionPerformed
         // TODO add your handling code here:
-        //newmechanictextfield
-        String incomingFirstName = this.newMechanicFirstNameTextField.getText();
-        String incomingMiddleInitial = this.newMechanicMiddleInitialTextField.getText();
-        String incomingLastName = this.newMechanicLastNameTextField.getText();
-        String incomingDescription = this.newMechanicDescriptionTextArea.getText();
-        if(this.newMechanicFirstNameTextField.getText().equals("") || this.newMechanicMiddleInitialTextField.getText().equals("") || this.newMechanicLastNameTextField.getText().equals("")){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle initial, and last name to create a mechanic!");
-            return;
-        }
-        Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
-        if(this.imageIcon!=null){
-            newMechanic.setImageIcon(imageIcon);
-        }
-        boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
-        if(mechanicCreated){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
-        } else{
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
-        }
-        this.dispose();
-    }//GEN-LAST:event_createMechanicButtonActionPerformed
+        if(!this.updateMechanic){
+            //newmechanictextfield
+            String incomingFirstName = this.mechanicFirstNameTextField.getText();
+            String incomingMiddleInitial = this.mechanicMiddleNameTextField.getText();
+            String incomingLastName = this.mechanicLastNameTextField.getText();
+            String incomingDescription = this.mechanicDescriptionTextArea.getText();
+            if(this.mechanicFirstNameTextField.getText().equals("") || this.mechanicMiddleNameTextField.getText().equals("") || this.mechanicLastNameTextField.getText().equals("")){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle name, and last name to create a mechanic!");
+                return;
+            }
+            Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
+            if(this.imageIcon!=null){
+                newMechanic.setImageIcon(imageIcon);
+            }
+            boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
+            if(mechanicCreated){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
+            } else{
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
+            }
+            this.dispose();
+        }else{
+            String incomingFirstName = this.mechanicFirstNameTextField.getText();
+            String incomingMiddleInitial = this.mechanicMiddleNameTextField.getText();
+            String incomingLastName = this.mechanicLastNameTextField.getText();
+            String incomingDescription = this.mechanicDescriptionTextArea.getText();
+            if(this.mechanicFirstNameTextField.getText().equals("") || this.mechanicMiddleNameTextField.getText().equals("") || this.mechanicLastNameTextField.getText().equals("")){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle name, and last name to update a mechanic!");
+                return;
+            }
+            Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
 
-    private void newMechanicLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMechanicLastNameTextFieldActionPerformed
+            if(this.imageIcon!=null){
+                newMechanic.setImageIcon(imageIcon);
+            }
+            System.out.println("attempting to update with " + newMechanic.toString());
+            boolean mechanicUpdated = this.motoGarageMechanicEngine.updateMechanic(newMechanic);
+            if(mechanicUpdated){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", updated successfully!");
+            } else{
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not updated a Mechanic with that name!");
+            }
+            this.dispose();
+        }
+    }//GEN-LAST:event_createOrUpdateMechanicButtonActionPerformed
+
+    private void mechanicLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicLastNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_newMechanicLastNameTextFieldActionPerformed
+    }//GEN-LAST:event_mechanicLastNameTextFieldActionPerformed
 
     private void openMechanicPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMechanicPictureButtonActionPerformed
         // TODO add your handling code here:
@@ -256,7 +303,7 @@ public class NewMechanicWindow extends javax.swing.JFrame {
                 try {
                     myPicture = ImageIO.read(new File(filePath));
                 } catch (IOException ex) {
-                Logger.getLogger(NewMechanicWindow.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MechanicWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 ImageIcon icon = new ImageIcon(myPicture); 
                 this.mechanicPictureLabel.setIcon(icon);
@@ -285,38 +332,38 @@ public class NewMechanicWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewMechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewMechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewMechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewMechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MechanicWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewMechanicWindow().setVisible(true);
+                new MechanicWindow().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton createMechanicButton;
+    private javax.swing.JButton createOrUpdateMechanicButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel mechanicDescriptionLabel;
+    private javax.swing.JTextArea mechanicDescriptionTextArea;
+    private javax.swing.JTextField mechanicFirstNameTextField;
+    private javax.swing.JLabel mechanicLastNameLabel;
+    private javax.swing.JTextField mechanicLastNameTextField;
+    private javax.swing.JTextField mechanicMiddleNameTextField;
     private javax.swing.JLabel mechanicPictureLabel;
-    private javax.swing.JLabel newMechanicDescriptionLabel;
-    private javax.swing.JTextArea newMechanicDescriptionTextArea;
     private javax.swing.JLabel newMechanicFirstNameLabel;
-    private javax.swing.JTextField newMechanicFirstNameTextField;
-    private javax.swing.JTextField newMechanicLastNameTextField;
-    private javax.swing.JTextField newMechanicMiddleInitialTextField;
     private javax.swing.JButton openMechanicPictureButton;
     // End of variables declaration//GEN-END:variables
 }

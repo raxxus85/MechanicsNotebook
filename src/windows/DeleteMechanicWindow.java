@@ -13,7 +13,7 @@ import java.awt.Toolkit;
  * @author Mark
  */
 public class DeleteMechanicWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine mechanicsNotebookEngine;
 
     /**
      * Creates new form DeleteMechanicWindow
@@ -25,8 +25,8 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
     /**
      * Creates new form DeleteMechanicWindow
      */
-    public DeleteMechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+    public DeleteMechanicWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine) {
+        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
     }
@@ -68,7 +68,7 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
 
         deleteMechanicLabel.setText("Delete Mechanic");
 
-        this.mechanicToDeleteTextField.setText(this.motoGarageMechanicEngine.getCurrentMechanic().toString());
+        this.mechanicToDeleteTextField.setText(this.mechanicsNotebookEngine.getCurrentMechanic().toString());
         mechanicToDeleteTextField.setEditable(false);
         mechanicToDeleteTextField.setFocusable(false);
 
@@ -85,7 +85,7 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
                 .addComponent(deleteMechanicLabel)
                 .addGap(124, 124, 124))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 64, Short.MAX_VALUE)
+                .addGap(0, 75, Short.MAX_VALUE)
                 .addComponent(deleteMechanicButton)
                 .addGap(42, 42, 42)
                 .addComponent(cancelButton)
@@ -102,7 +102,7 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteMechanicButton)
                     .addComponent(cancelButton))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,9 +127,9 @@ public class DeleteMechanicWindow extends javax.swing.JFrame {
     private void deleteMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMechanicButtonActionPerformed
         // TODO add your handling code here:
         //boolean sureToDelete = false;
-        boolean sureToDelete = this.motoGarageMechanicEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Mechanic? This is permanent!");
+        boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Mechanic? This is permanent!");
         if(sureToDelete){
-            this.motoGarageMechanicEngine.deleteCurrentMechanic();
+            this.mechanicsNotebookEngine.deleteCurrentMechanic();
             this.dispose();
         }
     }//GEN-LAST:event_deleteMechanicButtonActionPerformed
