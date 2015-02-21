@@ -15,7 +15,7 @@ import objectmodels.MaintenanceType;
  * @author Mark
  */
 public class NewMaintenanceActionWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine mechanicsNotebookEngine;
 
     /**
      * Creates new form NewMaintenanceActionWindow
@@ -28,9 +28,10 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
      * Creates new form NewMaintenanceActionWindow
      */
     public NewMaintenanceActionWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
-        this.motoGarageMechanicEngine= incomingMotoGarageMechanicEngine;
+        this.mechanicsNotebookEngine= incomingMotoGarageMechanicEngine;
         initComponents();
-        this.currentVehicleTextField.setText(this.motoGarageMechanicEngine.getCurrentVehicle().toString());
+        this.currentVehicleTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().toString());
+        this.maintenenaceActionMileageTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
         this.setIcon();
     }
     
@@ -82,7 +83,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
 
         jLabel2.setText("Maintenance Type");
 
-        maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageMechanicEngine.getMaintenaceTypeArray()));
+        maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray()));
 
         jLabel3.setText("Mileage");
 
@@ -99,7 +100,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
 
         mechanicLabel.setText("Mechanic");
 
-        mechanicTextField.setText(motoGarageMechanicEngine.getCurrentMechanic().toString());
+        mechanicTextField.setText(mechanicsNotebookEngine.getCurrentMechanic().toString());
         mechanicTextField.setEditable(false);
         mechanicTextField.setFocusable(false);
 
@@ -192,8 +193,15 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
             System.out.println("FAIL");
             return;
         }else{
-            MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageMechanicEngine.getCurrentMechanic(),this.motoGarageMechanicEngine.getCurrentVehicle(),(MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.maintenanceActionNotesTextArea.getText());
-            this.motoGarageMechanicEngine.addMaintenanceAction(newMaintenanceAction);
+            MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.mechanicsNotebookEngine.getCurrentMechanic(),this.mechanicsNotebookEngine.getCurrentVehicle(),(MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.maintenanceActionNotesTextArea.getText());
+            this.mechanicsNotebookEngine.addMaintenanceAction(newMaintenanceAction);
+            if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()!=newMaintenanceAction.getOdometer()){
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from :" 
+                        + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " to " +
+                newMaintenanceAction.getOdometer().toString());
+                this.mechanicsNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
+            }
+
         }
         this.dispose();
     }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed

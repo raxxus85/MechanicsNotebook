@@ -125,7 +125,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="customerMiddleNameLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Middle Initial"/>
+        <Property name="text" type="java.lang.String" value="Middle Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="customerLastNameLabel">

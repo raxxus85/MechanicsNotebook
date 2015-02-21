@@ -142,7 +142,7 @@ public class Vehicle implements Serializable{
     
     @Override
     public String toString() {
-        return this.getYear() + "," + this.getMake()+ " " + this.getModel();
+        return this.getYear() + " " + this.getMake()+ " " + this.getModel();
   }
     
 }

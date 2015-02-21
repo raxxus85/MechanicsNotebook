@@ -78,7 +78,6 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         openPictureButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         setResizable(false);
 
         newVehicleInformationLabel.setText("New Vehicle Information");

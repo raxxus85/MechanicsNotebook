@@ -103,7 +103,7 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         customerFirstNameLabel.setText("First Name");
 
-        customerMiddleNameLabel.setText("Middle Initial");
+        customerMiddleNameLabel.setText("Middle Name");
 
         customerLastNameLabel.setText("Last Name");
 

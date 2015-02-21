@@ -147,7 +147,7 @@
     <Component class="javax.swing.JComboBox" name="maintenanceTypeJComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel(motoGarageMechanicEngine.getMaintenaceTypeArray())" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray())" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -201,7 +201,7 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicTextField.setText(motoGarageMechanicEngine.getCurrentMechanic().toString());"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicTextField.setText(mechanicsNotebookEngine.getCurrentMechanic().toString());"/>
       </AuxValues>
     </Component>
   </SubComponents>

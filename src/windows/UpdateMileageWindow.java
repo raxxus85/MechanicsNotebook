@@ -13,7 +13,7 @@ import java.awt.Toolkit;
  * @author Mark
  */
 public class UpdateMileageWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MechanicsNotebookEngine mechanicsNotebookEngine;
 
     /**
      * Creates new form UpdateMileageWindow
@@ -25,10 +25,11 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
         /**
      * Creates new form UpdateMileageWindow
      */
-    public UpdateMileageWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+    public UpdateMileageWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine) {
+        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
+        this.updateMileageTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
     }
     
     private void setIcon(){
@@ -116,12 +117,12 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
     private void updateMileageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageButtonActionPerformed
         // TODO add your handling code here:
         if(this.updateMileageTextField.getText().equals("")){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must specify a mileage to update the current vehicle!");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must specify a mileage to update the current vehicle!");
             return;
         }else{
             Integer mileage= Integer.parseInt(this.updateMileageTextField.getText());
             //this.motoGarageMechanicEngine.getCurrentVehicle().updateMileage(mileage);
-            this.motoGarageMechanicEngine.updateVehicleMileage(mileage);
+            this.mechanicsNotebookEngine.updateVehicleMileage(mileage);
             this.dispose();
         }
 
