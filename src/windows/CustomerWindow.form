@@ -26,14 +26,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Component id="newCustomerCreateCustomerButton" min="-2" max="-2" attributes="0"/>
+              <Component id="createOrUpdateCustomerButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Component id="newCustomerCancelButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="216" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
-              <Component id="newCustomerInformationLabel" min="-2" max="-2" attributes="0"/>
+              <Component id="customerInformationLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -41,17 +41,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="newCustomerFirstNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="newCustomerMiddleInitialLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="newCustomerLastNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="newCustomerDescriptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="customerFirstNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="customerMiddleNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="customerLastNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="customerDescriptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Component id="newCustomerFirstNameTextField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="newCustomerMiddleInitialTextField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="newCustomerLastNameTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="customerFirstNameTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="customerMiddleNameTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="customerLastNameTextField" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -70,29 +70,29 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="newCustomerInformationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="customerInformationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="newCustomerFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="newCustomerFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="customerFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="customerFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="newCustomerMiddleInitialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="newCustomerMiddleInitialTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="customerMiddleNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="customerMiddleNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="newCustomerLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="newCustomerLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="customerLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="customerLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="newCustomerDescriptionLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="customerDescriptionLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -104,7 +104,7 @@
               </Group>
               <EmptySpace pref="19" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="newCustomerCreateCustomerButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="createOrUpdateCustomerButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newCustomerCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -113,36 +113,36 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="newCustomerInformationLabel">
+    <Component class="javax.swing.JLabel" name="customerInformationLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="New Customer Information"/>
+        <Property name="text" type="java.lang.String" value="Customer Information"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="newCustomerFirstNameLabel">
+    <Component class="javax.swing.JLabel" name="customerFirstNameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="First Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="newCustomerMiddleInitialLabel">
+    <Component class="javax.swing.JLabel" name="customerMiddleNameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Middle Initial"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="newCustomerLastNameLabel">
+    <Component class="javax.swing.JLabel" name="customerLastNameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Last Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="newCustomerDescriptionLabel">
+    <Component class="javax.swing.JLabel" name="customerDescriptionLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Description"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="newCustomerFirstNameTextField">
+    <Component class="javax.swing.JTextField" name="customerFirstNameTextField">
     </Component>
-    <Component class="javax.swing.JTextField" name="newCustomerMiddleInitialTextField">
+    <Component class="javax.swing.JTextField" name="customerMiddleNameTextField">
     </Component>
-    <Component class="javax.swing.JTextField" name="newCustomerLastNameTextField">
+    <Component class="javax.swing.JTextField" name="customerLastNameTextField">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -151,7 +151,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="newCustomerDescriptionTextArea">
+        <Component class="javax.swing.JTextArea" name="customerDescriptionTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -159,12 +159,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="newCustomerCreateCustomerButton">
+    <Component class="javax.swing.JButton" name="createOrUpdateCustomerButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Create Customer"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newCustomerCreateCustomerButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createOrUpdateCustomerButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="newCustomerCancelButton">

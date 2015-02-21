@@ -24,7 +24,7 @@ import windows.DeleteCustomerWindow;
 import windows.DeleteMechanicWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
-import windows.NewCustomerWindow;
+import windows.CustomerWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.NewMaintenanceTypeWindow;
 import windows.MechanicWindow;
@@ -42,7 +42,7 @@ public class MechanicsNotebookEngine {
     private WelcomeWindow welcomeWindow;
     private MainWindow mainWindow;
     private MechanicWindow mechanicWindow;
-    private NewCustomerWindow newCustomerWindow;
+    private CustomerWindow newCustomerWindow;
     private AboutWindow aboutWindow;
     private NewVehicleWindow newVehicleWindow;
     private NewMaintenanceTypeWindow newMaintenanceTypeWindow;
@@ -355,7 +355,7 @@ public class MechanicsNotebookEngine {
      * Method to create a new Customer Window, which prompts user for new Customer details
      */
     public void startNewCustomerWindow(){
-        this.newCustomerWindow = new NewCustomerWindow(this);
+        this.newCustomerWindow = new CustomerWindow(this);
         this.newCustomerWindow.setVisible(true);
     }
     

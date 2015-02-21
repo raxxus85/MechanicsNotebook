@@ -59,6 +59,7 @@ public class MechanicWindow extends javax.swing.JFrame {
         this.mechanicDescriptionTextArea.setText(incomingMechanic.getDescription());
         if(incomingMechanic.getImageIcon()!=null){
             this.mechanicPictureLabel.setIcon(incomingMechanic.getImageIcon());
+            this.imageIcon=incomingMechanic.getImageIcon();
         }
         this.createOrUpdateMechanicButton.setText("Update Mechanic");
         this.updateMechanic = true;
@@ -94,6 +95,7 @@ public class MechanicWindow extends javax.swing.JFrame {
         openMechanicPictureButton = new javax.swing.JButton();
         mechanicPictureLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        clearPictureButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create New Mechanic");
@@ -144,6 +146,13 @@ public class MechanicWindow extends javax.swing.JFrame {
 
         jLabel4.setText("Mechanic Picture");
 
+        clearPictureButton.setText("Clear Picture");
+        clearPictureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearPictureButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,9 +172,10 @@ public class MechanicWindow extends javax.swing.JFrame {
                         .addComponent(mechanicMiddleNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(mechanicFirstNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(openMechanicPictureButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(openMechanicPictureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clearPictureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(82, 82, 82))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,7 +221,9 @@ public class MechanicWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(mechanicPictureLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(openMechanicPictureButton)))
+                        .addComponent(openMechanicPictureButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearPictureButton)))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createOrUpdateMechanicButton)
@@ -315,6 +327,13 @@ public class MechanicWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openMechanicPictureButtonActionPerformed
 
+    private void clearPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPictureButtonActionPerformed
+        // TODO add your handling code here:
+        this.imageIcon=null;
+        mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
+
+    }//GEN-LAST:event_clearPictureButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -351,6 +370,7 @@ public class MechanicWindow extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton clearPictureButton;
     private javax.swing.JButton createOrUpdateMechanicButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

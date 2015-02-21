@@ -26,7 +26,7 @@ public class ConfirmDeleteDialog{
         
         
         JOptionPane jOptionPane = new JOptionPane();
-        Object[] options = { "Delete", "CANCEL" };
+        Object[] options = { "Confirm", "Cancel" };
         
         int choice = jOptionPane.showOptionDialog(null,message, "Warning!",
         jOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,

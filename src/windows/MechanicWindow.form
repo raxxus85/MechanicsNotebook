@@ -43,9 +43,10 @@
                   </Group>
               </Group>
               <EmptySpace pref="107" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="openMechanicPictureButton" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="mechanicPictureLabel" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="openMechanicPictureButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="clearPictureButton" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
           </Group>
@@ -105,6 +106,8 @@
                       <Component id="mechanicPictureLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="openMechanicPictureButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="clearPictureButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -202,6 +205,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mechanic Picture"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="clearPictureButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clear Picture"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearPictureButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
