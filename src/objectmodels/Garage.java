@@ -79,8 +79,19 @@ public class Garage implements Serializable{
         if(updatedMechanic.getImageIcon()== null){
             this.currentMechanic.setImageIcon(null);
         }else{
-            System.out.println(" DOESN'T APPEAR TO BE NULL...");
             this.currentMechanic.setImageIcon(updatedMechanic.getImageIcon());
+        }
+    }
+    
+    public void updateCurrentCustomer(Customer updatedCustomer){
+        this.currentCustomer.setFirstName(updatedCustomer.getFirstName());
+        this.currentCustomer.setMiddleName(updatedCustomer.getMiddleName());
+        this.currentCustomer.setLastName(updatedCustomer.getLastName());
+        this.currentCustomer.setDescription(updatedCustomer.getDescription());
+        if(updatedCustomer.getImageIcon()==null){
+            this.currentCustomer.setImageIcon(null);
+        }else{
+            this.currentCustomer.setImageIcon(updatedCustomer.getImageIcon());
         }
     }
     

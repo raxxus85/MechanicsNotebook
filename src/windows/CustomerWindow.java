@@ -55,9 +55,10 @@ public class CustomerWindow extends javax.swing.JFrame {
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Update Customer");
         this.setTitle("Update Customer");
+        this.updateCustomer = true;
         
         this.customerFirstNameTextField.setText(incomingCustomer.getFirstName());
-        this.customerMiddleNameTextField.setText(incomingCustomer.getMiddleInitial());
+        this.customerMiddleNameTextField.setText(incomingCustomer.getMiddleName());
         this.customerLastNameTextField.setText(incomingCustomer.getLastName());
         this.customerDescriptionTextArea.setText(incomingCustomer.getDescription());
         if(incomingCustomer.getImageIcon()!=null){
@@ -220,7 +221,9 @@ public class CustomerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_newCustomerCancelButtonActionPerformed
 
     private void createOrUpdateCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateCustomerButtonActionPerformed
-        // TODO add your handling code here:
+        // DECIDE IF CREATING OR UPDATING CUSTOMER
+        // CREATING CUSTOMER
+        if(!this.updateCustomer){
         String incomingFirstName = this.customerFirstNameTextField.getText();
         String incomingMiddleInitial = this.customerMiddleNameTextField.getText();
         String incomingLastName = this.customerLastNameTextField.getText();
@@ -241,6 +244,30 @@ public class CustomerWindow extends javax.swing.JFrame {
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not create a Customer with that name!");
         }
         this.dispose();
+        } else if(this.updateCustomer){
+            // UPDATING CUSTOMER HERE
+            String incomingFirstName = this.customerFirstNameTextField.getText();
+            String incomingMiddleName = this.customerMiddleNameTextField.getText();
+            String incomingLastName = this.customerLastNameTextField.getText();
+            String incomingDescription = this.customerDescriptionTextArea.getText();
+            if(this.customerFirstNameTextField.getText().equals("") || this.customerMiddleNameTextField.getText().equals("") || this.customerLastNameTextField.getText().equals("")){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle name, and last name to update a customer!");
+                return;
+            }
+            Customer updatedCustomer = new Customer(incomingFirstName,incomingMiddleName,incomingLastName,incomingDescription);
+
+            if(this.imageIcon!=null){
+                updatedCustomer.setImageIcon(imageIcon);
+            }
+            System.out.println("attempting to update with " + updatedCustomer.toString());
+            boolean customerUpdated = this.motoGarageMechanicEngine.updateCustomer(updatedCustomer);
+            if(customerUpdated){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Customer, " + updatedCustomer.toString() + ", updated successfully!");
+            } else{
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not updated a Customer with that name!");
+            }
+            this.dispose();
+        }
     }//GEN-LAST:event_createOrUpdateCustomerButtonActionPerformed
 
     private void openPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPictureButtonActionPerformed

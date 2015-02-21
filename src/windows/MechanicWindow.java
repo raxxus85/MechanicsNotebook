@@ -251,7 +251,9 @@ public class MechanicWindow extends javax.swing.JFrame {
      * @param evt 
      */
     private void createOrUpdateMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateMechanicButtonActionPerformed
-        // TODO add your handling code here:
+        // DECIDE IF CREATING OR UPDATING MECHANIC
+        
+        // CREATING MECHANIC
         if(!this.updateMechanic){
             //newmechanictextfield
             String incomingFirstName = this.mechanicFirstNameTextField.getText();
@@ -273,7 +275,7 @@ public class MechanicWindow extends javax.swing.JFrame {
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
             }
             this.dispose();
-        }else{
+        }else if(this.updateMechanic){
             String incomingFirstName = this.mechanicFirstNameTextField.getText();
             String incomingMiddleInitial = this.mechanicMiddleNameTextField.getText();
             String incomingLastName = this.mechanicLastNameTextField.getText();

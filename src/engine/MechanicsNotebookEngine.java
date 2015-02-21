@@ -42,7 +42,7 @@ public class MechanicsNotebookEngine {
     private WelcomeWindow welcomeWindow;
     private MainWindow mainWindow;
     private MechanicWindow mechanicWindow;
-    private CustomerWindow newCustomerWindow;
+    private CustomerWindow customerWindow;
     private AboutWindow aboutWindow;
     private NewVehicleWindow newVehicleWindow;
     private NewMaintenanceTypeWindow newMaintenanceTypeWindow;
@@ -168,6 +168,12 @@ public class MechanicsNotebookEngine {
         System.out.println(this.getGarage().getCurrentMechanic().toString());
 
         // TIME TO REFRESH
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean updateCustomer(Customer incomingCustomer){
+        this.getGarage().updateCurrentCustomer(incomingCustomer);
         this.mainWindow.refresh();
         return true;
     }
@@ -346,17 +352,22 @@ public class MechanicsNotebookEngine {
         this.mechanicWindow.setVisible(true);
     }
     
-    public void startUpdateMechanicWindow(Mechanic incomingMechanic){
-        this.mechanicWindow = new MechanicWindow(this, incomingMechanic);
+    public void startUpdateMechanicWindow(){
+        this.mechanicWindow = new MechanicWindow(this, this.getCurrentMechanic());
         this.mechanicWindow.setVisible(true);
+    }
+    
+    public void startUpdateCustomerWindow(){
+        this.customerWindow = new CustomerWindow(this, this.getCurrentCustomer());
+        this.customerWindow.setVisible(true);
     }
     
     /**
      * Method to create a new Customer Window, which prompts user for new Customer details
      */
     public void startNewCustomerWindow(){
-        this.newCustomerWindow = new CustomerWindow(this);
-        this.newCustomerWindow.setVisible(true);
+        this.customerWindow = new CustomerWindow(this);
+        this.customerWindow.setVisible(true);
     }
     
     /**

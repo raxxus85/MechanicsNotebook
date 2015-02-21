@@ -274,7 +274,7 @@ public class MainWindow extends javax.swing.JFrame {
             this.customerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png")));
         }
         this.currentCustomerFirstNameTextField.setText(currentCustomer.getFirstName());
-        this.currentCustomerMiddleInitialTextField.setText(currentCustomer.getMiddleInitial());
+        this.currentCustomerMiddleInitialTextField.setText(currentCustomer.getMiddleName());
         this.currentCustomerLastNameTextField.setText(currentCustomer.getLastName());
         this.currentCustomerDescriptionTextArea.setText(currentCustomer.getDescription());
         }
@@ -648,6 +648,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1.setText("Customer Picture");
 
         editCustomerButton.setText("Edit Customer");
+        editCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCustomerButtonActionPerformed(evt);
+            }
+        });
 
         deleteCustomerButton.setText("Delete Customer");
         deleteCustomerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1487,9 +1492,18 @@ public class MainWindow extends javax.swing.JFrame {
         if(this.mechanicsNotebookEngine.getCurrentMechanic()==null){
             this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a Mechanic to edit!");
         }else{
-            this.mechanicsNotebookEngine.startUpdateMechanicWindow(this.mechanicsNotebookEngine.getCurrentMechanic());
+            this.mechanicsNotebookEngine.startUpdateMechanicWindow();
         }
     }//GEN-LAST:event_editMechanicButtonActionPerformed
+
+    private void editCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.mechanicsNotebookEngine.getCurrentCustomer()==null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a Customer to edit!");
+        }else{
+            this.mechanicsNotebookEngine.startUpdateCustomerWindow();
+        }
+    }//GEN-LAST:event_editCustomerButtonActionPerformed
 
     /**
      * @param args the command line arguments

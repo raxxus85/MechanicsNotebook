@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  */
 public class Customer implements Serializable{
     private String firstName;
-    private String middleInitial;
+    private String middleName;
     private String lastName;
     private String description;
     // attached info
@@ -23,16 +23,16 @@ public class Customer implements Serializable{
     
     // CONSTRUCTORS
     
-    public Customer(String incomingFirstName, String incomingMiddleInitial, String incomingLastName){
+    public Customer(String incomingFirstName, String incomingMiddleName, String incomingLastName){
         this.firstName = incomingFirstName;
-        this.middleInitial = incomingMiddleInitial;
+        this.middleName = incomingMiddleName;
         this.lastName = incomingLastName;
     }    
     
-    public Customer(String incomingFirstName, String incomingMiddleInitial, String incomingLastName, String incomingDescription){
+    public Customer(String incomingFirstName, String incomingMiddleName, String incomingLastName, String incomingDescription){
         this.description = incomingDescription;
         this.firstName = incomingFirstName;
-        this.middleInitial = incomingMiddleInitial;
+        this.middleName = incomingMiddleName;
         this.lastName= incomingLastName;
     }
     
@@ -54,12 +54,12 @@ public class Customer implements Serializable{
         this.firstName = incomingFirstName;
     }
     
-    public String getMiddleInitial(){
-        return this.middleInitial;
+    public String getMiddleName(){
+        return this.middleName;
     }
     
-    public void setMiddleInitial(String incomingMiddleInitial){
-        this.middleInitial = incomingMiddleInitial;
+    public void setMiddleName(String incomingMiddleName){
+        this.middleName = incomingMiddleName;
     }
     
     public String getLastName(){
@@ -92,6 +92,6 @@ public class Customer implements Serializable{
     
     @Override
     public String toString() {
-        return this.getFirstName() + " " + this.getMiddleInitial() + " " + this.getLastName();
+        return this.getFirstName() + " " + this.getMiddleName() + " " + this.getLastName();
   }
 }
