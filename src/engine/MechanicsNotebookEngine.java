@@ -20,8 +20,6 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Vehicle;
 import windows.AboutWindow;
-import windows.DeleteCustomerWindow;
-import windows.DeleteMechanicWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
@@ -48,9 +46,7 @@ public class MechanicsNotebookEngine {
     private MaintenanceTypeWindow newMaintenanceTypeWindow;
     private NewMaintenanceActionWindow newMaintenenaceActionWindow;
     private UpdateMileageWindow updateMileageWindow;
-    private DeleteMechanicWindow deleteMechanicWindow;
     private MaintenanceActionWindow maintenanceActionWindow;
-    private DeleteCustomerWindow deleteCustomerWindow;
 
     //Other Variables
     private Garage currentGarage;
@@ -186,31 +182,42 @@ public class MechanicsNotebookEngine {
      * Method to delete the current Mechanic
      * @return true if successful
      */
-    public boolean deleteCurrentMechanic(){
-        if(this.getCurrentMechanic()!=null){
-            Mechanic mechanicToDelete = this.getCurrentMechanic();
-            this.getGarage().deleteMechanic(mechanicToDelete);
-            this.setCurrentMechanic(null);
-        // implement checks?
-            this.mainWindow.refresh();
-            return true;
-        }else{
-            return false;
-        }
+    public void deleteCurrentMechanic(){
+        if(this.getCurrentMechanic()== null){
+            this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Mechanic, when there is none! Error!");
+            return;
+        }    
+        this.getGarage().deleteCurrentMechanic();
+        this.setCurrentMechanic(null);
+        this.mainWindow.refresh();
     }
     
-    public boolean deleteCurrentCustomer(){
-        if(this.getCurrentCustomer()!=null){
-            Customer customerToDelete = this.getCurrentCustomer();
-            this.getGarage().deleteCustomer(customerToDelete);
-            this.setCurrentCustomer(null);
-            // TESTING
-            this.setCurrentVehicle(null);
-            this.mainWindow.refresh();
-            return true;
-        }else{
-            return false;
-        }
+    /**
+     * Method used to delete the current Customer
+     * <li> should attempt to delete current Vehicle (throwing error if non current!)
+     */
+    public void deleteCurrentCustomer(){
+        if(this.getCurrentCustomer()== null){
+            this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Customer, when there is none! Error!");
+            return;
+        }    
+        this.getGarage().deleteCurrentCustomer();
+        this.setCurrentCustomer(null);
+        this.mainWindow.refresh();
+    }
+    
+    /**
+     * Method used to delete the current Vehicle
+     * <li> should attempt to delete current Vehicle (throwing error if none current!)
+     */
+    public void deleteCurrentVehicle(){
+        if(this.getCurrentVehicle()== null){
+            this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Vehicle, when there is none! Error!");
+            return;
+        }       
+        this.getGarage().deleteCurrentVehicle();
+        this.setCurrentVehicle(null);
+        this.mainWindow.refresh();
     }
     
     /**
@@ -365,14 +372,7 @@ public class MechanicsNotebookEngine {
         this.vehicleWindow.setVisible(true);
     }
     
-    /**
-     * Method to create a Delete Mechanic Window, which prompts the user if they wish to delete current Mechanic
-     */
-    public void startDeleteMechanicWindow(){
-        this.deleteMechanicWindow = new DeleteMechanicWindow(this);
-        this.deleteMechanicWindow.setVisible(true);
-    }
-    
+ 
     
     /**
      * Method to create a new Customer Window, which prompts user for new Customer details
@@ -388,14 +388,6 @@ public class MechanicsNotebookEngine {
     public void startUpdateCustomerWindow(){
         this.customerWindow = new CustomerWindow(this, this.getCurrentCustomer());
         this.customerWindow.setVisible(true);
-    }
-    
-    /**
-     * 
-     */
-    public void startDeleteCustomerWindow(){
-        this.deleteCustomerWindow = new DeleteCustomerWindow(this);
-        this.deleteCustomerWindow.setVisible(true);
     }
     
     /**

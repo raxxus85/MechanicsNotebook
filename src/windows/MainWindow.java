@@ -797,6 +797,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         deleteVehicleButton.setText("Delete Vehicle");
+        deleteVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteVehicleButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout vehicleInfoPanelLayout = new javax.swing.GroupLayout(vehicleInfoPanel);
         vehicleInfoPanel.setLayout(vehicleInfoPanelLayout);
@@ -1440,15 +1445,18 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Method used when a user pressed the Delete Mechanic button
      * <li> 1)Ensure there is a CURRENT mechanic
-     * <li> 2)Start the Delete Mechanic Window
+     * <li> 2)Prompt User if they are sure
      * @param evt 
      */
     private void deleteMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMechanicButtonActionPerformed
         // TODO add your handling code here:
         if(this.mechanicsNotebookEngine.getCurrentMechanic()== null){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have no Mechanics to delete!");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Mechanic to delete!");
         }else{
-            this.mechanicsNotebookEngine.startDeleteMechanicWindow();
+            boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the current Mechanic? This is permanent!");
+            if(sureToDelete){
+                this.mechanicsNotebookEngine.deleteCurrentMechanic();
+            }            
         }
     }//GEN-LAST:event_deleteMechanicButtonActionPerformed
 
@@ -1480,9 +1488,12 @@ public class MainWindow extends javax.swing.JFrame {
     private void deleteCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerButtonActionPerformed
         // TODO add your handling code here:
         if(this.mechanicsNotebookEngine.getCurrentCustomer()== null){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have no Customers to delete!");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Customer to delete!");
         }else{
-            this.mechanicsNotebookEngine.startDeleteCustomerWindow();
+            boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the current Customer? This is permanent!");
+            if(sureToDelete){
+                this.mechanicsNotebookEngine.deleteCurrentCustomer();
+            }            
         }
     }//GEN-LAST:event_deleteCustomerButtonActionPerformed
 
@@ -1517,6 +1528,18 @@ public class MainWindow extends javax.swing.JFrame {
             this.mechanicsNotebookEngine.startUpdateVehicleWindow();
         }
     }//GEN-LAST:event_editVehicleButtonActionPerformed
+
+    private void deleteVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehicleButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()== null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Vehicle to delete!");
+        }else{
+            boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the current Vehicle? This is permanent!");
+            if(sureToDelete){
+                this.mechanicsNotebookEngine.deleteCurrentVehicle();
+            }            
+        }
+    }//GEN-LAST:event_deleteVehicleButtonActionPerformed
 
     /**
      * @param args the command line arguments

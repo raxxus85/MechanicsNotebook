@@ -190,16 +190,24 @@ public class Garage implements Serializable{
     }
     
     /**
-     * Method to delete a Mechanic
-     * @param incomingMechanic 
+     * Method to remove the current Mechanic
      */
-    public void deleteMechanic(Mechanic incomingMechanic){
-        //TODO implement checking to ensure mechainc actually exists. just to be safe i supposed
-        this.mechanics.remove(incomingMechanic);
+    public void deleteCurrentMechanic(){
+        this.mechanics.remove(this.getCurrentMechanic());
     }
     
-    public void deleteCustomer(Customer incomingCustomer){
-        this.customers.remove(incomingCustomer);
+    /**
+     * Method to remove the current Customer
+     */
+    public void deleteCurrentCustomer(){
+        this.customers.remove(this.getCurrentCustomer());
+    }
+    
+    /**
+     * Method to remove the current Vehicle
+     */
+    public void deleteCurrentVehicle(){
+        this.currentCustomer.getVehicles().remove(this.getCurrentVehicle());
     }
     
     /**
