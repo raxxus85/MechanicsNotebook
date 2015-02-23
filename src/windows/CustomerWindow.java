@@ -221,21 +221,22 @@ public class CustomerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_newCustomerCancelButtonActionPerformed
 
     private void createOrUpdateCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateCustomerButtonActionPerformed
-        // DECIDE IF CREATING OR UPDATING CUSTOMER
-        // CREATING CUSTOMER
-        if(!this.updateCustomer){
+        // Basic Checks here
         String incomingFirstName = this.customerFirstNameTextField.getText();
         String incomingMiddleInitial = this.customerMiddleNameTextField.getText();
         String incomingLastName = this.customerLastNameTextField.getText();
         String incomingDescription = this.customerDescriptionTextArea.getText();
         if(this.customerFirstNameTextField.getText().equals("") || this.customerMiddleNameTextField.getText().equals("") || this.customerLastNameTextField.getText().equals("")){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle initial, and last name to create a customer!");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "A Customer requires a first, middle, and last name! Please enter them and try again.");
             return;
         }
         Customer newCustomer = new Customer(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
         if(this.imageIcon!=null){
             newCustomer.setImageIcon(imageIcon);
         }
+        // DECIDE IF CREATING OR UPDATING CUSTOMER
+        // CREATING CUSTOMER
+        if(!this.updateCustomer){
         boolean customerCreated = this.motoGarageMechanicEngine.createNewCustomer(newCustomer);
 
         if(customerCreated){
@@ -246,23 +247,13 @@ public class CustomerWindow extends javax.swing.JFrame {
         this.dispose();
         } else if(this.updateCustomer){
             // UPDATING CUSTOMER HERE
-            String incomingFirstName = this.customerFirstNameTextField.getText();
-            String incomingMiddleName = this.customerMiddleNameTextField.getText();
-            String incomingLastName = this.customerLastNameTextField.getText();
-            String incomingDescription = this.customerDescriptionTextArea.getText();
-            if(this.customerFirstNameTextField.getText().equals("") || this.customerMiddleNameTextField.getText().equals("") || this.customerLastNameTextField.getText().equals("")){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle name, and last name to update a customer!");
-                return;
-            }
-            Customer updatedCustomer = new Customer(incomingFirstName,incomingMiddleName,incomingLastName,incomingDescription);
-
             if(this.imageIcon!=null){
-                updatedCustomer.setImageIcon(imageIcon);
+                newCustomer.setImageIcon(imageIcon);
             }
-            System.out.println("attempting to update with " + updatedCustomer.toString());
-            boolean customerUpdated = this.motoGarageMechanicEngine.updateCustomer(updatedCustomer);
+            System.out.println("attempting to update with " + newCustomer.toString());
+            boolean customerUpdated = this.motoGarageMechanicEngine.updateCustomer(newCustomer);
             if(customerUpdated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Customer, " + updatedCustomer.toString() + ", updated successfully!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", updated successfully!");
             } else{
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not updated a Customer with that name!");
             }

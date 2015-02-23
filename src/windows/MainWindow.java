@@ -1477,7 +1477,6 @@ public class MainWindow extends javax.swing.JFrame {
         if(this.mechanicsNotebookEngine.getCurrentCustomer()== null){
             this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have no Customers to delete!");
         }else{
-            //boolean delete =this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete this Customer?");
             this.mechanicsNotebookEngine.startDeleteCustomerWindow();
         }
     }//GEN-LAST:event_deleteCustomerButtonActionPerformed

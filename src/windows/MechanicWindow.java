@@ -37,7 +37,7 @@ public class MechanicWindow extends javax.swing.JFrame {
     }
     
     /**
-     * Creates new form MechanicWindow
+     * Creates new form MechanicWindow for CREATING Mechanic
      */
     public MechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
@@ -48,11 +48,16 @@ public class MechanicWindow extends javax.swing.JFrame {
     }
     
     /**
-     * Creates new form MechanicWindow for UPDATING mechanic
+     * Creates new form MechanicWindow for UPDATING Mechanic
      */
     public MechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setIcon();
+        this.createOrUpdateMechanicButton.setText("Update Mechanic");
+        this.setTitle("Update Mechanic");
+        this.updateMechanic = true;
+        
         this.mechanicFirstNameTextField.setText(incomingMechanic.getFirstName());
         this.mechanicMiddleNameTextField.setText(incomingMechanic.getMiddleName());
         this.mechanicLastNameTextField.setText(incomingMechanic.getLastName());
@@ -60,11 +65,7 @@ public class MechanicWindow extends javax.swing.JFrame {
         if(incomingMechanic.getImageIcon()!=null){
             this.mechanicPictureLabel.setIcon(incomingMechanic.getImageIcon());
             this.imageIcon=incomingMechanic.getImageIcon();
-        }
-        this.createOrUpdateMechanicButton.setText("Update Mechanic");
-        this.updateMechanic = true;
-        this.setTitle("Update Mechanic");
-        this.setIcon();
+        } 
     }
     
     private void setIcon(){
@@ -135,7 +136,7 @@ public class MechanicWindow extends javax.swing.JFrame {
             }
         });
 
-        openMechanicPictureButton.setText("Open  Picture");
+        openMechanicPictureButton.setText("Open");
         openMechanicPictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMechanicPictureButtonActionPerformed(evt);
@@ -146,7 +147,7 @@ public class MechanicWindow extends javax.swing.JFrame {
 
         jLabel4.setText("Mechanic Picture");
 
-        clearPictureButton.setText("Clear Picture");
+        clearPictureButton.setText("Clear");
         clearPictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearPictureButtonActionPerformed(evt);
@@ -171,12 +172,16 @@ public class MechanicWindow extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(mechanicMiddleNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(mechanicFirstNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(openMechanicPictureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clearPictureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(82, 82, 82))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(openMechanicPictureButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clearPictureButton)
+                        .addGap(68, 68, 68))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -220,10 +225,10 @@ public class MechanicWindow extends javax.swing.JFrame {
                             .addComponent(mechanicDescriptionLabel)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(mechanicPictureLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(openMechanicPictureButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clearPictureButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(clearPictureButton)
+                            .addComponent(openMechanicPictureButton))))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createOrUpdateMechanicButton)
@@ -251,23 +256,25 @@ public class MechanicWindow extends javax.swing.JFrame {
      * @param evt 
      */
     private void createOrUpdateMechanicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateMechanicButtonActionPerformed
-        // DECIDE IF CREATING OR UPDATING MECHANIC
+        // General Checks Here
+        // Must have First Name, Middle Name, Last Name
+        String incomingFirstName = this.mechanicFirstNameTextField.getText();
+        String incomingMiddleInitial = this.mechanicMiddleNameTextField.getText();
+        String incomingLastName = this.mechanicLastNameTextField.getText();
+        String incomingDescription = this.mechanicDescriptionTextArea.getText();
         
-        // CREATING MECHANIC
-        if(!this.updateMechanic){
-            //newmechanictextfield
-            String incomingFirstName = this.mechanicFirstNameTextField.getText();
-            String incomingMiddleInitial = this.mechanicMiddleNameTextField.getText();
-            String incomingLastName = this.mechanicLastNameTextField.getText();
-            String incomingDescription = this.mechanicDescriptionTextArea.getText();
-            if(this.mechanicFirstNameTextField.getText().equals("") || this.mechanicMiddleNameTextField.getText().equals("") || this.mechanicLastNameTextField.getText().equals("")){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle name, and last name to create a mechanic!");
+        if(this.mechanicFirstNameTextField.getText().equals("") || this.mechanicMiddleNameTextField.getText().equals("") || this.mechanicLastNameTextField.getText().equals("")){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "A Mechanic requires a first, middle, and last name! Please enter them and try again.");
                 return;
-            }
-            Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
-            if(this.imageIcon!=null){
+        }
+        Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
+        if(this.imageIcon!=null){
                 newMechanic.setImageIcon(imageIcon);
-            }
+        }
+        
+        // DECIDE IF CREATING OR UPDATING MECHANIC
+        // CREATING MECHANIC
+        if(!this.updateMechanic){            
             boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
             if(mechanicCreated){
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
@@ -276,25 +283,11 @@ public class MechanicWindow extends javax.swing.JFrame {
             }
             this.dispose();
         }else if(this.updateMechanic){
-            String incomingFirstName = this.mechanicFirstNameTextField.getText();
-            String incomingMiddleInitial = this.mechanicMiddleNameTextField.getText();
-            String incomingLastName = this.mechanicLastNameTextField.getText();
-            String incomingDescription = this.mechanicDescriptionTextArea.getText();
-            if(this.mechanicFirstNameTextField.getText().equals("") || this.mechanicMiddleNameTextField.getText().equals("") || this.mechanicLastNameTextField.getText().equals("")){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "You must provide a first name, middle name, and last name to update a mechanic!");
-                return;
-            }
-            Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
-
-            if(this.imageIcon!=null){
-                newMechanic.setImageIcon(imageIcon);
-            }
-            System.out.println("attempting to update with " + newMechanic.toString());
             boolean mechanicUpdated = this.motoGarageMechanicEngine.updateMechanic(newMechanic);
             if(mechanicUpdated){
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", updated successfully!");
             } else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not updated a Mechanic with that name!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not update a Mechanic with that name!");
             }
             this.dispose();
         }

@@ -319,15 +319,9 @@ public class MechanicsNotebookEngine {
     
     // Window Creation Methods
     
-    public void startDeleteMechanicWindow(){
-        this.deleteMechanicWindow = new DeleteMechanicWindow(this);
-        this.deleteMechanicWindow.setVisible(true);
-    }
+
     
-    public void startDeleteCustomerWindow(){
-        this.deleteCustomerWindow = new DeleteCustomerWindow(this);
-        this.deleteCustomerWindow.setVisible(true);
-    }
+
     
     public void startNewUpdateMileageWindow(){
         this.updateMileageWindow = new UpdateMileageWindow(this);
@@ -352,15 +346,23 @@ public class MechanicsNotebookEngine {
         this.mechanicWindow.setVisible(true);
     }
     
+    /**
+     * Method to create an Update Mechanic Window, which prompts the user for updated Mechanic details
+     *      
+     */
     public void startUpdateMechanicWindow(){
         this.mechanicWindow = new MechanicWindow(this, this.getCurrentMechanic());
         this.mechanicWindow.setVisible(true);
     }
     
-    public void startUpdateCustomerWindow(){
-        this.customerWindow = new CustomerWindow(this, this.getCurrentCustomer());
-        this.customerWindow.setVisible(true);
+    /**
+     * Method to create a Delete Mechanic Window, which prompts the user if they wish to delete current Mechanic
+     */
+    public void startDeleteMechanicWindow(){
+        this.deleteMechanicWindow = new DeleteMechanicWindow(this);
+        this.deleteMechanicWindow.setVisible(true);
     }
+    
     
     /**
      * Method to create a new Customer Window, which prompts user for new Customer details
@@ -368,6 +370,22 @@ public class MechanicsNotebookEngine {
     public void startNewCustomerWindow(){
         this.customerWindow = new CustomerWindow(this);
         this.customerWindow.setVisible(true);
+    }
+    
+    /**
+     * Method to create a new Update Customer Window, which prompts the user for updated Customer details
+     */
+    public void startUpdateCustomerWindow(){
+        this.customerWindow = new CustomerWindow(this, this.getCurrentCustomer());
+        this.customerWindow.setVisible(true);
+    }
+    
+    /**
+     * 
+     */
+    public void startDeleteCustomerWindow(){
+        this.deleteCustomerWindow = new DeleteCustomerWindow(this);
+        this.deleteCustomerWindow.setVisible(true);
     }
     
     /**

@@ -115,8 +115,14 @@ public class DeleteCustomerWindow extends javax.swing.JFrame {
 
     private void deleteCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerButtonActionPerformed
         // TODO add your handling code here:
-        boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Customer? "
+        boolean sureToDelete = false;
+        if(this.mechanicsNotebookEngine.getCurrentCustomer().getVehicles().isEmpty()){
+            sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Customer? "
+                + "This is permanent!");
+        }else{
+            sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Customer? "
                 + "All Vehicles related to that Customer will also be deleted! This is permanent!");
+        }
         if(sureToDelete){
             this.mechanicsNotebookEngine.deleteCurrentCustomer();
             this.dispose();
