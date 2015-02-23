@@ -73,10 +73,31 @@ public class Garage implements Serializable{
         return this.currentMechanic;
     }
     
+    /**
+     * Method used to update a Maintenance Type
+     * @param originalMaintenanceType
+     * @param updatedMaintenanceType
+     * @return true if successful
+     */
     public boolean updateMaintenanceType(MaintenanceType originalMaintenanceType, MaintenanceType updatedMaintenanceType){
         Integer originalIndex = this.getMaintenanceTypeArrayList().indexOf(originalMaintenanceType);
         this.getMaintenanceTypeArrayList().set(originalIndex, updatedMaintenanceType);
         if(!this.getMaintenanceTypeArrayList().contains(originalMaintenanceType)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    /**
+     * Method to delete Maintenance Type
+     * @param incomingMaintenanceType
+     * @return true if successful
+     */
+    public boolean deleteMaintenanceType(MaintenanceType incomingMaintenanceType){
+        ArrayList<MaintenanceType> currentMaintenanceTypes = this.getMaintenanceTypeArrayList();
+        if(currentMaintenanceTypes.contains(incomingMaintenanceType)){
+            currentMaintenanceTypes.remove(incomingMaintenanceType);
             return true;
         }else{
             return false;

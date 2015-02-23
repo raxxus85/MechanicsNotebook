@@ -235,6 +235,29 @@ public class MechanicsNotebookEngine {
     }
     
     /**
+     * Method to check to see if we have any maintenance Types
+     * @return true if we do
+     */
+    public boolean hasMaintenanceTypes(){
+        if(this.getGarage().getMaintenanceTypeArrayList().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    /**
+     * Method used to delete a Maintenance Type
+     * @param incomingMaintenanceType
+     * @return true if successful
+     */
+    public boolean deleteMaintenanceType(MaintenanceType incomingMaintenanceType){
+        boolean deleted = this.getGarage().deleteMaintenanceType(incomingMaintenanceType);
+        this.mainWindow.refresh();
+        return deleted;
+    }
+    
+    /**
      * Method called to create a new Maintenance Type
      * @param incomingMaintenanceType
      * @return true if successful (not implemented YET!)

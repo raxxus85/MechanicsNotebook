@@ -1052,6 +1052,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         deleteMaintenanceTypeButton.setText("Delete Maintenance Type");
+        deleteMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMaintenanceTypeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout maintenanceActionsTypesLayout = new javax.swing.GroupLayout(maintenanceActionsTypes);
         maintenanceActionsTypes.setLayout(maintenanceActionsTypesLayout);
@@ -1431,6 +1436,8 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }else if(this.mechanicsNotebookEngine.getCurrentMechanic() == null){
             this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
+        }else if(!this.mechanicsNotebookEngine.hasMaintenanceTypes()){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have at least one Maintenance Type before adding a Maintenace Action! Please create a Maintenance Type first.");
         }           
         else{
             this.mechanicsNotebookEngine.startNewMaintenanceActionWindow();
@@ -1554,12 +1561,30 @@ public class MainWindow extends javax.swing.JFrame {
     private void editMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMaintenanceTypeButtonActionPerformed
         // TODO add your handling code here:
         if(this.maintenanceTypesComboBox.getSelectedItem()== null){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a selected Maintenance Action to edit, try creating one first!");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have any Maintenance Types to edit!");
             return;
         }
         MaintenanceType selectedMaintenanceType = (MaintenanceType)this.maintenanceTypesComboBox.getSelectedItem();
         this.mechanicsNotebookEngine.startUpdateMaintenanceTypeWindow(selectedMaintenanceType);
     }//GEN-LAST:event_editMaintenanceTypeButtonActionPerformed
+
+    private void deleteMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMaintenanceTypeButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.maintenanceTypesComboBox.getSelectedItem()== null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have any Maintenance Types to delete!");
+            return;
+        }
+        boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Maintenance Type? This is permanent!");
+            if(sureToDelete){
+                MaintenanceType maintenanceTypeToDelete = (MaintenanceType)this.maintenanceTypesComboBox.getSelectedItem();
+                if(this.mechanicsNotebookEngine.deleteMaintenanceType(maintenanceTypeToDelete)){
+                    this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Maintenance Type deleted successfully!");
+                }else{
+                    this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Error attempting to delete Maintenace Type! Please report!");
+                }
+            }            
+        
+    }//GEN-LAST:event_deleteMaintenanceTypeButtonActionPerformed
 
     /**
      * @param args the command line arguments
