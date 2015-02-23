@@ -41,6 +41,10 @@ public class Garage implements Serializable{
         return maintenanceTypeArray;
     }
     
+    public ArrayList<MaintenanceType> getMaintenanceTypeArrayList(){
+        return this.maintenanceTypes;
+    }
+    
     /**
      * Method to return an [] of the current Vehicles Maintenance Actions, converted from Array List
      * @return MaintenanceAction[]
@@ -68,6 +72,17 @@ public class Garage implements Serializable{
     public Mechanic getCurrentMechanic(){
         return this.currentMechanic;
     }
+    
+    public boolean updateMaintenanceType(MaintenanceType originalMaintenanceType, MaintenanceType updatedMaintenanceType){
+        Integer originalIndex = this.getMaintenanceTypeArrayList().indexOf(originalMaintenanceType);
+        this.getMaintenanceTypeArrayList().set(originalIndex, updatedMaintenanceType);
+        if(!this.getMaintenanceTypeArrayList().contains(originalMaintenanceType)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     
     public void updateCurrentMechanic(Mechanic updatedMechanic){
         //this.currentMechanic = updatedMechanic;

@@ -422,8 +422,8 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         maintenanceTypeDescriptionTextArea = new javax.swing.JTextArea();
         newMaintenanceTypeButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        editMaintenanceTypeButton = new javax.swing.JButton();
+        deleteMaintenanceTypeButton = new javax.swing.JButton();
         currentMechanicLabel = new javax.swing.JLabel();
         currentMechanicTextField = new javax.swing.JTextField();
         currentCustomerLabel = new javax.swing.JLabel();
@@ -1044,9 +1044,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Edit Maintenance Type");
+        editMaintenanceTypeButton.setText("Edit Maintenance Type");
+        editMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMaintenanceTypeButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Delete Maintenance Type");
+        deleteMaintenanceTypeButton.setText("Delete Maintenance Type");
 
         javax.swing.GroupLayout maintenanceActionsTypesLayout = new javax.swing.GroupLayout(maintenanceActionsTypes);
         maintenanceActionsTypes.setLayout(maintenanceActionsTypesLayout);
@@ -1068,8 +1073,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(newMaintenanceTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(deleteMaintenanceTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editMaintenanceTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(236, Short.MAX_VALUE))
         );
         maintenanceActionsTypesLayout.setVerticalGroup(
@@ -1084,12 +1089,12 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(actionTypeNameLabel)
                     .addComponent(maintenanceTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(editMaintenanceTypeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(actionMileageIntervalLabel)
                     .addComponent(maintenenaceTypeMileageIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(deleteMaintenanceTypeButton))
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1542,6 +1547,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteVehicleButtonActionPerformed
 
     /**
+     * Method used when a user hits the Edit Maintenance Type button
+     * <li> will pass along the selected Maintenance Action to the Engine to be processed
+     * @param evt 
+     */
+    private void editMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMaintenanceTypeButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.maintenanceTypesComboBox.getSelectedItem()== null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a selected Maintenance Action to edit, try creating one first!");
+            return;
+        }
+        MaintenanceType selectedMaintenanceType = (MaintenanceType)this.maintenanceTypesComboBox.getSelectedItem();
+        this.mechanicsNotebookEngine.startUpdateMaintenanceTypeWindow(selectedMaintenanceType);
+    }//GEN-LAST:event_editMaintenanceTypeButtonActionPerformed
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -1620,17 +1640,17 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel customersLabel;
     private javax.swing.JPanel customersPanel;
     private javax.swing.JButton deleteCustomerButton;
+    private javax.swing.JButton deleteMaintenanceTypeButton;
     private javax.swing.JButton deleteMechanicButton;
     private javax.swing.JButton deleteVehicleButton;
     private javax.swing.JButton editCustomerButton;
+    private javax.swing.JButton editMaintenanceTypeButton;
     private javax.swing.JButton editMechanicButton;
     private javax.swing.JButton editVehicleButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPopupMenu.Separator fileMenuSeparator;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

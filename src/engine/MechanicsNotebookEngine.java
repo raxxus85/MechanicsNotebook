@@ -43,7 +43,7 @@ public class MechanicsNotebookEngine {
     private CustomerWindow customerWindow;
     private AboutWindow aboutWindow;
     private VehicleWindow vehicleWindow;
-    private MaintenanceTypeWindow newMaintenanceTypeWindow;
+    private MaintenanceTypeWindow maintenanceTypeWindow;
     private NewMaintenanceActionWindow newMaintenenaceActionWindow;
     private UpdateMileageWindow updateMileageWindow;
     private MaintenanceActionWindow maintenanceActionWindow;
@@ -171,11 +171,25 @@ public class MechanicsNotebookEngine {
         return true;
     }
     
+     
     
     public boolean updateCustomer(Customer incomingCustomer){
         this.getGarage().updateCurrentCustomer(incomingCustomer);
         this.mainWindow.refresh();
         return true;
+    }
+    
+    /**
+     * Method used to update a Maintenance Type
+     * <li> different than Mech/Vech/Action as there is no "current" concept
+     * @param originalMaintenanceType
+     * @param updatedMaintenanceType
+     * @return true if successful
+     */
+    public boolean updateMaintenanceType(MaintenanceType originalMaintenanceType, MaintenanceType updatedMaintenanceType){
+        boolean updatedType =this.getGarage().updateMaintenanceType(originalMaintenanceType, updatedMaintenanceType);
+        this.mainWindow.refresh();
+        return updatedType;
     }
     
     /**
@@ -372,7 +386,14 @@ public class MechanicsNotebookEngine {
         this.vehicleWindow.setVisible(true);
     }
     
- 
+    /**
+     * Method used to start the Maintenance Type Window, to Update a Type
+     * 
+     */
+    public void startUpdateMaintenanceTypeWindow(MaintenanceType originalMaintenanceType){
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(this,originalMaintenanceType);
+        this.maintenanceTypeWindow.setVisible(true);
+    }
     
     /**
      * Method to create a new Customer Window, which prompts user for new Customer details
@@ -413,8 +434,8 @@ public class MechanicsNotebookEngine {
     }
     
     public void startNewMaintenanceTypeWindow(){
-        this.newMaintenanceTypeWindow = new MaintenanceTypeWindow(this);
-        this.newMaintenanceTypeWindow.setVisible(true);
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(this);
+        this.maintenanceTypeWindow.setVisible(true);
     }
     
     public void startNewMaintenanceActionWindow(){
