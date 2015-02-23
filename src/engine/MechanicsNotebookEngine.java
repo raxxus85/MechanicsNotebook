@@ -28,7 +28,7 @@ import windows.CustomerWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.MaintenanceTypeWindow;
 import windows.MechanicWindow;
-import windows.NewVehicleWindow;
+import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
 import windows.WelcomeWindow;
 
@@ -44,7 +44,7 @@ public class MechanicsNotebookEngine {
     private MechanicWindow mechanicWindow;
     private CustomerWindow customerWindow;
     private AboutWindow aboutWindow;
-    private NewVehicleWindow newVehicleWindow;
+    private VehicleWindow vehicleWindow;
     private MaintenanceTypeWindow newMaintenanceTypeWindow;
     private NewMaintenanceActionWindow newMaintenenaceActionWindow;
     private UpdateMileageWindow updateMileageWindow;
@@ -163,14 +163,18 @@ public class MechanicsNotebookEngine {
     }
     
     public boolean updateMechanic(Mechanic incomingMechanic){
-        System.out.println(this.getGarage().getCurrentMechanic().toString());
         this.getGarage().updateCurrentMechanic(incomingMechanic);
-        System.out.println(this.getGarage().getCurrentMechanic().toString());
-
         // TIME TO REFRESH
         this.mainWindow.refresh();
         return true;
     }
+    
+    public boolean updateVehicle(Vehicle incomingVehicle){
+        this.getGarage().updateCurrentVehicle(incomingVehicle);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     
     public boolean updateCustomer(Customer incomingCustomer){
         this.getGarage().updateCurrentCustomer(incomingCustomer);
@@ -220,6 +224,7 @@ public class MechanicsNotebookEngine {
         this.mainWindow.refresh();
         return true;
     }
+    
     
     public boolean editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction newMaintenanceAction){
         this.getCurrentVehicle().editMaintenanceAction(existingMaintenanceAction, newMaintenanceAction); 
@@ -355,6 +360,11 @@ public class MechanicsNotebookEngine {
         this.mechanicWindow.setVisible(true);
     }
     
+    public void startUpdateVehicleWindow(){
+        this.vehicleWindow = new VehicleWindow(this, this.getCurrentVehicle());
+        this.vehicleWindow.setVisible(true);
+    }
+    
     /**
      * Method to create a Delete Mechanic Window, which prompts the user if they wish to delete current Mechanic
      */
@@ -392,8 +402,8 @@ public class MechanicsNotebookEngine {
      * Method to create a new Vehicle Window, which prompts the user for new Vehicle details
      */
     public void startNewVehicleWindow(){
-        this.newVehicleWindow = new NewVehicleWindow(this);
-        this.newVehicleWindow.setVisible(true);       
+        this.vehicleWindow = new VehicleWindow(this);
+        this.vehicleWindow.setVisible(true);       
     }
         
      /**

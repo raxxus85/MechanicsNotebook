@@ -95,6 +95,21 @@ public class Garage implements Serializable{
         }
     }
     
+    public void updateCurrentVehicle(Vehicle updatedVehicle){
+        this.currentVehicle.setMake(updatedVehicle.getMake());
+        this.currentVehicle.setModel(updatedVehicle.getModel());
+        this.currentVehicle.setYear(updatedVehicle.getYear());
+        this.currentVehicle.setColor(updatedVehicle.getColor());
+        this.currentVehicle.setVIN(updatedVehicle.getVIN());
+        this.currentVehicle.setOdometer(updatedVehicle.getOdometer());
+        if(updatedVehicle.getImageIcon()==null){
+            this.currentVehicle.setImageIcon(null);
+        }else{
+            this.currentVehicle.setImageIcon(updatedVehicle.getImageIcon());
+        }
+    }
+    
+    
     /**
      * Method to set the current Customer
      * @param incomingCustomer 

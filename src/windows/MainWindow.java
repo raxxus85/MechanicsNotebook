@@ -402,8 +402,8 @@ public class MainWindow extends javax.swing.JFrame {
         currentVehicleVINTextField = new javax.swing.JTextField();
         vehiclePictureTextLabel = new javax.swing.JLabel();
         vehiclePictureLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        editVehicleButton = new javax.swing.JButton();
+        deleteVehicleButton = new javax.swing.JButton();
         vehicleMaintenanceActionsPanel = new javax.swing.JPanel();
         maintenanceActionsLabel = new javax.swing.JLabel();
         updateMileageButton = new javax.swing.JButton();
@@ -789,9 +789,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
 
-        jButton1.setText("Edit Vehicle");
+        editVehicleButton.setText("Edit Vehicle");
+        editVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editVehicleButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Delete Vehicle");
+        deleteVehicleButton.setText("Delete Vehicle");
 
         javax.swing.GroupLayout vehicleInfoPanelLayout = new javax.swing.GroupLayout(vehicleInfoPanel);
         vehicleInfoPanel.setLayout(vehicleInfoPanelLayout);
@@ -815,7 +820,7 @@ public class MainWindow extends javax.swing.JFrame {
                                         .addComponent(newVehicleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(48, 48, 48))
                                     .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(editVehicleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)))
                                 .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(vehicleModelLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -823,7 +828,7 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(currentVehicleColorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(currentVehicleVINLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vehicleInfoPanelLayout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(deleteVehicleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(vehicleOdometerLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -866,7 +871,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(newVehicleButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(editVehicleButton))
                     .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -897,7 +902,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(vehicleOdometerLabel)))
                     .addGroup(vehicleInfoPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jButton2)))
+                        .addComponent(deleteVehicleButton)))
                 .addGap(73, 73, 73)
                 .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vehicleDescriptionLabel)
@@ -1504,6 +1509,15 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_editCustomerButtonActionPerformed
 
+    private void editVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVehicleButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()==null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a Vehicle to edit!");
+        }else{
+            this.mechanicsNotebookEngine.startUpdateVehicleWindow();
+        }
+    }//GEN-LAST:event_editVehicleButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1584,14 +1598,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel customersPanel;
     private javax.swing.JButton deleteCustomerButton;
     private javax.swing.JButton deleteMechanicButton;
+    private javax.swing.JButton deleteVehicleButton;
     private javax.swing.JButton editCustomerButton;
     private javax.swing.JButton editMechanicButton;
+    private javax.swing.JButton editVehicleButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPopupMenu.Separator fileMenuSeparator;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

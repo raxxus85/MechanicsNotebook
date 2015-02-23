@@ -21,25 +21,53 @@ import objectmodels.Vehicle;
  *
  * @author Mark
  */
-public class NewVehicleWindow extends javax.swing.JFrame {
+public class VehicleWindow extends javax.swing.JFrame {
     private MechanicsNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
+    boolean updateVehicle = false;
     
     /**
-     * Creates new form NewVehicleWindow
+     * Creates new form VehicleWindow
      * NOT USED
      */
-    public NewVehicleWindow() {
+    public VehicleWindow() {
         initComponents();
     }
     
-        /**
-     * Creates new form NewVehicleWindow
+    /**
+     * Creates new form VehicleWindow, used for creating a Vehicle
      */
-    public NewVehicleWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+    public VehicleWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
+        this.createOrUpdateVehicleButton.setText("Create Vehicle");
+        this.setTitle("Create Vehicle");
+    }
+    
+    /**
+     * Creates new form VehicleWindow, used for updating a Vehicle
+     */
+    public VehicleWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
+        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        initComponents();
+        this.setIcon();
+        this.createOrUpdateVehicleButton.setText("Update Vehicle");
+        this.setTitle("Update Vehicle");
+        this.updateVehicle = true;
+        
+        this.vehicleModelTextField.setText(incomingVehicle.getModel());
+        this.vehicleMakeTextField.setText(incomingVehicle.getMake());
+        this.vehicleYearTextField.setText(incomingVehicle.getYear().toString());
+        this.vehicleColorTextField.setText(incomingVehicle.getColor());
+        this.vehicleVINTextField.setText(incomingVehicle.getVIN());
+        this.vehicleOdometerTextField.setText(incomingVehicle.getOdometer().toString());
+        this.vehicleDescriptionTextArea.setText(incomingVehicle.getDescription());
+        if(incomingVehicle.getImageIcon()!=null){
+            this.vehiclePictureLabel.setIcon(incomingVehicle.getImageIcon());
+            this.imageIcon=incomingVehicle.getImageIcon();
+        } 
+        
     }
     
     private void setIcon(){
@@ -56,36 +84,37 @@ public class NewVehicleWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         newVehicleInformationLabel = new javax.swing.JLabel();
-        createVehicleButton = new javax.swing.JButton();
+        createOrUpdateVehicleButton = new javax.swing.JButton();
         newVehicleCancelButton = new javax.swing.JButton();
-        newVehicleMakeLabel = new javax.swing.JLabel();
-        newVehicleModelLabel = new javax.swing.JLabel();
-        newVehicleYearLabel = new javax.swing.JLabel();
-        newVehicleDescriptionLabel = new javax.swing.JLabel();
-        newVehicleMakeTextField = new javax.swing.JTextField();
-        newVehicleModelTextField = new javax.swing.JTextField();
-        newVehicleYearTextField = new javax.swing.JTextField();
+        vehicleMakeLabel = new javax.swing.JLabel();
+        vehicleModelLabel = new javax.swing.JLabel();
+        vehicleYearLabel = new javax.swing.JLabel();
+        vehicleDescriptionLabel = new javax.swing.JLabel();
+        vehicleMakeTextField = new javax.swing.JTextField();
+        vehicleModelTextField = new javax.swing.JTextField();
+        vehicleYearTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        newVehicleDescriptionTextArea = new javax.swing.JTextArea();
-        odometerLabel = new javax.swing.JLabel();
-        newVehicleOdometerTextField = new javax.swing.JTextField();
-        vinLabel = new javax.swing.JLabel();
-        newVehicleVINTextField = new javax.swing.JTextField();
-        colorLabel = new javax.swing.JLabel();
-        newVehicleColorTextField = new javax.swing.JTextField();
+        vehicleDescriptionTextArea = new javax.swing.JTextArea();
+        vehicleOdometerLabel = new javax.swing.JLabel();
+        vehicleOdometerTextField = new javax.swing.JTextField();
+        vehicleVinLabel = new javax.swing.JLabel();
+        vehicleVINTextField = new javax.swing.JTextField();
+        vehicleColorLabel = new javax.swing.JLabel();
+        vehicleColorTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         vehiclePictureLabel = new javax.swing.JLabel();
         openPictureButton = new javax.swing.JButton();
+        clearPictureButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        newVehicleInformationLabel.setText("New Vehicle Information");
+        newVehicleInformationLabel.setText("Vehicle Information");
 
-        createVehicleButton.setText("Create Vehicle");
-        createVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+        createOrUpdateVehicleButton.setText("Create Vehicle");
+        createOrUpdateVehicleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createVehicleButtonActionPerformed(evt);
+                createOrUpdateVehicleButtonActionPerformed(evt);
             }
         });
 
@@ -96,32 +125,39 @@ public class NewVehicleWindow extends javax.swing.JFrame {
             }
         });
 
-        newVehicleMakeLabel.setText("Make");
+        vehicleMakeLabel.setText("Make");
 
-        newVehicleModelLabel.setText("Model");
+        vehicleModelLabel.setText("Model");
 
-        newVehicleYearLabel.setText("Year");
+        vehicleYearLabel.setText("Year");
 
-        newVehicleDescriptionLabel.setText("Description");
+        vehicleDescriptionLabel.setText("Description");
 
-        newVehicleDescriptionTextArea.setColumns(20);
-        newVehicleDescriptionTextArea.setRows(5);
-        jScrollPane1.setViewportView(newVehicleDescriptionTextArea);
+        vehicleDescriptionTextArea.setColumns(20);
+        vehicleDescriptionTextArea.setRows(5);
+        jScrollPane1.setViewportView(vehicleDescriptionTextArea);
 
-        odometerLabel.setText("Odometer");
+        vehicleOdometerLabel.setText("Odometer");
 
-        vinLabel.setText("VIN");
+        vehicleVinLabel.setText("VIN");
 
-        colorLabel.setText("Color");
+        vehicleColorLabel.setText("Color");
 
         jLabel1.setText("Vehicle Picture");
 
         vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
 
-        openPictureButton.setText("Open Picture");
+        openPictureButton.setText("Open");
         openPictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openPictureButtonActionPerformed(evt);
+            }
+        });
+
+        clearPictureButton.setText("Clear");
+        clearPictureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearPictureButtonActionPerformed(evt);
             }
         });
 
@@ -136,35 +172,37 @@ public class NewVehicleWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(newVehicleModelLabel)
-                                    .addComponent(newVehicleMakeLabel)
-                                    .addComponent(newVehicleYearLabel)))
+                                    .addComponent(vehicleModelLabel)
+                                    .addComponent(vehicleMakeLabel)
+                                    .addComponent(vehicleYearLabel)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(colorLabel)
-                                    .addComponent(vinLabel)))
-                            .addComponent(odometerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(newVehicleDescriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(vehicleColorLabel)
+                                    .addComponent(vehicleVinLabel)))
+                            .addComponent(vehicleOdometerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(vehicleDescriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newVehicleVINTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(newVehicleInformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(newVehicleMakeTextField)
-                                .addComponent(newVehicleModelTextField)
-                                .addComponent(newVehicleYearTextField))
-                            .addComponent(newVehicleColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(newVehicleOdometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(vehicleMakeTextField)
+                            .addComponent(vehicleModelTextField)
+                            .addComponent(vehicleYearTextField)
+                            .addComponent(vehicleColorTextField)
+                            .addComponent(vehicleVINTextField)
+                            .addComponent(vehicleOdometerTextField)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(createVehicleButton)
+                        .addContainerGap()
+                        .addComponent(createOrUpdateVehicleButton)
                         .addGap(39, 39, 39)
                         .addComponent(newVehicleCancelButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(openPictureButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(openPictureButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clearPictureButton)
+                        .addContainerGap())
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel1)
@@ -172,52 +210,58 @@ public class NewVehicleWindow extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(81, 81, 81)))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(newVehicleInformationLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(newVehicleInformationLabel)
                 .addGap(9, 9, 9)
+                .addComponent(newVehicleInformationLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newVehicleMakeLabel)
-                    .addComponent(newVehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vehicleMakeLabel)
+                    .addComponent(vehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newVehicleModelLabel)
-                            .addComponent(newVehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vehicleModelLabel)
+                            .addComponent(vehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(newVehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(newVehicleYearLabel))
+                            .addComponent(vehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleYearLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(newVehicleColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(colorLabel))
+                            .addComponent(vehicleColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleColorLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(vinLabel)
-                            .addComponent(newVehicleVINTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vehicleVinLabel)
+                            .addComponent(vehicleVINTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(odometerLabel)
-                            .addComponent(newVehicleOdometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vehicleOdometerLabel)
+                            .addComponent(vehicleOdometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(newVehicleDescriptionLabel)
+                        .addComponent(vehicleDescriptionLabel)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(openPictureButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(openPictureButton)
+                            .addComponent(clearPictureButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(createVehicleButton)
+                            .addComponent(createOrUpdateVehicleButton)
                             .addComponent(newVehicleCancelButton)))))
         );
 
@@ -230,45 +274,58 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_newVehicleCancelButtonActionPerformed
 
-    private void createVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVehicleButtonActionPerformed
+    private void createOrUpdateVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateVehicleButtonActionPerformed
         // TODO add your handling code here:
         Integer newVehicleYear;
         Integer newVehicleOdometer;
         // check to ensure at least the make, model, and year are ENTERED and accurate
-        String newVehicleMake = this.newVehicleMakeTextField.getText();
-        String newVehicleModel = this.newVehicleModelTextField.getText();
-        String newVehicleColor = this.newVehicleColorTextField.getText();
-        String newVehicleVIN = this.newVehicleVINTextField.getText();
+        String newVehicleMake = this.vehicleMakeTextField.getText();
+        String newVehicleModel = this.vehicleModelTextField.getText();
+        String newVehicleColor = this.vehicleColorTextField.getText();
+        String newVehicleVIN = this.vehicleVINTextField.getText();
         
-        String newVehicleDescription = this.newVehicleDescriptionTextArea.getText();
+        String newVehicleDescription = this.vehicleDescriptionTextArea.getText();
         // MUST HAVE AT LEAST A MAKE AND MODEL
         if(newVehicleMake.equals("")||newVehicleModel.equals("")){
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must specify a Make, Model and Year before creating a Vehicle!");
             //if(newVehicleYear
             return;
-        }else{
-            // now try the year
-            try{
-                newVehicleYear = Integer.parseInt(this.newVehicleYearTextField.getText());
-                newVehicleOdometer = Integer.parseInt(this.newVehicleOdometerTextField.getText());
-            }catch(NumberFormatException ex){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
-                return;
-            }
-            Vehicle newVehicle = new Vehicle(newVehicleMake,newVehicleModel,newVehicleYear,newVehicleColor, newVehicleVIN,newVehicleOdometer,newVehicleDescription);
-            if(this.imageIcon!=null){
+        }
+        
+        // now try the year
+        try{
+            newVehicleYear = Integer.parseInt(this.vehicleYearTextField.getText());
+            newVehicleOdometer = Integer.parseInt(this.vehicleOdometerTextField.getText());
+        }catch(NumberFormatException ex){
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
+            return;
+        }
+        
+        Vehicle newVehicle = new Vehicle(newVehicleMake,newVehicleModel,newVehicleYear,newVehicleColor, newVehicleVIN,newVehicleOdometer,newVehicleDescription);
+        if(this.imageIcon!=null){
             newVehicle.setImageIcon(imageIcon);
+        }
+        // if updating...
+        if(this.updateVehicle){
+            boolean vehicleUpdated = this.motoGarageMechanicEngine.updateVehicle(newVehicle);
+            if(vehicleUpdated){
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been updated!");
+            }else{
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle was not updated!");
             }
+            this.dispose();
+        }else{ // creating...
             boolean vehicleCreated = this.motoGarageMechanicEngine.createNewVehicle(newVehicle);
             if(vehicleCreated){
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been created!");
             }else{
                 this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle was not created!");
             }
-            this.dispose();           
+            this.dispose();  
         }
+          
 
-    }//GEN-LAST:event_createVehicleButtonActionPerformed
+    }//GEN-LAST:event_createOrUpdateVehicleButtonActionPerformed
 
     private void openPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPictureButtonActionPerformed
         // TODO add your handling code here:
@@ -295,6 +352,12 @@ public class NewVehicleWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openPictureButtonActionPerformed
 
+    private void clearPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPictureButtonActionPerformed
+        // TODO add your handling code here:
+        this.imageIcon=null;
+        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
+    }//GEN-LAST:event_clearPictureButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -312,44 +375,45 @@ public class NewVehicleWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewVehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewVehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewVehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewVehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewVehicleWindow().setVisible(true);
+                new VehicleWindow().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel colorLabel;
-    private javax.swing.JButton createVehicleButton;
+    private javax.swing.JButton clearPictureButton;
+    private javax.swing.JButton createOrUpdateVehicleButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newVehicleCancelButton;
-    private javax.swing.JTextField newVehicleColorTextField;
-    private javax.swing.JLabel newVehicleDescriptionLabel;
-    private javax.swing.JTextArea newVehicleDescriptionTextArea;
     private javax.swing.JLabel newVehicleInformationLabel;
-    private javax.swing.JLabel newVehicleMakeLabel;
-    private javax.swing.JTextField newVehicleMakeTextField;
-    private javax.swing.JLabel newVehicleModelLabel;
-    private javax.swing.JTextField newVehicleModelTextField;
-    private javax.swing.JTextField newVehicleOdometerTextField;
-    private javax.swing.JTextField newVehicleVINTextField;
-    private javax.swing.JLabel newVehicleYearLabel;
-    private javax.swing.JTextField newVehicleYearTextField;
-    private javax.swing.JLabel odometerLabel;
     private javax.swing.JButton openPictureButton;
+    private javax.swing.JLabel vehicleColorLabel;
+    private javax.swing.JTextField vehicleColorTextField;
+    private javax.swing.JLabel vehicleDescriptionLabel;
+    private javax.swing.JTextArea vehicleDescriptionTextArea;
+    private javax.swing.JLabel vehicleMakeLabel;
+    private javax.swing.JTextField vehicleMakeTextField;
+    private javax.swing.JLabel vehicleModelLabel;
+    private javax.swing.JTextField vehicleModelTextField;
+    private javax.swing.JLabel vehicleOdometerLabel;
+    private javax.swing.JTextField vehicleOdometerTextField;
     private javax.swing.JLabel vehiclePictureLabel;
-    private javax.swing.JLabel vinLabel;
+    private javax.swing.JTextField vehicleVINTextField;
+    private javax.swing.JLabel vehicleVinLabel;
+    private javax.swing.JLabel vehicleYearLabel;
+    private javax.swing.JTextField vehicleYearTextField;
     // End of variables declaration//GEN-END:variables
 }
