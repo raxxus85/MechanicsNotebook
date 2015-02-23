@@ -26,24 +26,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="maintenanceTypeLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="createMaintenanceTypeButton" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="createOrUpdateMaintenanceTypeButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeIntervalLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeNameLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeDescriptionLabel" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <Component id="newMaintenanceTypeNameTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="newMaintenanceTypeIntervalTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="maintenanceTypeNameTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="maintenanceTypeIntervalTextField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -60,25 +60,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="maintenanceTypeLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="newMaintenanceTypeNameTextField" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeNameLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeNameTextField" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="newMaintenanceTypeIntervalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeIntervalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeIntervalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeDescriptionLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="31" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="createMaintenanceTypeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="createOrUpdateMaintenanceTypeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -87,29 +87,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="maintenanceTypeLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="New Maintenance Type"/>
+        <Property name="text" type="java.lang.String" value="Maintenance Type"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="maintenanceTypeNameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Type Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="newMaintenanceTypeNameTextField">
+    <Component class="javax.swing.JTextField" name="maintenanceTypeNameTextField">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="maintenanceTypeIntervalLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Recommended Interval"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="maintenanceTypeDescriptionLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Description"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="newMaintenanceTypeIntervalTextField">
+    <Component class="javax.swing.JTextField" name="maintenanceTypeIntervalTextField">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -118,7 +118,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="newMaintenanceTypeDescriptionTextArea">
+        <Component class="javax.swing.JTextArea" name="maintenanceTypeDescriptionTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -126,12 +126,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="createMaintenanceTypeButton">
+    <Component class="javax.swing.JButton" name="createOrUpdateMaintenanceTypeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Create Maintenance Type"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createMaintenanceTypeButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createOrUpdateMaintenanceTypeButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">

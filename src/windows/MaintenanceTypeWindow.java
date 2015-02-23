@@ -13,23 +13,42 @@ import objectmodels.MaintenanceType;
  *
  * @author Mark
  */
-public class NewMaintenanceTypeWindow extends javax.swing.JFrame {
+public class MaintenanceTypeWindow extends javax.swing.JFrame {
     private MechanicsNotebookEngine motoGarageMechanicEngine;
+    boolean updatingMaintenanceType = false;
 
     /**
-     * Creates new form NewMaintenanceTypeWindow
+     * Creates new form MaintenanceTypeWindow
      */
-    public NewMaintenanceTypeWindow() {
+    public MaintenanceTypeWindow() {
         initComponents();
     }
     
-        /**
-     * Creates new form NewMaintenanceTypeWindow
+    /**
+     * Creates new form MaintenanceTypeWindow
      */
-    public NewMaintenanceTypeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+    public MaintenanceTypeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine= incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
+        this.setTitle("Create Maintenance Type");
+    }
+    
+    /**
+     * Creates new form MaintenanceTypeWindow for Updating Maintenance Type
+     */
+    public MaintenanceTypeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine, MaintenanceType incomingMaintenanceType) {
+        this.motoGarageMechanicEngine= incomingMotoGarageMechanicEngine;
+        initComponents();
+        this.setIcon();
+        this.setTitle("Update Maintenance Type");
+        
+        this.updatingMaintenanceType = true;
+        
+        this.maintenanceTypeNameTextField.setText(incomingMaintenanceType.getMaintenanceTypeName());
+        this.maintenanceTypeIntervalTextField.setText(incomingMaintenanceType.getMileageInterval().toString());
+        this.maintenanceTypeDescriptionTextArea.setText(incomingMaintenanceType.getDescription());
+
     }
     
     private void setIcon(){
@@ -45,36 +64,36 @@ public class NewMaintenanceTypeWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        newMaintenanceTypeNameTextField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        newMaintenanceTypeIntervalTextField = new javax.swing.JTextField();
+        maintenanceTypeLabel = new javax.swing.JLabel();
+        maintenanceTypeNameLabel = new javax.swing.JLabel();
+        maintenanceTypeNameTextField = new javax.swing.JTextField();
+        maintenanceTypeIntervalLabel = new javax.swing.JLabel();
+        maintenanceTypeDescriptionLabel = new javax.swing.JLabel();
+        maintenanceTypeIntervalTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        newMaintenanceTypeDescriptionTextArea = new javax.swing.JTextArea();
-        createMaintenanceTypeButton = new javax.swing.JButton();
+        maintenanceTypeDescriptionTextArea = new javax.swing.JTextArea();
+        createOrUpdateMaintenanceTypeButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setText("New Maintenance Type");
+        maintenanceTypeLabel.setText("Maintenance Type");
 
-        jLabel2.setText("Type Name");
+        maintenanceTypeNameLabel.setText("Type Name");
 
-        jLabel3.setText("Recommended Interval");
+        maintenanceTypeIntervalLabel.setText("Recommended Interval");
 
-        jLabel4.setText("Description");
+        maintenanceTypeDescriptionLabel.setText("Description");
 
-        newMaintenanceTypeDescriptionTextArea.setColumns(20);
-        newMaintenanceTypeDescriptionTextArea.setRows(5);
-        jScrollPane1.setViewportView(newMaintenanceTypeDescriptionTextArea);
+        maintenanceTypeDescriptionTextArea.setColumns(20);
+        maintenanceTypeDescriptionTextArea.setRows(5);
+        jScrollPane1.setViewportView(maintenanceTypeDescriptionTextArea);
 
-        createMaintenanceTypeButton.setText("Create Maintenance Type");
-        createMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
+        createOrUpdateMaintenanceTypeButton.setText("Create Maintenance Type");
+        createOrUpdateMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createMaintenanceTypeButtonActionPerformed(evt);
+                createOrUpdateMaintenanceTypeButtonActionPerformed(evt);
             }
         });
 
@@ -91,22 +110,22 @@ public class NewMaintenanceTypeWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
-                .addComponent(jLabel1)
+                .addComponent(maintenanceTypeLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(createMaintenanceTypeButton)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(createOrUpdateMaintenanceTypeButton)
+                    .addComponent(maintenanceTypeIntervalLabel)
+                    .addComponent(maintenanceTypeNameLabel)
+                    .addComponent(maintenanceTypeDescriptionLabel))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
-                            .addComponent(newMaintenanceTypeNameTextField)
-                            .addComponent(newMaintenanceTypeIntervalTextField))
+                            .addComponent(maintenanceTypeNameTextField)
+                            .addComponent(maintenanceTypeIntervalTextField))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
@@ -117,22 +136,22 @@ public class NewMaintenanceTypeWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(maintenanceTypeLabel)
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(newMaintenanceTypeNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maintenanceTypeNameLabel)
+                    .addComponent(maintenanceTypeNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(newMaintenanceTypeIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maintenanceTypeIntervalLabel)
+                    .addComponent(maintenanceTypeIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                    .addComponent(maintenanceTypeDescriptionLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createMaintenanceTypeButton)
+                    .addComponent(createOrUpdateMaintenanceTypeButton)
                     .addComponent(cancelButton))
                 .addContainerGap())
         );
@@ -146,22 +165,27 @@ public class NewMaintenanceTypeWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void createMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createMaintenanceTypeButtonActionPerformed
-        // TODO add your handling code here:
-        if(this.newMaintenanceTypeNameTextField.getText().equals("")|| this.newMaintenanceTypeIntervalTextField.equals("") || this.newMaintenanceTypeDescriptionTextArea.equals("")){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Please enter a name, recommended mileage interval, and a description before creating the Maintenance Type!");
+    private void createOrUpdateMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateMaintenanceTypeButtonActionPerformed
+        // Basic Checks
+        if(this.maintenanceTypeNameTextField.getText().equals("")|| this.maintenanceTypeIntervalTextField.equals("") || this.maintenanceTypeDescriptionTextArea.equals("")){
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "A Maintenance Type requires a Name, Recommended Interval, and Description.");
+            return;
+        }
+        
+        String newName = this.maintenanceTypeNameTextField.getText();
+        Integer newInterval = Integer.parseInt(this.maintenanceTypeIntervalTextField.getText());
+        String newDescription = this.maintenanceTypeDescriptionTextArea.getText();
+        MaintenanceType newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription);        
+        
+        if(this.updatingMaintenanceType){
+            System.out.println("test");
         }else{
-
-            String newName = this.newMaintenanceTypeNameTextField.getText();
-            Integer newInterval = Integer.parseInt(this.newMaintenanceTypeIntervalTextField.getText());
-            String newDescription = this.newMaintenanceTypeDescriptionTextArea.getText();
-            MaintenanceType newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription);
             this.motoGarageMechanicEngine.createNewMaintenanceType(newMaintenanceType);
             this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "New Maintenance Type," + newMaintenanceType.toString() + ", has been created!");
             // REFRESH
             this.dispose();
         }
-    }//GEN-LAST:event_createMaintenanceTypeButtonActionPerformed
+    }//GEN-LAST:event_createOrUpdateMaintenanceTypeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,33 +204,33 @@ public class NewMaintenanceTypeWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewMaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewMaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewMaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewMaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceTypeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewMaintenanceTypeWindow().setVisible(true);
+                new MaintenanceTypeWindow().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton createMaintenanceTypeButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton createOrUpdateMaintenanceTypeButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea newMaintenanceTypeDescriptionTextArea;
-    private javax.swing.JTextField newMaintenanceTypeIntervalTextField;
-    private javax.swing.JTextField newMaintenanceTypeNameTextField;
+    private javax.swing.JLabel maintenanceTypeDescriptionLabel;
+    private javax.swing.JTextArea maintenanceTypeDescriptionTextArea;
+    private javax.swing.JLabel maintenanceTypeIntervalLabel;
+    private javax.swing.JTextField maintenanceTypeIntervalTextField;
+    private javax.swing.JLabel maintenanceTypeLabel;
+    private javax.swing.JLabel maintenanceTypeNameLabel;
+    private javax.swing.JTextField maintenanceTypeNameTextField;
     // End of variables declaration//GEN-END:variables
 }

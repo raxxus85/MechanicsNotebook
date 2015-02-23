@@ -26,7 +26,7 @@ import windows.MainWindow;
 import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
 import windows.NewMaintenanceActionWindow;
-import windows.NewMaintenanceTypeWindow;
+import windows.MaintenanceTypeWindow;
 import windows.MechanicWindow;
 import windows.NewVehicleWindow;
 import windows.UpdateMileageWindow;
@@ -45,7 +45,7 @@ public class MechanicsNotebookEngine {
     private CustomerWindow customerWindow;
     private AboutWindow aboutWindow;
     private NewVehicleWindow newVehicleWindow;
-    private NewMaintenanceTypeWindow newMaintenanceTypeWindow;
+    private MaintenanceTypeWindow newMaintenanceTypeWindow;
     private NewMaintenanceActionWindow newMaintenenaceActionWindow;
     private UpdateMileageWindow updateMileageWindow;
     private DeleteMechanicWindow deleteMechanicWindow;
@@ -411,7 +411,7 @@ public class MechanicsNotebookEngine {
     }
     
     public void startNewMaintenanceTypeWindow(){
-        this.newMaintenanceTypeWindow = new NewMaintenanceTypeWindow(this);
+        this.newMaintenanceTypeWindow = new MaintenanceTypeWindow(this);
         this.newMaintenanceTypeWindow.setVisible(true);
     }
     
