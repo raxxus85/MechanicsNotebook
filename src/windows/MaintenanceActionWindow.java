@@ -5,6 +5,7 @@
 package windows;
 
 import engine.MechanicsNotebookEngine;
+import informationwindows.DialogType;
 import java.awt.Toolkit;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
@@ -200,6 +201,12 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         String newNotes = this.notesTextArea.getText().toString();
         MaintenanceAction newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newMaintenanceType,newOdometer,newNotes );
         this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
+        if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+                newMaintenanceAction.getOdometer().toString() + " miles.");
+                this.mechanicsNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
+        }
         this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 

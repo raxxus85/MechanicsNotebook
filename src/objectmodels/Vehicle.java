@@ -6,6 +6,8 @@ package objectmodels;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.ImageIcon;
 
 /**
@@ -79,6 +81,35 @@ public class Vehicle implements Serializable{
     
     public ArrayList<MaintenanceAction> getMaintenanceActions(){
         return this.maintenanceActions;
+    }
+    
+    /**
+     * Method used to return a sorted ArrayList of MaintenanceActions, based on Odometer
+     * @return ArrayList<MaintenanceAction>
+     */
+    public ArrayList<MaintenanceAction> getSortedMaintenanceActionsList(){
+        ArrayList<MaintenanceAction> maintenanceActionList = this.maintenanceActions;
+        Collections.sort(maintenanceActionList, new Comparator<MaintenanceAction>() {
+            @Override
+            public int compare(MaintenanceAction o1, MaintenanceAction o2) {
+                return Double.compare(o1.getOdometer(), o2.getOdometer());
+            }
+        });
+        return maintenanceActionList;
+    }
+    
+    public MaintenanceAction[] getSortedMaintenanceActionsArray(){
+        ArrayList<MaintenanceAction> maintenanceActionList = this.maintenanceActions;
+        Collections.sort(maintenanceActionList, new Comparator<MaintenanceAction>() {
+            @Override
+            public int compare(MaintenanceAction o1, MaintenanceAction o2) {
+                return Double.compare(o1.getOdometer(), o2.getOdometer());
+            }
+        });
+        MaintenanceAction[] maintenanceActionArray = maintenanceActionList.toArray(new MaintenanceAction[maintenanceActionList.size()]);
+        
+        
+        return maintenanceActionArray;
     }
     
     public MaintenanceAction[] getMaintenanceActionsArray(){
