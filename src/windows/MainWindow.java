@@ -10,6 +10,7 @@ import objectmodels.Mechanic;
 import engine.MechanicsNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,6 +18,8 @@ import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import objectmodels.Customer;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
@@ -43,35 +46,52 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
     public MainWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
-        
-        MouseListener mouseListener = new MouseAdapter2(this.mechanicsNotebookEngine) {
-        public void mouseClicked(MouseEvent mouseEvent) {
-            JList theList = (JList) mouseEvent.getSource();
-            if (mouseEvent.getClickCount() == 2) {
-                int index = theList.locationToIndex(mouseEvent.getPoint());
-                    if (index >= 0) {
-                        Object o = theList.getModel().getElementAt(index);
-                        System.out.println("Double-clicked on: " + o.toString());
-                        // Time to have the ENGINE OPEN THE MAINTENANCE ACTION EDIT WINDOW!!!
-                        mechanicsNotebookEngine.startMaintenanceActionWindow((MaintenanceAction)o);
-
-                    }
-            }
-            
-        }
-    };
-            
+    
         //this.mainTabbedPane.setBackground(Color.black);
 
         this.mechanicsNotebookEngine = incomingMotoGarageMechanicEngine;
         initComponents();
-        maintenanceActionList2.addMouseListener(mouseListener);
+        //maintenanceActionList2.addMouseListener(mouseListener);
         /**
         this.getContentPane().setBackground(Color.gray);
         this.mainTabbedPane.setBackground(Color.gray);
         this.mechanicsPanel.setBackground(Color.gray);
         * **/
         this.setIcon();
+        
+        // TEST CODE
+        maintenanceActionsTable.addMouseListener(new MouseAdapter2(this.mechanicsNotebookEngine) {
+            public void mousePressed(MouseEvent me) {
+                JTable table =(JTable) me.getSource();
+                Point p = me.getPoint();
+                int row = table.rowAtPoint(p);
+                if (me.getClickCount() == 2) {
+                    MaintenanceAction [] currentMaintenanceActions = mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
+                    mechanicsNotebookEngine.startMaintenanceActionWindow(currentMaintenanceActions[row]);
+                }
+            }
+        });
+        DefaultTableModel tableModel = new DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Odometer", "Maintenance Type", "Notes", "Performed By"
+            }
+                
+                ) {
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //all cells false
+                if(row==0){
+                    return true;
+                }
+            return false;
+            }
+            
+    };
+
+    maintenanceActionsTable.setModel(tableModel);
     }
     
     private void setIcon(){
@@ -130,25 +150,25 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     /**
-     * One of the most important Refresh methods, refeshes all the maintenance actions for current vehicle
+     * One of the most important Refresh methods, refreshes all the maintenance actions for current vehicle
      */
     private void refreshMaintenanceActions(){
-        this.maintenanceActionList2.removeAll();
         model.removeAllElements();
-        //this.maintenanceActionList2.removeAll();
-        //this.model.removeAllElements();
-        //model = new DefaultListModel();
-        maintenanceActionList2 = new JList(model);
         
         if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null){
-            MaintenanceAction[] currentMaintenanceActions = this.mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
-            for(MaintenanceAction maintenanceAction : currentMaintenanceActions){
-                // NEW
-                model.addElement(maintenanceAction);
-                //maintenanceActionList2 = new JList(model);
-
-
-            }
+            this.maintenanceActionsTable.setModel(new DefaultTableModel(
+                this.mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceDoubleArray(),
+                new String [] {
+                    "Odometer", "Maintenance Type", "Notes", "Performed By"
+                    }               
+                ));
+        }else{
+            this.maintenanceActionsTable.setModel(new DefaultTableModel(
+                new Object[][]{{null,null,null,null}},
+                new String [] {
+                    "Odometer", "Maintenance Type", "Notes", "Performed By"
+                    }               
+                ));
         }
     }
     
@@ -408,8 +428,8 @@ public class MainWindow extends javax.swing.JFrame {
         maintenanceActionsLabel = new javax.swing.JLabel();
         updateMileageButton = new javax.swing.JButton();
         addMaintenanceActionButton = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        maintenanceActionList2 = new javax.swing.JList();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        maintenanceActionsTable = new javax.swing.JTable();
         vehicleWarrantiesPanel = new javax.swing.JPanel();
         maintenanceActionsTypes = new javax.swing.JPanel();
         maintenanceTypesComboBox = new javax.swing.JComboBox();
@@ -477,21 +497,21 @@ public class MainWindow extends javax.swing.JFrame {
         currentMechanicDescriptionTextArea.setFocusable(false);
         jScrollPane1.setViewportView(currentMechanicDescriptionTextArea);
 
-        editMechanicButton.setText("Edit Mechanic");
+        editMechanicButton.setText("Edit ");
         editMechanicButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMechanicButtonActionPerformed(evt);
             }
         });
 
-        deleteMechanicButton.setText("Delete Mechanic");
+        deleteMechanicButton.setText("Delete");
         deleteMechanicButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteMechanicButtonActionPerformed(evt);
             }
         });
 
-        createNewMechanicButton.setText(" New Mechanic");
+        createNewMechanicButton.setText(" New ");
         createNewMechanicButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createNewMechanicButtonActionPerformed(evt);
@@ -521,13 +541,19 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(mechanicsPanelLayout.createSequentialGroup()
                         .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mechanicsPanelLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(mechanicsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(editMechanicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(deleteMechanicButton, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(createNewMechanicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                                .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(mechanicsPanelLayout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(mechanicsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(mechanicsPanelLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(createNewMechanicButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(editMechanicButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(deleteMechanicButton)
+                                        .addGap(18, 18, Short.MAX_VALUE)))
                                 .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(currentMechanicFirstNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(currentMechanicMiddleNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -543,7 +569,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(currentMechanicFirstNameTextField)
                             .addComponent(currentMechanicLastNameTextField)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -569,7 +595,9 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(currentMechanicMiddleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(currentMechanicMiddleNameLabel)
-                                    .addComponent(createNewMechanicButton))
+                                    .addComponent(createNewMechanicButton)
+                                    .addComponent(editMechanicButton)
+                                    .addComponent(deleteMechanicButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(currentMechanicLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -577,20 +605,12 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(mechanicsPanelLayout.createSequentialGroup()
-                                .addGroup(mechanicsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(mechanicsPanelLayout.createSequentialGroup()
-                                        .addGap(71, 71, 71)
-                                        .addComponent(currentMechanicDescription)
-                                        .addGap(5, 5, 5))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mechanicsPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(editMechanicButton)
-                                        .addGap(18, 18, 18)))
-                                .addComponent(deleteMechanicButton)
-                                .addGap(42, 42, 42)
+                                .addGap(71, 71, 71)
+                                .addComponent(currentMechanicDescription)
+                                .addGap(70, 70, 70)
                                 .addComponent(jLabel3))))
                     .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Mechanics", mechanicsPanel);
@@ -726,7 +746,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(customerDescriptionLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Customers", customersPanel);
@@ -912,7 +932,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(vehicleInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vehicleDescriptionLabel)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(126, 191, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         vehiclesTabbedPane.addTab("Vehicle Info", vehicleInfoPanel);
@@ -933,18 +953,18 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        maintenanceActionList2.setModel(model);
-        maintenanceActionList2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                maintenanceActionList2MouseClicked(evt);
+        maintenanceActionsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Odometer", "Maintenance Type", "Notes", "Performed By"
             }
-        });
-        maintenanceActionList2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                maintenanceActionList2ValueChanged(evt);
-            }
-        });
-        jScrollPane3.setViewportView(maintenanceActionList2);
+        ));
+        jScrollPane6.setViewportView(maintenanceActionsTable);
 
         javax.swing.GroupLayout vehicleMaintenanceActionsPanelLayout = new javax.swing.GroupLayout(vehicleMaintenanceActionsPanel);
         vehicleMaintenanceActionsPanel.setLayout(vehicleMaintenanceActionsPanelLayout);
@@ -965,7 +985,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(0, 127, Short.MAX_VALUE))
                     .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                        .addComponent(jScrollPane6)))
                 .addContainerGap())
         );
         vehicleMaintenanceActionsPanelLayout.setVerticalGroup(
@@ -977,8 +997,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateMileageButton)
                     .addComponent(addMaintenanceActionButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -992,7 +1012,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         vehicleWarrantiesPanelLayout.setVerticalGroup(
             vehicleWarrantiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 558, Short.MAX_VALUE)
+            .addGap(0, 493, Short.MAX_VALUE)
         );
 
         vehiclesTabbedPane.addTab("Vehicle Warranties", vehicleWarrantiesPanel);
@@ -1037,21 +1057,21 @@ public class MainWindow extends javax.swing.JFrame {
         maintenanceTypeDescriptionTextArea.setFocusable(false);
         jScrollPane5.setViewportView(maintenanceTypeDescriptionTextArea);
 
-        newMaintenanceTypeButton.setText("New Maintenance Action Type");
+        newMaintenanceTypeButton.setText("New");
         newMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newMaintenanceTypeButtonActionPerformed(evt);
             }
         });
 
-        editMaintenanceTypeButton.setText("Edit Maintenance Type");
+        editMaintenanceTypeButton.setText("Edit");
         editMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMaintenanceTypeButtonActionPerformed(evt);
             }
         });
 
-        deleteMaintenanceTypeButton.setText("Delete Maintenance Type");
+        deleteMaintenanceTypeButton.setText("Delete");
         deleteMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteMaintenanceTypeButtonActionPerformed(evt);
@@ -1063,51 +1083,64 @@ public class MainWindow extends javax.swing.JFrame {
         maintenanceActionsTypesLayout.setHorizontalGroup(
             maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addContainerGap()
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(actionDescriptionLabel)
-                    .addComponent(actionMileageIntervalLabel)
-                    .addComponent(actionTypeNameLabel)
-                    .addComponent(actionTypesLable))
-                .addGap(35, 35, 35)
-                .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(maintenanceTypesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(maintenanceTypeTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maintenenaceTypeMileageIntervalTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(18, 18, 18)
-                .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(newMaintenanceTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteMaintenanceTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editMaintenanceTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(236, Short.MAX_VALUE))
+                    .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
+                        .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, maintenanceActionsTypesLayout.createSequentialGroup()
+                                .addComponent(maintenanceTypesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(actionTypeNameLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(maintenanceTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
+                                .addComponent(editMaintenanceTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                .addGap(338, 338, 338)
+                                .addComponent(actionMileageIntervalLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(maintenenaceTypeMileageIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
+                                .addComponent(deleteMaintenanceTypeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(actionDescriptionLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(115, 115, 115))
+                    .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
+                        .addComponent(actionTypesLable)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
+                        .addComponent(newMaintenanceTypeButton)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         maintenanceActionsTypesLayout.setVerticalGroup(
             maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(actionTypesLable)
-                    .addComponent(maintenanceTypesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newMaintenanceTypeButton))
-                .addGap(18, 18, 18)
-                .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(actionTypeNameLabel)
-                    .addComponent(maintenanceTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editMaintenanceTypeButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(actionMileageIntervalLabel)
-                    .addComponent(maintenenaceTypeMileageIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteMaintenanceTypeButton))
+                .addGap(25, 25, 25)
+                .addComponent(actionTypesLable)
                 .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(actionDescriptionLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(maintenanceTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(actionTypeNameLabel)))
                     .addGroup(maintenanceActionsTypesLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(317, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addComponent(maintenanceTypesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newMaintenanceTypeButton)
+                .addGap(12, 12, 12)
+                .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maintenenaceTypeMileageIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(actionMileageIntervalLabel)
+                    .addComponent(editMaintenanceTypeButton))
+                .addGap(5, 5, 5)
+                .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(actionDescriptionLabel)
+                        .addComponent(deleteMaintenanceTypeButton)))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Maintenance Action Types", maintenanceActionsTypes);
@@ -1472,31 +1505,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteMechanicButtonActionPerformed
 
-    private void maintenanceActionList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_maintenanceActionList2ValueChanged
-        // TODO add your handling code here:
-        //System.out.println("TESTING HERE!!!!!!!!!!!!!!" + evt.toString());
-        //System.out.println(this.maintenanceActionList2.getSelectedValue().toString() + " !!!!!!!!!!!!" );
-        //if(evt.getFirstIndex()!=evt.getLastIndex()){
-        //    int latestIndex = evt.getLastIndex();
-        //    MaintenanceAction selectedMaintenanceAction  = (MaintenanceAction)model.getElementAt(latestIndex);
-         //   System.out.println(selectedMaintenanceAction);
-        //}
-
-    }//GEN-LAST:event_maintenanceActionList2ValueChanged
-
-    private void maintenanceActionList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceActionList2MouseClicked
-        // TODO add your handling code here:
-        //mouseClicked;
-        //JList theList = (JList) mouseClicked.getSource();
-        //if (mouseEvent.getClickCount() == 2) {
-        //  int index = theList.locationToIndex(mouseEvent.getPoint());
-        //  if (index >= 0) {
-         //   Object o = theList.getModel().getElementAt(index);
-         //   System.out.println("Double-clicked on: " + o.toString());
-         // }
-        
-    }//GEN-LAST:event_maintenanceActionList2MouseClicked
-
     private void deleteCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerButtonActionPerformed
         // TODO add your handling code here:
         if(this.mechanicsNotebookEngine.getCurrentCustomer()== null){
@@ -1681,12 +1689,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane mainTabbedPane;
-    private javax.swing.JList maintenanceActionList2;
     private javax.swing.JLabel maintenanceActionsLabel;
+    private javax.swing.JTable maintenanceActionsTable;
     private javax.swing.JPanel maintenanceActionsTypes;
     private javax.swing.JTextArea maintenanceTypeDescriptionTextArea;
     private javax.swing.JTextField maintenanceTypeTextField;
