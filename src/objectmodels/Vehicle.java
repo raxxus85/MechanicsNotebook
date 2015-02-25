@@ -88,6 +88,31 @@ public class Vehicle implements Serializable{
         return maintenanceActionArray;
     }
     
+    /**
+     * Method used to return a 2d Array used for JTable... FILL THIS OUT!!! 
+     * @return Object[][]
+     */
+    public Object[][] getMaintenanceDoubleArray(){       
+        Vehicle currentVehicle = this;
+        ArrayList<MaintenanceAction> maintenanceActionArrayList = currentVehicle.getMaintenanceActions();
+        MaintenanceAction[] maintenanceActionArray = maintenanceActionArrayList.toArray(new MaintenanceAction[maintenanceActionArrayList.size()]);
+        String[][] object2DArray = new String[maintenanceActionArray.length][];
+
+        for(int counter = maintenanceActionArray.length - 1;counter>-1; counter = counter-1){
+            String odometer = maintenanceActionArray[counter].getOdometer().toString();
+            String maintenanceType = maintenanceActionArray[counter].getMaintenanceType().toString();
+            String notes = maintenanceActionArray[counter].getNotes();
+            String performedBy = maintenanceActionArray[counter].getMechanic().toString();
+            String[] testStringArray = {odometer,maintenanceType,notes,performedBy};        
+                    // odo maint type , notes, performed by
+
+            object2DArray[counter]= testStringArray;
+        }
+   
+        return object2DArray;
+    }
+
+    
     public void updateMileage(Integer incomingMileage){
         this.odometer = incomingMileage;
     }

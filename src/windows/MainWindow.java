@@ -32,7 +32,8 @@ import objectmodels.Vehicle;
  */
 public class MainWindow extends javax.swing.JFrame {
     private MechanicsNotebookEngine mechanicsNotebookEngine;
-    DefaultListModel model = new DefaultListModel();
+    //DefaultListModel model = new DefaultListModel();
+    DefaultTableModel tableModel = new DefaultTableModel();
     //JList maintenanceActionList2;
     
     /**
@@ -153,30 +154,23 @@ public class MainWindow extends javax.swing.JFrame {
      * One of the most important Refresh methods, refreshes all the maintenance actions for current vehicle
      */
     private void refreshMaintenanceActions(){
-        model.removeAllElements();
-        
-        if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null){
-            this.maintenanceActionsTable.setModel(new DefaultTableModel(
-                this.mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceDoubleArray(),
-                new String [] {
-                    "Odometer", "Maintenance Type", "Notes", "Performed By"
-                    }               
-                ));
-        }else{
-            this.maintenanceActionsTable.setModel(new DefaultTableModel(
-                new Object[][]{{null,null,null,null}},
-                new String [] {
-                    "Odometer", "Maintenance Type", "Notes", "Performed By"
-                    }               
-                ));
+        DefaultTableModel model = (DefaultTableModel) maintenanceActionsTable.getModel();
+        // time to remove the maintenance actions here
+        int rowCount = model.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
         }
-    }
-    
-    /**
-     * SUPER IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * **/
-    
-
+        // time to add all the maintenance actions
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null && this.mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray().length >0){
+            int newRowCount = this.mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray().length;
+            MaintenanceAction[] maintenanceArray = this.mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
+            for (int i = 0  ; i <newRowCount ; i++) {
+                Object[]maintenanceActionObject = maintenanceArray[i].getMaintenaceAction();
+                model.addRow(maintenanceActionObject);                
+            }
+        }
+    }    
     
     private void refreshVehiclesInformation(){
         System.out.println("REFRESH VEHICLES INFO BIENG CALLED");
