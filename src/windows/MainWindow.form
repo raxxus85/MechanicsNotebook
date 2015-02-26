@@ -2,6 +2,11 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.JMenuItem" name="jMenuItem1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="mechanicsNotebookMenuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileMenu">
@@ -100,65 +105,44 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="mainTabbedPane" pref="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="currentMechanicLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Component id="currentMechanicTextField" min="-2" pref="199" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
               <Component id="currentCustomerTextField" min="-2" pref="200" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="addVehicleButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="editVehicleButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="removeVehicleButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="currentVehicleTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="currentVehicleTextField" min="-2" pref="200" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+              <Component id="currentMechanicLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
+              <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+          </Group>
+          <Component id="mainToolBar" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" max="-2" attributes="0">
-                          <Component id="currentMechanicLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="currentMechanicTextField" max="32767" attributes="0"/>
-                          <Component id="currentCustomerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="currentCustomerTextField" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="currentVehicleTextField" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Component id="mainToolBar" min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="currentVehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="currentCustomerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="currentMechanicLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="addVehicleButton" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="editVehicleButton" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="removeVehicleButton" min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="currentMechanicTextField" alignment="3" max="32767" attributes="0"/>
+                  <Component id="currentCustomerTextField" alignment="3" max="32767" attributes="0"/>
+                  <Component id="currentVehicleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="mainTabbedPane" min="-2" pref="495" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="mainTabbedPane" min="-2" pref="498" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -182,45 +166,51 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                               <Component id="mechanicsLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="273" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="mechanicsComboBox" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="mechanicsComboBox" min="-2" pref="150" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="addMechanicButton" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="editMechanicButton" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="removeMechanicButton" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="currentMechanicMiddleNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentMechanicFirstNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="createNewMechanicButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="editMechanicButton" min="-2" pref="59" max="-2" attributes="0"/>
-                                      <EmptySpace pref="13" max="32767" attributes="0"/>
-                                      <Component id="deleteMechanicButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="currentMechanicLastNameLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentMechanicDescription" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="currentMechanicFirstNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentMechanicMiddleNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentMechanicLastNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentMechanicDescription" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="currentMechanicMiddleNameTextField" max="32767" attributes="0"/>
-                                  <Component id="currentMechanicFirstNameTextField" max="32767" attributes="0"/>
-                                  <Component id="currentMechanicLastNameTextField" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane1" pref="286" max="32767" attributes="0"/>
-                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="currentMechanicMiddleNameTextField" max="32767" attributes="0"/>
+                          <Component id="currentMechanicLastNameTextField" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="286" max="32767" attributes="0"/>
+                          <Component id="currentMechanicFirstNameTextField" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="mechanicPictureTextLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="mechanicPictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -230,46 +220,54 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="mechanicsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="mechanicsComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentMechanicFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentMechanicFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="mechanicsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="mechanicPictureTextLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="mechanicPictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                      <Component id="mechanicsComboBox" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="currentMechanicMiddleNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="currentMechanicMiddleNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="createNewMechanicButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="editMechanicButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="deleteMechanicButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="currentMechanicLastNameTextField" min="-2" max="-2" attributes="0"/>
-                                          <Component id="currentMechanicLastNameLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addMechanicButton" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="editMechanicButton" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="removeMechanicButton" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane1" min="-2" pref="135" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                      <Component id="currentMechanicDescription" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="currentMechanicFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentMechanicFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="currentMechanicMiddleNameTextField" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentMechanicMiddleNameLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="currentMechanicLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentMechanicLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane1" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <Component id="currentMechanicDescription" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="mechanicPictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="204" max="32767" attributes="0"/>
+                      <EmptySpace pref="162" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -345,30 +343,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="editMechanicButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Edit "/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editMechanicButtonActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="deleteMechanicButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Delete"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteMechanicButtonActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="createNewMechanicButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value=" New "/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createNewMechanicButtonActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="mechanicPictureLabel">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -376,10 +350,61 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="mechanicPictureTextLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mechanic Picture"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="addMechanicButton">
+              <Properties>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMechanicButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.MechanicButton(ButtonActions.ADD)"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addMechanicButton.setToolTipText(&quot;Add a Mechanic&quot;);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="editMechanicButton">
+              <Properties>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editMechanicButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.MechanicButton(ButtonActions.EDIT)"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMechanicButton.setToolTipText(&quot;Edit a Mechanic&quot;);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="removeMechanicButton">
+              <Properties>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeMechanicButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.MechanicButton(ButtonActions.REMOVE)"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="removeMechanicButton.setToolTipText(&quot;Remove a Mechanic&quot;);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -400,11 +425,15 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="customersLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="customersComboBox" max="32767" attributes="0"/>
-                                  <Component id="newCustomerButton" pref="184" max="32767" attributes="0"/>
-                                  <Component id="editCustomerButton" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="deleteCustomerButton" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="customersComboBox" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="addCustomerButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="editCustomerButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="deleteCustomerButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -422,7 +451,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="108" max="32767" attributes="0"/>
+                      <EmptySpace pref="67" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="customerPictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
@@ -450,36 +479,36 @@
                                   <Component id="customersComboBox" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="customerMiddleInitialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="currentCustomerMiddleInitialTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="customerLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="currentCustomerLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="newCustomerButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="editCustomerButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="deleteCustomerButton" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="addCustomerButton" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="editCustomerButton" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="deleteCustomerButton" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="customerLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentCustomerLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="customerPictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="customerDescriptionLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="188" max="32767" attributes="0"/>
+                      <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -558,14 +587,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="newCustomerButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="New Customer"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newCustomerButtonActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="customerPictureLabel">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -578,21 +599,56 @@
                 <Property name="text" type="java.lang.String" value="Customer Picture"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="addCustomerButton">
+              <Properties>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCustomerButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.CustomerButton(ButtonActions.ADD)"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addCustomerButton.setToolTipText(&quot;Add a Customer&quot;);"/>
+              </AuxValues>
+            </Component>
             <Component class="javax.swing.JButton" name="editCustomerButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Edit Customer"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editCustomerButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.CustomerButton(ButtonActions.EDIT)"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editCustomerButton.setToolTipText(&quot;Edit Customer&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="deleteCustomerButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Delete Customer"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32, 32]"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCustomerButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.CustomerButton(ButtonActions.REMOVE)"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="deleteCustomerButton.setToolTipText(&quot;Remove Customer&quot;);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -638,7 +694,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -654,7 +710,12 @@
                                               <Component id="vehicleOdometerLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                                              <Component id="addVehicleButton" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="editVehicleButton" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="removeVehicleButton" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="vehicleModelLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                                   <Component id="vehicleYearLabel" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -678,7 +739,7 @@
                                       <Component id="jScrollPane4" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="125" max="32767" attributes="0"/>
+                              <EmptySpace pref="84" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="vehiclePictureLabel" min="-2" pref="100" max="-2" attributes="0"/>
@@ -708,6 +769,12 @@
                                       <Component id="currentVehicleJComboBoxLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="vehiclesComboBox" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="addVehicleButton" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="editVehicleButton" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="removeVehicleButton" min="-2" pref="32" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -870,13 +937,64 @@
                         </Property>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JButton" name="addVehicleButton">
+                      <Properties>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[32, 32]"/>
+                        </Property>
+                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[32, 32]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addVehicleButtonActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.VehicleButton(ButtonActions.ADD)"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addVehicleButton.setToolTipText(&quot;Add a Vehicle&quot;);"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="editVehicleButton">
+                      <Properties>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[32, 32]"/>
+                        </Property>
+                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[32, 32]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editVehicleButtonActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.VehicleButton(ButtonActions.EDIT)"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editVehicleButton.setToolTipText(&quot;Edit a Vehicle&quot;);"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="removeVehicleButton">
+                      <Properties>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[32, 32]"/>
+                        </Property>
+                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[32, 32]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeVehicleButtonActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.VehicleButton(ButtonActions.REMOVE)"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="removeVehicleButton.setToolTipText(&quot;Remove a Vehicle&quot;);"/>
+                      </AuxValues>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="vehicleMaintenanceActionsPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Vehicle Maintenance Actions">
-                        <Property name="tabTitle" type="java.lang.String" value="Vehicle Maintenance Actions"/>
+                      <JTabbedPaneConstraints tabName="Maintenance Actions">
+                        <Property name="tabTitle" type="java.lang.String" value="Maintenance Actions"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -899,7 +1017,7 @@
                                               <Component id="addMaintenanceActionButton" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="159" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -921,7 +1039,7 @@
                                   <Component id="addMaintenanceActionButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" pref="339" max="32767" attributes="0"/>
+                              <Component id="jScrollPane6" pref="342" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1005,8 +1123,8 @@
                 <Container class="javax.swing.JPanel" name="vehicleWarrantiesPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Vehicle Warranties">
-                        <Property name="tabTitle" type="java.lang.String" value="Vehicle Warranties"/>
+                      <JTabbedPaneConstraints tabName="Warranties">
+                        <Property name="tabTitle" type="java.lang.String" value="Warranties"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -1014,12 +1132,34 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="804" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="763" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="439" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="442" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanel1">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Modifications">
+                        <Property name="tabTitle" type="java.lang.String" value="Modifications"/>
+                      </JTabbedPaneConstraints>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="763" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="442" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1053,7 +1193,7 @@
                                       <Component id="maintenanceTypeTextField" min="-2" pref="166" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="editMaintenanceTypeButton" pref="85" max="32767" attributes="0"/>
+                                      <Component id="editMaintenanceTypeButton" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="338" max="-2" attributes="0"/>
                                       <Component id="actionMileageIntervalLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1115,7 +1255,7 @@
                               <Component id="deleteMaintenanceTypeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="220" max="32767" attributes="0"/>
+                      <EmptySpace pref="223" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1232,13 +1372,8 @@
     </Component>
     <Component class="javax.swing.JLabel" name="currentVehicleLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Vehicle&quot;" type="code"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Vehicle"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="currentVehicleLabel.setForeground(Color.WHITE);"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="currentVehicleTextField">
       <Properties>
@@ -1246,56 +1381,12 @@
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="addVehicleButton">
+    <Container class="javax.swing.JToolBar" name="mainToolBar">
       <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32, 32]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32, 32]"/>
-        </Property>
+        <Property name="rollover" type="boolean" value="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addVehicleButtonActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.VehicleButton(ButtonActions.ADD)"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addVehicleButton.setToolTipText(&quot;Add a Vehicle&quot;);"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="editVehicleButton">
-      <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32, 32]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32, 32]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editVehicleButtonActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.VehicleButton(ButtonActions.EDIT)"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editVehicleButton.setToolTipText(&quot;Edit a Vehicle&quot;);"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="removeVehicleButton">
-      <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32, 32]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32, 32]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeVehicleButtonActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new customclasses.VehicleButton(ButtonActions.REMOVE)"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="removeVehicleButton.setToolTipText(&quot;Remove a Vehicle&quot;);"/>
-      </AuxValues>
-    </Component>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+    </Container>
   </SubComponents>
 </Form>
