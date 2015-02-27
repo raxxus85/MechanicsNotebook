@@ -488,6 +488,7 @@ public class MechanicsNotebookEngine {
         return this.currentGarage.getCurrentMechanic();
     }
     
+    
     /**
      * Method to set the current Customer
      * @param incomingCustomer 
@@ -503,6 +504,7 @@ public class MechanicsNotebookEngine {
     public Customer getCurrentCustomer(){
         return this.currentGarage.getCurrentCustomer();
     }
+    
     
     public void setCurrentVehicle(Vehicle incomingVehicle){
         this.currentGarage.setCurrentVehicle(incomingVehicle);

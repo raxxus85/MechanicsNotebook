@@ -47,7 +47,7 @@ public class MaintenanceAction implements Serializable{
      * Method used for the sole purpose of filling out a JTable in MainWindow
      * @return 
      */
-    public Object[] getMaintenaceAction(){
+    public Object[] getMaintenaceActionObject(){
         String[] stringArray = {this.odometer.toString(),this.maintenanceType.toString(), this.notes, this.mechanic.toString()};
         return stringArray;
     }

@@ -38,6 +38,11 @@ public class Customer implements Serializable{
     
     // END CONSTRUCTORS
     
+    public Object[] getCustomerObject(){
+        String[] stringArray = {this.firstName,this.middleName, this.lastName, this.description};
+        return stringArray;
+    }
+    
     public void setImageIcon(ImageIcon incomingImageIcon){
         this.imageIcon= incomingImageIcon;
     }
@@ -76,6 +81,12 @@ public class Customer implements Serializable{
     
     public void setDescription(String incomingDescription){
         this.description = incomingDescription;
+    }
+    
+    public Vehicle[] getVehicleArray(){
+        ArrayList<Vehicle> vehicleArrayList = this.vehicles;
+        Vehicle[] vehicleArray = vehicleArrayList.toArray(new Vehicle[vehicleArrayList.size()]);
+        return vehicleArray;
     }
     
     public ArrayList<Vehicle> getVehicles(){

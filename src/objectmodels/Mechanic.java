@@ -31,6 +31,15 @@ public class Mechanic implements Serializable{
     }
     
 
+     /**
+     * Method used for the sole purpose of filling out a JTable in MainWindow
+     * @return 
+     */
+    public Object[] getMechanicObject(){
+        String[] stringArray = {this.firstName,this.middleName, this.lastName, this.description};
+        return stringArray;
+    }
+    
     public void setImageIcon(ImageIcon incomingImageIcon){
         this.imageIcon = incomingImageIcon;
     }

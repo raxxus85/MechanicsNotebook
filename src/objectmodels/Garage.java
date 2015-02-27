@@ -73,6 +73,7 @@ public class Garage implements Serializable{
         return this.currentMechanic;
     }
     
+    
     /**
      * Method used to update a Maintenance Type
      * @param originalMaintenanceType
