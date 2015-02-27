@@ -478,6 +478,7 @@ public class MechanicsNotebookEngine {
      */
     public void setCurrentMechanic(Mechanic incomingMechanic){
         this.currentGarage.setCurrentMechanic(incomingMechanic);
+        this.mainWindow.refresh();
     }
     
     /**

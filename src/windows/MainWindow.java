@@ -37,6 +37,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import objectmodels.Customer;
@@ -321,21 +322,39 @@ public class MainWindow extends javax.swing.JFrame {
      * Method use to update the Mechanic List
      */
     private void refreshMechanicsList(){
+
         DefaultTableModel model = (DefaultTableModel) mechanicsTable.getModel();
         // time to remove the maintenance actions here
         int rowCount = model.getRowCount();
         //Remove rows one by one from the end of the table
+        //test
+        Integer currentRowSelected = mechanicsTable.getSelectedRow();
+        System.out.println(" THE CURRENT ROW SELECTED VALUE IS " + currentRowSelected + "   !~~~~~~~~~~~~~~~~~~~~~~~");
+        // remove all mechanics
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
+        // if we have mechanics, re-add them
+
         if(this.mechanicsNotebookEngine.getMechanicArray().length >0){
             Mechanic[] mechanics = this.mechanicsNotebookEngine.getMechanicArray();
             int newRowCount = mechanics.length;
             for (int i = 0  ; i <newRowCount ; i++) {
                 Object[]mechanicObject = mechanics[i].getMechanicObject();
                 model.addRow(mechanicObject);       
-                
             }
+            // since there ARE mechanics, let's ensure the 'selected' remains selected
+            if(currentRowSelected>-1 && this.mechanicsNotebookEngine.getCurrentMechanic()!=null){
+                ListSelectionModel selectionModel =mechanicsTable.getSelectionModel();
+                selectionModel.setSelectionInterval(currentRowSelected, currentRowSelected);
+
+            }else if((currentRowSelected==-1) &&this.mechanicsNotebookEngine.getCurrentMechanic()!=null ){
+                ListSelectionModel selectionModel =mechanicsTable.getSelectionModel();
+                selectionModel.setSelectionInterval(0, 0);
+                currentRowSelected = mechanicsTable.getSelectedRow();
+                this.mechanicsNotebookEngine.setCurrentMechanic(mechanics[0]);
+            }
+                 
         }
     }
     
@@ -346,6 +365,7 @@ public class MainWindow extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) vehiclesTable.getModel();
         // time to remove the maintenance actions here
         int rowCount = model.getRowCount();
+
         //Remove rows one by one from the end of the table
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
@@ -534,7 +554,8 @@ public class MainWindow extends javax.swing.JFrame {
         this.mechanicsComboBox.removeAllItems();
         mechanicsComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.mechanicsNotebookEngine.getMechanicArray()));
         if(hasMechanics){
-            mechanicsComboBox.setSelectedItem(currentMechanic);
+            // REMOVING THIS FOR TESTING REASONS
+            //mechanicsComboBox.setSelectedItem(currentMechanic);
         }
     }
     
@@ -1443,6 +1464,11 @@ public class MainWindow extends javax.swing.JFrame {
                 "First", "Middle", "Last", "Description"
             }
         ));
+        mechanicsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mechanicsTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(mechanicsTable);
 
         jLabel2.setText("Mechanics");
@@ -1997,6 +2023,18 @@ public class MainWindow extends javax.swing.JFrame {
     private void removeVehicleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeVehicleButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_removeVehicleButton2ActionPerformed
+
+    private void mechanicsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mechanicsTableMouseClicked
+        // TODO add your handling code here:
+        System.out.println("The mechaincs table was clicked...");
+        int rowSelected = mechanicsTable.getSelectedRow();
+        // clicked on a mechanic, time to set the "current" mechanic to that mechanic
+        Mechanic[] mechanics = this.mechanicsNotebookEngine.getMechanicArray();
+        Mechanic selectedMechanic = mechanics[rowSelected];
+        System.out.println("The mechanic selected was : " + selectedMechanic.toString());
+        this.mechanicsNotebookEngine.setCurrentMechanic(selectedMechanic);
+        //this.refresh();
+    }//GEN-LAST:event_mechanicsTableMouseClicked
 
     /**
      * @param args the command line arguments
