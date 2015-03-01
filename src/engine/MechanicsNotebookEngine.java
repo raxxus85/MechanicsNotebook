@@ -496,6 +496,7 @@ public class MechanicsNotebookEngine {
      */
     public void setCurrentCustomer(Customer incomingCustomer){
         this.currentGarage.setCurrentCustomer(incomingCustomer);
+        this.mainWindow.refresh();
     }
     
     /**
@@ -509,6 +510,7 @@ public class MechanicsNotebookEngine {
     
     public void setCurrentVehicle(Vehicle incomingVehicle){
         this.currentGarage.setCurrentVehicle(incomingVehicle);
+        this.mainWindow.refresh();
     }
     
     public Vehicle getCurrentVehicle(){
