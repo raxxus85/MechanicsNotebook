@@ -82,71 +82,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         this.setIcon();
         
-        // CUSTOMERS TABLE
-        customersTable.addMouseListener(new MouseAdapter2(this.mechanicsNotebookEngine) {
-            public void mousePressed(MouseEvent me) {
-                JTable table =(JTable) me.getSource();
-                Point p = me.getPoint();
-                int row = table.rowAtPoint(p);
-                if (me.getClickCount() == 2) {
-
-                    //int rowSelected = customersTable.getSelectedRow();
-                    System.out.println("INTERESTING2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                    System.out.println("Customers Table touched TWICE!");
-                    System.out.println("Row was  :" + row);
-                    if(row>-1){
-                        Customer[] customers = mechanicsNotebookEngine.getCustomerArray();
-                        Customer selectedCustomer = customers[row];
-                        System.out.println("INTERESTING");
-                        System.out.println("The customer selected was : " + selectedCustomer.toString());
-                    mechanicsNotebookEngine.setCurrentCustomer(selectedCustomer);
-                    }
-                    //MaintenanceAction [] currentMaintenanceActions = mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
-                    //mechanicsNotebookEngine.startMaintenanceActionWindow(currentMaintenanceActions[row]);
-                }
-            }
-        });
-        
-        // Mechanics Table Mouse Listener
-        mechanicsTable.addMouseListener(new MouseAdapter2(this.mechanicsNotebookEngine) {
-            public void mousePressed(MouseEvent me) {
-                JTable table =(JTable) me.getSource();
-                Point p = me.getPoint();
-                int row = table.rowAtPoint(p);
-                if (me.getClickCount() == 2) {
-                    System.out.println("The mechaincs table was clicked...");
-                    int rowSelected = mechanicsTable.getSelectedRow();
-                    if(rowSelected>-1){
-                        Mechanic[] mechanics = mechanicsNotebookEngine.getMechanicArray();
-                        Mechanic selectedMechanic = mechanics[rowSelected];
-                        System.out.println("The mechanic selected was : " + selectedMechanic.toString());
-                        mechanicsNotebookEngine.setCurrentMechanic(selectedMechanic);
-                    }
-   
-                }
-            }
-        });
-        // VEHICLES TABLE
-        vehiclesTable.addMouseListener(new MouseAdapter2(this.mechanicsNotebookEngine) {
-            public void mousePressed(MouseEvent me) {
-                JTable table =(JTable) me.getSource();
-                Point p = me.getPoint();
-                int row = table.rowAtPoint(p);
-                if (me.getClickCount() == 2) {
-                    System.out.println("Customers Table touched TWICE!");
-                    System.out.println("Row was  :" + row);
-                    if(row>-1){
-                        Vehicle[] vehicles = mechanicsNotebookEngine.getCurrentCustomer().getVehicleArray();
-                        Vehicle selectedVehicle = vehicles[row];
-                        System.out.println("The vehicle selected was : " + selectedVehicle.toString());
-                        mechanicsNotebookEngine.setCurrentVehicle(selectedVehicle);
-                    }
-                    //MaintenanceAction [] currentMaintenanceActions = mechanicsNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
-                    //mechanicsNotebookEngine.startMaintenanceActionWindow(currentMaintenanceActions[row]);
-                }
-            }
-        });
-        
         // mechanics table model
     DefaultTableModel vehiclesTableModel = new DefaultTableModel(
         new Object [][] {
@@ -358,10 +293,8 @@ public class MainWindow extends javax.swing.JFrame {
                 model.addRow(vehicleObject);                      
             }
             
-            // new code
             if(this.mechanicsNotebookEngine.getVehicleArray().length >0){
-            Vehicle[] vehicle = this.mechanicsNotebookEngine.getVehicleArray();
-            
+            Vehicle[] vehicle = this.mechanicsNotebookEngine.getVehicleArray();  //?????????????????????          
             // since there ARE customers, let's ensure the 'selected' remains selected
             if(currentRowSelected==-1 && this.mechanicsNotebookEngine.getCurrentVehicle()!=null){
                 ListSelectionModel selectionModel =vehiclesTable.getSelectionModel();
@@ -474,11 +407,38 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         mainTabbedPane = new javax.swing.JTabbedPane();
         vehicleMaintenanceActionsPanel = new javax.swing.JPanel();
-        maintenanceActionsLabel = new javax.swing.JLabel();
-        updateMileageButton = new javax.swing.JButton();
-        addMaintenanceActionButton = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         maintenanceActionsTable = new javax.swing.JTable();
+        maintenanceActionsToolBar = new javax.swing.JToolBar();
+        ImageIcon maintenanceActionAddToolBar = new ImageIcon(getClass().getResource("/maintenanceAction32x32ADD.png"));
+        Action actionMaintenanceActionAddToolBar = new AbstractAction("New", maintenanceActionAddToolBar) {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("MaintenanceActionAdd add");
+            }
+        };
+        addMaintenanceActionButtonToolBar = maintenanceActionsToolBar.add(actionMaintenanceActionAddToolBar);
+        ImageIcon maintenanceActionEditToolBar = new ImageIcon(getClass().getResource("/maintenanceAction32x32EDIT.png"));
+        Action actionMaintenanceActionEditToolBar = new AbstractAction("New", maintenanceActionEditToolBar) {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("MaintenanceActionEdit");
+            }
+        };
+        editMaintenanceActionButtonToolBar = maintenanceActionsToolBar.add(actionMaintenanceActionEditToolBar);
+        ImageIcon maintenanceActionDeleteToolBar = new ImageIcon(getClass().getResource("/maintenanceAction32x32DELETE.png"));
+        Action actionMaintenanceActionDeleteToolBar = new AbstractAction("New", maintenanceActionDeleteToolBar) {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("MaintenanceActionEdit");
+            }
+        };
+        deleteMaintenanceActionButtonToolBar = maintenanceActionsToolBar.add(actionMaintenanceActionDeleteToolBar);
+        jSeparator1 = new javax.swing.JSeparator();
+        ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource("/odometer32x32ADD.png"));
+        Action actionUpdateOdometerActionToolBar = new AbstractAction("New", updateOdometerActionToolBar) {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("ODOMETER UPDATE");
+            }
+        };
+        updateOdometerActionButtonToolBar = maintenanceActionsToolBar.add(actionUpdateOdometerActionToolBar);
         vehicleWarrantiesPanel = new javax.swing.JPanel();
         modificationsPanel = new javax.swing.JPanel();
         maintenanceActionsTypes = new javax.swing.JPanel();
@@ -501,6 +461,13 @@ public class MainWindow extends javax.swing.JFrame {
         currentVehicleLabel = new javax.swing.JLabel();
         currentVehicleTextField = new javax.swing.JTextField();
         mainToolBar = new javax.swing.JToolBar();
+        ImageIcon maintenanceActionAdd = new ImageIcon(getClass().getResource("/maintenanceAction32x32ADD.png"));
+        Action actionMaintenanceActionAdd = new AbstractAction("New", maintenanceActionAdd) {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("MaintenanceActionAdd add");
+            }
+        };
+        addMaintenanceActionButton = mainToolBar.add(actionMaintenanceActionAdd);
         mechanicPanelNew = new javax.swing.JPanel();
         mechanicToolBar = new javax.swing.JToolBar();
         ImageIcon mechanicAdd = new ImageIcon(getClass().getResource("/mechanic32x32ADD.png"));
@@ -596,22 +563,6 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle("Mechanic's Notebook");
         setMinimumSize(new java.awt.Dimension(800, 600));
 
-        maintenanceActionsLabel.setText("Maintenace Actions");
-
-        updateMileageButton.setText("Update Mileage");
-        updateMileageButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateMileageButtonActionPerformed(evt);
-            }
-        });
-
-        addMaintenanceActionButton.setText("Add Maintenance Action");
-        addMaintenanceActionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMaintenanceActionButtonActionPerformed(evt);
-            }
-        });
-
         maintenanceActionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -628,40 +579,52 @@ public class MainWindow extends javax.swing.JFrame {
         maintenanceActionsTable.setBackground(Color.WHITE);
         jScrollPane6.setViewportView(maintenanceActionsTable);
 
+        maintenanceActionsToolBar.setRollover(true);
+        maintenanceActionsToolBar.setFloatable(false);
+
+        addMaintenanceActionButtonToolBar.setToolTipText("Add Maintenance Action to Current Vehicle");
+        addMaintenanceActionButtonToolBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMaintenanceActionButtonToolBarActionPerformed(evt);
+            }
+        });
+        maintenanceActionsToolBar.add(addMaintenanceActionButtonToolBar);
+
+        editMaintenanceActionButtonToolBar.setToolTipText("Edit Maintenance Action");
+        maintenanceActionsToolBar.add(editMaintenanceActionButtonToolBar);
+
+        deleteMaintenanceActionButtonToolBar.setToolTipText("Delete Maintenance Action");
+        maintenanceActionsToolBar.add(deleteMaintenanceActionButtonToolBar);
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator1.setBorder(compound);
+        maintenanceActionsToolBar.add(jSeparator1);
+
+        updateOdometerActionButtonToolBar.setToolTipText("Update Odometer");
+        updateOdometerActionButtonToolBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateOdometerActionButtonToolBarActionPerformed(evt);
+            }
+        });
+        maintenanceActionsToolBar.add(updateOdometerActionButtonToolBar);
+
         javax.swing.GroupLayout vehicleMaintenanceActionsPanelLayout = new javax.swing.GroupLayout(vehicleMaintenanceActionsPanel);
         vehicleMaintenanceActionsPanel.setLayout(vehicleMaintenanceActionsPanelLayout);
         vehicleMaintenanceActionsPanelLayout.setHorizontalGroup(
             vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
             .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                .addGroup(vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                        .addGroup(vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                                .addGap(326, 326, 326)
-                                .addComponent(maintenanceActionsLabel))
-                            .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                                .addGap(201, 201, 201)
-                                .addComponent(updateMileageButton)
-                                .addGap(178, 178, 178)
-                                .addComponent(addMaintenanceActionButton)))
-                        .addGap(0, 89, Short.MAX_VALUE))
-                    .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane6)))
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(maintenanceActionsToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         vehicleMaintenanceActionsPanelLayout.setVerticalGroup(
             vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(maintenanceActionsLabel)
-                .addGap(23, 23, 23)
-                .addGroup(vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateMileageButton)
-                    .addComponent(addMaintenanceActionButton))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(maintenanceActionsToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Maintenance Actions", vehicleMaintenanceActionsPanel);
@@ -674,7 +637,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         vehicleWarrantiesPanelLayout.setVerticalGroup(
             vehicleWarrantiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGap(0, 514, Short.MAX_VALUE)
         );
 
         mainTabbedPane.addTab("Warranties", vehicleWarrantiesPanel);
@@ -687,7 +650,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         modificationsPanelLayout.setVerticalGroup(
             modificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGap(0, 514, Short.MAX_VALUE)
         );
 
         mainTabbedPane.addTab("Modifications", modificationsPanel);
@@ -802,10 +765,10 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(maintenanceActionsTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(actionDescriptionLabel)
                         .addComponent(deleteMaintenanceTypeButton)))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
 
-        mainTabbedPane.addTab("Maintenance Action Types", maintenanceActionsTypes);
+        mainTabbedPane.addTab("Maintenance Types", maintenanceActionsTypes);
 
         currentMechanicLabel.setText("Mechanic");
 
@@ -823,6 +786,10 @@ public class MainWindow extends javax.swing.JFrame {
         currentVehicleTextField.setFocusable(false);
 
         mainToolBar.setRollover(true);
+        mainToolBar.setFloatable(false);
+
+        addMaintenanceActionButton.setToolTipText("Add Maintenance Action to Current Vehicle");
+        mainToolBar.add(addMaintenanceActionButton);
 
         mechanicPanelNew.setBorder(compound);
 
@@ -874,6 +841,11 @@ public class MainWindow extends javax.swing.JFrame {
         mechanicsTable.setOpaque(true);
         mechanicsTable.setFillsViewportHeight(true);
         mechanicsTable.setBackground(Color.WHITE);
+        mechanicsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mechanicsTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(mechanicsTable);
 
         jLabel2.setText("Mechanics");
@@ -946,6 +918,11 @@ public class MainWindow extends javax.swing.JFrame {
         customersTable.setOpaque(true);
         customersTable.setFillsViewportHeight(true);
         customersTable.setBackground(Color.WHITE);
+        customersTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customersTableMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(customersTable);
 
         jLabel3.setText("Customers");
@@ -1018,6 +995,11 @@ public class MainWindow extends javax.swing.JFrame {
         vehiclesTable.setOpaque(true);
         vehiclesTable.setFillsViewportHeight(true);
         vehiclesTable.setBackground(Color.WHITE);
+        vehiclesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vehiclesTableMouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(vehiclesTable);
 
         jLabel4.setText("Vehicles");
@@ -1139,7 +1121,8 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(mainToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(currentVehicleLabel)
                     .addComponent(currentCustomerLabel)
@@ -1158,7 +1141,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mainTabbedPane))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1375,30 +1358,6 @@ public class MainWindow extends javax.swing.JFrame {
         this.refresh();
     }//GEN-LAST:event_maintenanceTypesComboBoxActionPerformed
 
-    private void addMaintenanceActionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceActionButtonActionPerformed
-        // TODO add your handling code here:
-        if(this.mechanicsNotebookEngine.getCurrentVehicle()==null){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
-            return;
-        }else if(this.mechanicsNotebookEngine.getCurrentMechanic() == null){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
-        }else if(!this.mechanicsNotebookEngine.hasMaintenanceTypes()){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have at least one Maintenance Type before adding a Maintenace Action! Please create a Maintenance Type first.");
-        }
-        else{
-            this.mechanicsNotebookEngine.startNewMaintenanceActionWindow();
-        }
-    }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed
-
-    private void updateMileageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageButtonActionPerformed
-        // TODO add your handling code here:
-        if(this.mechanicsNotebookEngine.getCurrentVehicle()==null){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
-        }else{
-            this.mechanicsNotebookEngine.startNewUpdateMileageWindow();
-        }
-    }//GEN-LAST:event_updateMileageButtonActionPerformed
-
     private void vehicleDeleteButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleDeleteButtonNewActionPerformed
         // TODO add your handling code here:
         if(this.mechanicsNotebookEngine.getCurrentVehicle()== null){
@@ -1419,6 +1378,60 @@ public class MainWindow extends javax.swing.JFrame {
             this.mechanicsNotebookEngine.startUpdateVehicleWindow();
         }
     }//GEN-LAST:event_vehicleEditButtonNewActionPerformed
+
+    private void mechanicsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mechanicsTableMouseClicked
+        // TODO add your handling code here:
+        int rowSelected = mechanicsTable.getSelectedRow();
+            if(rowSelected>-1){
+                Mechanic[] mechanics = mechanicsNotebookEngine.getMechanicArray();
+                Mechanic selectedMechanic = mechanics[rowSelected];
+                mechanicsNotebookEngine.setCurrentMechanic(selectedMechanic);
+            }            
+    }//GEN-LAST:event_mechanicsTableMouseClicked
+
+    private void customersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customersTableMouseClicked
+        // TODO add your handling code here:
+        int rowSelected = customersTable.getSelectedRow();
+            if(rowSelected>-1){
+                Customer[] customers = mechanicsNotebookEngine.getCustomerArray();
+                Customer selectedCustomer = customers[rowSelected];
+                mechanicsNotebookEngine.setCurrentCustomer(selectedCustomer);
+            }                      
+    }//GEN-LAST:event_customersTableMouseClicked
+
+    private void vehiclesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiclesTableMouseClicked
+        // TODO add your handling code here:
+        int rowSelected = vehiclesTable.getSelectedRow();
+            if(rowSelected>-1){
+                Vehicle[] vehicles = mechanicsNotebookEngine.getVehicleArray();
+                Vehicle selectedVehicle = vehicles[rowSelected];
+                mechanicsNotebookEngine.setCurrentVehicle(selectedVehicle);
+            }
+    }//GEN-LAST:event_vehiclesTableMouseClicked
+
+    private void updateOdometerActionButtonToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOdometerActionButtonToolBarActionPerformed
+        // TODO add your handling code here:
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()==null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You can't update mileage without a Vehicle!");
+        }else{
+            this.mechanicsNotebookEngine.startNewUpdateMileageWindow();
+        }
+    }//GEN-LAST:event_updateOdometerActionButtonToolBarActionPerformed
+
+    private void addMaintenanceActionButtonToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceActionButtonToolBarActionPerformed
+        // TODO add your handling code here:
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()==null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
+            return;
+        }else if(this.mechanicsNotebookEngine.getCurrentMechanic() == null){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
+        }else if(!this.mechanicsNotebookEngine.hasMaintenanceTypes()){
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have at least one Maintenance Type before adding a Maintenace Action! Please create a Maintenance Type first.");
+        }
+        else{
+            this.mechanicsNotebookEngine.startNewMaintenanceActionWindow();
+        }
+    }//GEN-LAST:event_addMaintenanceActionButtonToolBarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1461,6 +1474,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel actionTypeNameLabel;
     private javax.swing.JLabel actionTypesLable;
     private javax.swing.JButton addMaintenanceActionButton;
+    private javax.swing.JButton addMaintenanceActionButtonToolBar;
     private javax.swing.JLabel currentCustomerLabel;
     private javax.swing.JTextField currentCustomerTextField;
     private javax.swing.JLabel currentMechanicLabel;
@@ -1473,7 +1487,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel customerPanelNew;
     private javax.swing.JToolBar customerToolBar;
     private javax.swing.JTable customersTable;
+    private javax.swing.JButton deleteMaintenanceActionButtonToolBar;
     private javax.swing.JButton deleteMaintenanceTypeButton;
+    private javax.swing.JButton editMaintenanceActionButtonToolBar;
     private javax.swing.JButton editMaintenanceTypeButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
@@ -1488,10 +1504,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JToolBar mainToolBar;
-    private javax.swing.JLabel maintenanceActionsLabel;
     private javax.swing.JTable maintenanceActionsTable;
+    private javax.swing.JToolBar maintenanceActionsToolBar;
     private javax.swing.JPanel maintenanceActionsTypes;
     private javax.swing.JTextArea maintenanceTypeDescriptionTextArea;
     private javax.swing.JTextField maintenanceTypeTextField;
@@ -1510,7 +1527,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
-    private javax.swing.JButton updateMileageButton;
+    private javax.swing.JButton updateOdometerActionButtonToolBar;
     private javax.swing.JButton vehicleAddButtonNew;
     private javax.swing.JButton vehicleDeleteButtonNew;
     private javax.swing.JButton vehicleEditButtonNew;

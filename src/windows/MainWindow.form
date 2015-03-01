@@ -142,7 +142,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="mainToolBar" min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="mainToolBar" min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="currentVehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="currentCustomerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -165,7 +166,7 @@
                   </Group>
                   <Component id="mainTabbedPane" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -187,29 +188,11 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
-                                      <Component id="maintenanceActionsLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
-                                      <Component id="updateMileageButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
-                                      <Component id="addMaintenanceActionButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="89" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Component id="jScrollPane6" pref="734" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="maintenanceActionsToolBar" min="-2" pref="184" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -217,41 +200,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="maintenanceActionsLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="updateMileageButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="addMaintenanceActionButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane6" pref="385" max="32767" attributes="0"/>
+                      <Component id="maintenanceActionsToolBar" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane6" pref="456" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="maintenanceActionsLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Maintenace Actions"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="updateMileageButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Update Mileage"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateMileageButtonActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="addMaintenanceActionButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Add Maintenance Action"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMaintenanceActionButtonActionPerformed"/>
-              </Events>
-            </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane6">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -303,6 +259,60 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Container class="javax.swing.JToolBar" name="maintenanceActionsToolBar">
+              <Properties>
+                <Property name="rollover" type="boolean" value="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="maintenanceActionsToolBar.setFloatable(false);"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="addMaintenanceActionButtonToolBar">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMaintenanceActionButtonToolBarActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionMaintenanceActionAddToolBar)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionAddToolBar = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32ADD.png&quot;));&#xa;Action actionMaintenanceActionAddToolBar = new AbstractAction(&quot;New&quot;, maintenanceActionAddToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionAdd add&quot;);&#xa;      }&#xa;    };"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addMaintenanceActionButtonToolBar.setToolTipText(&quot;Add Maintenance Action to Current Vehicle&quot;);"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="editMaintenanceActionButtonToolBar">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionMaintenanceActionEditToolBar)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionEditToolBar = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32EDIT.png&quot;));&#xa;Action actionMaintenanceActionEditToolBar = new AbstractAction(&quot;New&quot;, maintenanceActionEditToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionEdit&quot;);&#xa;      }&#xa;    };"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceActionButtonToolBar.setToolTipText(&quot;Edit Maintenance Action&quot;);"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="deleteMaintenanceActionButtonToolBar">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionMaintenanceActionDeleteToolBar)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionDeleteToolBar = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32DELETE.png&quot;));&#xa;Action actionMaintenanceActionDeleteToolBar = new AbstractAction(&quot;New&quot;, maintenanceActionDeleteToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionEdit&quot;);&#xa;      }&#xa;    };"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="deleteMaintenanceActionButtonToolBar.setToolTipText(&quot;Delete Maintenance Action&quot;);"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JSeparator" name="jSeparator1">
+                  <Properties>
+                    <Property name="orientation" type="int" value="1"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jSeparator1.setBorder(compound);"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="updateOdometerActionButtonToolBar">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateOdometerActionButtonToolBarActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionUpdateOdometerActionToolBar)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource(&quot;/odometer32x32ADD.png&quot;));&#xa;Action actionUpdateOdometerActionToolBar = new AbstractAction(&quot;New&quot;, updateOdometerActionToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;ODOMETER UPDATE&quot;);&#xa;      }&#xa;    };"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="updateOdometerActionButtonToolBar.setToolTipText(&quot;Update Odometer&quot;);"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="vehicleWarrantiesPanel">
@@ -322,7 +332,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="485" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="514" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -344,7 +354,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="485" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="514" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -352,8 +362,8 @@
         <Container class="javax.swing.JPanel" name="maintenanceActionsTypes">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Maintenance Action Types">
-                <Property name="tabTitle" type="java.lang.String" value="Maintenance Action Types"/>
+              <JTabbedPaneConstraints tabName="Maintenance Types">
+                <Property name="tabTitle" type="java.lang.String" value="Maintenance Types"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -436,7 +446,7 @@
                               <Component id="deleteMaintenanceTypeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="238" max="32767" attributes="0"/>
+                      <EmptySpace pref="267" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -566,8 +576,20 @@
       <Properties>
         <Property name="rollover" type="boolean" value="true"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mainToolBar.setFloatable(false);"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="addMaintenanceActionButton">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="mainToolBar.add(actionMaintenanceActionAdd)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionAdd = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32ADD.png&quot;));&#xa;    Action actionMaintenanceActionAdd = new AbstractAction(&quot;New&quot;, maintenanceActionAdd) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionAdd add&quot;);&#xa;      }&#xa;    };"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addMaintenanceActionButton.setToolTipText(&quot;Add Maintenance Action to Current Vehicle&quot;);"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="mechanicPanelNew">
       <AuxValues>
@@ -690,6 +712,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mechanicsTableMouseClicked"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mechanicsTable.setOpaque(true);&#xa;mechanicsTable.setFillsViewportHeight(true);&#xa;mechanicsTable.setBackground(Color.WHITE);"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicsTable.setModel(new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;First&quot;, &quot;Middle&quot;, &quot;Last&quot;, &quot;Description&quot;&#xa;    }&#xa;));"/>
@@ -829,6 +854,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customersTableMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -964,6 +992,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="vehiclesTableMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
