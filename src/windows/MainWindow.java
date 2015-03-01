@@ -481,9 +481,6 @@ public class MainWindow extends javax.swing.JFrame {
         newMaintenanceTypeButton = new javax.swing.JButton();
         editMaintenanceTypeButton = new javax.swing.JButton();
         deleteMaintenanceTypeButton = new javax.swing.JButton();
-        currentMechanicLabel = new javax.swing.JLabel();
-        currentCustomerLabel = new javax.swing.JLabel();
-        currentVehicleLabel = new javax.swing.JLabel();
         mainToolBar = new javax.swing.JToolBar();
         ImageIcon maintenanceActionAdd = new ImageIcon(getClass().getResource("/maintenanceAction32x32ADD.png"));
         Action actionMaintenanceActionAdd = new AbstractAction("New", maintenanceActionAdd) {
@@ -517,7 +514,7 @@ public class MainWindow extends javax.swing.JFrame {
         mechanicDeleteButtonNew = mechanicToolBar.add(actionMechanicDelete);
         jScrollPane3 = new javax.swing.JScrollPane();
         mechanicsTable = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        mechanicsLabel = new javax.swing.JLabel();
         customerPanelNew = new javax.swing.JPanel();
         customerToolBar = new javax.swing.JToolBar();
         ImageIcon customerAdd = new ImageIcon(getClass().getResource("/customer32x32ADD.png"));
@@ -569,13 +566,20 @@ public class MainWindow extends javax.swing.JFrame {
         vehicleDeleteButtonNew = vehicleToolBar.add(actionVehicleDelete);
         jScrollPane8 = new javax.swing.JScrollPane();
         vehiclesTable = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        mechanicPictureLabel = new javax.swing.JLabel();
-        mechanicNameLabel = new javax.swing.JLabel();
+        vehiclesLabel = new javax.swing.JLabel();
+        currentVehicleMaintenanceAlertLabel = new javax.swing.JLabel();
+        currentVehiclePanel = new javax.swing.JPanel();
+        vehiclePictureLabel = new javax.swing.JLabel();
+        currentVehicleLabel = new javax.swing.JLabel();
+        vehicleNameLabel = new javax.swing.JLabel();
+        currentCustomerPanel = new javax.swing.JPanel();
         customerPictureLabel = new javax.swing.JLabel();
         customerNameLabel = new javax.swing.JLabel();
-        vehiclePictureLabel = new javax.swing.JLabel();
-        vehicleNameLabel = new javax.swing.JLabel();
+        currentCustomerLabel = new javax.swing.JLabel();
+        currentMechanicPanel = new javax.swing.JPanel();
+        mechanicNameLabel = new javax.swing.JLabel();
+        mechanicPictureLabel = new javax.swing.JLabel();
+        currentMechanicLabel = new javax.swing.JLabel();
         mechanicsNotebookMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newGarageMenuItem = new javax.swing.JMenuItem();
@@ -642,7 +646,7 @@ public class MainWindow extends javax.swing.JFrame {
         vehicleMaintenanceActionsPanel.setLayout(vehicleMaintenanceActionsPanelLayout);
         vehicleMaintenanceActionsPanelLayout.setHorizontalGroup(
             vehicleMaintenanceActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(vehicleMaintenanceActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(maintenanceActionsToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -663,7 +667,7 @@ public class MainWindow extends javax.swing.JFrame {
         vehicleWarrantiesPanel.setLayout(vehicleWarrantiesPanelLayout);
         vehicleWarrantiesPanelLayout.setHorizontalGroup(
             vehicleWarrantiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 767, Short.MAX_VALUE)
+            .addGap(0, 730, Short.MAX_VALUE)
         );
         vehicleWarrantiesPanelLayout.setVerticalGroup(
             vehicleWarrantiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,7 +680,7 @@ public class MainWindow extends javax.swing.JFrame {
         modificationsPanel.setLayout(modificationsPanelLayout);
         modificationsPanelLayout.setHorizontalGroup(
             modificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 767, Short.MAX_VALUE)
+            .addGap(0, 730, Short.MAX_VALUE)
         );
         modificationsPanelLayout.setVerticalGroup(
             modificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -800,12 +804,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Maintenance Types", maintenanceActionsTypes);
 
-        currentMechanicLabel.setText("Mechanic");
-
-        currentCustomerLabel.setText("Customer");
-
-        currentVehicleLabel.setText("Vehicle");
-
         mainToolBar.setRollover(true);
         mainToolBar.setFloatable(false);
 
@@ -869,7 +867,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(mechanicsTable);
 
-        jLabel2.setText("Mechanics");
+        mechanicsLabel.setText("Mechanics");
 
         javax.swing.GroupLayout mechanicPanelNewLayout = new javax.swing.GroupLayout(mechanicPanelNew);
         mechanicPanelNew.setLayout(mechanicPanelNewLayout);
@@ -877,7 +875,7 @@ public class MainWindow extends javax.swing.JFrame {
             mechanicPanelNewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mechanicPanelNewLayout.createSequentialGroup()
                 .addGap(146, 146, 146)
-                .addComponent(jLabel2))
+                .addComponent(mechanicsLabel))
             .addGroup(mechanicPanelNewLayout.createSequentialGroup()
                 .addComponent(mechanicToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -887,7 +885,7 @@ public class MainWindow extends javax.swing.JFrame {
             mechanicPanelNewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(mechanicPanelNewLayout.createSequentialGroup()
                 .addGap(0, 11, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(mechanicsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(mechanicPanelNewLayout.createSequentialGroup()
@@ -1023,7 +1021,9 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(vehiclesTable);
 
-        jLabel4.setText("Vehicles");
+        vehiclesLabel.setText("Vehicles");
+
+        currentVehicleMaintenanceAlertLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32EDIT.png"))); // NOI18N
 
         javax.swing.GroupLayout vehiclePanelNewLayout = new javax.swing.GroupLayout(vehiclePanelNew);
         vehiclePanelNew.setLayout(vehiclePanelNewLayout);
@@ -1035,31 +1035,125 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(vehiclePanelNewLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(vehiclesLabel)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(vehiclePanelNewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(vehiclePanelNewLayout.createSequentialGroup()
+                    .addGap(177, 177, 177)
+                    .addComponent(currentVehicleMaintenanceAlertLabel)
+                    .addContainerGap(178, Short.MAX_VALUE)))
         );
         vehiclePanelNewLayout.setVerticalGroup(
             vehiclePanelNewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vehiclePanelNewLayout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(vehiclesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(vehiclePanelNewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(vehicleToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)))
+            .addGroup(vehiclePanelNewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(vehiclePanelNewLayout.createSequentialGroup()
+                    .addGap(80, 80, 80)
+                    .addComponent(currentVehicleMaintenanceAlertLabel)
+                    .addContainerGap(80, Short.MAX_VALUE)))
         );
 
-        mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
+        currentVehiclePanel.setBorder(compound);
 
-        mechanicNameLabel.setText("No Mechanic Selected");
+        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
+
+        currentVehicleLabel.setText("Vehicle");
+
+        vehicleNameLabel.setText("No Vehicle Selected");
+
+        javax.swing.GroupLayout currentVehiclePanelLayout = new javax.swing.GroupLayout(currentVehiclePanel);
+        currentVehiclePanel.setLayout(currentVehiclePanelLayout);
+        currentVehiclePanelLayout.setHorizontalGroup(
+            currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentVehiclePanelLayout.createSequentialGroup()
+                .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(currentVehicleLabel)
+                    .addComponent(vehicleNameLabel))
+                .addContainerGap(101, Short.MAX_VALUE))
+        );
+        currentVehiclePanelLayout.setVerticalGroup(
+            currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentVehiclePanelLayout.createSequentialGroup()
+                .addGroup(currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(currentVehiclePanelLayout.createSequentialGroup()
+                        .addComponent(currentVehicleLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(vehicleNameLabel))
+                    .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        currentCustomerPanel.setBorder(compound);
 
         customerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
 
         customerNameLabel.setText("No Customer Selected");
 
-        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
+        currentCustomerLabel.setText("Customer");
 
-        vehicleNameLabel.setText("No Vehicle Selected");
+        javax.swing.GroupLayout currentCustomerPanelLayout = new javax.swing.GroupLayout(currentCustomerPanel);
+        currentCustomerPanel.setLayout(currentCustomerPanelLayout);
+        currentCustomerPanelLayout.setHorizontalGroup(
+            currentCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentCustomerPanelLayout.createSequentialGroup()
+                .addComponent(customerPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(currentCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(currentCustomerLabel)
+                    .addComponent(customerNameLabel))
+                .addGap(0, 88, Short.MAX_VALUE))
+        );
+        currentCustomerPanelLayout.setVerticalGroup(
+            currentCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, currentCustomerPanelLayout.createSequentialGroup()
+                .addGroup(currentCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(currentCustomerPanelLayout.createSequentialGroup()
+                        .addComponent(currentCustomerLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(customerNameLabel))
+                    .addComponent(customerPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        currentMechanicPanel.setBorder(compound);
+
+        mechanicNameLabel.setText("No Mechanic Selected");
+
+        mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
+
+        currentMechanicLabel.setText("Mechanic");
+
+        javax.swing.GroupLayout currentMechanicPanelLayout = new javax.swing.GroupLayout(currentMechanicPanel);
+        currentMechanicPanel.setLayout(currentMechanicPanelLayout);
+        currentMechanicPanelLayout.setHorizontalGroup(
+            currentMechanicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, currentMechanicPanelLayout.createSequentialGroup()
+                .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(currentMechanicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(currentMechanicLabel)
+                    .addComponent(mechanicNameLabel))
+                .addGap(0, 90, Short.MAX_VALUE))
+        );
+        currentMechanicPanelLayout.setVerticalGroup(
+            currentMechanicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, currentMechanicPanelLayout.createSequentialGroup()
+                .addGroup(currentMechanicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(currentMechanicPanelLayout.createSequentialGroup()
+                        .addComponent(currentMechanicLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mechanicNameLabel))
+                    .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         fileMenu.setText("File");
 
@@ -1126,71 +1220,38 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(customerPanelNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(mechanicPanelNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(vehiclePanelNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(mechanicNameLabel))
-                            .addComponent(currentMechanicLabel))
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(currentCustomerLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(customerPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(customerNameLabel)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(vehicleNameLabel))
-                            .addComponent(currentVehicleLabel))
-                        .addGap(0, 553, Short.MAX_VALUE))))
+                .addComponent(currentMechanicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(currentCustomerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(currentVehiclePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(vehiclePanelNew, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mechanicPanelNew, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(customerPanelNew, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(mainToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currentMechanicLabel)
-                    .addComponent(currentCustomerLabel)
-                    .addComponent(currentVehicleLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(currentVehiclePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(currentCustomerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(currentMechanicPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(customerNameLabel)
-                            .addComponent(mechanicNameLabel)
-                            .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(customerPictureLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(mechanicPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(customerPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(mainTabbedPane))
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(vehicleNameLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(mechanicPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mainTabbedPane)))
         );
 
         pack();
@@ -1525,8 +1586,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton addMaintenanceActionButton;
     private javax.swing.JButton addMaintenanceActionButtonToolBar;
     private javax.swing.JLabel currentCustomerLabel;
+    private javax.swing.JPanel currentCustomerPanel;
     private javax.swing.JLabel currentMechanicLabel;
+    private javax.swing.JPanel currentMechanicPanel;
     private javax.swing.JLabel currentVehicleLabel;
+    private javax.swing.JLabel currentVehicleMaintenanceAlertLabel;
+    private javax.swing.JPanel currentVehiclePanel;
     private javax.swing.JButton customerAddButtonNew;
     private javax.swing.JButton customerDeleteButtonNew;
     private javax.swing.JButton customerEditButtonNew;
@@ -1544,8 +1609,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPopupMenu.Separator fileMenuSeparator;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
@@ -1569,6 +1632,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel mechanicPanelNew;
     private javax.swing.JLabel mechanicPictureLabel;
     private javax.swing.JToolBar mechanicToolBar;
+    private javax.swing.JLabel mechanicsLabel;
     private javax.swing.JMenuBar mechanicsNotebookMenuBar;
     private javax.swing.JTable mechanicsTable;
     private javax.swing.JPanel modificationsPanel;
@@ -1587,6 +1651,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel vehiclePictureLabel;
     private javax.swing.JToolBar vehicleToolBar;
     private javax.swing.JPanel vehicleWarrantiesPanel;
+    private javax.swing.JLabel vehiclesLabel;
     private javax.swing.JTable vehiclesTable;
     // End of variables declaration//GEN-END:variables
 }

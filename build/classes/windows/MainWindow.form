@@ -103,53 +103,22 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="mainToolBar" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="customerPanelNew" alignment="0" max="32767" attributes="0"/>
-                      <Component id="mechanicPanelNew" alignment="0" max="32767" attributes="0"/>
-                      <Component id="vehiclePanelNew" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="mechanicPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="mechanicNameLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="currentMechanicLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="customerPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
+          <Component id="mainToolBar" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="currentMechanicPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="currentCustomerPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="currentVehiclePanel" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="vehiclePanelNew" alignment="0" max="32767" attributes="0"/>
+                  <Component id="mechanicPanelNew" alignment="0" max="32767" attributes="0"/>
+                  <Component id="customerPanelNew" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="mainTabbedPane" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="vehiclePictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="vehicleNameLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="553" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="mainTabbedPane" min="-2" pref="735" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -157,39 +126,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="mainToolBar" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="currentMechanicLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="currentCustomerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="currentVehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="currentVehiclePanel" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="currentCustomerPanel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="currentMechanicPanel" alignment="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="mechanicNameLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="mechanicPictureLabel" max="32767" attributes="0"/>
-                          <Component id="customerPictureLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="vehiclePictureLabel" pref="50" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="mechanicPanelNew" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="customerPanelNew" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="vehiclePanelNew" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="mainTabbedPane" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <Component id="mechanicPanelNew" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="customerPanelNew" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="vehiclePanelNew" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="vehicleNameLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="mainTabbedPane" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -212,7 +166,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane6" pref="767" max="32767" attributes="0"/>
+                  <Component id="jScrollPane6" pref="730" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="maintenanceActionsToolBar" min="-2" pref="184" max="-2" attributes="0"/>
@@ -351,7 +305,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="767" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="730" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -373,7 +327,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="767" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="730" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -563,21 +517,6 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="currentMechanicLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mechanic"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="currentCustomerLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Customer"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="currentVehicleLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Vehicle"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JToolBar" name="mainToolBar">
       <Properties>
         <Property name="rollover" type="boolean" value="true"/>
@@ -608,7 +547,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="mechanicsLabel" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="mechanicToolBar" min="-2" pref="50" max="-2" attributes="0"/>
@@ -621,7 +560,7 @@
           <Group type="103" groupAlignment="1" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="mechanicsLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="141" max="-2" attributes="0"/>
               </Group>
@@ -728,7 +667,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="mechanicsLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Mechanics"/>
           </Properties>
@@ -888,8 +827,15 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="vehiclesLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
+                      <Component id="currentVehicleMaintenanceAlertLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -897,11 +843,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="13" max="32767" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="vehiclesLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jScrollPane8" pref="0" max="32767" attributes="0"/>
                       <Component id="vehicleToolBar" pref="127" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="currentVehicleMaintenanceAlertLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="80" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -1004,42 +957,176 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="vehiclesLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vehicles"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="currentVehicleMaintenanceAlertLabel">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="currentVehicleMaintenanceAlertLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32EDIT.png&quot;))); // NOI18N"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="mechanicPictureLabel">
+    <Container class="javax.swing.JPanel" name="currentVehiclePanel">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="currentVehiclePanel.setBorder(compound);"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="mechanicNameLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No Mechanic Selected"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="customerPictureLabel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Component id="vehiclePictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="vehicleNameLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="vehicleNameLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="vehiclePictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="vehiclePictureLabel">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="currentVehicleLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vehicle"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="vehicleNameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="No Vehicle Selected"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="currentCustomerPanel">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="customerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="currentCustomerPanel.setBorder(compound);"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="customerNameLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No Customer Selected"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="vehiclePictureLabel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="customerPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="88" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="customerPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="customerPictureLabel">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="customerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="customerNameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="No Customer Selected"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="currentCustomerLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Customer"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="currentMechanicPanel">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="currentMechanicPanel.setBorder(compound);"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="vehicleNameLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No Vehicle Selected"/>
-      </Properties>
-    </Component>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="mechanicPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="currentMechanicLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="mechanicNameLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="90" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="currentMechanicLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="mechanicNameLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="mechanicPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="mechanicNameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="No Mechanic Selected"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="mechanicPictureLabel">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="currentMechanicLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mechanic"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
