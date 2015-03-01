@@ -981,10 +981,15 @@
                   <Component id="vehiclePictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="vehicleNameLabel" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="vehicleNameLabel" pref="194" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="101" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1034,10 +1039,15 @@
                   <Component id="customerPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="customerNameLabel" pref="194" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="88" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1088,9 +1098,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="currentMechanicLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="mechanicNameLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="mechanicNameLabel" min="-2" pref="194" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="90" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1105,7 +1114,7 @@
                       </Group>
                       <Component id="mechanicPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
