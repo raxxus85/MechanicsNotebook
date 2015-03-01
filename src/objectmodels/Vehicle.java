@@ -56,7 +56,7 @@ public class Vehicle implements Serializable{
     }
     
     public Object[] getVehicleObject(){
-        String[] stringArray = {this.make,this.model, this.year.toString(), this.vin};
+        String[] stringArray = {this.make,this.model, this.year.toString(), this.odometer.toString()};
         return stringArray;
     }
     

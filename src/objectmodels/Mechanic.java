@@ -36,7 +36,7 @@ public class Mechanic implements Serializable{
      * @return 
      */
     public Object[] getMechanicObject(){
-        String[] stringArray = {this.firstName,this.middleName, this.lastName, this.description};
+        String[] stringArray = {this.firstName,this.middleName, this.lastName};
         return stringArray;
     }
     

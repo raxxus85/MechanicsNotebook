@@ -39,7 +39,7 @@ public class Customer implements Serializable{
     // END CONSTRUCTORS
     
     public Object[] getCustomerObject(){
-        String[] stringArray = {this.firstName,this.middleName, this.lastName, this.description};
+        String[] stringArray = {this.firstName,this.middleName, this.lastName};
         return stringArray;
     }
     
