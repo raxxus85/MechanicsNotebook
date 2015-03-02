@@ -35,7 +35,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
      * Creates new form WelcomeWindow
      */
     public WelcomeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
-        this.getContentPane().setBackground(Color.black);
+        //this.getContentPane().setBackground(Color.black);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();

@@ -25,6 +25,7 @@ import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.MaintenanceTypeWindow;
+import windows.MaintenanceTypesMainWindow;
 import windows.MechanicWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
@@ -47,6 +48,7 @@ public class MechanicsNotebookEngine {
     private NewMaintenanceActionWindow newMaintenenaceActionWindow;
     private UpdateMileageWindow updateMileageWindow;
     private MaintenanceActionWindow maintenanceActionWindow;
+    private MaintenanceTypesMainWindow maintenanceTypesMainWindow;
 
     //Other Variables
     private Garage currentGarage;
@@ -409,14 +411,7 @@ public class MechanicsNotebookEngine {
         this.vehicleWindow.setVisible(true);
     }
     
-    /**
-     * Method used to start the Maintenance Type Window, to Update a Type
-     * 
-     */
-    public void startUpdateMaintenanceTypeWindow(MaintenanceType originalMaintenanceType){
-        this.maintenanceTypeWindow = new MaintenanceTypeWindow(this,originalMaintenanceType);
-        this.maintenanceTypeWindow.setVisible(true);
-    }
+   
     
     /**
      * Method to create a new Customer Window, which prompts user for new Customer details
@@ -456,8 +451,20 @@ public class MechanicsNotebookEngine {
         this.aboutWindow.setVisible(true);
     }
     
-    public void startNewMaintenanceTypeWindow(){
-        this.maintenanceTypeWindow = new MaintenanceTypeWindow(this);
+    /**
+     * Method used to start the Maintenance Type Window, to create a new Type
+     */
+    public void startNewMaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow){
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(incomingMaintenanceTypesMainWindow,this);
+        this.maintenanceTypeWindow.setVisible(true);
+    }
+    
+     /**
+     * Method used to start the Maintenance Type Window, to Update a Type
+     * 
+     */
+    public void startUpdateMaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MaintenanceType originalMaintenanceType){
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(incomingMaintenanceTypesMainWindow,this,originalMaintenanceType);
         this.maintenanceTypeWindow.setVisible(true);
     }
     
@@ -470,6 +477,12 @@ public class MechanicsNotebookEngine {
         this.maintenanceActionWindow = new MaintenanceActionWindow(this, incomingMaintenanceAction);
         this.maintenanceActionWindow.setVisible(true);
     }
+    
+    public void startMaintenanceTypesMainWindow(){
+        this.maintenanceTypesMainWindow = new MaintenanceTypesMainWindow(this);
+        this.maintenanceTypesMainWindow.setVisible(true);
+    }
+    
     // End Window Creation Methods
     
     /**

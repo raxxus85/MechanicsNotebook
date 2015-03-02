@@ -28,6 +28,15 @@ public class MaintenanceType implements Serializable{
         this.mileageInterval = incomingMileageInterval;
     }
     
+    /**
+     * Method used for the sole purpose of filling out a JTable 
+     * @return 
+     */
+    public Object[] getMaintenanceTypeObject(){
+        String[] stringArray = {this.maintenanceTypeName,this.mileageInterval.toString(), this.description};
+        return stringArray;
+    }
+    
     public String getMaintenanceTypeName() {
         return maintenanceTypeName;
     }
