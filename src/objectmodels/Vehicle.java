@@ -157,7 +157,7 @@ public class Vehicle implements Serializable{
         this.maintenanceActions.add(incomingMaintenanceAction);
     }
     
-    public void removeMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
+    public void deleteMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
         this.maintenanceActions.remove(incomingMaintenanceAction);
     }
     

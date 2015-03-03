@@ -124,7 +124,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         // TODO add your handling code here:
         
-        this.motoGarageMechanicEngine.startMainWindow();
+
         this.dispose();
     }//GEN-LAST:event_startButtonActionPerformed
 

@@ -68,15 +68,25 @@ public class MechanicsNotebookEngine {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MechanicsNotebookEngine motoGarageMechanicEngine = new MechanicsNotebookEngine();
+        MechanicsNotebookEngine mechanicsNotebookEngine = new MechanicsNotebookEngine();
         // create a DEFAULT GARAGE as program just opened
-        motoGarageMechanicEngine.createDefaultGarage();
+        mechanicsNotebookEngine.createDefaultGarage();
         //add some maintenance TYPES
         MaintenanceType oilChange = new MaintenanceType("Oil Change", 3000,"Simple Oil Change");
         MaintenanceType rotateTires = new MaintenanceType("Tire Rotation", 5000,"Rotating the tires (LF-> LR, LR->LF, etc)");
-        motoGarageMechanicEngine.addMaintenanceType(oilChange);
-        motoGarageMechanicEngine.addMaintenanceType(rotateTires);
-        motoGarageMechanicEngine.startWelcomeWindow();
+        mechanicsNotebookEngine.addMaintenanceType(oilChange);
+        mechanicsNotebookEngine.addMaintenanceType(rotateTires);
+
+        mechanicsNotebookEngine.startWelcomeWindow();
+        try{
+            mechanicsNotebookEngine.startMainWindow();
+        }catch(Exception e){
+            mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Something horrible happened! " + e.toString());
+            mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.toString());
+            mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.getMessage());
+            
+        }
+ 
     }
     
     /**
@@ -259,6 +269,12 @@ public class MechanicsNotebookEngine {
         return deleted;
     }
     
+    public boolean deleteMaintenaceAction(MaintenanceAction incomingMaintenanceAction){
+        this.getCurrentVehicle().deleteMaintenanceAction(incomingMaintenanceAction);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     /**
      * Method called to create a new Maintenance Type
      * @param incomingMaintenanceType
@@ -323,6 +339,7 @@ public class MechanicsNotebookEngine {
         return this.currentGarage.getMaintenaceTypeArray();
     }
     
+ 
     public void addMaintenanceType(MaintenanceType incomingMaintenanceType){
         this.currentGarage.addMaintenanceType(incomingMaintenanceType);
     }

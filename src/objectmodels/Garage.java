@@ -106,6 +106,7 @@ public class Garage implements Serializable{
     }
     
     
+    
     public void updateCurrentMechanic(Mechanic updatedMechanic){
         //this.currentMechanic = updatedMechanic;
         this.currentMechanic.setFirstName(updatedMechanic.getFirstName());
