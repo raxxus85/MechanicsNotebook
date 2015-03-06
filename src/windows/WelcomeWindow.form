@@ -67,7 +67,7 @@
               <Component id="motoGarageLogo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="startButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,7 +89,7 @@
     <Component class="javax.swing.JLabel" name="motoGarageLogo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/MotoGarageLogo_tm_black_Page_1-SHRUNK.png"/>
+          <Image iconType="3" name="/motoGarageLogoTrans.png"/>
         </Property>
       </Properties>
     </Component>

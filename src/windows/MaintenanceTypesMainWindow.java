@@ -47,9 +47,9 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
     public void refreshMaintenanceTypeTable(){
         
         DefaultTableModel model = (DefaultTableModel) maintenanceTypesTable.getModel();
-        maintenanceTypesTable.getColumnModel().getColumn(1).setMaxWidth(50);
+
         int rowCount = model.getRowCount();
-        Integer currentRowSelected = maintenanceTypesTable.getSelectedRow();
+        //Integer currentRowSelected = maintenanceTypesTable.getSelectedRow();
         // remove all mechanics
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
@@ -121,6 +121,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
         maintenanceTypeToolBar.setFloatable(false);
 
         addMaintenanceTypeButton.setToolTipText("Add Maintenance Type");
+        addMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32ADD.png"))); // NOI18N
         addMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addMaintenanceTypeButtonActionPerformed(evt);
@@ -129,6 +130,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
         maintenanceTypeToolBar.add(addMaintenanceTypeButton);
 
         editMaintenanceTypeButton.setToolTipText("View / Edit Selected Maintenance Type");
+        editMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"))); // NOI18N
         editMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMaintenanceTypeButtonActionPerformed(evt);
@@ -136,6 +138,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
         });
         maintenanceTypeToolBar.add(editMaintenanceTypeButton);
 
+        deleteMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32DELETE.png"))); // NOI18N
         deleteMaintenanceTypeButton.setToolTipText("Delete Selected Maintenance Type");
         deleteMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +157,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
         maintenanceTypesTable.setOpaque(true);
         maintenanceTypesTable.setFillsViewportHeight(true);
         maintenanceTypesTable.setBackground(Color.WHITE);
+        maintenanceTypesTable.getColumnModel().getColumn(1).setMaxWidth(60);
         jScrollPane1.setViewportView(maintenanceTypesTable);
 
         maintenanceTypesLabel.setText("Maintenace Types");

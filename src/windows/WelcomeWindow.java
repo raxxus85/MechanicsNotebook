@@ -74,7 +74,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
 
         jLabel1.setText("In Collaboration with");
 
-        motoGarageLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MotoGarageLogo_tm_black_Page_1-SHRUNK.png"))); // NOI18N
+        motoGarageLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageLogoTrans.png"))); // NOI18N
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanicsNotebookLogo.png"))); // NOI18N
 
@@ -110,7 +110,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
                 .addComponent(motoGarageLogo)
                 .addGap(18, 18, 18)
                 .addComponent(startButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
