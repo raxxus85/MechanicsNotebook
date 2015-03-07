@@ -106,29 +106,24 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="currentMechanicPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="currentCustomerPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="currentVehiclePanel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="vehiclePanelNew" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="mechanicPanelNew" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="customerPanelNew" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="mainTabbedPane" min="-2" pref="735" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="currentMechanicPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="currentCustomerPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="currentVehiclePanel" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="mainToolBar" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="vehiclePanelNew" alignment="0" max="32767" attributes="0"/>
+                          <Component id="mechanicPanelNew" alignment="0" max="32767" attributes="0"/>
+                          <Component id="customerPanelNew" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mainTabbedPane" min="-2" pref="735" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="mainToolBar" alignment="0" min="-2" pref="894" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -156,6 +151,7 @@
                   </Group>
                   <Component id="mainTabbedPane" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -191,7 +187,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="maintenanceActionsToolBar" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane6" pref="455" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" pref="432" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -356,8 +352,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fuelEntryToolBar" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" min="-2" pref="379" max="-2" attributes="0"/>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="433" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -370,17 +365,15 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable3">
+                <Component class="javax.swing.JTable" name="fuelEntriesTable">
                   <Properties>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="4">
-                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                      </Table>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Odometer&quot;, &quot;Gallons&quot;, &quot;Cost Per Gallon&quot;&#xa;    }&#xa;)" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntriesTable.setOpaque(true);&#xa;fuelEntriesTable.setFillsViewportHeight(true);&#xa;fuelEntriesTable.setBackground(Color.WHITE);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -400,6 +393,9 @@
                       <Image iconType="3" name="/fuelEntry32x32ADD.png"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryAddButton.setToolTipText(&quot;Add Fuel Entry&quot;);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="fuelEntryEditButton">
                   <Properties>
@@ -407,6 +403,9 @@
                       <Image iconType="3" name="/fuelEntry32x32EDIT.png"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryEditButton.setToolTipText(&quot;View / Edit Selected Fuel Entry&quot;);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="fuelEntryDeleteButton">
                   <Properties>
@@ -414,6 +413,9 @@
                       <Image iconType="3" name="/fuelEntry32x32DELETE.png"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryDeleteButton.setToolTipText(&quot;Delete Selected Fuel Entry&quot;);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -437,8 +439,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="86" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="374" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -485,8 +488,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="75" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="438" max="-2" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="415" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -549,7 +553,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="maintenanceAlertButton.setToolTipText(&quot;There are 0 maintenance reminders for this Customer.&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="maintenanceAlertButton.setToolTipText(&quot;There are 0 maintenance reminders for this Vehicle&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="editMaintenanceTypesButton">
@@ -573,6 +577,39 @@
               <Image iconType="3" name="/fuelEntry32x32ADD.png"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryMainToolBarAddButton.setToolTipText(&quot;Add Fuel Entry&quot;);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="importGarageButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/garage32x32IMPORT.png"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="importGarageButton.setToolTipText(&quot;Import Garage&quot;);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="exportGarageButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/garage32x32EXPORT.png"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="importGarageButton.setToolTipText(&quot;Export Garage&quot;);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="helpButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/help32x32.png"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="helpButton.setToolTipText(&quot;Help&quot;);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
