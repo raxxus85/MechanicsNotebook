@@ -598,7 +598,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="importGarageButton.setToolTipText(&quot;Export Garage&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="exportGarageButton.setToolTipText(&quot;Export Garage&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="helpButton">

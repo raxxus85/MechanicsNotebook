@@ -221,6 +221,8 @@ public class MainWindow extends javax.swing.JFrame {
         }
         // if we have mechanics, re-add them
         if(this.mechanicsNotebookEngine.getMechanicArray().length >0){
+            mechanicButtonEditNew.setEnabled(true);
+            mechanicDeleteButtonNew.setEnabled(true);
             Mechanic[] mechanics = this.mechanicsNotebookEngine.getMechanicArray();
             int newRowCount = mechanics.length;
             for (int i = 0  ; i <newRowCount ; i++) {
@@ -242,8 +244,11 @@ public class MainWindow extends javax.swing.JFrame {
                 selectionModel.setSelectionInterval(0, 0);
                 // = mechanicsTable.getSelectedRow();
                 this.mechanicsNotebookEngine.setCurrentMechanic(mechanics[0]);
-            }
-                 
+            }                
+        }
+        else{
+            mechanicButtonEditNew.setEnabled(false);
+            mechanicDeleteButtonNew.setEnabled(false);
         }
     }
     
@@ -262,12 +267,15 @@ public class MainWindow extends javax.swing.JFrame {
         }
         // time to add the vehicles
         if(this.mechanicsNotebookEngine.getCurrentCustomer()!=null &&this.mechanicsNotebookEngine.getCurrentCustomer().getVehicleArray().length >0){
+            vehicleAddButtonNew.setEnabled(true);
+            vehicleEditButtonNew.setEnabled(true);
+            vehicleDeleteButtonNew.setEnabled(true);
             Vehicle[] vehicles = this.mechanicsNotebookEngine.getVehicleArray();
             int newRowCount = vehicles.length;
             for (int i = 0  ; i <newRowCount ; i++) {
                 Object[]vehicleObject = vehicles[i].getVehicleObject();
                 model.addRow(vehicleObject);                      
-            }
+                }
             
             if(this.mechanicsNotebookEngine.getVehicleArray().length >0){
             //Vehicle[] vehicle = this.mechanicsNotebookEngine.getVehicleArray();  //?????????????????????          
@@ -282,8 +290,16 @@ public class MainWindow extends javax.swing.JFrame {
                 ListSelectionModel selectionModel =vehiclesTable.getSelectionModel();
                 selectionModel.setSelectionInterval(0, 0);
                 this.mechanicsNotebookEngine.setCurrentVehicle(vehicles[0]);
+                }
             }
-        }
+        }else if(this.mechanicsNotebookEngine.getCurrentCustomer()!=null &&this.mechanicsNotebookEngine.getCurrentCustomer().getVehicleArray().length ==0){
+            vehicleAddButtonNew.setEnabled(true);
+            vehicleEditButtonNew.setEnabled(false);
+            vehicleDeleteButtonNew.setEnabled(false);
+        }else if(this.mechanicsNotebookEngine.getCurrentCustomer()==null){
+            vehicleAddButtonNew.setEnabled(false);
+            vehicleEditButtonNew.setEnabled(false);
+            vehicleDeleteButtonNew.setEnabled(false);
         }
     }
     
@@ -310,6 +326,8 @@ public class MainWindow extends javax.swing.JFrame {
             model.removeRow(i);
         }
         if(this.mechanicsNotebookEngine.getCustomerArray().length >0){
+            customerEditButtonNew.setEnabled(true);
+            customerDeleteButtonNew.setEnabled(true);
             Customer[] customers = this.mechanicsNotebookEngine.getCustomerArray();
             int newRowCount = customers.length;
             for (int i = 0  ; i <newRowCount ; i++) {
@@ -329,6 +347,9 @@ public class MainWindow extends javax.swing.JFrame {
                 selectionModel.setSelectionInterval(0, 0);
                 this.mechanicsNotebookEngine.setCurrentCustomer(customers[0]);
             }
+        }else{
+            customerEditButtonNew.setEnabled(false);
+            customerDeleteButtonNew.setEnabled(false);
         }
     }
     
@@ -815,7 +836,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(importGarageButton);
 
         exportGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32EXPORT.png"))); // NOI18N
-        importGarageButton.setToolTipText("Export Garage");
+        exportGarageButton.setToolTipText("Export Garage");
         mainToolBar.add(exportGarageButton);
 
         helpButton.setToolTipText("Help");
