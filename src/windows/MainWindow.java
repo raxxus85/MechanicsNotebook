@@ -185,6 +185,7 @@ public class MainWindow extends javax.swing.JFrame {
      * One of the most important Refresh methods, refreshes all the maintenance actions for current vehicle
      */
     private void refreshMaintenanceActions(){
+        
         DefaultTableModel model = (DefaultTableModel) maintenanceActionsTable.getModel();
         maintenanceActionsTable.getColumnModel().getColumn(0).setMaxWidth(maxColumnWidth);
         // time to remove the maintenance actions here
@@ -195,6 +196,10 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null && this.mechanicsNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray().length >0){
+            addMaintenanceActionButtonToolBar.setEnabled(true);
+            editMaintenanceActionButtonToolBar.setEnabled(true);
+            deleteMaintenanceActionButtonToolBar.setEnabled(true);
+            updateOdometerActionButtonToolBar.setEnabled(true);
             int newRowCount = this.mechanicsNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray().length;
             MaintenanceAction[] maintenanceArray = this.mechanicsNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray();
             for (int i = 0  ; i <newRowCount ; i++) {
@@ -202,6 +207,17 @@ public class MainWindow extends javax.swing.JFrame {
 
                 model.addRow(maintenanceActionObject);                
             }
+        }else if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null){
+            addMaintenanceActionButtonToolBar.setEnabled(true);
+            updateOdometerActionButtonToolBar.setEnabled(true);
+            
+            editMaintenanceActionButtonToolBar.setEnabled(false);
+            deleteMaintenanceActionButtonToolBar.setEnabled(false);            
+        }else{
+            addMaintenanceActionButtonToolBar.setEnabled(false);
+            editMaintenanceActionButtonToolBar.setEnabled(false);
+            deleteMaintenanceActionButtonToolBar.setEnabled(false);
+            updateOdometerActionButtonToolBar.setEnabled(false);
         }
     }    
     
@@ -612,9 +628,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         maintenanceActionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -833,10 +846,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         importGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
         importGarageButton.setToolTipText("Import Garage");
+        importGarageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importGarageButtonActionPerformed(evt);
+            }
+        });
         mainToolBar.add(importGarageButton);
 
         exportGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32EXPORT.png"))); // NOI18N
         exportGarageButton.setToolTipText("Export Garage");
+        exportGarageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportGarageButtonActionPerformed(evt);
+            }
+        });
         mainToolBar.add(exportGarageButton);
 
         helpButton.setToolTipText("Help");
@@ -954,9 +977,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         customersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -1036,9 +1056,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         vehiclesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -1182,6 +1199,11 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         fileMenu.setText("File");
+        fileMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileMenuActionPerformed(evt);
+            }
+        });
 
         newGarageMenuItem.setText("New");
         newGarageMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -1259,7 +1281,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(customerPanelNew, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(mainToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mainToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1573,6 +1595,49 @@ public class MainWindow extends javax.swing.JFrame {
             }  
         
     }//GEN-LAST:event_deleteMaintenanceActionButtonToolBarActionPerformed
+
+    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileMenuActionPerformed
+
+    private void importGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importGarageButtonActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Import Garage");
+        
+        
+        chooser.showOpenDialog(this);
+        File testFile = chooser.getSelectedFile();
+        
+        if(testFile != null){
+            String filePath = testFile.getAbsolutePath();
+            try {
+                System.out.println(filePath);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            this.mechanicsNotebookEngine.openGarage(testFile);
+        }
+    }//GEN-LAST:event_importGarageButtonActionPerformed
+
+    private void exportGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportGarageButtonActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Export Garage");
+        chooser.showSaveDialog(this);
+        
+        if(chooser.getSelectedFile() != null){
+            File testFile = chooser.getSelectedFile();
+            String filePath = testFile.getAbsolutePath();
+            try {
+                System.out.println(filePath);
+            } catch (Exception ex) {
+                System.out.println("dialog must have closed?");
+                ex.printStackTrace();
+            }
+            this.mechanicsNotebookEngine.saveGarage(testFile);
+        }
+    }//GEN-LAST:event_exportGarageButtonActionPerformed
 
     /**
      * @param args the command line arguments

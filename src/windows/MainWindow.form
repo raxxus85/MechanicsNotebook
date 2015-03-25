@@ -13,6 +13,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fileMenuActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="newGarageMenuItem">
               <Properties>
@@ -121,7 +124,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="mainTabbedPane" min="-2" pref="735" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="mainToolBar" alignment="0" min="-2" pref="894" max="-2" attributes="0"/>
+                  <Component id="mainToolBar" alignment="0" min="-2" pref="911" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -202,13 +205,8 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="maintenanceActionsTable">
                   <Properties>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="maintenanceActionsTable.setOpaque(true);&#xa;maintenanceActionsTable.setFillsViewportHeight(true);&#xa;maintenanceActionsTable.setBackground(Color.WHITE);&#xa;maintenanceActionsTable.getColumnModel().getColumn(1).setMaxWidth(6);">
-                      <Table columnCount="4" rowCount="4">
-                        <Column editable="true" title="Odometer" type="java.lang.Object"/>
-                        <Column editable="true" title="Maintenance Type" type="java.lang.Object"/>
-                        <Column editable="true" title="Notes" type="java.lang.Object"/>
-                        <Column editable="true" title="Performed By" type="java.lang.Object"/>
-                      </Table>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="maintenanceActionsTable.setOpaque(true);&#xa;maintenanceActionsTable.setFillsViewportHeight(true);&#xa;maintenanceActionsTable.setBackground(Color.WHITE);&#xa;maintenanceActionsTable.getColumnModel().getColumn(1).setMaxWidth(6);">
+                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;Odometer&quot;, &quot;Maintenance Type&quot;, &quot;Notes&quot;, &quot;Performed By&quot;&#xa;    }&#xa;)" type="code"/>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
@@ -587,6 +585,9 @@
               <Image iconType="3" name="/garage32x32IMPORT.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importGarageButtonActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="importGarageButton.setToolTipText(&quot;Import Garage&quot;);"/>
           </AuxValues>
@@ -597,6 +598,9 @@
               <Image iconType="3" name="/garage32x32EXPORT.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportGarageButtonActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="exportGarageButton.setToolTipText(&quot;Export Garage&quot;);"/>
           </AuxValues>
@@ -870,13 +874,8 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="customersTable">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="customersTable.setOpaque(true);&#xa;customersTable.setFillsViewportHeight(true);&#xa;customersTable.setBackground(Color.WHITE);">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="First" type="java.lang.Object"/>
-                    <Column editable="true" title="Middle" type="java.lang.Object"/>
-                    <Column editable="true" title="Last" type="java.lang.Object"/>
-                    <Column editable="true" title="Description" type="java.lang.Object"/>
-                  </Table>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="customersTable.setOpaque(true);&#xa;customersTable.setFillsViewportHeight(true);&#xa;customersTable.setBackground(Color.WHITE);">
+                  <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;First&quot;, &quot;Middle&quot;, &quot;Last&quot;, &quot;Description&quot;&#xa;    }&#xa;)" type="code"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
@@ -1023,13 +1022,8 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="vehiclesTable">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="vehiclesTable.setOpaque(true);&#xa;vehiclesTable.setFillsViewportHeight(true);&#xa;vehiclesTable.setBackground(Color.WHITE);">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Make" type="java.lang.Object"/>
-                    <Column editable="true" title="Model" type="java.lang.Object"/>
-                    <Column editable="true" title="Year" type="java.lang.Object"/>
-                    <Column editable="true" title="Vin" type="java.lang.Object"/>
-                  </Table>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="vehiclesTable.setOpaque(true);&#xa;vehiclesTable.setFillsViewportHeight(true);&#xa;vehiclesTable.setBackground(Color.WHITE);">
+                  <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;Make&quot;, &quot;Model&quot;, &quot;Year&quot;, &quot;Vin&quot;&#xa;    }&#xa;)" type="code"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">

@@ -165,6 +165,13 @@ public class MechanicsNotebookEngine {
     public boolean createNewMechanic(Mechanic incomingMechanic){       
         //TODO insert logic here to check to see if mechanic exists?
         this.getGarage().addMechanic(incomingMechanic);
+        
+        // time to create the corresponding customer
+        Customer newCustomer = new Customer(incomingMechanic.getFirstName(),incomingMechanic.getMiddleName(),incomingMechanic.getLastName());
+        if(incomingMechanic.getImageIcon()!=null){
+            newCustomer.setImageIcon(incomingMechanic.getImageIcon());
+        }
+        this.getGarage().addCustomer(newCustomer);
         // TIME TO REFRESH
         this.mainWindow.refresh();
         return true;
