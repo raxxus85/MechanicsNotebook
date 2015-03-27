@@ -285,6 +285,12 @@ public class MechanicsNotebookEngine {
         return true;
     }
     
+    public boolean deleteFuelEntry(FuelEntry incomingFuelEntry){
+        this.getCurrentVehicle().deleteFuelEntry(incomingFuelEntry);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     /**
      * Method called to create a new Maintenance Type
      * @param incomingMaintenanceType

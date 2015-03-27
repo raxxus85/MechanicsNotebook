@@ -796,6 +796,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         fuelEntryDeleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fuelEntry32x32DELETE.png"))); // NOI18N
         fuelEntryDeleteButton.setToolTipText("Delete Selected Fuel Entry");
+        fuelEntryDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fuelEntryDeleteButtonActionPerformed(evt);
+            }
+        });
         fuelEntryToolBar.add(fuelEntryDeleteButton);
 
         javax.swing.GroupLayout fuelEntriesPanelLayout = new javax.swing.GroupLayout(fuelEntriesPanel);
@@ -1746,6 +1751,22 @@ public class MainWindow extends javax.swing.JFrame {
                 this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Fuel Entry to Update.");
             } 
     }//GEN-LAST:event_fuelEntryEditButtonActionPerformed
+
+    private void fuelEntryDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelEntryDeleteButtonActionPerformed
+        // TODO add your handling code here:
+        int rowSelected = fuelEntriesTable.getSelectedRow();        
+        if(rowSelected>-1){
+            boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Fuel Entry? This is permanent!");
+            if(sureToDelete){
+                FuelEntry[] currentFuelEntries = this.mechanicsNotebookEngine.getCurrentVehicle().getFuelEntriesArray();
+                FuelEntry selectedFuelEntry = currentFuelEntries[rowSelected]; 
+                //this.mechanicsNotebookEngine.getCurrentVehicle().deleteMaintenanceAction(selectedMaintenanceAction);
+                this.mechanicsNotebookEngine.deleteFuelEntry(selectedFuelEntry);
+            }    
+        }else{
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Maintenance Action to Delete.");
+            }  
+    }//GEN-LAST:event_fuelEntryDeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments

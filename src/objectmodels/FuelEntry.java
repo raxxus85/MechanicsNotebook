@@ -30,7 +30,9 @@ public class FuelEntry implements Serializable{
      */
     public Object[] getFuelEntryObject(){
         Float totalFuelCost = this.gallons * this.costPerGallon;
-        String[] stringArray = {this.odometer.toString(),this.gallons.toString(), this.costPerGallon.toString(),};
+        String totalFuelCostEdited = "$" + totalFuelCost.toString();
+        String costPerGallonEdited = "$" +this.costPerGallon.toString();
+        String[] stringArray = {this.odometer.toString(),this.gallons.toString(), costPerGallonEdited,totalFuelCostEdited};
         return stringArray;
     }
     

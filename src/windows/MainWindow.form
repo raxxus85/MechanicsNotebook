@@ -413,6 +413,9 @@
                       <Image iconType="3" name="/fuelEntry32x32DELETE.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fuelEntryDeleteButtonActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryDeleteButton.setToolTipText(&quot;Delete Selected Fuel Entry&quot;);"/>
                   </AuxValues>

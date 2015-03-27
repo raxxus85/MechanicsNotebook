@@ -213,6 +213,10 @@ public class Vehicle implements Serializable{
         this.maintenanceActions.remove(incomingMaintenanceAction);
     }
     
+    public void deleteFuelEntry(FuelEntry incomingFuelEntry){
+        this.fuelEntries.remove(incomingFuelEntry);
+    }
+    
     public String getMake(){
         return this.make;
     }
