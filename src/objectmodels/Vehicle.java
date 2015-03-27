@@ -23,7 +23,8 @@ public class Vehicle implements Serializable{
     private String vin;
     private Integer odometer;
     private String description;
-    private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();
+    private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();   
+    private ArrayList<FuelEntry> fuelEntries = new ArrayList<>();
     
     private ImageIcon imageIcon;
     /**
@@ -53,6 +54,15 @@ public class Vehicle implements Serializable{
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setOdometer(updatedMaintenanceAction.getOdometer());
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setVehicle(updatedMaintenanceAction.getVehicle());
         
+    }
+    
+    public void editFuelEntry(FuelEntry existingFuelEntry, FuelEntry updatedFuelEntry){
+        int indexOfExistingFuelEntry = this.fuelEntries.indexOf(existingFuelEntry);
+        //MaintenanceAction tempMaintenanceAction = this.maintenanceActions.get(indexOfExistingMaintenanceAction);
+        this.fuelEntries.get(indexOfExistingFuelEntry).setOdometer(updatedFuelEntry.getOdometer());
+        this.fuelEntries.get(indexOfExistingFuelEntry).setGallons(updatedFuelEntry.getGallons());
+        this.fuelEntries.get(indexOfExistingFuelEntry).setCostPerGallon(updatedFuelEntry.getCostPerGallon());
+
     }
     
     public Object[] getVehicleObject(){
@@ -86,6 +96,48 @@ public class Vehicle implements Serializable{
     
     public ArrayList<MaintenanceAction> getMaintenanceActions(){
         return this.maintenanceActions;
+    }
+    
+    public void addFuelEntry(FuelEntry incomingFuelEntry){
+        this.fuelEntries.add(incomingFuelEntry);
+    }
+    
+    public ArrayList<FuelEntry> getFuelEntries(){
+        return this.fuelEntries;
+    }
+    
+    public FuelEntry[] getFuelEntriesArray(){
+        Vehicle currentVehicle = this;
+        ArrayList<FuelEntry> fuelEntryList = currentVehicle.getFuelEntries();
+        FuelEntry[] fuelEntryArray = fuelEntryList.toArray(new FuelEntry[fuelEntryList.size()]);
+        return fuelEntryArray;    
+    }
+    
+    public ArrayList<FuelEntry> getSortedFuelEntryList(){
+        Vehicle currentVehicle = this;
+        ArrayList<FuelEntry> fuelEntryList = currentVehicle.getFuelEntries();
+        Collections.sort(fuelEntryList, new Comparator<FuelEntry>() {
+            @Override
+            public int compare(FuelEntry o1, FuelEntry o2) {
+                return Double.compare(o1.getOdometer(), o2.getOdometer());
+            }
+        });
+        return fuelEntryList;
+    }
+    
+    public FuelEntry[] getSortedFuelEntryArray(){
+        Vehicle currentVehicle = this;
+        ArrayList<FuelEntry> fuelEntryList = currentVehicle.getFuelEntries();
+        Collections.sort(fuelEntryList, new Comparator<FuelEntry>() {
+            @Override
+            public int compare(FuelEntry o1, FuelEntry o2) {
+                return Double.compare(o1.getOdometer(), o2.getOdometer());
+            }
+        });
+        
+        FuelEntry[] fuelEntryArray = fuelEntryList.toArray(new FuelEntry[fuelEntryList.size()]);
+        
+        return fuelEntryArray;
     }
     
     /**

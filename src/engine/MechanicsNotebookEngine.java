@@ -16,6 +16,7 @@ import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
 import objectmodels.Customer;
+import objectmodels.FuelEntry;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Vehicle;
@@ -23,6 +24,7 @@ import windows.AboutWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
+import windows.FuelEntryWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.MaintenanceTypeWindow;
 import windows.MaintenanceTypesMainWindow;
@@ -49,7 +51,8 @@ public class MechanicsNotebookEngine {
     private UpdateMileageWindow updateMileageWindow;
     private MaintenanceActionWindow maintenanceActionWindow;
     private MaintenanceTypesMainWindow maintenanceTypesMainWindow;
-
+    private FuelEntryWindow fuelEntryWindow;
+    
     //Other Variables
     private Garage currentGarage;
     private DialogFactory dialogFactory;
@@ -301,6 +304,18 @@ public class MechanicsNotebookEngine {
         return true;
     }
     
+    public boolean editFuelEntry(FuelEntry existingFuelEntry, FuelEntry updatedFuelEntry){
+        this.getCurrentVehicle().editFuelEntry(existingFuelEntry, updatedFuelEntry);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean addFuelEntry(FuelEntry incomingFuelEntry){
+        this.currentGarage.getCurrentVehicle().addFuelEntry(incomingFuelEntry);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     public boolean addMaintenanceAction(MaintenanceAction incomingMaintenanceAction){
         this.currentGarage.getCurrentVehicle().addMaintenanceAction(incomingMaintenanceAction);
         // TIME TO REFRESH
@@ -495,6 +510,16 @@ public class MechanicsNotebookEngine {
     public void startNewMaintenanceActionWindow(){
         this.newMaintenenaceActionWindow = new NewMaintenanceActionWindow(this);
         this.newMaintenenaceActionWindow.setVisible(true);
+    }
+    
+    public void startNewFuelEntryWindow(){
+        this.fuelEntryWindow = new FuelEntryWindow(this);
+        this.fuelEntryWindow.setVisible(true);
+    }
+    
+    public void startViewOrEditFuelEntryWindow(FuelEntry incomingFuelEntry){
+        this.fuelEntryWindow = new FuelEntryWindow(this, incomingFuelEntry);
+        this.fuelEntryWindow.setVisible(true);
     }
     
     public void startMaintenanceActionWindow(MaintenanceAction incomingMaintenanceAction){
