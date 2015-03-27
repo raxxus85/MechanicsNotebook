@@ -337,7 +337,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fuelEntryToolBar" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane4" alignment="0" pref="730" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane4" min="-2" pref="348" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="382" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -495,6 +498,9 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addWarrantyButtonActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addWarrantyButton.setToolTipText(&quot;Add a Warranty&quot;);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="editWarrantyButton">
                   <Properties>
@@ -502,6 +508,12 @@
                       <Image iconType="3" name="/warrantyType32x32EDIT.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editWarrantyButtonActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editWarrantyButton.setToolTipText(&quot;View / Edit selected Warranty&quot;);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="deleteWarrantyButton">
                   <Properties>
@@ -509,6 +521,12 @@
                       <Image iconType="3" name="/warrantyType32x32DELETE.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteWarrantyButtonActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deleteWarrantyButton.setToolTipText(&quot;Delete selected Warranty&quot;);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

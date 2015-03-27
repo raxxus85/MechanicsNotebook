@@ -242,6 +242,10 @@ public class Vehicle implements Serializable{
         this.fuelEntries.remove(incomingFuelEntry);
     }
     
+    public void deleteWarranty(Warranty incomingWarranty){
+        this.warranties.remove(incomingWarranty);
+    }
+    
     public String getMake(){
         return this.make;
     }

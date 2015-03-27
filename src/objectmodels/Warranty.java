@@ -32,7 +32,8 @@ public class Warranty implements Serializable{
      * @return 
      */
     public Object[] getWarrantyObject(){
-        String[] stringArray = {this.partName,this.datePurchased.toString(), this.warrantyDuration,this.description,this.cost.toString()};
+        String costEdited = "$" + this.cost.toString();
+        String[] stringArray = {this.partName,this.datePurchased.toString(), this.warrantyDuration,this.description,costEdited};
         return stringArray;
     }
     

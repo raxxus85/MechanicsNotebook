@@ -306,6 +306,12 @@ public class MechanicsNotebookEngine {
         return true;
     }
     
+    public boolean deleteWarranty(Warranty incomingWarranty){
+        this.getCurrentVehicle().deleteWarranty(incomingWarranty);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     /**
      * Method called to create a new Maintenance Type
      * @param incomingMaintenanceType

@@ -849,7 +849,9 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(fuelEntriesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(fuelEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+            .addGroup(fuelEntriesPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 382, Short.MAX_VALUE))
         );
         fuelEntriesPanelLayout.setVerticalGroup(
             fuelEntriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -878,6 +880,7 @@ public class MainWindow extends javax.swing.JFrame {
         warrantyEntryToolBar.setFloatable(false);
 
         addWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32ADD.png"))); // NOI18N
+        addWarrantyButton.setToolTipText("Add a Warranty");
         addWarrantyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addWarrantyButtonActionPerformed(evt);
@@ -886,9 +889,21 @@ public class MainWindow extends javax.swing.JFrame {
         warrantyEntryToolBar.add(addWarrantyButton);
 
         editWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32EDIT.png"))); // NOI18N
+        editWarrantyButton.setToolTipText("View / Edit selected Warranty");
+        editWarrantyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editWarrantyButtonActionPerformed(evt);
+            }
+        });
         warrantyEntryToolBar.add(editWarrantyButton);
 
         deleteWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32DELETE.png"))); // NOI18N
+        deleteWarrantyButton.setToolTipText("Delete selected Warranty");
+        deleteWarrantyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteWarrantyButtonActionPerformed(evt);
+            }
+        });
         warrantyEntryToolBar.add(deleteWarrantyButton);
 
         javax.swing.GroupLayout vehicleWarrantiesPanelLayout = new javax.swing.GroupLayout(vehicleWarrantiesPanel);
@@ -1807,6 +1822,34 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.mechanicsNotebookEngine.startNewWarrantyWindow();
     }//GEN-LAST:event_addWarrantyButtonActionPerformed
+
+    private void deleteWarrantyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteWarrantyButtonActionPerformed
+        // TODO add your handling code here:
+        int rowSelected = warrantiesTable.getSelectedRow();        
+        if(rowSelected>-1){
+            boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Warranty? This is permanent!");
+            if(sureToDelete){
+                Warranty[] currentWarranties = this.mechanicsNotebookEngine.getCurrentVehicle().getWarrantyArray();
+                Warranty selectedWarranty = currentWarranties[rowSelected]; 
+                //this.mechanicsNotebookEngine.getCurrentVehicle().deleteMaintenanceAction(selectedMaintenanceAction);
+                this.mechanicsNotebookEngine.deleteWarranty(selectedWarranty);
+            }    
+        }else{
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Warranty to Delete.");
+            }  
+    }//GEN-LAST:event_deleteWarrantyButtonActionPerformed
+
+    private void editWarrantyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editWarrantyButtonActionPerformed
+        // TODO add your handling code here:
+              int rowSelected = warrantiesTable.getSelectedRow();
+            if(rowSelected>-1){
+                Warranty[] currentWarranties = this.mechanicsNotebookEngine.getCurrentVehicle().getWarrantyArray();
+                Warranty selectedWarranty = currentWarranties[rowSelected];                
+                this.mechanicsNotebookEngine.startViewOrEditWarrantyWindow(selectedWarranty);
+            }else{
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Warranty to View / Update.");
+            } 
+    }//GEN-LAST:event_editWarrantyButtonActionPerformed
 
     /**
      * @param args the command line arguments

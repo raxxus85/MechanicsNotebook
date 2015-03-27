@@ -39,6 +39,12 @@ public class WarrantyWindow extends javax.swing.JFrame {
         addWarranty = false;
         this.addOrUpdateButton.setText("Update Warranty");
         originalWarranty=incomingWarranty;
+        
+        this.partTextField.setText(incomingWarranty.getPartName());
+        this.dateTextField.setText(incomingWarranty.getDatePurchased());
+        this.durationTextField.setText(incomingWarranty.getWarrantyDuration());
+        this.descriptionTextField.setText(incomingWarranty.getDescription());
+        this.costTextField.setText(incomingWarranty.getCost().toString());
     }
     
     /**
