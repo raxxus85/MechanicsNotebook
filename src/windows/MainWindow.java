@@ -48,6 +48,7 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.MouseAdapter2;
 import objectmodels.Vehicle;
+import objectmodels.Warranty;
 
 /**
  *
@@ -182,7 +183,45 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshVehicleList();
         this.refreshCurrentVehicleInformation();
         this.refreshFuelEntries();
+        this.refreshWarranties();
     }
+    
+    private void refreshWarranties(){
+        DefaultTableModel model = (DefaultTableModel) warrantiesTable.getModel();
+        // time to remove the fuel entries here
+        int rowCount = model.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        
+        // IF there is a vehicle and it has warranties      
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null && this.mechanicsNotebookEngine.getCurrentVehicle().getWarranties().size() >0){
+            addWarrantyButton.setEnabled(true);
+            editWarrantyButton.setEnabled(true);
+            deleteWarrantyButton.setEnabled(true);
+            
+            // NO IDEA HOW TO SORT UNTIL WE FIGURE OUT DATE DUDE
+            int newRowCount = this.mechanicsNotebookEngine.getCurrentVehicle().getWarrantyArray().length;
+            Warranty[] warrantyArray = this.mechanicsNotebookEngine.getCurrentVehicle().getWarrantyArray();
+            for (int i = 0  ; i <newRowCount ; i++) {
+                Object[]warrantyObject = warrantyArray[i].getWarrantyObject();
+                model.addRow(warrantyObject);                
+            }
+        }else if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null){
+            // if there is a vehicle, but no warranties
+            addWarrantyButton.setEnabled(true);
+            editWarrantyButton.setEnabled(false);
+            deleteWarrantyButton.setEnabled(false);
+           
+        }else{
+            // if no vehicle
+            addWarrantyButton.setEnabled(false);
+            editWarrantyButton.setEnabled(false);
+            deleteWarrantyButton.setEnabled(false);
+        }
+    }
+    
     
     private void refreshFuelEntries(){
         DefaultTableModel model = (DefaultTableModel) fuelEntriesTable.getModel();
@@ -538,11 +577,11 @@ public class MainWindow extends javax.swing.JFrame {
         fuelEntryDeleteButton = new javax.swing.JButton();
         vehicleWarrantiesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        warrantiesTable = new javax.swing.JTable();
         warrantyEntryToolBar = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addWarrantyButton = new javax.swing.JButton();
+        editWarrantyButton = new javax.swing.JButton();
+        deleteWarrantyButton = new javax.swing.JButton();
         modificationsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -807,10 +846,10 @@ public class MainWindow extends javax.swing.JFrame {
         fuelEntriesPanel.setLayout(fuelEntriesPanelLayout);
         fuelEntriesPanelLayout.setHorizontalGroup(
             fuelEntriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(fuelEntriesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(fuelEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
         );
         fuelEntriesPanelLayout.setVerticalGroup(
             fuelEntriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -823,33 +862,34 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Fuel Entries", fuelEntriesPanel);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        warrantiesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Part", "Date Purchased", "Warranty Duration", "Description"
+                "Part", "Date Purchased", "Warranty Duration", "Description", "Cost"
             }
         ));
-        jTable1.setOpaque(true);
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setBackground(Color.WHITE);
-        jScrollPane1.setViewportView(jTable1);
+        warrantiesTable.setOpaque(true);
+        warrantiesTable.setFillsViewportHeight(true);
+        warrantiesTable.setBackground(Color.WHITE);
+        jScrollPane1.setViewportView(warrantiesTable);
 
         warrantyEntryToolBar.setRollover(true);
         warrantyEntryToolBar.setFloatable(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32ADD.png"))); // NOI18N
-        warrantyEntryToolBar.add(jButton1);
+        addWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32ADD.png"))); // NOI18N
+        addWarrantyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addWarrantyButtonActionPerformed(evt);
+            }
+        });
+        warrantyEntryToolBar.add(addWarrantyButton);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32EDIT.png"))); // NOI18N
-        warrantyEntryToolBar.add(jButton2);
+        editWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32EDIT.png"))); // NOI18N
+        warrantyEntryToolBar.add(editWarrantyButton);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32DELETE.png"))); // NOI18N
-        warrantyEntryToolBar.add(jButton3);
+        deleteWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32DELETE.png"))); // NOI18N
+        warrantyEntryToolBar.add(deleteWarrantyButton);
 
         javax.swing.GroupLayout vehicleWarrantiesPanelLayout = new javax.swing.GroupLayout(vehicleWarrantiesPanel);
         vehicleWarrantiesPanel.setLayout(vehicleWarrantiesPanelLayout);
@@ -873,13 +913,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Part", "Date Installed", "Warranty", "Description"
+                "Part", "Date Purchased", "Warranty Duration", "Description"
             }
         ));
         jTable2.setOpaque(true);
@@ -903,19 +939,18 @@ public class MainWindow extends javax.swing.JFrame {
         modificationsPanel.setLayout(modificationsPanelLayout);
         modificationsPanelLayout.setHorizontalGroup(
             modificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(modificationsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(modificationEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
         );
         modificationsPanelLayout.setVerticalGroup(
             modificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificationsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(modificationEntryToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Modifications", modificationsPanel);
@@ -1403,7 +1438,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(customerPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(mainTabbedPane))
                 .addGap(47, 47, 47))
         );
 
@@ -1768,6 +1803,11 @@ public class MainWindow extends javax.swing.JFrame {
             }  
     }//GEN-LAST:event_fuelEntryDeleteButtonActionPerformed
 
+    private void addWarrantyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWarrantyButtonActionPerformed
+        // TODO add your handling code here:
+        this.mechanicsNotebookEngine.startNewWarrantyWindow();
+    }//GEN-LAST:event_addWarrantyButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1801,6 +1841,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton addMaintenanceActionButton;
     private javax.swing.JButton addMaintenanceActionButtonToolBar;
+    private javax.swing.JButton addWarrantyButton;
     private javax.swing.JLabel currentCustomerLabel;
     private javax.swing.JPanel currentCustomerPanel;
     private javax.swing.JLabel currentMechanicLabel;
@@ -1818,8 +1859,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel customersLabel;
     private javax.swing.JTable customersTable;
     private javax.swing.JButton deleteMaintenanceActionButtonToolBar;
+    private javax.swing.JButton deleteWarrantyButton;
     private javax.swing.JButton editMaintenanceActionButtonToolBar;
     private javax.swing.JButton editMaintenanceTypesButton;
+    private javax.swing.JButton editWarrantyButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton exportGarageButton;
     private javax.swing.JMenu fileMenu;
@@ -1834,9 +1877,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton helpButton;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton importGarageButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1849,7 +1889,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JToolBar mainToolBar;
@@ -1884,6 +1923,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel vehicleWarrantiesPanel;
     private javax.swing.JLabel vehiclesLabel;
     private javax.swing.JTable vehiclesTable;
+    private javax.swing.JTable warrantiesTable;
     private javax.swing.JToolBar warrantyEntryToolBar;
     // End of variables declaration//GEN-END:variables
 }

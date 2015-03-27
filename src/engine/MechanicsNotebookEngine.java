@@ -20,6 +20,7 @@ import objectmodels.FuelEntry;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Vehicle;
+import objectmodels.Warranty;
 import windows.AboutWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
@@ -31,6 +32,7 @@ import windows.MaintenanceTypesMainWindow;
 import windows.MechanicWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
+import windows.WarrantyWindow;
 import windows.WelcomeWindow;
 
 /**
@@ -52,6 +54,7 @@ public class MechanicsNotebookEngine {
     private MaintenanceActionWindow maintenanceActionWindow;
     private MaintenanceTypesMainWindow maintenanceTypesMainWindow;
     private FuelEntryWindow fuelEntryWindow;
+    private WarrantyWindow warrantyWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -212,6 +215,18 @@ public class MechanicsNotebookEngine {
         boolean updatedType =this.getGarage().updateMaintenanceType(originalMaintenanceType, updatedMaintenanceType);
         this.mainWindow.refresh();
         return updatedType;
+    }
+    
+    public boolean editWarranty(Warranty originalWarranty, Warranty updatedWarranty){
+        this.getGarage().getCurrentVehicle().editWarranty(originalWarranty, updatedWarranty);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean addWarranty(Warranty incomingWarranty){
+        this.getGarage().getCurrentVehicle().addWarranty(incomingWarranty);
+        this.mainWindow.refresh();
+        return true;
     }
     
     /**
@@ -521,6 +536,16 @@ public class MechanicsNotebookEngine {
     public void startNewFuelEntryWindow(){
         this.fuelEntryWindow = new FuelEntryWindow(this);
         this.fuelEntryWindow.setVisible(true);
+    }
+    
+    public void startNewWarrantyWindow(){
+        this.warrantyWindow = new WarrantyWindow(this);
+        this.warrantyWindow.setVisible(true);
+    }
+    
+    public void startViewOrEditWarrantyWindow(Warranty incomingWarranty){
+        this.warrantyWindow = new WarrantyWindow(this,incomingWarranty);
+        this.warrantyWindow.setVisible(true);
     }
     
     public void startViewOrEditFuelEntryWindow(FuelEntry incomingFuelEntry){

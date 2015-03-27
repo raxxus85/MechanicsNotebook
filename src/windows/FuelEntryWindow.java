@@ -53,7 +53,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-        private void setIcon(){
+    private void setIcon(){
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
 

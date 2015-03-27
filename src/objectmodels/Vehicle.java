@@ -25,6 +25,7 @@ public class Vehicle implements Serializable{
     private String description;
     private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();   
     private ArrayList<FuelEntry> fuelEntries = new ArrayList<>();
+    private ArrayList<Warranty> warranties = new ArrayList<>();
     
     private ImageIcon imageIcon;
     /**
@@ -62,7 +63,20 @@ public class Vehicle implements Serializable{
         this.fuelEntries.get(indexOfExistingFuelEntry).setOdometer(updatedFuelEntry.getOdometer());
         this.fuelEntries.get(indexOfExistingFuelEntry).setGallons(updatedFuelEntry.getGallons());
         this.fuelEntries.get(indexOfExistingFuelEntry).setCostPerGallon(updatedFuelEntry.getCostPerGallon());
+    }
+    
+    public void editWarranty(Warranty existingWarranty, Warranty updatedWarranty){
+        int indexOfExistingWarranty = this.warranties.indexOf(existingWarranty);
 
+        this.warranties.get(indexOfExistingWarranty).setPartName(updatedWarranty.getPartName());
+        this.warranties.get(indexOfExistingWarranty).setDatePurchased(updatedWarranty.getDatePurchased());
+        this.warranties.get(indexOfExistingWarranty).setWarrantyDuration(updatedWarranty.getWarrantyDuration());
+        this.warranties.get(indexOfExistingWarranty).setDescription(updatedWarranty.getDescription());
+        this.warranties.get(indexOfExistingWarranty).setCost(updatedWarranty.getCost());
+    }
+    
+    public void addWarranty(Warranty incomingWarranty){
+        this.warranties.add(incomingWarranty);
     }
     
     public Object[] getVehicleObject(){
@@ -104,6 +118,17 @@ public class Vehicle implements Serializable{
     
     public ArrayList<FuelEntry> getFuelEntries(){
         return this.fuelEntries;
+    }
+    
+    public ArrayList<Warranty> getWarranties(){
+        return this.warranties;
+    }
+    
+    public Warranty[] getWarrantyArray(){
+        Vehicle currentVehicle = this;
+        ArrayList<Warranty> warrantyList = currentVehicle.getWarranties();
+        Warranty[] warrantyArray = warrantyList.toArray(new Warranty[warrantyList.size()]);
+        return warrantyArray;
     }
     
     public FuelEntry[] getFuelEntriesArray(){
