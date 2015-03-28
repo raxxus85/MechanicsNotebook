@@ -5,11 +5,13 @@
  */
 package objectmodels;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mark
  */
-public class Modification {
+public class Modification implements Serializable{
     String partName;
     String datePurchased;
     String warrantyDuration;
