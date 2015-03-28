@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
  * @author Mark
  */
 public class WelcomeWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private Image iconImage;
     private BufferedImage image;
     
@@ -34,7 +34,7 @@ public class WelcomeWindow extends javax.swing.JFrame {
      /**
      * Creates new form WelcomeWindow
      */
-    public WelcomeWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+    public WelcomeWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         //this.getContentPane().setBackground(Color.black);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();

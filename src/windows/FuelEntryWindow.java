@@ -5,7 +5,8 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
+import informationwindows.DialogType;
 import java.awt.Toolkit;
 import objectmodels.FuelEntry;
 
@@ -14,14 +15,14 @@ import objectmodels.FuelEntry;
  * @author Mark
  */
 public class FuelEntryWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine mechanicsNotebookEngine;
+    private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private boolean addFuelEntryBoolean;
     private FuelEntry originalFuelEntry;
     
     /**
      * Creates new form FuelEntryWindow, for NEW FUEL ENTRY
      */
-    public FuelEntryWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine) {
+    public FuelEntryWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.addOrUpdateButton.setText("Add Fuel Entry");
@@ -32,7 +33,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
     /**
      * Creates new form FuelEntryWindow, for UPDATING
      */
-    public FuelEntryWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine, FuelEntry incomingFuelEntry) {
+    public FuelEntryWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, FuelEntry incomingFuelEntry) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         this.originalFuelEntry = incomingFuelEntry;
         initComponents();
@@ -174,6 +175,12 @@ public class FuelEntryWindow extends javax.swing.JFrame {
             if(addFuelEntryBoolean){
             FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()), Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));           
             this.mechanicsNotebookEngine.addFuelEntry(newFuelEntry);
+            if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newFuelEntry.getOdometer())){
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+                newFuelEntry.getOdometer().toString() + " miles.");
+                this.mechanicsNotebookEngine.updateVehicleMileage(newFuelEntry.getOdometer());
+            }
             this.dispose();
             }else{
                 FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()), Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));

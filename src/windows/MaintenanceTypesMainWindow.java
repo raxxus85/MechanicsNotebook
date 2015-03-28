@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -20,7 +20,7 @@ import objectmodels.MaintenanceType;
  * @author Mark
  */
 public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
-    MechanicsNotebookEngine mechanicsNotebookEngine;
+    MotoGarageNotebookEngine mechanicsNotebookEngine;
     
     /**
      * Creates new form MaintenanceTypesMainWindow
@@ -32,7 +32,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
      /**
      * Creates new form MaintenanceTypesMainWindow
      */
-    public MaintenanceTypesMainWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine) {
+    public MaintenanceTypesMainWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();

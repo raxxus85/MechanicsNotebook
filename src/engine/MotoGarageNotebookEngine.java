@@ -34,6 +34,7 @@ import windows.MechanicWindow;
 import windows.ModificationWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
+import windows.VehicleTrackersWindow;
 import windows.WarrantyWindow;
 import windows.WelcomeWindow;
 
@@ -41,7 +42,7 @@ import windows.WelcomeWindow;
  * MAIN engine for Mechanic's Notebook
  * @author Mark
  */
-public class MechanicsNotebookEngine {
+public class MotoGarageNotebookEngine {
     
     //Window Variables
     private WelcomeWindow welcomeWindow;
@@ -58,13 +59,14 @@ public class MechanicsNotebookEngine {
     private FuelEntryWindow fuelEntryWindow;
     private WarrantyWindow warrantyWindow;
     private ModificationWindow modificationWindow;
+    private VehicleTrackersWindow vehicleTrackersWindow;
     
     //Other Variables
     private Garage currentGarage;
     private DialogFactory dialogFactory;
     private Boolean saved;
     
-    public MechanicsNotebookEngine(){
+    public MotoGarageNotebookEngine(){
         // TESTING CODE NEW TO REMOVE ONCE WE IMPLEMENT CREATE/ OPEN/ SAVE
         //Garage testGarage = new Garage();
         //this.currentGarage = testGarage;
@@ -77,7 +79,7 @@ public class MechanicsNotebookEngine {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MechanicsNotebookEngine mechanicsNotebookEngine = new MechanicsNotebookEngine();
+        MotoGarageNotebookEngine mechanicsNotebookEngine = new MotoGarageNotebookEngine();
         // create a DEFAULT GARAGE as program just opened
         mechanicsNotebookEngine.createDefaultGarage();
         //add some maintenance TYPES
@@ -162,6 +164,43 @@ public class MechanicsNotebookEngine {
             ex.printStackTrace();
         }
         return true;
+    }
+    
+    
+    public void setFuelEntriesEnabled(Boolean incomingBoolean){
+        this.currentGarage.setFuelEntriesEnabled(incomingBoolean); 
+        this.mainWindow.refresh();
+    }
+    
+    public Boolean getFuelEntriesEnabled(){
+        return this.currentGarage.getFuelEntriesEnabled();
+    }
+    
+    public void setWarrantiesEnabled(Boolean incomingBoolean){
+        this.currentGarage.setWarrantiesEnabled(incomingBoolean);
+        this.mainWindow.refresh();
+    }
+    
+    public Boolean getWarrantiesEnabled(){
+        return this.currentGarage.getWarrantiesEnabled();
+    }
+    
+    public void setModificationsEnabled(Boolean incomingBoolean){
+        this.currentGarage.setModificationsEnabled(incomingBoolean);
+        this.mainWindow.refresh();
+    }
+    
+    public Boolean getModificationsEnabled(){
+        return this.currentGarage.getModificationsEnabled();
+    }
+    
+    public void setDragStripSlipsEnabled(Boolean incomingBoolean){
+        this.currentGarage.setDragStripSlipsEnabled(incomingBoolean);
+        this.mainWindow.refresh();
+    }
+    
+    public Boolean getDragStripSlipsEnabled(){
+        return this.currentGarage.getDragStripSlipsEnabled();
     }
     
     
@@ -546,6 +585,11 @@ public class MechanicsNotebookEngine {
     public void startAboutWindow(){
         this.aboutWindow = new AboutWindow();
         this.aboutWindow.setVisible(true);
+    }
+    
+    public void startVehicleTrackersWindow(){
+        this.vehicleTrackersWindow = new VehicleTrackersWindow(this);
+        this.vehicleTrackersWindow.setVisible(true);
     }
     
     /**

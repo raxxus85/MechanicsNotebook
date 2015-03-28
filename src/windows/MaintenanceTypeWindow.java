@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import objectmodels.MaintenanceType;
@@ -14,7 +14,7 @@ import objectmodels.MaintenanceType;
  * @author Mark
  */
 public class MaintenanceTypeWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine mechanicsNotebookEngine;
+    private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private MaintenanceTypesMainWindow maintenanceTypesMainWindow;
     boolean updatingMaintenanceType = false;
     MaintenanceType originalMaintenanceType = null;
@@ -29,7 +29,7 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     /**
      * Creates new form MaintenanceTypeWindow
      */
-    public MaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MechanicsNotebookEngine incomingMechanicsNotebookEngine) {
+    public MaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         this.mechanicsNotebookEngine= incomingMechanicsNotebookEngine;
         this.maintenanceTypesMainWindow = incomingMaintenanceTypesMainWindow;
         initComponents();
@@ -40,7 +40,7 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     /**
      * Creates new form MaintenanceTypeWindow for Updating Maintenance Type
      */
-    public MaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MechanicsNotebookEngine incomingMechanicsNotebookEngine, MaintenanceType incomingMaintenanceType) {
+    public MaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, MaintenanceType incomingMaintenanceType) {
         this.mechanicsNotebookEngine= incomingMechanicsNotebookEngine;
         this.maintenanceTypesMainWindow = incomingMaintenanceTypesMainWindow;
         initComponents();

@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -22,7 +22,7 @@ import objectmodels.Vehicle;
  * @author Mark
  */
 public class VehicleWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
     boolean updateVehicle = false;
     
@@ -37,7 +37,7 @@ public class VehicleWindow extends javax.swing.JFrame {
     /**
      * Creates new form VehicleWindow, used for creating a Vehicle
      */
-    public VehicleWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+    public VehicleWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
@@ -48,7 +48,7 @@ public class VehicleWindow extends javax.swing.JFrame {
     /**
      * Creates new form VehicleWindow, used for updating a Vehicle
      */
-    public VehicleWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
+    public VehicleWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();

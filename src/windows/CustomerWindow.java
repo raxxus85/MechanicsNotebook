@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -23,7 +23,7 @@ import objectmodels.Mechanic;
  * @author Mark
  */
 public class CustomerWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
     private boolean updateCustomer = false;
     /**
@@ -37,7 +37,7 @@ public class CustomerWindow extends javax.swing.JFrame {
      * Main constructor, used when creating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+    public CustomerWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
@@ -49,7 +49,7 @@ public class CustomerWindow extends javax.swing.JFrame {
      * Main constructor, used when updating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
+    public CustomerWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();

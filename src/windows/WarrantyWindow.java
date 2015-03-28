@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import java.awt.Toolkit;
 import objectmodels.Warranty;
 
@@ -14,14 +14,14 @@ import objectmodels.Warranty;
  * @author Mark
  */
 public class WarrantyWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine mechanicsNotebookEngine;
+    private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private boolean addWarranty;
     private Warranty originalWarranty;
 
     /**
      * Creates new form WarrantyWindow, for ADDING
      */
-    public WarrantyWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine) {
+    public WarrantyWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
@@ -32,7 +32,7 @@ public class WarrantyWindow extends javax.swing.JFrame {
     /**
      * Creates new form WarrantyWindow, for UPDATING
      */
-    public WarrantyWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine, Warranty incomingWarranty) {
+    public WarrantyWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Warranty incomingWarranty) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();

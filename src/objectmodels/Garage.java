@@ -8,6 +8,12 @@ import java.util.ArrayList;
  * @author Mark
  */
 public class Garage implements Serializable{
+    // vehicle trackers
+    private Boolean fuelEntriesEnabled = false;
+    private Boolean warrantiesEnabled = false;
+    private Boolean modificationsEnabled = false;
+    private Boolean dragStripSlipsEnabled= false;
+    
     // "current" or selected mechanic, customer, vehicle
     private Mechanic currentMechanic=null;
     private Customer currentCustomer=null;
@@ -22,6 +28,39 @@ public class Garage implements Serializable{
     
     // current object manipulation methods
    
+    public void setFuelEntriesEnabled(Boolean incomingBoolean){
+        this.fuelEntriesEnabled = incomingBoolean;
+    }
+    
+    public Boolean getFuelEntriesEnabled(){
+        return this.fuelEntriesEnabled;
+    }
+    
+    public void setWarrantiesEnabled(Boolean incomingBoolean){
+        this.warrantiesEnabled = incomingBoolean;
+    }
+    
+    public Boolean getWarrantiesEnabled(){
+        return this.warrantiesEnabled;
+    }
+    
+    public void setModificationsEnabled(Boolean incomingBoolean){
+        this.modificationsEnabled = incomingBoolean;
+    }
+    
+    public Boolean getModificationsEnabled(){
+        return this.modificationsEnabled;
+    }
+    
+    public void setDragStripSlipsEnabled(Boolean incomingBoolean){
+        this.dragStripSlipsEnabled = incomingBoolean;
+    }
+    
+    public Boolean getDragStripSlipsEnabled(){
+        return this.dragStripSlipsEnabled;
+    }
+    
+    
     /**
      * Method to add a new MaintenanceType to the Garage
      * @param incomingMaintenanceType 

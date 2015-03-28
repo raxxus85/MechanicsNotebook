@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import java.awt.Toolkit;
 import objectmodels.Modification;
 
@@ -14,7 +14,7 @@ import objectmodels.Modification;
  * @author Mark
  */
 public class ModificationWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine mechanicsNotebookEngine;
+    private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private Boolean addModification;
     private Modification originalModification;
     
@@ -22,7 +22,7 @@ public class ModificationWindow extends javax.swing.JFrame {
     /**
      * Creates new form ModificationWindow, for ADDING
      */
-    public ModificationWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine) {
+    public ModificationWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
@@ -33,7 +33,7 @@ public class ModificationWindow extends javax.swing.JFrame {
     /**
      * Creates new form ModificationWindow, for UPDATING
      */
-    public ModificationWindow(MechanicsNotebookEngine incomingMechanicsNotebookEngine, Modification incomingModification) {
+    public ModificationWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Modification incomingModification) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();

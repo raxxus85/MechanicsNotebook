@@ -6,7 +6,7 @@ package windows;
 
 import informationwindows.DialogType;
 import objectmodels.Mechanic;
-import engine.MechanicsNotebookEngine;
+import engine.MotoGarageNotebookEngine;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  * @author Mark
  */
 public class MechanicWindow extends javax.swing.JFrame {
-    private MechanicsNotebookEngine motoGarageMechanicEngine;
+    private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
     private boolean updateMechanic = false;
     
@@ -39,7 +39,7 @@ public class MechanicWindow extends javax.swing.JFrame {
     /**
      * Creates new form MechanicWindow for CREATING Mechanic
      */
-    public MechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine) {
+    public MechanicWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
@@ -50,7 +50,7 @@ public class MechanicWindow extends javax.swing.JFrame {
     /**
      * Creates new form MechanicWindow for UPDATING Mechanic
      */
-    public MechanicWindow(MechanicsNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
+    public MechanicWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
