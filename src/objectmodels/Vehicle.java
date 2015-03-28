@@ -26,6 +26,7 @@ public class Vehicle implements Serializable{
     private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();   
     private ArrayList<FuelEntry> fuelEntries = new ArrayList<>();
     private ArrayList<Warranty> warranties = new ArrayList<>();
+    private ArrayList<Modification> modifications = new ArrayList<>();
     
     private ImageIcon imageIcon;
     /**
@@ -79,6 +80,25 @@ public class Vehicle implements Serializable{
         this.warranties.add(incomingWarranty);
     }
     
+    public void addModification(Modification incomingModification){
+        this.modifications.add(incomingModification);
+    }
+    
+    public void editModification(Modification existingModification, Modification updatedModification){
+        int indexOfExistingModification = this.modifications.indexOf(existingModification);
+
+        this.modifications.get(indexOfExistingModification).setPartName(updatedModification.getPartName());
+        this.modifications.get(indexOfExistingModification).setDatePurchased(updatedModification.getDatePurchased());
+        this.modifications.get(indexOfExistingModification).setWarrantyDuration(updatedModification.getWarrantyDuration());
+        this.modifications.get(indexOfExistingModification).setDescription(updatedModification.getDescription());
+        this.modifications.get(indexOfExistingModification).setCost(updatedModification.getCost());
+               
+    }
+    
+    public void deleteModification(Modification incomingModification){
+        this.modifications.remove(incomingModification);
+    }
+    
     public Object[] getVehicleObject(){
         String[] stringArray = {this.make,this.model, this.year.toString(), this.odometer.toString()};
         return stringArray;
@@ -120,6 +140,10 @@ public class Vehicle implements Serializable{
         return this.fuelEntries;
     }
     
+    public ArrayList<Modification> getModifications(){
+        return this.modifications;
+    }
+    
     public ArrayList<Warranty> getWarranties(){
         return this.warranties;
     }
@@ -129,6 +153,13 @@ public class Vehicle implements Serializable{
         ArrayList<Warranty> warrantyList = currentVehicle.getWarranties();
         Warranty[] warrantyArray = warrantyList.toArray(new Warranty[warrantyList.size()]);
         return warrantyArray;
+    }
+    
+    public Modification[] getModificationArray(){
+        Vehicle currentVehicle = this;
+        ArrayList<Modification> modificationList = currentVehicle.getModifications();
+        Modification[] modificationArray = modificationList.toArray(new Modification[modificationList.size()]);
+        return modificationArray;
     }
     
     public FuelEntry[] getFuelEntriesArray(){

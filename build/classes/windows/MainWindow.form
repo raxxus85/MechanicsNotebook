@@ -570,14 +570,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable2">
+                <Component class="javax.swing.JTable" name="modificationsTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Part&quot;, &quot;Date Purchased&quot;, &quot;Warranty Duration&quot;, &quot;Description&quot;&#xa;    }&#xa;)" type="code"/>
+                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Part&quot;, &quot;Date Purchased&quot;, &quot;Warranty Duration&quot;, &quot;Description&quot;,&quot;Cost&quot;&#xa;    }&#xa;)" type="code"/>
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTable2.setOpaque(true);&#xa;jTable2.setFillsViewportHeight(true);&#xa;jTable2.setBackground(Color.WHITE);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="modificationsTable.setOpaque(true);&#xa;modificationsTable.setFillsViewportHeight(true);&#xa;modificationsTable.setBackground(Color.WHITE);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -592,26 +592,44 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jButton4">
+                <Component class="javax.swing.JButton" name="addModificationButton">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/modification32x32ADD.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addModificationButtonActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addModificationButton.setToolTipText(&quot;Add a Modification&quot;);"/>
+                  </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton5">
+                <Component class="javax.swing.JButton" name="editModificationButton">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/modification32x32EDIT.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editModificationButtonActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editModificationButton.setToolTipText(&quot;Edit / View Selected Modification&quot;);"/>
+                  </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton6">
+                <Component class="javax.swing.JButton" name="deleteModificationButton">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/modification32x32DELETE.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteModificationButtonActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deleteModificationButton.setToolTipText(&quot;Delete Selected Modification&quot;);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -629,31 +647,6 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="addMaintenanceActionButton">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/maintenanceAction32x32ADD.png"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMaintenanceActionButtonActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="mainToolBar.add(actionMaintenanceActionAdd)"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionAdd = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32ADD.png&quot;));&#xa;    Action actionMaintenanceActionAdd = new AbstractAction(&quot;New&quot;, maintenanceActionAdd) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionAdd add&quot;);&#xa;      }&#xa;    };"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addMaintenanceActionButton.setToolTipText(&quot;Add Maintenance Action to Current Vehicle&quot;);"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="maintenanceAlertButton">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/maintenanceAction32x32ALERTNONE.png"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="maintenanceAlertButton.setToolTipText(&quot;There are 0 maintenance reminders for this Vehicle&quot;);"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JButton" name="editMaintenanceTypesButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -667,16 +660,6 @@
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="mainToolBar.add(actionMaintenanceTypeEdit)"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource(&quot;/maintenanceType32x32EDIT.png&quot;));&#xa;    Action actionMaintenanceTypeEdit = new AbstractAction(&quot;New&quot;, maintenanceTypeEdit) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceTypes Edid!&quot;);&#xa;      }&#xa;    };"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceTypesButton.setToolTipText(&quot;View / Edit Maintenance Types&quot;);"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="fuelEntryMainToolBarAddButton">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/fuelEntry32x32ADD.png"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryMainToolBarAddButton.setToolTipText(&quot;Add Fuel Entry&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="importGarageButton">
@@ -713,6 +696,51 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="helpButton.setToolTipText(&quot;Help&quot;);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="addMaintenanceActionButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/maintenanceAction32x32ADD.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMaintenanceActionButtonActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="mainToolBar.add(actionMaintenanceActionAdd)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionAdd = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32ADD.png&quot;));&#xa;    Action actionMaintenanceActionAdd = new AbstractAction(&quot;New&quot;, maintenanceActionAdd) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionAdd add&quot;);&#xa;      }&#xa;    };"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addMaintenanceActionButton.setToolTipText(&quot;Add Maintenance Action to Current Vehicle&quot;);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="maintenanceAlertButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/maintenanceAction32x32ALERTNONE.png"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="maintenanceAlertButton.setToolTipText(&quot;There are 0 maintenance reminders for this Vehicle&quot;);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="fuelEntryMainToolBarAddButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/fuelEntry32x32ADD.png"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryMainToolBarAddButton.setToolTipText(&quot;Add Fuel Entry&quot;);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="graphsButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/graph32x32EDIT.png"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="graphsButton.setToolTipText(&quot;Vehicle Information Graphs&quot;);"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -46,6 +46,7 @@ import objectmodels.Customer;
 import objectmodels.FuelEntry;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
+import objectmodels.Modification;
 import objectmodels.MouseAdapter2;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
@@ -174,7 +175,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshMechanicsTab();
         this.refreshCustomersTab();
         this.refreshVehiclesTab();
-        
+        this.refreshModifications();
     }
     
 
@@ -184,6 +185,44 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshCurrentVehicleInformation();
         this.refreshFuelEntries();
         this.refreshWarranties();
+        this.refreshModifications();
+    }
+    
+    private void refreshModifications(){
+        DefaultTableModel model = (DefaultTableModel) modificationsTable.getModel();
+        // time to remove the fuel entries here
+        int rowCount = model.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        
+        // IF there is a vehicle and it has modifications      
+        if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null && this.mechanicsNotebookEngine.getCurrentVehicle().getModifications().size() >0){
+            addModificationButton.setEnabled(true);
+            editModificationButton.setEnabled(true);
+            deleteModificationButton.setEnabled(true);
+            
+            // NO IDEA HOW TO SORT UNTIL WE FIGURE OUT DATE DUDE
+            int newRowCount = this.mechanicsNotebookEngine.getCurrentVehicle().getModificationArray().length;
+            Modification[] modificationArray = this.mechanicsNotebookEngine.getCurrentVehicle().getModificationArray();
+            for (int i = 0  ; i <newRowCount ; i++) {
+                Object[]modificationObject = modificationArray[i].getModificationObject();
+                model.addRow(modificationObject);                
+            }
+        }else if(this.mechanicsNotebookEngine.getCurrentVehicle()!=null){
+            // if there is a vehicle, but no warranties
+            addModificationButton.setEnabled(true);
+            editModificationButton.setEnabled(false);
+            deleteModificationButton.setEnabled(false);
+           
+        }else{
+            // if no vehicle
+            addModificationButton.setEnabled(false);
+            editModificationButton.setEnabled(false);
+            deleteModificationButton.setEnabled(false);
+        }
+        
     }
     
     private void refreshWarranties(){
@@ -584,12 +623,22 @@ public class MainWindow extends javax.swing.JFrame {
         deleteWarrantyButton = new javax.swing.JButton();
         modificationsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        modificationsTable = new javax.swing.JTable();
         modificationEntryToolBar = new javax.swing.JToolBar();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        addModificationButton = new javax.swing.JButton();
+        editModificationButton = new javax.swing.JButton();
+        deleteModificationButton = new javax.swing.JButton();
         mainToolBar = new javax.swing.JToolBar();
+        ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"));
+        Action actionMaintenanceTypeEdit = new AbstractAction("New", maintenanceTypeEdit) {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("MaintenanceTypes Edid!");
+            }
+        };
+        editMaintenanceTypesButton = mainToolBar.add(actionMaintenanceTypeEdit);
+        importGarageButton = new javax.swing.JButton();
+        exportGarageButton = new javax.swing.JButton();
+        helpButton = new javax.swing.JButton();
         ImageIcon maintenanceActionAdd = new ImageIcon(getClass().getResource("/maintenanceAction32x32ADD.png"));
         Action actionMaintenanceActionAdd = new AbstractAction("New", maintenanceActionAdd) {
             public void actionPerformed(ActionEvent e) {
@@ -598,17 +647,8 @@ public class MainWindow extends javax.swing.JFrame {
         };
         addMaintenanceActionButton = mainToolBar.add(actionMaintenanceActionAdd);
         maintenanceAlertButton = new javax.swing.JButton();
-        ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"));
-        Action actionMaintenanceTypeEdit = new AbstractAction("New", maintenanceTypeEdit) {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("MaintenanceTypes Edid!");
-            }
-        };
-        editMaintenanceTypesButton = mainToolBar.add(actionMaintenanceTypeEdit);
         fuelEntryMainToolBarAddButton = new javax.swing.JButton();
-        importGarageButton = new javax.swing.JButton();
-        exportGarageButton = new javax.swing.JButton();
-        helpButton = new javax.swing.JButton();
+        graphsButton = new javax.swing.JButton();
         mechanicPanelNew = new javax.swing.JPanel();
         mechanicToolBar = new javax.swing.JToolBar();
         ImageIcon mechanicAdd = new ImageIcon(getClass().getResource("/mechanic32x32ADD.png"));
@@ -926,29 +966,47 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Warranties", vehicleWarrantiesPanel);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        modificationsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
             new String [] {
-                "Part", "Date Purchased", "Warranty Duration", "Description"
+                "Part", "Date Purchased", "Warranty Duration", "Description","Cost"
             }
         ));
-        jTable2.setOpaque(true);
-        jTable2.setFillsViewportHeight(true);
-        jTable2.setBackground(Color.WHITE);
-        jScrollPane2.setViewportView(jTable2);
+        modificationsTable.setOpaque(true);
+        modificationsTable.setFillsViewportHeight(true);
+        modificationsTable.setBackground(Color.WHITE);
+        jScrollPane2.setViewportView(modificationsTable);
 
         modificationEntryToolBar.setRollover(true);
         modificationEntryToolBar.setFloatable(false);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modification32x32ADD.png"))); // NOI18N
-        modificationEntryToolBar.add(jButton4);
+        addModificationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modification32x32ADD.png"))); // NOI18N
+        addModificationButton.setToolTipText("Add a Modification");
+        addModificationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addModificationButtonActionPerformed(evt);
+            }
+        });
+        modificationEntryToolBar.add(addModificationButton);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modification32x32EDIT.png"))); // NOI18N
-        modificationEntryToolBar.add(jButton5);
+        editModificationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modification32x32EDIT.png"))); // NOI18N
+        editModificationButton.setToolTipText("Edit / View Selected Modification");
+        editModificationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editModificationButtonActionPerformed(evt);
+            }
+        });
+        modificationEntryToolBar.add(editModificationButton);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modification32x32DELETE.png"))); // NOI18N
-        modificationEntryToolBar.add(jButton6);
+        deleteModificationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modification32x32DELETE.png"))); // NOI18N
+        deleteModificationButton.setToolTipText("Delete Selected Modification");
+        deleteModificationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteModificationButtonActionPerformed(evt);
+            }
+        });
+        modificationEntryToolBar.add(deleteModificationButton);
 
         javax.swing.GroupLayout modificationsPanelLayout = new javax.swing.GroupLayout(modificationsPanel);
         modificationsPanel.setLayout(modificationsPanelLayout);
@@ -973,19 +1031,6 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.setRollover(true);
         mainToolBar.setFloatable(false);
 
-        addMaintenanceActionButton.setToolTipText("Add Maintenance Action to Current Vehicle");
-        addMaintenanceActionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32ADD.png"))); // NOI18N
-        addMaintenanceActionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMaintenanceActionButtonActionPerformed(evt);
-            }
-        });
-        mainToolBar.add(addMaintenanceActionButton);
-
-        maintenanceAlertButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32ALERTNONE.png"))); // NOI18N
-        maintenanceAlertButton.setToolTipText("There are 0 maintenance reminders for this Vehicle");
-        mainToolBar.add(maintenanceAlertButton);
-
         editMaintenanceTypesButton.setToolTipText("View / Edit Maintenance Types");
         editMaintenanceTypesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"))); // NOI18N
         editMaintenanceTypesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -994,10 +1039,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         mainToolBar.add(editMaintenanceTypesButton);
-
-        fuelEntryMainToolBarAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fuelEntry32x32ADD.png"))); // NOI18N
-        fuelEntryMainToolBarAddButton.setToolTipText("Add Fuel Entry");
-        mainToolBar.add(fuelEntryMainToolBarAddButton);
 
         importGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
         importGarageButton.setToolTipText("Import Garage");
@@ -1020,6 +1061,27 @@ public class MainWindow extends javax.swing.JFrame {
         helpButton.setToolTipText("Help");
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/help32x32.png"))); // NOI18N
         mainToolBar.add(helpButton);
+
+        addMaintenanceActionButton.setToolTipText("Add Maintenance Action to Current Vehicle");
+        addMaintenanceActionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32ADD.png"))); // NOI18N
+        addMaintenanceActionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMaintenanceActionButtonActionPerformed(evt);
+            }
+        });
+        mainToolBar.add(addMaintenanceActionButton);
+
+        maintenanceAlertButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32ALERTNONE.png"))); // NOI18N
+        maintenanceAlertButton.setToolTipText("There are 0 maintenance reminders for this Vehicle");
+        mainToolBar.add(maintenanceAlertButton);
+
+        fuelEntryMainToolBarAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fuelEntry32x32ADD.png"))); // NOI18N
+        fuelEntryMainToolBarAddButton.setToolTipText("Add Fuel Entry");
+        mainToolBar.add(fuelEntryMainToolBarAddButton);
+
+        graphsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graph32x32EDIT.png"))); // NOI18N
+        graphsButton.setToolTipText("Vehicle Information Graphs");
+        mainToolBar.add(graphsButton);
 
         mechanicPanelNew.setBorder(compound);
 
@@ -1851,6 +1913,39 @@ public class MainWindow extends javax.swing.JFrame {
             } 
     }//GEN-LAST:event_editWarrantyButtonActionPerformed
 
+    private void addModificationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addModificationButtonActionPerformed
+        // TODO add your handling code here:
+        this.mechanicsNotebookEngine.startNewModificationWindow();
+    }//GEN-LAST:event_addModificationButtonActionPerformed
+
+    private void deleteModificationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteModificationButtonActionPerformed
+        // TODO add your handling code here:
+        int rowSelected = modificationsTable.getSelectedRow();        
+        if(rowSelected>-1){
+            boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Modification? This is permanent!");
+            if(sureToDelete){
+                Modification[] currentModifications = this.mechanicsNotebookEngine.getCurrentVehicle().getModificationArray();
+                Modification selectedModification = currentModifications[rowSelected]; 
+
+                this.mechanicsNotebookEngine.deleteModification(selectedModification);
+            }    
+        }else{
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Modification to Delete.");
+            }  
+    }//GEN-LAST:event_deleteModificationButtonActionPerformed
+
+    private void editModificationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editModificationButtonActionPerformed
+        // TODO add your handling code here:
+            int rowSelected = modificationsTable.getSelectedRow();
+            if(rowSelected>-1){
+                Modification[] currentModifications = this.mechanicsNotebookEngine.getCurrentVehicle().getModificationArray();
+                Modification selectedModification = currentModifications[rowSelected];                
+                this.mechanicsNotebookEngine.startViewOrEditModificationWindow(selectedModification);
+            }else{
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Modification to View / Update.");
+            } 
+    }//GEN-LAST:event_editModificationButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1884,6 +1979,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton addMaintenanceActionButton;
     private javax.swing.JButton addMaintenanceActionButtonToolBar;
+    private javax.swing.JButton addModificationButton;
     private javax.swing.JButton addWarrantyButton;
     private javax.swing.JLabel currentCustomerLabel;
     private javax.swing.JPanel currentCustomerPanel;
@@ -1902,9 +1998,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel customersLabel;
     private javax.swing.JTable customersTable;
     private javax.swing.JButton deleteMaintenanceActionButtonToolBar;
+    private javax.swing.JButton deleteModificationButton;
     private javax.swing.JButton deleteWarrantyButton;
     private javax.swing.JButton editMaintenanceActionButtonToolBar;
     private javax.swing.JButton editMaintenanceTypesButton;
+    private javax.swing.JButton editModificationButton;
     private javax.swing.JButton editWarrantyButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton exportGarageButton;
@@ -1917,12 +2015,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton fuelEntryEditButton;
     private javax.swing.JButton fuelEntryMainToolBarAddButton;
     private javax.swing.JToolBar fuelEntryToolBar;
+    private javax.swing.JButton graphsButton;
     private javax.swing.JButton helpButton;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton importGarageButton;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1932,7 +2028,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JToolBar mainToolBar;
     private javax.swing.JTable maintenanceActionsTable;
@@ -1950,6 +2045,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable mechanicsTable;
     private javax.swing.JToolBar modificationEntryToolBar;
     private javax.swing.JPanel modificationsPanel;
+    private javax.swing.JTable modificationsTable;
     private javax.swing.JMenuItem newGarageMenuItem;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;

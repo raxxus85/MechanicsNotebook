@@ -19,6 +19,7 @@ import objectmodels.Customer;
 import objectmodels.FuelEntry;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
+import objectmodels.Modification;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
 import windows.AboutWindow;
@@ -30,6 +31,7 @@ import windows.NewMaintenanceActionWindow;
 import windows.MaintenanceTypeWindow;
 import windows.MaintenanceTypesMainWindow;
 import windows.MechanicWindow;
+import windows.ModificationWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
 import windows.WarrantyWindow;
@@ -55,6 +57,7 @@ public class MechanicsNotebookEngine {
     private MaintenanceTypesMainWindow maintenanceTypesMainWindow;
     private FuelEntryWindow fuelEntryWindow;
     private WarrantyWindow warrantyWindow;
+    private ModificationWindow modificationWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -350,6 +353,24 @@ public class MechanicsNotebookEngine {
         return true;
     }
     
+    public boolean addModification(Modification incomingModification){
+        this.currentGarage.getCurrentVehicle().addModification(incomingModification);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean editModification(Modification existingModification, Modification updatedModification){
+        this.getCurrentVehicle().editModification(existingModification,updatedModification);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean deleteModification(Modification incomingModification){
+        this.getCurrentVehicle().deleteModification(incomingModification);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
     public boolean updateVehicleMileage(Integer incomingMileage){
         this.currentGarage.getCurrentVehicle().updateMileage(incomingMileage);
         this.mainWindow.refresh();
@@ -461,6 +482,16 @@ public class MechanicsNotebookEngine {
     public void startNewMechanicWindow(){
         this.mechanicWindow = new MechanicWindow(this);
         this.mechanicWindow.setVisible(true);
+    }
+    
+    public void startNewModificationWindow(){
+        this.modificationWindow = new ModificationWindow(this);
+        this.modificationWindow.setVisible(true);
+    }
+    
+    public void startViewOrEditModificationWindow(Modification incomingModification){
+        this.modificationWindow = new ModificationWindow(this, incomingModification);
+        this.modificationWindow.setVisible(true);
     }
     
     /**

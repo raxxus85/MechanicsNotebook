@@ -5,21 +5,18 @@
  */
 package objectmodels;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  *
  * @author Mark
  */
-public class Warranty implements Serializable{
+public class Modification {
     String partName;
     String datePurchased;
     String warrantyDuration;
     String description;
     Float cost;
     
-    public Warranty(String incomingPartName, String incomingDatePurchased, String incomingWarrantyDuration, String incomingDescription,Float incomingCost){
+    public Modification(String incomingPartName, String incomingDatePurchased, String incomingWarrantyDuration, String incomingDescription,Float incomingCost){
         this.partName = incomingPartName;
         this.datePurchased = incomingDatePurchased;
         this.warrantyDuration = incomingWarrantyDuration;
@@ -27,11 +24,11 @@ public class Warranty implements Serializable{
         this.cost = incomingCost;
     }
     
-    /**
+        /**
      * Method used for the sole purpose of filling out a JTable in MainWindow
      * @return 
      */
-    public Object[] getWarrantyObject(){
+    public Object[] getModificationObject(){
         String costEdited = "$" + this.cost.toString();
         String[] stringArray = {this.partName,this.datePurchased, this.warrantyDuration,this.description,costEdited};
         return stringArray;
