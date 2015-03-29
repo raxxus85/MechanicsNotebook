@@ -43,6 +43,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import objectmodels.Customer;
+import objectmodels.DragStripSlip;
 import objectmodels.FuelEntry;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
@@ -189,7 +190,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshFuelEntries();
         this.refreshWarranties();
         this.refreshModifications();
-        //this.refreshDragStripSlips();
+        this.refreshDragStripSlips();
     }
     
     private void refreshVehicleTrackers(){
@@ -217,6 +218,43 @@ public class MainWindow extends javax.swing.JFrame {
         }else{
             this.mainTabbedPane.remove(dragStripSlipsPanel);
         }
+    }
+
+    private void refreshDragStripSlips(){
+        DefaultTableModel model = (DefaultTableModel) dragStripSlipsTable.getModel();
+        // time to remove the fuel entries here
+        int rowCount = model.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        
+        // IF there is a vehicle and it has drag strip slips      
+        if(this.motoGarageNotebookEngine.getCurrentVehicle()!=null && this.motoGarageNotebookEngine.getCurrentVehicle().getDragStripSlipList().size() >0){
+            dragStripSlipAddButton.setEnabled(true);
+            dragStripSlipEditButton.setEnabled(true);
+            dragStripSlipDeleteButton.setEnabled(true);
+            
+            // NO IDEA HOW TO SORT UNTIL WE FIGURE OUT DATE DUDE
+            int newRowCount = this.motoGarageNotebookEngine.getCurrentVehicle().getDragStripSlipArray().length;
+            DragStripSlip[] dragStripSlipArrayArray = this.motoGarageNotebookEngine.getCurrentVehicle().getDragStripSlipArray();
+            for (int i = 0  ; i <newRowCount ; i++) {
+                Object[]dragStripSlipObject = dragStripSlipArrayArray[i].getDragStripSlipObject();
+                model.addRow(dragStripSlipObject);                
+            }
+        }else if(this.motoGarageNotebookEngine.getCurrentVehicle()!=null){
+            // if there is a vehicle, but no drag strip slips
+            dragStripSlipAddButton.setEnabled(true);
+            dragStripSlipEditButton.setEnabled(false);
+            dragStripSlipDeleteButton.setEnabled(false);
+           
+        }else{
+            // if no vehicle
+            dragStripSlipAddButton.setEnabled(false);
+            dragStripSlipEditButton.setEnabled(false);
+            dragStripSlipDeleteButton.setEnabled(false);
+        }
+        
     }
     
     private void refreshModifications(){
@@ -661,6 +699,12 @@ public class MainWindow extends javax.swing.JFrame {
         editModificationButton = new javax.swing.JButton();
         deleteModificationButton = new javax.swing.JButton();
         dragStripSlipsPanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        dragStripSlipsTable = new javax.swing.JTable();
+        dragStripSlipToolBar = new javax.swing.JToolBar();
+        dragStripSlipAddButton = new javax.swing.JButton();
+        dragStripSlipEditButton = new javax.swing.JButton();
+        dragStripSlipDeleteButton = new javax.swing.JButton();
         mainToolBar = new javax.swing.JToolBar();
         ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"));
         Action actionMaintenanceTypeEdit = new AbstractAction("New", maintenanceTypeEdit) {
@@ -922,10 +966,11 @@ public class MainWindow extends javax.swing.JFrame {
         fuelEntriesPanel.setLayout(fuelEntriesPanelLayout);
         fuelEntriesPanelLayout.setHorizontalGroup(
             fuelEntriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(fuelEntriesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(fuelEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addComponent(fuelEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         fuelEntriesPanelLayout.setVerticalGroup(
             fuelEntriesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -987,7 +1032,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(vehicleWarrantiesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(warrantyEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(warrantyEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         vehicleWarrantiesPanelLayout.setVerticalGroup(
             vehicleWarrantiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1046,10 +1092,11 @@ public class MainWindow extends javax.swing.JFrame {
         modificationsPanel.setLayout(modificationsPanelLayout);
         modificationsPanelLayout.setHorizontalGroup(
             modificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(modificationsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(modificationEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addComponent(modificationEntryToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         modificationsPanelLayout.setVerticalGroup(
             modificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1062,15 +1109,47 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Modifications", modificationsPanel);
 
+        dragStripSlipsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Date", "R/T", "60'", "330'", "1/8" , "1/8 MPH", "1000", "1/4", "1/4 MPH"
+            }
+        ));
+        dragStripSlipsTable.setOpaque(true);
+        dragStripSlipsTable.setFillsViewportHeight(true);
+        dragStripSlipsTable.setBackground(Color.WHITE);
+        jScrollPane5.setViewportView(dragStripSlipsTable);
+
+        dragStripSlipToolBar.setRollover(true);
+        dragStripSlipToolBar.setFloatable(false);
+
+        dragStripSlipAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32ADD.png"))); // NOI18N
+        dragStripSlipToolBar.add(dragStripSlipAddButton);
+
+        dragStripSlipEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32EDIT.png"))); // NOI18N
+        dragStripSlipToolBar.add(dragStripSlipEditButton);
+
+        dragStripSlipDeleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32DELETE.png"))); // NOI18N
+        dragStripSlipToolBar.add(dragStripSlipDeleteButton);
+
         javax.swing.GroupLayout dragStripSlipsPanelLayout = new javax.swing.GroupLayout(dragStripSlipsPanel);
         dragStripSlipsPanel.setLayout(dragStripSlipsPanelLayout);
         dragStripSlipsPanelLayout.setHorizontalGroup(
             dragStripSlipsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+            .addGroup(dragStripSlipsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dragStripSlipToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         dragStripSlipsPanelLayout.setVerticalGroup(
             dragStripSlipsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(dragStripSlipsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dragStripSlipToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Drag Strip Slips", dragStripSlipsPanel);
@@ -1362,7 +1441,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(vehicleToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        currentVehiclePanel.setBorder(compound);
+        //currentVehiclePanel.setBorder(compound);
+        currentVehiclePanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
 
@@ -1391,15 +1471,19 @@ public class MainWindow extends javax.swing.JFrame {
         currentVehiclePanelLayout.setVerticalGroup(
             currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(currentVehiclePanelLayout.createSequentialGroup()
-                .addGroup(currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currentVehicleLabel)
-                    .addComponent(currentVehicleOdometerLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vehicleNameLabel))
-            .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(currentVehiclePanelLayout.createSequentialGroup()
+                        .addGroup(currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(currentVehicleLabel)
+                            .addComponent(currentVehicleOdometerLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vehicleNameLabel))
+                    .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        currentCustomerPanel.setBorder(compound);
+        //currentCustomerPanel.setBorder(compound);
+        currentCustomerPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         customerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
 
@@ -1431,7 +1515,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addComponent(customerPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        currentMechanicPanel.setBorder(compound);
+        //currentMechanicPanel.setBorder(compound);
+        currentMechanicPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         mechanicNameLabel.setText("No Mechanic Selected");
 
@@ -1562,10 +1647,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(currentCustomerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(currentVehiclePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(currentMechanicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(currentMechanicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(currentVehiclePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -1575,7 +1658,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mainTabbedPane))
-                .addGap(47, 47, 47))
+                .addContainerGap())
         );
 
         pack();
@@ -2065,7 +2148,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton deleteMaintenanceActionButtonToolBar;
     private javax.swing.JButton deleteModificationButton;
     private javax.swing.JButton deleteWarrantyButton;
+    private javax.swing.JButton dragStripSlipAddButton;
+    private javax.swing.JButton dragStripSlipDeleteButton;
+    private javax.swing.JButton dragStripSlipEditButton;
+    private javax.swing.JToolBar dragStripSlipToolBar;
     private javax.swing.JPanel dragStripSlipsPanel;
+    private javax.swing.JTable dragStripSlipsTable;
     private javax.swing.JButton editMaintenanceActionButtonToolBar;
     private javax.swing.JButton editMaintenanceTypesButton;
     private javax.swing.JButton editModificationButton;
@@ -2090,6 +2178,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;

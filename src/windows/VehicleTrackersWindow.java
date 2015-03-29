@@ -96,7 +96,7 @@ public class VehicleTrackersWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Maintenance Tasks");
+        jLabel6.setText("Maintenance Actions");
 
         maintenanceTasksCheckBox.setEnabled(false);
 

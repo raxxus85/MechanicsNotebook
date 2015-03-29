@@ -27,6 +27,7 @@ public class Vehicle implements Serializable{
     private ArrayList<FuelEntry> fuelEntries = new ArrayList<>();
     private ArrayList<Warranty> warranties = new ArrayList<>();
     private ArrayList<Modification> modifications = new ArrayList<>();
+    private ArrayList<DragStripSlip> dragStripSlips = new ArrayList<>();
     
     private ImageIcon imageIcon;
     /**
@@ -74,6 +75,39 @@ public class Vehicle implements Serializable{
         this.warranties.get(indexOfExistingWarranty).setWarrantyDuration(updatedWarranty.getWarrantyDuration());
         this.warranties.get(indexOfExistingWarranty).setDescription(updatedWarranty.getDescription());
         this.warranties.get(indexOfExistingWarranty).setCost(updatedWarranty.getCost());
+    }
+    
+    public void addDragStripSlip(DragStripSlip incomingDragStripSlip){
+        this.dragStripSlips.add(incomingDragStripSlip);
+    }
+    
+    public void editDragStripSlip(DragStripSlip existingDragStripSlip, DragStripSlip updatedDragStripSlip){
+        int indexOfExistingDragStripSlip = this.dragStripSlips.indexOf(existingDragStripSlip);
+
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setDate(updatedDragStripSlip.getDate());
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setReactionTime(updatedDragStripSlip.getReactionTime());
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setThreeHundredThirtyFeetTime(updatedDragStripSlip.getThreeHundredThirtyFeetTime());
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setEighthMileTime(updatedDragStripSlip.getEighthMileTime());
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setEighthSpeed(updatedDragStripSlip.getEighthSpeed());
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setOneThousandFeetTime(updatedDragStripSlip.getOneThousandFeetTime());
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setQuarterMileTime(updatedDragStripSlip.getQuarterMileTime());
+        this.dragStripSlips.get(indexOfExistingDragStripSlip).setQuarterMileSpeed(updatedDragStripSlip.getQuarterMileSpeed());     
+    }
+    
+    public void deleteDragStripSlip(DragStripSlip incomingDragStripSlip){
+        this.dragStripSlips.remove(incomingDragStripSlip);
+    }
+    
+    public ArrayList<DragStripSlip> getDragStripSlipList(){
+        return this.dragStripSlips;
+    }
+    
+    public DragStripSlip[] getDragStripSlipArray(){
+        Vehicle currentVehicle = this;
+        ArrayList<DragStripSlip> dragStripSlipList = currentVehicle.getDragStripSlipList();
+        DragStripSlip[] dragStripSlipArray = dragStripSlipList.toArray(new DragStripSlip[dragStripSlipList.size()]);
+        
+        return dragStripSlipArray;
     }
     
     public void addWarranty(Warranty incomingWarranty){
