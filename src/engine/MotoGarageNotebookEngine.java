@@ -16,6 +16,7 @@ import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
 import objectmodels.Customer;
+import objectmodels.DragStripSlip;
 import objectmodels.FuelEntry;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
@@ -26,6 +27,7 @@ import windows.AboutWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
+import windows.DragStripSlipWindow;
 import windows.FuelEntryWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.MaintenanceTypeWindow;
@@ -60,6 +62,7 @@ public class MotoGarageNotebookEngine {
     private WarrantyWindow warrantyWindow;
     private ModificationWindow modificationWindow;
     private VehicleTrackersWindow vehicleTrackersWindow;
+    private DragStripSlipWindow dragStripSlipWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -166,6 +169,13 @@ public class MotoGarageNotebookEngine {
         return true;
     }
     
+    public void setVehicleTrackersChanged(Boolean incomingBoolean){
+        this.currentGarage.setVehicleTrackersChanged(incomingBoolean);
+    }
+    
+    public Boolean getVehicleTrackersChanged(){
+        return this.currentGarage.getVehicleTrackersChanged();
+    }
     
     public void setFuelEntriesEnabled(Boolean incomingBoolean){
         this.currentGarage.setFuelEntriesEnabled(incomingBoolean); 
@@ -267,6 +277,24 @@ public class MotoGarageNotebookEngine {
     
     public boolean addWarranty(Warranty incomingWarranty){
         this.getGarage().getCurrentVehicle().addWarranty(incomingWarranty);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean addDragStripSlip(DragStripSlip incomingDragStripSlip){
+        this.getGarage().getCurrentVehicle().addDragStripSlip(incomingDragStripSlip);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean editDragStripSlip(DragStripSlip originalDragStripSlip, DragStripSlip updatedDragStripSlip){
+        this.getGarage().getCurrentVehicle().editDragStripSlip(originalDragStripSlip, updatedDragStripSlip);
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean deleteDragStripSlip(DragStripSlip incomingDragStripSlip){
+        this.getGarage().getCurrentVehicle().deleteDragStripSlip(incomingDragStripSlip);
         this.mainWindow.refresh();
         return true;
     }
@@ -555,6 +583,16 @@ public class MotoGarageNotebookEngine {
     public void startNewCustomerWindow(){
         this.customerWindow = new CustomerWindow(this);
         this.customerWindow.setVisible(true);
+    }
+    
+    public void startNewDragStripSlipWindow(){
+        this.dragStripSlipWindow = new DragStripSlipWindow(this);
+        this.dragStripSlipWindow.setVisible(true);
+    }
+    
+    public void startUpdateDragStripSlipWindow(DragStripSlip incomingDragStripSlip){
+        this.dragStripSlipWindow = new DragStripSlipWindow(this, incomingDragStripSlip);
+        this.dragStripSlipWindow.setVisible(true);
     }
     
     /**

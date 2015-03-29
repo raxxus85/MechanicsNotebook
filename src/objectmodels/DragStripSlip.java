@@ -5,6 +5,9 @@
  */
 package objectmodels;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,8 +29,19 @@ public class DragStripSlip {
     /**
      * Main Constructor
      */
-    public DragStripSlip(){
+    public DragStripSlip(Float incomingReactionTime, Float incomingSixtyFeetTime, Float incomingThreeHundredThirtyFeetTime, Float incomingEighthMileTime, Float incomingEighthSpeed
+    ,Float incomingOneThousandFeetTime, Float incomingQuarterMileTime, Float incomingQuarterMileSpeed){
+        Date currentDate = new Date(); 
+        this.date = currentDate;
         
+        this.reactionTime = incomingReactionTime;
+        this.sixtyFeetTime = incomingSixtyFeetTime;
+        this.threeHundredThirtyFeetTime = incomingThreeHundredThirtyFeetTime;
+        this.eighthMileTime = incomingEighthMileTime;
+        this.eighthSpeed = incomingEighthSpeed;
+        this.oneThousandFeetTime = incomingOneThousandFeetTime;
+        this.quarterMileTime = incomingQuarterMileTime;
+        this.quarterMileSpeed = incomingQuarterMileSpeed;       
     }
     
     
@@ -37,7 +51,11 @@ public class DragStripSlip {
      * @return 
      */
     public Object[] getDragStripSlipObject(){
-        String[] stringArray = {this.date.toString(),this.reactionTime.toString(), this.sixtyFeetTime.toString(), this.threeHundredThirtyFeetTime.toString(),
+        DateFormat dateInstance = SimpleDateFormat.getDateInstance();
+        //System.out.println(dateInstance.format(Calendar.getInstance().getTime()));
+        //System.out.println(dateInstance.format(this.date));
+        
+        String[] stringArray = {dateInstance.format(this.date),this.reactionTime.toString(), this.sixtyFeetTime.toString(), this.threeHundredThirtyFeetTime.toString(),
             this.eighthMileTime.toString(),this.eighthSpeed.toString(),this.oneThousandFeetTime.toString(),this.quarterMileTime.toString(),this.quarterMileSpeed.toString()};
         return stringArray;
     }

@@ -174,10 +174,15 @@ public class VehicleTrackersWindow extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         //fuel warranties mods drag
+        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
         this.motoGarageNotebookEngine.setFuelEntriesEnabled(this.fuelEntriesCheckBox.isSelected());
+        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
         this.motoGarageNotebookEngine.setWarrantiesEnabled(this.warrantiesCheckBox.isSelected());
+        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
         this.motoGarageNotebookEngine.setModificationsEnabled(this.modificationsCheckBox.isSelected());
+        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
         this.motoGarageNotebookEngine.setDragStripSlipsEnabled(this.dragStripSlipsCheckBox.isSelected());
+        
         this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 

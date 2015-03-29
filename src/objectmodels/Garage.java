@@ -13,6 +13,7 @@ public class Garage implements Serializable{
     private Boolean warrantiesEnabled = false;
     private Boolean modificationsEnabled = false;
     private Boolean dragStripSlipsEnabled= false;
+    private Boolean vehicleTrackersChanged =true;
     
     // "current" or selected mechanic, customer, vehicle
     private Mechanic currentMechanic=null;
@@ -28,6 +29,14 @@ public class Garage implements Serializable{
     
     // current object manipulation methods
    
+    public void setVehicleTrackersChanged(Boolean incomingBoolean){
+        this.vehicleTrackersChanged = incomingBoolean;
+    }
+    
+    public Boolean getVehicleTrackersChanged(){
+        return this.vehicleTrackersChanged;
+    }
+    
     public void setFuelEntriesEnabled(Boolean incomingBoolean){
         this.fuelEntriesEnabled = incomingBoolean;
     }

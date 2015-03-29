@@ -714,6 +714,9 @@
                       <Image iconType="3" name="/dragStripSlip32x32ADD.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dragStripSlipAddButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="dragStripSlipEditButton">
                   <Properties>
@@ -721,6 +724,9 @@
                       <Image iconType="3" name="/dragStripSlip32x32EDIT.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dragStripSlipEditButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="dragStripSlipDeleteButton">
                   <Properties>
@@ -728,6 +734,9 @@
                       <Image iconType="3" name="/dragStripSlip32x32DELETE.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dragStripSlipDeleteButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

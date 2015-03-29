@@ -185,14 +185,11 @@ public class WarrantyWindow extends javax.swing.JFrame {
 
     private void addOrUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrUpdateButtonActionPerformed
         // TODO add your handling code here:
-        if(this.addWarranty){
-            
-            Warranty newWarranty = new Warranty(this.partTextField.getText(), this.dateTextField.getText(), 
+        Warranty newWarranty = new Warranty(this.partTextField.getText(), this.dateTextField.getText(), 
             this.durationTextField.getText(),this.descriptionTextField.getText(), Float.parseFloat(this.costTextField.getText()));
+        if(this.addWarranty){
             this.mechanicsNotebookEngine.addWarranty(newWarranty);
         }else{
-            Warranty newWarranty = new Warranty(this.partTextField.getText(), this.dateTextField.getText(), 
-            this.durationTextField.getText(),this.descriptionTextField.getText(), Float.parseFloat(this.costTextField.getText())); 
             this.mechanicsNotebookEngine.editWarranty(this.originalWarranty, newWarranty);
         }
         this.dispose();

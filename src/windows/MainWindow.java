@@ -194,29 +194,34 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void refreshVehicleTrackers(){
-        Boolean fuelEntries = this.motoGarageNotebookEngine.getFuelEntriesEnabled();
-        Boolean warranties = this.motoGarageNotebookEngine.getWarrantiesEnabled();
-        Boolean modifications = this.motoGarageNotebookEngine.getModificationsEnabled();
-        Boolean dragStripSlips = this.motoGarageNotebookEngine.getDragStripSlipsEnabled();
-        if(fuelEntries){
-            this.mainTabbedPane.addTab("Fuel Entries", fuelEntriesPanel);
-        }else{
-            this.mainTabbedPane.remove(fuelEntriesPanel);
-        }
-        if(warranties){
-            this.mainTabbedPane.addTab("Warranties", vehicleWarrantiesPanel);
-        }else{
-            this.mainTabbedPane.remove(vehicleWarrantiesPanel);
-        }
-        if(modifications){
-            this.mainTabbedPane.addTab("Modifications", modificationsPanel);
-        }else{
-            this.mainTabbedPane.remove(modificationsPanel);
-        }
-        if(dragStripSlips){
-            this.mainTabbedPane.addTab("Drag Strip Slips", dragStripSlipsPanel);
-        }else{
-            this.mainTabbedPane.remove(dragStripSlipsPanel);
+        if(this.motoGarageNotebookEngine.getVehicleTrackersChanged()){
+            
+        
+            Boolean fuelEntries = this.motoGarageNotebookEngine.getFuelEntriesEnabled();
+            Boolean warranties = this.motoGarageNotebookEngine.getWarrantiesEnabled();
+            Boolean modifications = this.motoGarageNotebookEngine.getModificationsEnabled();
+            Boolean dragStripSlips = this.motoGarageNotebookEngine.getDragStripSlipsEnabled();
+            if(fuelEntries){
+                this.mainTabbedPane.addTab("Fuel Entries", fuelEntriesPanel);
+            }else{
+                this.mainTabbedPane.remove(fuelEntriesPanel);
+            }
+            if(warranties){
+                this.mainTabbedPane.addTab("Warranties", vehicleWarrantiesPanel);
+            }else{
+                this.mainTabbedPane.remove(vehicleWarrantiesPanel);
+            }
+            if(modifications){
+                this.mainTabbedPane.addTab("Modifications", modificationsPanel);
+            }else{
+                this.mainTabbedPane.remove(modificationsPanel);
+            }
+            if(dragStripSlips){
+                this.mainTabbedPane.addTab("Drag Strip Slips", dragStripSlipsPanel);
+            }else{
+                this.mainTabbedPane.remove(dragStripSlipsPanel);
+            }
+            this.motoGarageNotebookEngine.setVehicleTrackersChanged(false);
         }
     }
 
@@ -254,7 +259,6 @@ public class MainWindow extends javax.swing.JFrame {
             dragStripSlipEditButton.setEnabled(false);
             dragStripSlipDeleteButton.setEnabled(false);
         }
-        
     }
     
     private void refreshModifications(){
@@ -1125,12 +1129,27 @@ public class MainWindow extends javax.swing.JFrame {
         dragStripSlipToolBar.setFloatable(false);
 
         dragStripSlipAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32ADD.png"))); // NOI18N
+        dragStripSlipAddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dragStripSlipAddButtonActionPerformed(evt);
+            }
+        });
         dragStripSlipToolBar.add(dragStripSlipAddButton);
 
         dragStripSlipEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32EDIT.png"))); // NOI18N
+        dragStripSlipEditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dragStripSlipEditButtonActionPerformed(evt);
+            }
+        });
         dragStripSlipToolBar.add(dragStripSlipEditButton);
 
         dragStripSlipDeleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32DELETE.png"))); // NOI18N
+        dragStripSlipDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dragStripSlipDeleteButtonActionPerformed(evt);
+            }
+        });
         dragStripSlipToolBar.add(dragStripSlipDeleteButton);
 
         javax.swing.GroupLayout dragStripSlipsPanelLayout = new javax.swing.GroupLayout(dragStripSlipsPanel);
@@ -2092,6 +2111,40 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.motoGarageNotebookEngine.startVehicleTrackersWindow();
     }//GEN-LAST:event_VehicleTrackersMenuItemActionPerformed
+
+    private void dragStripSlipAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dragStripSlipAddButtonActionPerformed
+        // TODO add your handling code here:
+
+        this.motoGarageNotebookEngine.startNewDragStripSlipWindow();
+    }//GEN-LAST:event_dragStripSlipAddButtonActionPerformed
+
+    private void dragStripSlipDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dragStripSlipDeleteButtonActionPerformed
+        // TODO add your handling code here:
+        int rowSelected = dragStripSlipsTable.getSelectedRow();        
+        if(rowSelected>-1){
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Drag Strip Slip? This is permanent!");
+            if(sureToDelete){
+                DragStripSlip[] currentDragStripSlips = this.motoGarageNotebookEngine.getCurrentVehicle().getDragStripSlipArray();
+                DragStripSlip selectedDragStripSlip = currentDragStripSlips[rowSelected]; 
+
+                this.motoGarageNotebookEngine.deleteDragStripSlip(selectedDragStripSlip);
+            }    
+        }else{
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Drag Strip Slip to Delete.");
+            }  
+    }//GEN-LAST:event_dragStripSlipDeleteButtonActionPerformed
+
+    private void dragStripSlipEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dragStripSlipEditButtonActionPerformed
+        // TODO add your handling code here:
+            int rowSelected = dragStripSlipsTable.getSelectedRow();
+            if(rowSelected>-1){
+                DragStripSlip[] currentDragStripSlips = this.motoGarageNotebookEngine.getCurrentVehicle().getDragStripSlipArray();
+                DragStripSlip selectedDragStripSlip = currentDragStripSlips[rowSelected];                
+                this.motoGarageNotebookEngine.startUpdateDragStripSlipWindow(selectedDragStripSlip);
+            }else{
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Drag Strip Slip to View / Update.");
+            } 
+    }//GEN-LAST:event_dragStripSlipEditButtonActionPerformed
 
     /**
      * @param args the command line arguments
