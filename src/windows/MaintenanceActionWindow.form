@@ -32,29 +32,21 @@
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="vehicleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="maintenanceTypeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="odometerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="mechanicLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="notesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="maintenanceTypeJComboBox" max="32767" attributes="0"/>
-                          <Component id="mechanicJComboBox" alignment="0" max="32767" attributes="0"/>
-                          <Component id="odometerTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="vehicleTextField" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
-                      <Component id="editMaintenaneActionLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="vehicleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceTypeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="odometerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="mechanicLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="notesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="maintenanceTypeJComboBox" max="32767" attributes="0"/>
+                  <Component id="mechanicJComboBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="odometerTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="vehicleTextField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
@@ -63,9 +55,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="editMaintenaneActionLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="vehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="vehicleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -179,10 +169,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="editMaintenaneActionLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Edit Maintenance Action"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

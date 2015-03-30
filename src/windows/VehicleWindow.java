@@ -53,7 +53,7 @@ public class VehicleWindow extends javax.swing.JFrame {
         initComponents();
         this.setIcon();
         this.createOrUpdateVehicleButton.setText("Update Vehicle");
-        this.setTitle("Update Vehicle");
+        this.setTitle("View / Update Vehicle");
         this.updateVehicle = true;
         
         this.vehicleModelTextField.setText(incomingVehicle.getModel());
@@ -71,7 +71,8 @@ public class VehicleWindow extends javax.swing.JFrame {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
 
     /**

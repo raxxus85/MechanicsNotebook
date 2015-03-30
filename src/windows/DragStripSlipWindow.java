@@ -29,6 +29,7 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         addDragStripSlip = true;
         this.addOrUpdateButton.setText("Add");
+        this.setTitle("Add Drag Strip Slip");
     }
     
     /**
@@ -40,7 +41,8 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         addDragStripSlip = false;
         this.originalDragStripSlip = incomingDragStripSlip;
-        this.addOrUpdateButton.setText("Update");
+        this.addOrUpdateButton.setText("Edit");
+        this.setTitle("View / Edit Drag Strip Slip");
         
         DateFormat dateInstance = SimpleDateFormat.getDateInstance();        
         this.timeTextField.setText(dateInstance.format(this.originalDragStripSlip.getDate()));
@@ -77,7 +79,6 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -101,8 +102,6 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-
-        jLabel1.setText("Drag Strip Slip");
 
         jLabel2.setText("Date");
 
@@ -141,10 +140,6 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
@@ -178,9 +173,7 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(timeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -291,7 +284,6 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField eighthMileSpeedTextField;
     private javax.swing.JTextField eighthMileTextField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

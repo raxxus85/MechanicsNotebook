@@ -68,7 +68,8 @@ public class CustomerWindow extends javax.swing.JFrame {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
 
     /**
@@ -80,7 +81,6 @@ public class CustomerWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        customerInformationLabel = new javax.swing.JLabel();
         customerFirstNameLabel = new javax.swing.JLabel();
         customerMiddleNameLabel = new javax.swing.JLabel();
         customerLastNameLabel = new javax.swing.JLabel();
@@ -98,8 +98,6 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-
-        customerInformationLabel.setText("Customer Information");
 
         customerFirstNameLabel.setText("First Name");
 
@@ -149,9 +147,7 @@ public class CustomerWindow extends javax.swing.JFrame {
                 .addComponent(newCustomerCancelButton)
                 .addContainerGap(216, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(customerInformationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(124, 411, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(54, 54, 54))
             .addGroup(layout.createSequentialGroup()
@@ -179,9 +175,7 @@ public class CustomerWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerInformationLabel)
-                    .addComponent(jLabel1))
+                .addComponent(jLabel1)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -327,7 +321,6 @@ public class CustomerWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea customerDescriptionTextArea;
     private javax.swing.JLabel customerFirstNameLabel;
     private javax.swing.JTextField customerFirstNameTextField;
-    private javax.swing.JLabel customerInformationLabel;
     private javax.swing.JLabel customerLastNameLabel;
     private javax.swing.JTextField customerLastNameTextField;
     private javax.swing.JLabel customerMiddleNameLabel;

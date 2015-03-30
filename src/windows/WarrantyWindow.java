@@ -27,6 +27,7 @@ public class WarrantyWindow extends javax.swing.JFrame {
         this.setIcon();
         addWarranty=true;
         this.addOrUpdateButton.setText("Create Warranty");
+        this.setTitle("Create Warranty");
     }
     
     /**
@@ -38,6 +39,7 @@ public class WarrantyWindow extends javax.swing.JFrame {
         this.setIcon();
         addWarranty = false;
         this.addOrUpdateButton.setText("Update Warranty");
+        this.setTitle("View / Update Warranty");
         originalWarranty=incomingWarranty;
         
         this.partTextField.setText(incomingWarranty.getPartName());

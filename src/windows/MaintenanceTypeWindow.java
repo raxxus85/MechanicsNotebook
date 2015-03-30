@@ -58,7 +58,8 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
 
     /**
@@ -70,31 +71,19 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        maintenanceTypeLabel = new javax.swing.JLabel();
-        maintenanceTypeNameLabel = new javax.swing.JLabel();
+        createOrUpdateMaintenanceTypeButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         maintenanceTypeNameTextField = new javax.swing.JTextField();
-        maintenanceTypeIntervalLabel = new javax.swing.JLabel();
-        maintenanceTypeDescriptionLabel = new javax.swing.JLabel();
+        maintenanceTypeNameLabel = new javax.swing.JLabel();
         maintenanceTypeIntervalTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         maintenanceTypeDescriptionTextArea = new javax.swing.JTextArea();
-        createOrUpdateMaintenanceTypeButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        maintenanceTypeIntervalLabel = new javax.swing.JLabel();
+        maintenanceTypeDescriptionLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-
-        maintenanceTypeLabel.setText("Maintenance Type");
-
-        maintenanceTypeNameLabel.setText("Type Name");
-
-        maintenanceTypeIntervalLabel.setText("Recommended Interval");
-
-        maintenanceTypeDescriptionLabel.setText("Description");
-
-        maintenanceTypeDescriptionTextArea.setColumns(20);
-        maintenanceTypeDescriptionTextArea.setRows(5);
-        jScrollPane1.setViewportView(maintenanceTypeDescriptionTextArea);
 
         createOrUpdateMaintenanceTypeButton.setText("Create Maintenance Type");
         createOrUpdateMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -110,56 +99,80 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        maintenanceTypeNameLabel.setText("Type Name");
+
+        maintenanceTypeDescriptionTextArea.setColumns(20);
+        maintenanceTypeDescriptionTextArea.setRows(5);
+        jScrollPane1.setViewportView(maintenanceTypeDescriptionTextArea);
+
+        maintenanceTypeIntervalLabel.setText("Recommended Interval");
+
+        maintenanceTypeDescriptionLabel.setText("Description");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(maintenanceTypeIntervalLabel)
+                    .addComponent(maintenanceTypeDescriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(maintenanceTypeNameLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(maintenanceTypeNameTextField)
+                    .addComponent(maintenanceTypeIntervalTextField)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maintenanceTypeNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maintenanceTypeNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maintenanceTypeIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maintenanceTypeIntervalLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(maintenanceTypeDescriptionLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(maintenanceTypeLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(createOrUpdateMaintenanceTypeButton)
+                .addGap(60, 60, 60)
+                .addComponent(cancelButton)
+                .addContainerGap(94, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(createOrUpdateMaintenanceTypeButton)
-                    .addComponent(maintenanceTypeIntervalLabel)
-                    .addComponent(maintenanceTypeNameLabel)
-                    .addComponent(maintenanceTypeDescriptionLabel))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(maintenanceTypeNameTextField)
-                            .addComponent(maintenanceTypeIntervalTextField))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(cancelButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(11, 11, 11))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(maintenanceTypeLabel)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maintenanceTypeNameLabel)
-                    .addComponent(maintenanceTypeNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maintenanceTypeIntervalLabel)
-                    .addComponent(maintenanceTypeIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maintenanceTypeDescriptionLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createOrUpdateMaintenanceTypeButton)
                     .addComponent(cancelButton))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,12 +251,12 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton createOrUpdateMaintenanceTypeButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel maintenanceTypeDescriptionLabel;
     private javax.swing.JTextArea maintenanceTypeDescriptionTextArea;
     private javax.swing.JLabel maintenanceTypeIntervalLabel;
     private javax.swing.JTextField maintenanceTypeIntervalTextField;
-    private javax.swing.JLabel maintenanceTypeLabel;
     private javax.swing.JLabel maintenanceTypeNameLabel;
     private javax.swing.JTextField maintenanceTypeNameTextField;
     // End of variables declaration//GEN-END:variables

@@ -28,6 +28,7 @@ public class ModificationWindow extends javax.swing.JFrame {
         this.setIcon();
         addModification=true;
         this.addOrUpdateButton.setText("Create Modification");
+        this.setTitle("Create Modification");
     }
     
     /**
@@ -38,7 +39,8 @@ public class ModificationWindow extends javax.swing.JFrame {
         initComponents();
         this.setIcon();
         addModification = false;
-        this.addOrUpdateButton.setText("Update Modification");
+        this.addOrUpdateButton.setText("Edit Modification");
+        this.setTitle("View / Edit Modification");
         originalModification=incomingModification;
         
         this.partTextField.setText(incomingModification.getPartName());
@@ -67,7 +69,6 @@ public class ModificationWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        modificationLabel = new javax.swing.JLabel();
         partLabel = new javax.swing.JLabel();
         datePurchasedLabel = new javax.swing.JLabel();
         warrantyDurationLabel = new javax.swing.JLabel();
@@ -83,8 +84,6 @@ public class ModificationWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-
-        modificationLabel.setText("Modification");
 
         partLabel.setText("Part");
 
@@ -117,10 +116,6 @@ public class ModificationWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(modificationLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(partLabel)
@@ -145,9 +140,7 @@ public class ModificationWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(modificationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(partLabel)
                     .addComponent(partTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -243,7 +236,6 @@ public class ModificationWindow extends javax.swing.JFrame {
     private javax.swing.JTextField datePurchasedTextField;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JTextField descriptionTextField;
-    private javax.swing.JLabel modificationLabel;
     private javax.swing.JLabel partLabel;
     private javax.swing.JTextField partTextField;
     private javax.swing.JLabel warrantyDurationLabel;

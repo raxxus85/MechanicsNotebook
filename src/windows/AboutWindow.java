@@ -19,11 +19,13 @@ public class AboutWindow extends javax.swing.JFrame {
     public AboutWindow() {
         initComponents();
         this.setIcon();
-        this.getContentPane().setBackground(Color.black);
+        //this.getContentPane().setBackground(Color.black);
+        this.setTitle("About");
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
 
     /**

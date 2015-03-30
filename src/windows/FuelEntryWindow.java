@@ -26,6 +26,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.addOrUpdateButton.setText("Add Fuel Entry");
+        this.setTitle("Add Fuel Entry");
         this.setIcon();
         addFuelEntryBoolean = true;
     }
@@ -37,7 +38,8 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         this.originalFuelEntry = incomingFuelEntry;
         initComponents();
-        this.addOrUpdateButton.setText("Update Fuel Entry");
+        this.addOrUpdateButton.setText("Edit Fuel Entry");
+        this.setTitle("View / Edit Fuel Entry");
         this.setIcon();
         
         this.odometerTextField.setText(incomingFuelEntry.getOdometer().toString());
@@ -67,7 +69,6 @@ public class FuelEntryWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         odometerLabel = new javax.swing.JLabel();
         gallonsLabel = new javax.swing.JLabel();
         costPerGallonLabel = new javax.swing.JLabel();
@@ -79,8 +80,6 @@ public class FuelEntryWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-
-        jLabel1.setText("Fuel Entry");
 
         odometerLabel.setText("Odometer");
 
@@ -107,40 +106,31 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addOrUpdateButton)
+                    .addComponent(costPerGallonLabel)
+                    .addComponent(gallonsLabel)
+                    .addComponent(odometerLabel))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(costPerGallonLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(gallonsLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(odometerLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(odometerTextField)
-                                    .addComponent(gallonsTextField)
-                                    .addComponent(costPerGallonTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(addOrUpdateButton)))))
-                .addContainerGap(141, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(cancelButton)
-                .addGap(91, 91, 91))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(odometerTextField)
+                            .addComponent(gallonsTextField)
+                            .addComponent(costPerGallonTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addContainerGap(74, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancelButton)
+                        .addGap(89, 89, 89))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(odometerLabel)
                             .addComponent(odometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -151,11 +141,11 @@ public class FuelEntryWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(costPerGallonLabel)
                     .addComponent(costPerGallonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
-                    .addComponent(addOrUpdateButton))
-                .addGap(54, 54, 54))
+                    .addComponent(addOrUpdateButton)
+                    .addComponent(cancelButton))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,7 +223,6 @@ public class FuelEntryWindow extends javax.swing.JFrame {
     private javax.swing.JTextField costPerGallonTextField;
     private javax.swing.JLabel gallonsLabel;
     private javax.swing.JTextField gallonsTextField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel odometerLabel;
     private javax.swing.JTextField odometerTextField;
     // End of variables declaration//GEN-END:variables

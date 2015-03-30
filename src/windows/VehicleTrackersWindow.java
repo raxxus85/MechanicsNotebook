@@ -23,7 +23,7 @@ public class VehicleTrackersWindow extends javax.swing.JFrame {
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         initComponents();
         this.setIcon();
-        
+        this.setTitle("Vehicle Trackers");
 
         this.fuelEntriesCheckBox.setSelected(this.motoGarageNotebookEngine.getFuelEntriesEnabled());
         this.warrantiesCheckBox.setSelected(this.motoGarageNotebookEngine.getWarrantiesEnabled());
@@ -54,7 +54,6 @@ public class VehicleTrackersWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -71,8 +70,6 @@ public class VehicleTrackersWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Edit Vehicle Trackers");
         setResizable(false);
-
-        jLabel1.setText("Vehicle Trackers");
 
         jLabel2.setText("Fuel Entries");
 
@@ -105,61 +102,56 @@ public class VehicleTrackersWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(saveButton)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(maintenanceTasksCheckBox))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fuelEntriesCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(warrantiesCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(modificationsCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dragStripSlipsCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cancelButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jLabel4)
+                            .addComponent(saveButton))
+                        .addGap(3, 3, 3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(maintenanceTasksCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fuelEntriesCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(warrantiesCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(modificationsCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dragStripSlipsCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel6))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addComponent(maintenanceTasksCheckBox))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fuelEntriesCheckBox, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel2)
+                    .addComponent(fuelEntriesCheckBox))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(warrantiesCheckBox, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel3)
+                    .addComponent(warrantiesCheckBox))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(modificationsCheckBox, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel4)
+                    .addComponent(modificationsCheckBox))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dragStripSlipsCheckBox, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel5)
+                    .addComponent(dragStripSlipsCheckBox))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saveButton)
                     .addComponent(cancelButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,7 +217,6 @@ public class VehicleTrackersWindow extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JCheckBox dragStripSlipsCheckBox;
     private javax.swing.JCheckBox fuelEntriesCheckBox;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

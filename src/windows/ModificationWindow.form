@@ -27,11 +27,6 @@
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
-                      <Component id="modificationLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="partLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -63,9 +58,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="modificationLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="partLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="partTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -101,11 +94,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="modificationLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Modification"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="partLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Part"/>

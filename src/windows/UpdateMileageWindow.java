@@ -29,11 +29,13 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
+        this.setTitle("Update Vehicle Mileage");
         this.updateMileageTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
 
     /**
@@ -45,7 +47,6 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        updateVehicleMileageLabel = new javax.swing.JLabel();
         updateMileageLabel = new javax.swing.JLabel();
         updateMileageTextField = new javax.swing.JTextField();
         updateMileageButton = new javax.swing.JButton();
@@ -53,8 +54,6 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-
-        updateVehicleMileageLabel.setText("Update Vehicle Mileage");
 
         updateMileageLabel.setText("Mileage");
 
@@ -77,29 +76,22 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(updateVehicleMileageLabel))
+                        .addComponent(updateMileageLabel)
+                        .addGap(66, 66, 66)
+                        .addComponent(updateMileageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(updateMileageLabel)
-                                .addGap(66, 66, 66)
-                                .addComponent(updateMileageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(updateMileageButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                                .addComponent(updateMileageCancelButton)))))
+                        .addComponent(updateMileageButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(updateMileageCancelButton)))
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(updateVehicleMileageLabel)
-                .addGap(7, 7, 7)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateMileageLabel)
                     .addComponent(updateMileageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,6 +164,5 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
     private javax.swing.JButton updateMileageCancelButton;
     private javax.swing.JLabel updateMileageLabel;
     private javax.swing.JTextField updateMileageTextField;
-    private javax.swing.JLabel updateVehicleMileageLabel;
     // End of variables declaration//GEN-END:variables
 }
