@@ -1,18 +1,39 @@
 package objectmodels;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
  * @author Mark
  */
 public class MaintenanceAction implements Serializable{
+    private Mechanic mechanic;
     private Vehicle vehicle;
     private MaintenanceType maintenanceType;
     private Integer odometer;
+    private Date date;
     private String notes;
-    private Mechanic mechanic;
-    // private DATE???
+    
+    /**
+     * Main constructor
+     * @param incomingMechanic
+     * @param incomingVehicle
+     * @param incomingMaintenanceType
+     * @param incomingOdometer
+     * @param incomingDate
+     * @param incomingNotes 
+     */
+    public MaintenanceAction(Mechanic incomingMechanic, Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer, Date incomingDate, String incomingNotes){
+        this.mechanic = incomingMechanic;
+        this.vehicle = incomingVehicle;
+        this.maintenanceType = incomingMaintenanceType;
+        this.odometer = incomingOdometer;
+        this.date = incomingDate;
+        this.notes = incomingNotes;
+    }
     
     /**
      * Main constructor
@@ -21,26 +42,20 @@ public class MaintenanceAction implements Serializable{
      * @param incomingOdometer
      * @param incomingNotes 
      */
-    public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer, String incomingNotes){
-        this.mechanic = incomingMechanic;
-        this.vehicle=incomingVehicle;
-        this.maintenanceType = incomingMaintenanceType;
-        this.odometer = incomingOdometer;
-        this.notes = incomingNotes;
-    }
+    //public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer, String incomingNotes){
+    //    this(incomingMechanic,incomingVehicle,incomingMaintenanceType,incomingOdometer, null, incomingNotes);
+    //}
     
     /**
      * Second constructor, when not supplying "notes" for action
+     * @param incomingMechanic
      * @param incomingVehicle
      * @param incomingMaintenanceType
      * @param incomingOdometer 
+     * @param incomingDate 
      */
-    public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer){
-        this.mechanic = incomingMechanic;
-        this.vehicle=incomingVehicle;
-        this.maintenanceType = incomingMaintenanceType;
-        this.odometer = incomingOdometer;
-        this.notes = "";
+    public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer, Date incomingDate){
+        this(incomingMechanic,incomingVehicle,incomingMaintenanceType,incomingOdometer, incomingDate, "");
     }
     
     /**
@@ -48,8 +63,17 @@ public class MaintenanceAction implements Serializable{
      * @return 
      */
     public Object[] getMaintenaceActionObject(){
-        String[] stringArray = {this.odometer.toString(),this.maintenanceType.toString(), this.notes, this.mechanic.toString()};
+        DateFormat dateInstance = SimpleDateFormat.getDateInstance();
+        String[] stringArray = {this.odometer.toString(), dateInstance.format(this.date),this.maintenanceType.toString(), this.notes, this.mechanic.toString()};
         return stringArray;
+    }
+    
+    public void setDate(Date incomingDate){
+        this.date = incomingDate;
+    }
+    
+    public Date getDate(){
+        return this.date;
     }
     
     public Mechanic getMechanic(){

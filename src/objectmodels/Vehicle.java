@@ -55,6 +55,7 @@ public class Vehicle implements Serializable{
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setMechanic(updatedMaintenanceAction.getMechanic());
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setNotes(updatedMaintenanceAction.getNotes());
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setOdometer(updatedMaintenanceAction.getOdometer());
+        this.maintenanceActions.get(indexOfExistingMaintenanceAction).setDate(updatedMaintenanceAction.getDate());
         this.maintenanceActions.get(indexOfExistingMaintenanceAction).setVehicle(updatedMaintenanceAction.getVehicle());
         
     }
@@ -63,6 +64,7 @@ public class Vehicle implements Serializable{
         int indexOfExistingFuelEntry = this.fuelEntries.indexOf(existingFuelEntry);
         //MaintenanceAction tempMaintenanceAction = this.maintenanceActions.get(indexOfExistingMaintenanceAction);
         this.fuelEntries.get(indexOfExistingFuelEntry).setOdometer(updatedFuelEntry.getOdometer());
+        this.fuelEntries.get(indexOfExistingFuelEntry).setDate(updatedFuelEntry.getDate());
         this.fuelEntries.get(indexOfExistingFuelEntry).setGallons(updatedFuelEntry.getGallons());
         this.fuelEntries.get(indexOfExistingFuelEntry).setCostPerGallon(updatedFuelEntry.getCostPerGallon());
     }

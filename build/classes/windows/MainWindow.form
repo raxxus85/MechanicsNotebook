@@ -118,6 +118,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="mainToolBar" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -139,7 +140,7 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
-          <Component id="mainToolBar" max="32767" attributes="0"/>
+          <Component id="mainWindowStatusBar" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -147,10 +148,10 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="mainToolBar" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="currentCustomerPanel" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="currentCustomerPanel" alignment="0" max="32767" attributes="0"/>
                   <Component id="currentMechanicPanel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="currentVehiclePanel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="currentVehiclePanel" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -164,6 +165,7 @@
                   <Component id="mainTabbedPane" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="mainWindowStatusBar" pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -199,7 +201,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="maintenanceActionsToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane6" pref="501" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" pref="498" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -215,7 +217,7 @@
                 <Component class="javax.swing.JTable" name="maintenanceActionsTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="maintenanceActionsTable.setOpaque(true);&#xa;maintenanceActionsTable.setFillsViewportHeight(true);&#xa;maintenanceActionsTable.setBackground(Color.WHITE);&#xa;//maintenanceActionsTable.getColumnModel().getColumn(0).setMaxWidth(80);">
-                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;Odometer&quot;, &quot;Maintenance Type&quot;, &quot;Notes&quot;, &quot;Performed By&quot;&#xa;    }&#xa;)" type="code"/>
+                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Odometer&quot;, &quot;Date&quot;,&quot;Maintenance Type&quot;, &quot;Notes&quot;, &quot;Performed By&quot;&#xa;    }&#xa;)" type="code"/>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
@@ -306,29 +308,6 @@
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="deleteMaintenanceActionButtonToolBar.setToolTipText(&quot;Delete Maintenance Action&quot;);"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JSeparator" name="jSeparator1">
-                  <Properties>
-                    <Property name="orientation" type="int" value="1"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jSeparator1.setBorder(compound);&#xa;&#xa;Dimension size = new Dimension(&#xa;    2,&#xa;    jSeparator1.getMaximumSize().height);&#xa;jSeparator1.setMaximumSize(size);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="updateOdometerActionButtonToolBar">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/odometer32x32ADD.png"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateOdometerActionButtonToolBarActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionUpdateOdometerActionToolBar)"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource(&quot;/odometer32x32ADD.png&quot;));&#xa;Action actionUpdateOdometerActionToolBar = new AbstractAction(&quot;New&quot;, updateOdometerActionToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;ODOMETER UPDATE&quot;);&#xa;      }&#xa;    };"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="updateOdometerActionButtonToolBar.setToolTipText(&quot;Update Odometer&quot;);"/>
-                  </AuxValues>
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -359,7 +338,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fuelEntryToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" pref="501" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="498" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -375,7 +354,7 @@
                 <Component class="javax.swing.JTable" name="fuelEntriesTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Odometer&quot;, &quot;Gallons&quot;, &quot;Cost Per Gallon&quot;,&quot;Total Cost&quot;&#xa;    }&#xa;)" type="code"/>
+                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Odometer&quot;, &quot;Date&quot;,&quot;Gallons&quot;, &quot;Cost Per Gallon&quot;,&quot;Total Cost&quot;&#xa;    }&#xa;)" type="code"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -463,7 +442,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="warrantyEntryToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="501" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="498" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -569,7 +548,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="modificationEntryToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="501" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="498" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -673,7 +652,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dragStripSlipToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane5" pref="501" max="32767" attributes="0"/>
+                      <Component id="jScrollPane5" pref="498" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -795,6 +774,23 @@
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="exportGarageButton.setToolTipText(&quot;Export Garage&quot;);"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
+        </Component>
+        <Component class="javax.swing.JButton" name="updateOdometerActionButtonToolBar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/odometer32x32ADD.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateOdometerActionButtonToolBarActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionUpdateOdometerActionToolBar)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource(&quot;/odometer32x32ADD.png&quot;));&#xa;Action actionUpdateOdometerActionToolBar = new AbstractAction(&quot;New&quot;, updateOdometerActionToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;ODOMETER UPDATE&quot;);&#xa;      }&#xa;    };"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="updateOdometerActionButtonToolBar.setToolTipText(&quot;Update Odometer&quot;);"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JButton" name="addMaintenanceActionButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -813,7 +809,7 @@
         <Component class="javax.swing.JButton" name="maintenanceAlertButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/maintenanceAction32x32ALERTNONE.png"/>
+              <Image iconType="3" name="/maintenanceAction32x32ALERT.png"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -826,6 +822,9 @@
               <Image iconType="3" name="/fuelEntry32x32ADD.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fuelEntryMainToolBarAddButtonActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="fuelEntryMainToolBarAddButton.setToolTipText(&quot;Add Fuel Entry&quot;);"/>
           </AuxValues>
@@ -839,6 +838,8 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="graphsButton.setToolTipText(&quot;Vehicle Information Graphs&quot;);"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
         </Component>
         <Component class="javax.swing.JButton" name="helpButton">
           <Properties>
@@ -882,12 +883,10 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="1" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="36" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane3" min="-2" pref="141" max="-2" attributes="0"/>
-                      <Component id="mechanicToolBar" min="-2" pref="134" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="mechanicToolBar" min="-2" pref="134" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
               </Group>
+              <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -1005,7 +1004,11 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Customers"/>
+            <TitledBorder title="Customers">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -1025,13 +1028,11 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
+                  <Component id="customerToolBar" min="-2" pref="138" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="customerToolBar" pref="138" max="32767" attributes="0"/>
-                      <Component id="jScrollPane7" pref="0" max="32767" attributes="0"/>
-                  </Group>
               </Group>
+              <Component id="jScrollPane7" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -1148,7 +1149,11 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Vehicles"/>
+            <TitledBorder title="Vehicles">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -1168,13 +1173,8 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane8" pref="135" max="32767" attributes="0"/>
-                      <Component id="vehicleToolBar" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="jScrollPane8" pref="160" max="32767" attributes="0"/>
+              <Component id="vehicleToolBar" pref="160" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -1290,8 +1290,12 @@
     <Container class="javax.swing.JPanel" name="currentVehiclePanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-            <BevelBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Selected Vehicle">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -1306,16 +1310,10 @@
                   <Component id="vehiclePictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="vehicleNameLabel" pref="194" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="currentVehicleLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="currentVehicleOdometerLabel" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="vehicleNameLabel" pref="194" max="32767" attributes="0"/>
+                      <Component id="currentVehicleOdometerLabel" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1324,12 +1322,9 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="currentVehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="currentVehicleOdometerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="vehicleNameLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="currentVehicleOdometerLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="vehiclePictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
@@ -1343,11 +1338,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="currentVehicleLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Vehicle"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="vehicleNameLabel">
           <Properties>
@@ -1364,8 +1354,12 @@
     <Container class="javax.swing.JPanel" name="currentCustomerPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-            <BevelBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Selected Customer">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -1379,27 +1373,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="customerPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="customerNameLabel" pref="194" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="customerNameLabel" pref="194" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Component id="currentCustomerLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
-              </Group>
               <Component id="customerPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -1414,18 +1396,17 @@
             <Property name="text" type="java.lang.String" value="No Customer Selected"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="currentCustomerLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Customer"/>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="currentMechanicPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-            <BevelBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Selected Mechanic">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -1439,26 +1420,14 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="mechanicPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="currentMechanicLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="mechanicNameLabel" min="-2" pref="194" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="mechanicNameLabel" min="-2" pref="194" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="currentMechanicLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="mechanicNameLabel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="mechanicPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="mechanicPictureLabel" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="mechanicNameLabel" min="-2" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -1473,12 +1442,9 @@
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="currentMechanicLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Mechanic"/>
-          </Properties>
-        </Component>
       </SubComponents>
+    </Container>
+    <Container class="org.jdesktop.swingx.JXStatusBar" name="mainWindowStatusBar">
     </Container>
   </SubComponents>
 </Form>

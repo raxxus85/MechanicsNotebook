@@ -24,6 +24,8 @@ import objectmodels.Modification;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
 import windows.AboutWindow;
+//import windows.MainWindow;
+//import windows.MainWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
@@ -130,6 +132,8 @@ public class MotoGarageNotebookEngine {
             Object object = objectInputStream.readObject();
             Garage garage = (Garage)object;
             this.currentGarage = garage;
+            // do this step to ensure vehicle trackers get displayed
+            this.currentGarage.setVehicleTrackersChanged(true);
             this.mainWindow.refresh();
             System.out.println("ATTEMPTING TO OPEN.." + pathOfFileToOpen);
             

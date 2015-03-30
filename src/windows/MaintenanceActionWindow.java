@@ -7,6 +7,9 @@ package windows;
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Mechanic;
@@ -39,7 +42,7 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         // Update Fields
         this.vehicleTextField.setText(incomingMaintenanceAction.getVehicle().toString());
         this.odometerTextField.setText(incomingMaintenanceAction.getOdometer().toString());
-        this.notesTextArea.setText(incomingMaintenanceAction.getNotes().toString()); 
+        this.notesTextArea.setText(incomingMaintenanceAction.getNotes()); 
         
         // maintenance type
         MaintenanceType currentMaintenanceType = incomingMaintenanceAction.getMaintenanceType();
@@ -50,6 +53,9 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         Mechanic currentMechanic = incomingMaintenanceAction.getMechanic();
         this.mechanicJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMechanicArray()));
         this.mechanicJComboBox.setSelectedItem(currentMechanic);
+        
+        // date
+        this.datePerformedDatePicker.setDate(incomingMaintenanceAction.getDate());
     }
     
     private void setIcon(){
@@ -68,17 +74,20 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
 
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
-        vehicleLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         vehicleTextField = new javax.swing.JTextField();
-        maintenanceTypeLabel = new javax.swing.JLabel();
-        odometerLabel = new javax.swing.JLabel();
-        odometerTextField = new javax.swing.JTextField();
-        mechanicLabel = new javax.swing.JLabel();
+        vehicleLabel = new javax.swing.JLabel();
         mechanicJComboBox = new javax.swing.JComboBox();
         maintenanceTypeJComboBox = new javax.swing.JComboBox();
-        notesLabel = new javax.swing.JLabel();
+        odometerTextField = new javax.swing.JTextField();
+        mechanicLabel = new javax.swing.JLabel();
+        maintenanceTypeLabel = new javax.swing.JLabel();
+        odometerLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        datePerformedDatePicker = new org.jdesktop.swingx.JXDatePicker();
         jScrollPane1 = new javax.swing.JScrollPane();
         notesTextArea = new javax.swing.JTextArea();
+        notesLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -97,82 +106,107 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
             }
         });
 
-        vehicleLabel.setText("Vehicle");
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         vehicleTextField.setEditable(false);
         vehicleTextField.setFocusable(false);
 
-        maintenanceTypeLabel.setText("Maintenance Type");
-
-        odometerLabel.setText("Odometer");
-
-        mechanicLabel.setText("Mechanic");
+        vehicleLabel.setText("Vehicle");
 
         mechanicJComboBox.setModel(new javax.swing.DefaultComboBoxModel());
 
         maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel());
 
-        notesLabel.setText("Notes");
+        mechanicLabel.setText("Mechanic");
+
+        maintenanceTypeLabel.setText("Maintenance Type");
+
+        odometerLabel.setText("Odometer");
+
+        jLabel1.setText("Date Performed");
 
         notesTextArea.setColumns(20);
         notesTextArea.setRows(5);
         jScrollPane1.setViewportView(notesTextArea);
 
+        notesLabel.setText("Notes");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(vehicleLabel)
+                    .addComponent(mechanicLabel)
+                    .addComponent(maintenanceTypeLabel)
+                    .addComponent(odometerLabel)
+                    .addComponent(notesLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(odometerTextField)
+                    .addComponent(maintenanceTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mechanicJComboBox, 0, 185, Short.MAX_VALUE)
+                    .addComponent(vehicleTextField)
+                    .addComponent(datePerformedDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(vehicleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vehicleLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mechanicJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mechanicLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maintenanceTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maintenanceTypeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(odometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(odometerLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(datePerformedDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(notesLabel))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cancelButton)
-                .addGap(66, 66, 66))
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vehicleLabel)
-                    .addComponent(maintenanceTypeLabel)
-                    .addComponent(odometerLabel)
-                    .addComponent(mechanicLabel)
-                    .addComponent(notesLabel))
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(maintenanceTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mechanicJComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(odometerTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vehicleTextField))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(saveButton)
+                .addGap(90, 90, 90)
+                .addComponent(cancelButton))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(vehicleLabel)
-                    .addComponent(vehicleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maintenanceTypeLabel)
-                    .addComponent(maintenanceTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mechanicLabel)
-                    .addComponent(mechanicJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(odometerLabel)
-                    .addComponent(odometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(notesLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(saveButton))
-                .addGap(24, 24, 24))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,8 +224,11 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         MaintenanceType newMaintenanceType = (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem();
         Mechanic newMechanic = (Mechanic) this.mechanicJComboBox.getSelectedItem();
         Integer newOdometer = Integer.parseInt(this.odometerTextField.getText());
-        String newNotes = this.notesTextArea.getText().toString();
-        MaintenanceAction newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newMaintenanceType,newOdometer,newNotes );
+        String newNotes = this.notesTextArea.getText();
+        Date newDate = this.datePerformedDatePicker.getDate();
+
+        MaintenanceAction newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newMaintenanceType,newOdometer,newDate,newNotes );
+        
         this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
         if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
                 this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
@@ -238,6 +275,9 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private org.jdesktop.swingx.JXDatePicker datePerformedDatePicker;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox maintenanceTypeJComboBox;
     private javax.swing.JLabel maintenanceTypeLabel;

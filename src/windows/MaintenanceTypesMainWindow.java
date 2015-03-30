@@ -36,7 +36,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
-        this.setTitle("Edit Maintenance Types");
+        this.setTitle("Maintenance Types");
         this.refreshMaintenanceTypeTable();
     }
     
