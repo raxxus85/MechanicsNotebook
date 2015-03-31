@@ -6,6 +6,9 @@
 package objectmodels;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -14,12 +17,14 @@ import java.io.Serializable;
 public class FuelEntry implements Serializable{
     
     private Integer odometer;
+    private Date date;
     private Float gallons;
     private Float costPerGallon;
     
-    public FuelEntry(Integer incomingOdometer, Float incomingGallons, Float incomingCostPerGallon){
+    public FuelEntry(Integer incomingOdometer,Date incomingDate, Float incomingGallons, Float incomingCostPerGallon){
         
         this.odometer = incomingOdometer;
+        this.date = incomingDate;
         this.gallons = incomingGallons;
         this.costPerGallon = incomingCostPerGallon;
     }
@@ -29,11 +34,21 @@ public class FuelEntry implements Serializable{
      * @return 
      */
     public Object[] getFuelEntryObject(){
+        DateFormat dateInstance = SimpleDateFormat.getDateInstance();
+        
         Float totalFuelCost = this.gallons * this.costPerGallon;
         String totalFuelCostEdited = "$" + totalFuelCost.toString();
         String costPerGallonEdited = "$" +this.costPerGallon.toString();
-        String[] stringArray = {this.odometer.toString(),this.gallons.toString(), costPerGallonEdited,totalFuelCostEdited};
+        String[] stringArray = {this.odometer.toString(),dateInstance.format(this.date),this.gallons.toString(), costPerGallonEdited,totalFuelCostEdited};
         return stringArray;
+    }
+    
+    public void setDate(Date incomingDate){
+        this.date = incomingDate;
+    }
+    
+    public Date getDate(){
+        return this.date;
     }
     
     public void setOdometer(Integer incomingOdometer){

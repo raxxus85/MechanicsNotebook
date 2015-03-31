@@ -458,7 +458,7 @@
                 <Component class="javax.swing.JTable" name="warrantiesTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Part&quot;, &quot;Date Purchased&quot;, &quot;Warranty Duration&quot;, &quot;Description&quot;, &quot;Cost&quot;&#xa;    }&#xa;)" type="code"/>
+                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Part&quot;, &quot;Date&quot;, &quot;Warranty Duration&quot;, &quot;Description&quot;, &quot;Cost&quot;&#xa;    }&#xa;)" type="code"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -564,11 +564,11 @@
                 <Component class="javax.swing.JTable" name="modificationsTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Part&quot;, &quot;Date Purchased&quot;, &quot;Warranty Duration&quot;, &quot;Description&quot;,&quot;Cost&quot;&#xa;    }&#xa;)" type="code"/>
+                      <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Part&quot;, &quot;Date&quot;, &quot;Warranty Duration&quot;, &quot;Description&quot;,&quot;Cost&quot;&#xa;    }&#xa;)" type="code"/>
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="modificationsTable.setOpaque(true);&#xa;modificationsTable.setFillsViewportHeight(true);&#xa;modificationsTable.setBackground(Color.WHITE);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="modificationsTable.setOpaque(true);&#xa;modificationsTable.setFillsViewportHeight(true);&#xa;modificationsTable.setBackground(Color.WHITE);&#xa;modificationsTable.getColumnModel().getColumn(1).setMaxWidth(80);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -835,6 +835,9 @@
               <Image iconType="3" name="/graph32x32EDIT.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="graphsButtonActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="graphsButton.setToolTipText(&quot;Vehicle Information Graphs&quot;);"/>
           </AuxValues>

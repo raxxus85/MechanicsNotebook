@@ -73,7 +73,7 @@ public class Vehicle implements Serializable{
         int indexOfExistingWarranty = this.warranties.indexOf(existingWarranty);
 
         this.warranties.get(indexOfExistingWarranty).setPartName(updatedWarranty.getPartName());
-        this.warranties.get(indexOfExistingWarranty).setDatePurchased(updatedWarranty.getDatePurchased());
+        this.warranties.get(indexOfExistingWarranty).setDate(updatedWarranty.getDate());
         this.warranties.get(indexOfExistingWarranty).setWarrantyDuration(updatedWarranty.getWarrantyDuration());
         this.warranties.get(indexOfExistingWarranty).setDescription(updatedWarranty.getDescription());
         this.warranties.get(indexOfExistingWarranty).setCost(updatedWarranty.getCost());
@@ -124,7 +124,7 @@ public class Vehicle implements Serializable{
         int indexOfExistingModification = this.modifications.indexOf(existingModification);
 
         this.modifications.get(indexOfExistingModification).setPartName(updatedModification.getPartName());
-        this.modifications.get(indexOfExistingModification).setDatePurchased(updatedModification.getDatePurchased());
+        this.modifications.get(indexOfExistingModification).setDate(updatedModification.getDate());
         this.modifications.get(indexOfExistingModification).setWarrantyDuration(updatedModification.getWarrantyDuration());
         this.modifications.get(indexOfExistingModification).setDescription(updatedModification.getDescription());
         this.modifications.get(indexOfExistingModification).setCost(updatedModification.getCost());

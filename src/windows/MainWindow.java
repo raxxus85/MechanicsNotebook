@@ -301,6 +301,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void refreshWarranties(){
+        warrantiesTable.getColumnModel().getColumn(1).setMaxWidth(maxColumnWidth);
         DefaultTableModel model = (DefaultTableModel) warrantiesTable.getModel();
         // time to remove the fuel entries here
         int rowCount = model.getRowCount();
@@ -994,7 +995,7 @@ public class MainWindow extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "Part", "Date Purchased", "Warranty Duration", "Description", "Cost"
+                "Part", "Date", "Warranty Duration", "Description", "Cost"
             }
         ));
         warrantiesTable.setOpaque(true);
@@ -1057,12 +1058,13 @@ public class MainWindow extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "Part", "Date Purchased", "Warranty Duration", "Description","Cost"
+                "Part", "Date", "Warranty Duration", "Description","Cost"
             }
         ));
         modificationsTable.setOpaque(true);
         modificationsTable.setFillsViewportHeight(true);
         modificationsTable.setBackground(Color.WHITE);
+        modificationsTable.getColumnModel().getColumn(1).setMaxWidth(80);
         jScrollPane2.setViewportView(modificationsTable);
 
         modificationEntryToolBar.setRollover(true);
@@ -1240,6 +1242,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         graphsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graph32x32EDIT.png"))); // NOI18N
         graphsButton.setToolTipText("Vehicle Information Graphs");
+        graphsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graphsButtonActionPerformed(evt);
+            }
+        });
         mainToolBar.add(graphsButton);
         mainToolBar.add(jSeparator3);
 
@@ -2116,6 +2123,11 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.motoGarageNotebookEngine.startNewFuelEntryWindow();
     }//GEN-LAST:event_fuelEntryMainToolBarAddButtonActionPerformed
+
+    private void graphsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graphsButtonActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageNotebookEngine.startVehicleInformationGraphs();
+    }//GEN-LAST:event_graphsButtonActionPerformed
 
     /**
      * @param args the command line arguments

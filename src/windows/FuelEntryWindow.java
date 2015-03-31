@@ -8,6 +8,7 @@ package windows;
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
+import java.util.Date;
 import objectmodels.FuelEntry;
 
 /**
@@ -21,6 +22,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
     
     /**
      * Creates new form FuelEntryWindow, for NEW FUEL ENTRY
+     * @param incomingMechanicsNotebookEngine
      */
     public FuelEntryWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
@@ -28,11 +30,16 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         this.addOrUpdateButton.setText("Add Fuel Entry");
         this.setTitle("Add Fuel Entry");
         this.setIcon();
+        Date currentDate = new Date();
+        this.datePicker.setDate(currentDate);
+        this.odometerTextField.setText(incomingMechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
         addFuelEntryBoolean = true;
     }
     
     /**
      * Creates new form FuelEntryWindow, for UPDATING
+     * @param incomingMechanicsNotebookEngine
+     * @param incomingFuelEntry
      */
     public FuelEntryWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, FuelEntry incomingFuelEntry) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
@@ -43,6 +50,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         this.setIcon();
         
         this.odometerTextField.setText(incomingFuelEntry.getOdometer().toString());
+        this.datePicker.setDate(incomingFuelEntry.getDate());
         this.gallonsTextField.setText(incomingFuelEntry.getGallons().toString());
         this.costPerGallonTextField.setText(incomingFuelEntry.getCostPerGallon().toString());       
         
@@ -77,6 +85,8 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         costPerGallonTextField = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         addOrUpdateButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        datePicker = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -101,6 +111,8 @@ public class FuelEntryWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Date");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,34 +120,40 @@ public class FuelEntryWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
                     .addComponent(addOrUpdateButton)
                     .addComponent(costPerGallonLabel)
                     .addComponent(gallonsLabel)
                     .addComponent(odometerLabel))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(cancelButton)
+                        .addGap(89, 89, 89))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(odometerTextField)
-                            .addComponent(gallonsTextField)
-                            .addComponent(costPerGallonTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                        .addContainerGap(74, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancelButton)
-                        .addGap(89, 89, 89))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(odometerTextField)
+                                .addComponent(gallonsTextField)
+                                .addComponent(costPerGallonTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(odometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(odometerLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(odometerLabel)
-                            .addComponent(odometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(gallonsLabel))
+                    .addComponent(gallonsLabel)
                     .addComponent(gallonsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -145,7 +163,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addOrUpdateButton)
                     .addComponent(cancelButton))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,7 +181,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
             System.out.println("Something is null");
         }else{
             if(addFuelEntryBoolean){
-            FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()), Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));           
+            FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()), this.datePicker.getDate(),Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));           
             this.mechanicsNotebookEngine.addFuelEntry(newFuelEntry);
             if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newFuelEntry.getOdometer())){
                 this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
@@ -173,7 +191,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
             }
             this.dispose();
             }else{
-                FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()), Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));
+                FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()),this.datePicker.getDate(), Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));
                         
                 this.mechanicsNotebookEngine.editFuelEntry(originalFuelEntry, newFuelEntry);
                 this.dispose();
@@ -221,8 +239,10 @@ public class FuelEntryWindow extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel costPerGallonLabel;
     private javax.swing.JTextField costPerGallonTextField;
+    private org.jdesktop.swingx.JXDatePicker datePicker;
     private javax.swing.JLabel gallonsLabel;
     private javax.swing.JTextField gallonsTextField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel odometerLabel;
     private javax.swing.JTextField odometerTextField;
     // End of variables declaration//GEN-END:variables

@@ -7,6 +7,7 @@ package windows;
 
 import engine.MotoGarageNotebookEngine;
 import java.awt.Toolkit;
+import java.util.Date;
 import objectmodels.Warranty;
 
 /**
@@ -20,6 +21,7 @@ public class WarrantyWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form WarrantyWindow, for ADDING
+     * @param incomingMechanicsNotebookEngine
      */
     public WarrantyWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
@@ -28,6 +30,9 @@ public class WarrantyWindow extends javax.swing.JFrame {
         addWarranty=true;
         this.addOrUpdateButton.setText("Create Warranty");
         this.setTitle("Create Warranty");
+        this.durationTextField.setText(Integer.toString(this.durationSlider.getValue())+ " Days");
+        Date currentDate = new Date();
+        this.datePicker.setDate(currentDate);
     }
     
     /**
@@ -43,8 +48,18 @@ public class WarrantyWindow extends javax.swing.JFrame {
         originalWarranty=incomingWarranty;
         
         this.partTextField.setText(incomingWarranty.getPartName());
-        this.dateTextField.setText(incomingWarranty.getDatePurchased());
-        this.durationTextField.setText(incomingWarranty.getWarrantyDuration());
+        this.datePicker.setDate(incomingWarranty.getDate());
+        
+        if(incomingWarranty.getWarrantyDuration().equals("Lifetime")){
+            this.durationTextField.setText(incomingWarranty.getWarrantyDuration());
+            this.lifeTimeCheckBox.setSelected(true);
+            this.durationSlider.setEnabled(false);
+        }else{
+            String originalString = incomingWarranty.getWarrantyDuration();
+            String reducedString = originalString.substring(0, originalString.length() - 5);
+            this.durationSlider.setValue(Integer.parseInt(reducedString));
+            this.durationTextField.setText(incomingWarranty.getWarrantyDuration());
+        }
         this.descriptionTextField.setText(incomingWarranty.getDescription());
         this.costTextField.setText(incomingWarranty.getCost().toString());
     }
@@ -76,12 +91,14 @@ public class WarrantyWindow extends javax.swing.JFrame {
         durationLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
         costLabel = new javax.swing.JLabel();
-        dateTextField = new javax.swing.JTextField();
         durationTextField = new javax.swing.JTextField();
         descriptionTextField = new javax.swing.JTextField();
         costTextField = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         addOrUpdateButton = new javax.swing.JButton();
+        datePicker = new org.jdesktop.swingx.JXDatePicker();
+        durationSlider = new javax.swing.JSlider();
+        lifeTimeCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -112,15 +129,35 @@ public class WarrantyWindow extends javax.swing.JFrame {
             }
         });
 
+        durationSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                durationSliderStateChanged(evt);
+            }
+        });
+
+        lifeTimeCheckBox.setText("LifeTime");
+        lifeTimeCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lifeTimeCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(warrantyLabel)
+                .addGap(96, 201, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 71, Short.MAX_VALUE)
+                .addComponent(addOrUpdateButton)
+                .addGap(54, 54, 54)
+                .addComponent(cancelButton)
+                .addGap(107, 107, 107))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(warrantyLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,20 +166,19 @@ public class WarrantyWindow extends javax.swing.JFrame {
                             .addComponent(durationLabel)
                             .addComponent(dateLabel)
                             .addComponent(partLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(partTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(dateTextField)
-                            .addComponent(durationTextField)
-                            .addComponent(descriptionTextField)
-                            .addComponent(costTextField))))
-                .addGap(96, 96, 96))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 71, Short.MAX_VALUE)
-                .addComponent(addOrUpdateButton)
-                .addGap(54, 54, 54)
-                .addComponent(cancelButton)
-                .addGap(107, 107, 107))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lifeTimeCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(descriptionTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(durationTextField)
+                    .addComponent(partTextField)
+                    .addComponent(datePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(costTextField, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,26 +190,30 @@ public class WarrantyWindow extends javax.swing.JFrame {
                     .addComponent(partLabel)
                     .addComponent(partTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dateLabel)
-                    .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(durationLabel)
                     .addComponent(durationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lifeTimeCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(descriptionLabel)
                     .addComponent(descriptionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(costLabel)
-                    .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                    .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(costLabel))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(addOrUpdateButton))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,7 +227,7 @@ public class WarrantyWindow extends javax.swing.JFrame {
 
     private void addOrUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrUpdateButtonActionPerformed
         // TODO add your handling code here:
-        Warranty newWarranty = new Warranty(this.partTextField.getText(), this.dateTextField.getText(), 
+        Warranty newWarranty = new Warranty(this.partTextField.getText(), this.datePicker.getDate(), 
             this.durationTextField.getText(),this.descriptionTextField.getText(), Float.parseFloat(this.costTextField.getText()));
         if(this.addWarranty){
             this.mechanicsNotebookEngine.addWarranty(newWarranty);
@@ -196,6 +236,23 @@ public class WarrantyWindow extends javax.swing.JFrame {
         }
         this.dispose();
     }//GEN-LAST:event_addOrUpdateButtonActionPerformed
+
+    private void lifeTimeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lifeTimeCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(this.lifeTimeCheckBox.isSelected()){
+            this.durationSlider.setEnabled(false);
+            this.durationTextField.setText("Lifetime");
+        }else{
+            this.durationSlider.setEnabled(true);
+            this.durationTextField.setText(Integer.toString(this.durationSlider.getValue())+ " Days");
+        }
+        
+    }//GEN-LAST:event_lifeTimeCheckBoxActionPerformed
+
+    private void durationSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_durationSliderStateChanged
+        // TODO add your handling code here:
+        this.durationTextField.setText(Integer.toString(this.durationSlider.getValue()) + " Days");
+    }//GEN-LAST:event_durationSliderStateChanged
 
     /**
      * @param args the command line arguments
@@ -238,11 +295,13 @@ public class WarrantyWindow extends javax.swing.JFrame {
     private javax.swing.JLabel costLabel;
     private javax.swing.JTextField costTextField;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JTextField dateTextField;
+    private org.jdesktop.swingx.JXDatePicker datePicker;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JTextField descriptionTextField;
     private javax.swing.JLabel durationLabel;
+    private javax.swing.JSlider durationSlider;
     private javax.swing.JTextField durationTextField;
+    private javax.swing.JCheckBox lifeTimeCheckBox;
     private javax.swing.JLabel partLabel;
     private javax.swing.JTextField partTextField;
     private javax.swing.JLabel warrantyLabel;

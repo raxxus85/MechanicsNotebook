@@ -6,6 +6,8 @@
 package objectmodels;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,14 +16,14 @@ import java.util.Date;
  */
 public class Warranty implements Serializable{
     String partName;
-    String datePurchased;
+    Date date;
     String warrantyDuration;
     String description;
     Float cost;
     
-    public Warranty(String incomingPartName, String incomingDatePurchased, String incomingWarrantyDuration, String incomingDescription,Float incomingCost){
+    public Warranty(String incomingPartName, Date incomingDate, String incomingWarrantyDuration, String incomingDescription,Float incomingCost){
         this.partName = incomingPartName;
-        this.datePurchased = incomingDatePurchased;
+        this.date = incomingDate;
         this.warrantyDuration = incomingWarrantyDuration;
         this.description = incomingDescription;
         this.cost = incomingCost;
@@ -32,8 +34,9 @@ public class Warranty implements Serializable{
      * @return 
      */
     public Object[] getWarrantyObject(){
+        DateFormat dateInstance = SimpleDateFormat.getDateInstance();
         String costEdited = "$" + this.cost.toString();
-        String[] stringArray = {this.partName,this.datePurchased, this.warrantyDuration,this.description,costEdited};
+        String[] stringArray = {this.partName,dateInstance.format(this.date), this.warrantyDuration,this.description,costEdited};
         return stringArray;
     }
     
@@ -45,12 +48,12 @@ public class Warranty implements Serializable{
         return this.partName;
     }   
     
-    public void setDatePurchased(String incomingDatePurchased){
-        this.datePurchased = incomingDatePurchased;
+    public void setDate(Date incomingDate){
+        this.date = incomingDate;
     }
     
-    public String getDatePurchased(){
-        return this.datePurchased;
+    public Date getDate(){
+        return this.date;
     }
     
     public void setWarrantyDuration(String incomingWarrantyDuration){

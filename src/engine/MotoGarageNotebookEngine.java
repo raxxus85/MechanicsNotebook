@@ -38,6 +38,7 @@ import windows.MechanicWindow;
 import windows.ModificationWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
+import windows.VehicleInformationGraphs;
 import windows.VehicleTrackersWindow;
 import windows.WarrantyWindow;
 import windows.WelcomeWindow;
@@ -65,6 +66,7 @@ public class MotoGarageNotebookEngine {
     private ModificationWindow modificationWindow;
     private VehicleTrackersWindow vehicleTrackersWindow;
     private DragStripSlipWindow dragStripSlipWindow;
+    private VehicleInformationGraphs vehicleInformationGraphs;
     
     //Other Variables
     private Garage currentGarage;
@@ -592,6 +594,11 @@ public class MotoGarageNotebookEngine {
     public void startNewDragStripSlipWindow(){
         this.dragStripSlipWindow = new DragStripSlipWindow(this);
         this.dragStripSlipWindow.setVisible(true);
+    }
+    
+    public void startVehicleInformationGraphs(){
+        this.vehicleInformationGraphs = new VehicleInformationGraphs(this);
+        this.vehicleInformationGraphs.setVisible(true);
     }
     
     public void startUpdateDragStripSlipWindow(DragStripSlip incomingDragStripSlip){
