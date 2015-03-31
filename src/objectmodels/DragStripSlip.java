@@ -28,11 +28,20 @@ public class DragStripSlip {
 
     /**
      * Main Constructor
+     * @param incomingDate
+     * @param incomingReactionTime
+     * @param incomingSixtyFeetTime
+     * @param incomingThreeHundredThirtyFeetTime
+     * @param incomingEighthSpeed
+     * @param incomingEighthMileTime
+     * @param incomingOneThousandFeetTime
+     * @param incomingQuarterMileSpeed
+     * @param incomingQuarterMileTime
      */
-    public DragStripSlip(Float incomingReactionTime, Float incomingSixtyFeetTime, Float incomingThreeHundredThirtyFeetTime, Float incomingEighthMileTime, Float incomingEighthSpeed
+    public DragStripSlip(Date incomingDate,Float incomingReactionTime, Float incomingSixtyFeetTime, Float incomingThreeHundredThirtyFeetTime, Float incomingEighthMileTime, Float incomingEighthSpeed
     ,Float incomingOneThousandFeetTime, Float incomingQuarterMileTime, Float incomingQuarterMileSpeed){
-        Date currentDate = new Date(); 
-        this.date = currentDate;
+
+        this.date = incomingDate;
         
         this.reactionTime = incomingReactionTime;
         this.sixtyFeetTime = incomingSixtyFeetTime;

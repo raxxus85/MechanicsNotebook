@@ -38,16 +38,16 @@
                   <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="reactionTimeTextField" alignment="1" max="32767" attributes="0"/>
-                  <Component id="sixtyFeetTextField" alignment="1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="threeHundredThirtyFeetTextField" alignment="1" max="32767" attributes="0"/>
                   <Component id="eighthMileTextField" alignment="1" max="32767" attributes="0"/>
                   <Component id="eighthMileSpeedTextField" alignment="1" max="32767" attributes="0"/>
                   <Component id="oneThousandFeetTextField" alignment="1" max="32767" attributes="0"/>
                   <Component id="quarterMileTextField" alignment="1" max="32767" attributes="0"/>
                   <Component id="quarterMileSpeedTextField" alignment="1" max="32767" attributes="0"/>
-                  <Component id="timeTextField" pref="100" max="32767" attributes="0"/>
+                  <Component id="datePicker" alignment="1" max="32767" attributes="0"/>
+                  <Component id="reactionTimeTextField" alignment="1" max="32767" attributes="0"/>
+                  <Component id="sixtyFeetTextField" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
           </Group>
@@ -63,10 +63,10 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="timeTextField" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="datePicker" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -108,7 +108,7 @@
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="quarterMileSpeedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="addOrUpdateButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -196,7 +196,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addOrUpdateButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="timeTextField">
+    <Component class="org.jdesktop.swingx.JXDatePicker" name="datePicker">
     </Component>
   </SubComponents>
 </Form>
