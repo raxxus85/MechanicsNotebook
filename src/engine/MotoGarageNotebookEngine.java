@@ -627,8 +627,8 @@ public class MotoGarageNotebookEngine {
      * <li> used in the beginning of the program to flash neat graphics, welcome user,  etc
      */
     private void startWelcomeWindow(){
-        this.welcomeWindow = new WelcomeWindow(this);
-        this.welcomeWindow.setVisible(true);
+        //this.welcomeWindow = new WelcomeWindow(this);
+        //this.welcomeWindow.setVisible(true);
     }  
     
     public void startAboutWindow(){
