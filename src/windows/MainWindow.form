@@ -164,8 +164,8 @@
                   </Group>
                   <Component id="mainTabbedPane" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="mainWindowStatusBar" pref="23" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="mainWindowStatusBar" pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -290,7 +290,7 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionMaintenanceActionEditToolBar)"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionEditToolBar = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32EDIT.png&quot;));&#xa;Action actionMaintenanceActionEditToolBar = new AbstractAction(&quot;New&quot;, maintenanceActionEditToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionEdit&quot;);&#xa;      }&#xa;    };"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceActionButtonToolBar.setToolTipText(&quot;Edit Maintenance Action&quot;);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceActionButtonToolBar.setToolTipText(&quot;View / Edit Selected Maintenance Action&quot;);"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="deleteMaintenanceActionButtonToolBar">
@@ -305,7 +305,7 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="maintenanceActionsToolBar.add(actionMaintenanceActionDeleteToolBar)"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceActionDeleteToolBar = new ImageIcon(getClass().getResource(&quot;/maintenanceAction32x32DELETE.png&quot;));&#xa;Action actionMaintenanceActionDeleteToolBar = new AbstractAction(&quot;New&quot;, maintenanceActionDeleteToolBar) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceActionEdit&quot;);&#xa;      }&#xa;    };"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="deleteMaintenanceActionButtonToolBar.setToolTipText(&quot;Delete Maintenance Action&quot;);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="deleteMaintenanceActionButtonToolBar.setToolTipText(&quot;Delete Selected Maintenance Action&quot;);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -502,7 +502,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editWarrantyButtonActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editWarrantyButton.setToolTipText(&quot;View / Edit selected Warranty&quot;);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editWarrantyButton.setToolTipText(&quot;View / Edit Selected Warranty&quot;);"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="deleteWarrantyButton">
@@ -515,7 +515,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteWarrantyButtonActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deleteWarrantyButton.setToolTipText(&quot;Delete selected Warranty&quot;);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deleteWarrantyButton.setToolTipText(&quot;Delete Selected Warranty&quot;);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -606,7 +606,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editModificationButtonActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editModificationButton.setToolTipText(&quot;Edit / View Selected Modification&quot;);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editModificationButton.setToolTipText(&quot;View / Edit Selected Modification&quot;);"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="deleteModificationButton">
@@ -696,6 +696,9 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dragStripSlipAddButtonActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dragStripSlipAddButton.setToolTipText(&quot;Add a Drag Strip Slip&quot;);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="dragStripSlipEditButton">
                   <Properties>
@@ -706,6 +709,9 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dragStripSlipEditButtonActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dragStripSlipEditButton.setToolTipText(&quot;View / Edit Selected Drag Strip Slip&quot;);"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="dragStripSlipDeleteButton">
                   <Properties>
@@ -716,6 +722,9 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dragStripSlipDeleteButtonActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dragStripSlipDeleteButton.setToolTipText(&quot;Delete Selected Drag Strip Slip&quot;);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

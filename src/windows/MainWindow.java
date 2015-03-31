@@ -89,6 +89,7 @@ public class MainWindow extends javax.swing.JFrame {
         //this.mainTabbedPane.setBackground(Color.black);
         //this.mechanicsPanel.setBackground(Color.black);
         this.setIcon();
+        //this.currentMechanicPanel.setBackground(Color.red);
         
 
         
@@ -888,7 +889,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         maintenanceActionsToolBar.add(addMaintenanceActionButtonToolBar);
 
-        editMaintenanceActionButtonToolBar.setToolTipText("Edit Maintenance Action");
+        editMaintenanceActionButtonToolBar.setToolTipText("View / Edit Selected Maintenance Action");
         editMaintenanceActionButtonToolBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32EDIT.png"))); // NOI18N
         editMaintenanceActionButtonToolBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -897,7 +898,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         maintenanceActionsToolBar.add(editMaintenanceActionButtonToolBar);
 
-        deleteMaintenanceActionButtonToolBar.setToolTipText("Delete Maintenance Action");
+        deleteMaintenanceActionButtonToolBar.setToolTipText("Delete Selected Maintenance Action");
         deleteMaintenanceActionButtonToolBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32DELETE.png"))); // NOI18N
         deleteMaintenanceActionButtonToolBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1016,7 +1017,7 @@ public class MainWindow extends javax.swing.JFrame {
         warrantyEntryToolBar.add(addWarrantyButton);
 
         editWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32EDIT.png"))); // NOI18N
-        editWarrantyButton.setToolTipText("View / Edit selected Warranty");
+        editWarrantyButton.setToolTipText("View / Edit Selected Warranty");
         editWarrantyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editWarrantyButtonActionPerformed(evt);
@@ -1025,7 +1026,7 @@ public class MainWindow extends javax.swing.JFrame {
         warrantyEntryToolBar.add(editWarrantyButton);
 
         deleteWarrantyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warrantyType32x32DELETE.png"))); // NOI18N
-        deleteWarrantyButton.setToolTipText("Delete selected Warranty");
+        deleteWarrantyButton.setToolTipText("Delete Selected Warranty");
         deleteWarrantyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteWarrantyButtonActionPerformed(evt);
@@ -1080,7 +1081,7 @@ public class MainWindow extends javax.swing.JFrame {
         modificationEntryToolBar.add(addModificationButton);
 
         editModificationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/modification32x32EDIT.png"))); // NOI18N
-        editModificationButton.setToolTipText("Edit / View Selected Modification");
+        editModificationButton.setToolTipText("View / Edit Selected Modification");
         editModificationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editModificationButtonActionPerformed(evt);
@@ -1134,6 +1135,7 @@ public class MainWindow extends javax.swing.JFrame {
         dragStripSlipToolBar.setFloatable(false);
 
         dragStripSlipAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32ADD.png"))); // NOI18N
+        dragStripSlipAddButton.setToolTipText("Add a Drag Strip Slip");
         dragStripSlipAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dragStripSlipAddButtonActionPerformed(evt);
@@ -1142,6 +1144,7 @@ public class MainWindow extends javax.swing.JFrame {
         dragStripSlipToolBar.add(dragStripSlipAddButton);
 
         dragStripSlipEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32EDIT.png"))); // NOI18N
+        dragStripSlipEditButton.setToolTipText("View / Edit Selected Drag Strip Slip");
         dragStripSlipEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dragStripSlipEditButtonActionPerformed(evt);
@@ -1150,6 +1153,7 @@ public class MainWindow extends javax.swing.JFrame {
         dragStripSlipToolBar.add(dragStripSlipEditButton);
 
         dragStripSlipDeleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dragStripSlip32x32DELETE.png"))); // NOI18N
+        dragStripSlipDeleteButton.setToolTipText("Delete Selected Drag Strip Slip");
         dragStripSlipDeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dragStripSlipDeleteButtonActionPerformed(evt);
@@ -1649,8 +1653,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mainTabbedPane))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
         );
 
         pack();

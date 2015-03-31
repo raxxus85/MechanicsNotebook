@@ -188,6 +188,7 @@ public class Garage implements Serializable{
         this.currentVehicle.setColor(updatedVehicle.getColor());
         this.currentVehicle.setVIN(updatedVehicle.getVIN());
         this.currentVehicle.setOdometer(updatedVehicle.getOdometer());
+        this.currentVehicle.setDescription(updatedVehicle.getDescription());
         if(updatedVehicle.getImageIcon()==null){
             this.currentVehicle.setImageIcon(null);
         }else{
