@@ -14,6 +14,7 @@ import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -24,6 +25,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -31,10 +37,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JProgressBar;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
@@ -51,6 +59,7 @@ import objectmodels.Modification;
 import objectmodels.MouseAdapter2;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
+import org.jdesktop.swingx.JXStatusBar;
 
 /**
  *
@@ -70,19 +79,39 @@ public class MainWindow extends javax.swing.JFrame {
     
     // variables
     int maxColumnWidth = 80;
-
+    
+    // INFO for Help Button
+    final URI uri = new URI("http://www.motogaragechi.com/motogarage-notebook-help/");
+    class OpenUrlAction implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                open(uri);
+            }
+        }
+    
+    private static void open(URI uri) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(uri);
+        } catch (IOException e) {
+            /* TODO: error handling */ 
+        }
+        } else {
+        /* TODO: error handling */ 
+        }
+    }
     
     /**
      * Creates new form MainWindow
      */
-    public MainWindow() {
+    public MainWindow() throws URISyntaxException{
         initComponents();
     }
     
      /**
      * Creates new form MainWindow
      */
-    public MainWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public MainWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) throws URISyntaxException{
         this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
         initComponents();   
         //this.getContentPane().setBackground(Color.black);
@@ -107,6 +136,7 @@ public class MainWindow extends javax.swing.JFrame {
             return false;
             }
         };
+    vehiclesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     vehiclesTable.setModel(vehiclesTableModel);
         
         
@@ -123,6 +153,7 @@ public class MainWindow extends javax.swing.JFrame {
             return false;
             }
         };
+    customersTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     customersTable.setModel(customersTableModel);
         
         
@@ -139,6 +170,7 @@ public class MainWindow extends javax.swing.JFrame {
             return false;
             }
         };
+    mechanicsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     mechanicsTable.setModel(mechanicsTableModel);
         
         
@@ -157,6 +189,7 @@ public class MainWindow extends javax.swing.JFrame {
             return false;
             }
     };
+    maintenanceActionsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     maintenanceActionsTable.setModel(maintenanceActionsTableModel);
     
     // end main constructor
@@ -180,8 +213,19 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshCustomersTab();
         this.refreshVehiclesTab();
         this.refreshModifications();
+        
+        //this.refreshMainWindowStatusBar();
     }
     
+    private void refreshMainWindowStatusBar(){
+      //JXStatusBar bar = new JXStatusBar();
+      
+      //JLabel statusLabel = new JLabel("Ready");
+      //this.mainWindowStatusBar.add(statusLabel, new JXStatusBar()); //weight of 0.0 and no insets
+      //JProgressBar pbar = new JProgressBar();
+      //this.mainWindowStatusBar.add(pbar); //weight of 0.0 and no insets
+        //this.mainWindowStatusBar.s
+    }
 
     private void refreshVehiclesTab(){
         this.refreshCurrentVehicleInformation();
@@ -206,8 +250,10 @@ public class MainWindow extends javax.swing.JFrame {
             Boolean dragStripSlips = this.motoGarageNotebookEngine.getDragStripSlipsEnabled();
             if(fuelEntries){
                 this.mainTabbedPane.addTab("Fuel Entries", fuelEntriesPanel);
+                this.fuelEntryMainToolBarAddButton.setEnabled(true);
             }else{
                 this.mainTabbedPane.remove(fuelEntriesPanel);
+                this.fuelEntryMainToolBarAddButton.setEnabled(false);
             }
             if(warranties){
                 this.mainTabbedPane.addTab("Warranties", vehicleWarrantiesPanel);
@@ -349,12 +395,16 @@ public class MainWindow extends javax.swing.JFrame {
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        
+        Boolean fuelEntries = this.motoGarageNotebookEngine.getFuelEntriesEnabled();
         // IF there is a vehicle and it has fuel entries
         //System.out.println("TEST");
         if(this.motoGarageNotebookEngine.getCurrentVehicle()!=null && this.motoGarageNotebookEngine.getCurrentVehicle().getFuelEntries().size() >0){
-            // main tool bar            
-            fuelEntryMainToolBarAddButton.setEnabled(true);
+            // main tool bar  
+            
+            if(fuelEntries){
+                fuelEntryMainToolBarAddButton.setEnabled(true);
+            }
+            
                     
             fuelEntryAddButton.setEnabled(true);
             fuelEntryEditButton.setEnabled(true);
@@ -370,8 +420,11 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }else if(this.motoGarageNotebookEngine.getCurrentVehicle()!=null){
             // if there is a vehicle, but no fuel entries
-            // main tool bar            
-            fuelEntryMainToolBarAddButton.setEnabled(true);
+            // main tool bar        
+            if(fuelEntries){
+                fuelEntryMainToolBarAddButton.setEnabled(true);
+            }
+
             
             fuelEntryAddButton.setEnabled(true);
             fuelEntryEditButton.setEnabled(false);
@@ -863,6 +916,7 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MotoGarage Notebook");
         setMinimumSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
 
         maintenanceActionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1256,6 +1310,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         helpButton.setToolTipText("Help");
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/help32x32.png"))); // NOI18N
+        helpButton.addActionListener(new OpenUrlAction());
+        helpButton.setToolTipText("Visit Help Online on MotoGarage Forums");
         mainToolBar.add(helpButton);
 
         mechanicPanelNew.setBorder(compound);
@@ -1645,16 +1701,16 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(currentMechanicPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(currentVehiclePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(mechanicPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(mainTabbedPane))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+                    .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
         );
 
         pack();
@@ -2136,7 +2192,7 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws URISyntaxException{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -2161,7 +2217,11 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainWindow().setVisible(true);
+                try {
+                    new MainWindow().setVisible(true);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

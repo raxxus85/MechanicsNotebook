@@ -5,6 +5,7 @@
  */
 package objectmodels;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,7 +15,7 @@ import java.util.Date;
  *
  * @author Mark
  */
-public class DragStripSlip {
+public class DragStripSlip implements Serializable{
     // eighth
     private Date date;
     private Float reactionTime;

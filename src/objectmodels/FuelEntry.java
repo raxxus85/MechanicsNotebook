@@ -36,7 +36,11 @@ public class FuelEntry implements Serializable{
     public Object[] getFuelEntryObject(){
         DateFormat dateInstance = SimpleDateFormat.getDateInstance();
         
+        // parse to 2 decimal places for simplicty... (Figured out total cost later?)
         Float totalFuelCost = this.gallons * this.costPerGallon;
+        totalFuelCost = Float.parseFloat(String.format("%.2f", totalFuelCost));
+        
+        
         String totalFuelCostEdited = "$" + totalFuelCost.toString();
         String costPerGallonEdited = "$" +this.costPerGallon.toString();
         String[] stringArray = {this.odometer.toString(),dateInstance.format(this.date),this.gallons.toString(), costPerGallonEdited,totalFuelCostEdited};

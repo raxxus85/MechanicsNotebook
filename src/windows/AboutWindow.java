@@ -5,22 +5,52 @@
 package windows;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Mark
  */
 public class AboutWindow extends javax.swing.JFrame {
-
+    // BUTTON WEB PAGE LINK!!!
+    final URI uri = new URI("http://www.motogaragechi.com");
+    class OpenUrlAction implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                open(uri);
+            }
+        }
     /**
      * Creates new form AboutWindow
      */
-    public AboutWindow() {
+    public AboutWindow() throws URISyntaxException{
         initComponents();
         this.setIcon();
         //this.getContentPane().setBackground(Color.black);
         this.setTitle("About MotoGarage Notebook");
+        
+        // BUTTON WEB PAGE LINK!!!
+  
+    }
+    
+    private static void open(URI uri) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(uri);
+        } catch (IOException e) {
+            /* TODO: error handling */ 
+        }
+        } else {
+        /* TODO: error handling */ 
+        }
     }
     
     private void setIcon(){
@@ -28,6 +58,8 @@ public class AboutWindow extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +73,7 @@ public class AboutWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,11 +87,13 @@ public class AboutWindow extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanicShrunk.png"))); // NOI18N
         jLabel1.setToolTipText("");
 
-        jLabel3.setText("Created by Mark Milford");
+        jLabel3.setText("Created by Mark Milford(mark.p.milford@gmail.com)");
 
         jLabel2.setText("In Collaboration with");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageLogoTrans.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageLogoShrunk.png"))); // NOI18N
+        jButton2.addActionListener(new OpenUrlAction());
+        jButton2.setToolTipText("Visit http://www.motogaragechi.com");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,22 +102,21 @@ public class AboutWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
+                        .addGap(85, 85, 85)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel4))
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(jButton1)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addGap(129, 129, 129)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,9 +127,9 @@ public class AboutWindow extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -140,15 +173,19 @@ public class AboutWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AboutWindow().setVisible(true);
+                try {
+                    new AboutWindow().setVisible(true);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(AboutWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

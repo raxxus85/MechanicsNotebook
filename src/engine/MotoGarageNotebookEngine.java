@@ -12,9 +12,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URISyntaxException;
 import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objectmodels.Customer;
 import objectmodels.DragStripSlip;
 import objectmodels.FuelEntry;
@@ -632,7 +635,11 @@ public class MotoGarageNotebookEngine {
     }  
     
     public void startAboutWindow(){
-        this.aboutWindow = new AboutWindow();
+        try {
+            this.aboutWindow = new AboutWindow();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(MotoGarageNotebookEngine.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.aboutWindow.setVisible(true);
     }
     

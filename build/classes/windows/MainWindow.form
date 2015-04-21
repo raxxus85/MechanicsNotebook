@@ -97,6 +97,7 @@
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[800, 600]"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="mechanicsNotebookMenuBar"/>
@@ -154,7 +155,7 @@
                   <Component id="currentVehiclePanel" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="mechanicPanelNew" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -162,10 +163,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="vehiclePanelNew" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="mainTabbedPane" max="32767" attributes="0"/>
+                  <Component id="mainTabbedPane" min="-2" pref="584" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="mainWindowStatusBar" pref="20" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="mainWindowStatusBar" pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -860,6 +861,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="helpButton.addActionListener(new OpenUrlAction());&#xa;helpButton.setToolTipText(&quot;Visit Help Online on MotoGarage Forums&quot;);"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="helpButton.setToolTipText(&quot;Help&quot;);"/>
           </AuxValues>
         </Component>
