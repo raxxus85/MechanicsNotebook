@@ -45,6 +45,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
@@ -112,6 +113,7 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
     public MainWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) throws URISyntaxException{
+        
         this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
         initComponents();   
         //this.getContentPane().setBackground(Color.black);
@@ -215,6 +217,9 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshModifications();
         
         //this.refreshMainWindowStatusBar();
+        
+        // TESTING TESTING DELETE
+
     }
     
     private void refreshMainWindowStatusBar(){
@@ -239,6 +244,8 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshModifications();
         this.refreshDragStripSlips();
     }
+    
+
     
     private void refreshVehicleTrackers(){
         if(this.motoGarageNotebookEngine.getVehicleTrackersChanged()){
@@ -469,6 +476,8 @@ public class MainWindow extends javax.swing.JFrame {
             editMaintenanceActionButtonToolBar.setEnabled(true);
             deleteMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
+            maintenanceAlertButton.setEnabled(true);
+            graphsButton.setEnabled(true);
             int newRowCount = this.motoGarageNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray().length;
             MaintenanceAction[] maintenanceArray = this.motoGarageNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray();
             for (int i = 0  ; i <newRowCount ; i++) {
@@ -480,9 +489,13 @@ public class MainWindow extends javax.swing.JFrame {
             // if there is a vehicle
             // main tool bar
             addMaintenanceActionButton.setEnabled(true);
+            graphsButton.setEnabled(true);
+            maintenanceAlertButton.setEnabled(true);
             
             addMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
+            
+            
             
             editMaintenanceActionButtonToolBar.setEnabled(false);
             deleteMaintenanceActionButtonToolBar.setEnabled(false);            
@@ -490,6 +503,8 @@ public class MainWindow extends javax.swing.JFrame {
             // if no vehicle
             // main tool bar
             addMaintenanceActionButton.setEnabled(false);
+            graphsButton.setEnabled(false);
+            maintenanceAlertButton.setEnabled(false);
             
             addMaintenanceActionButtonToolBar.setEnabled(false);
             editMaintenanceActionButtonToolBar.setEnabled(false);
@@ -909,6 +924,8 @@ public class MainWindow extends javax.swing.JFrame {
         optionsMenu = new javax.swing.JMenu();
         VehicleTrackersMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
+        helpMenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -916,7 +933,8 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MotoGarage Notebook");
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setResizable(false);
+
+        //mainTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         maintenanceActionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1311,7 +1329,7 @@ public class MainWindow extends javax.swing.JFrame {
         helpButton.setToolTipText("Help");
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/help32x32.png"))); // NOI18N
         helpButton.addActionListener(new OpenUrlAction());
-        helpButton.setToolTipText("Visit Help Online on MotoGarage Forums");
+        helpButton.setToolTipText("Visit kelp online on MotoGarage Forums");
         mainToolBar.add(helpButton);
 
         mechanicPanelNew.setBorder(compound);
@@ -1362,6 +1380,9 @@ public class MainWindow extends javax.swing.JFrame {
         mechanicsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mechanicsTableMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                mechanicsTableMouseReleased(evt);
             }
         });
         jScrollPane3.setViewportView(mechanicsTable);
@@ -1432,6 +1453,9 @@ public class MainWindow extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 customersTableMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                customersTableMouseReleased(evt);
+            }
         });
         jScrollPane7.setViewportView(customersTable);
 
@@ -1500,6 +1524,9 @@ public class MainWindow extends javax.swing.JFrame {
         vehiclesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 vehiclesTableMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vehiclesTableMouseReleased(evt);
             }
         });
         jScrollPane8.setViewportView(vehiclesTable);
@@ -1654,7 +1681,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         mechanicsNotebookMenuBar.add(optionsMenu);
 
-        helpMenu.setText("About");
+        helpMenu.setText("Help");
+
+        helpMenuItem.setText("Help");
+        helpMenuItem.addActionListener(new OpenUrlAction());
+        helpMenu.add(helpMenuItem);
+        helpMenu.add(jSeparator1);
 
         aboutMenuItem.setText("About");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -1673,6 +1705,7 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -1689,7 +1722,6 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1709,8 +1741,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -2189,6 +2221,37 @@ public class MainWindow extends javax.swing.JFrame {
         this.motoGarageNotebookEngine.startVehicleInformationGraphs();
     }//GEN-LAST:event_graphsButtonActionPerformed
 
+    private void mechanicsTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mechanicsTableMouseReleased
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+        int rowSelected = mechanicsTable.getSelectedRow();
+            if(rowSelected>-1){
+                Mechanic[] mechanics = motoGarageNotebookEngine.getMechanicArray();
+                Mechanic selectedMechanic = mechanics[rowSelected];
+                motoGarageNotebookEngine.setCurrentMechanic(selectedMechanic);
+            }  
+    }//GEN-LAST:event_mechanicsTableMouseReleased
+
+    private void customersTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customersTableMouseReleased
+        // TODO add your handling code here:
+        int rowSelected = customersTable.getSelectedRow();
+        if(rowSelected>-1){
+            Customer[] customers = motoGarageNotebookEngine.getCustomerArray();
+            Customer selectedCustomer = customers[rowSelected];
+            motoGarageNotebookEngine.setCurrentCustomer(selectedCustomer);
+        }    
+    }//GEN-LAST:event_customersTableMouseReleased
+
+    private void vehiclesTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehiclesTableMouseReleased
+        // TODO add your handling code here:
+        int rowSelected = vehiclesTable.getSelectedRow();
+            if(rowSelected>-1){
+                Vehicle[] vehicles = motoGarageNotebookEngine.getVehicleArray();
+                Vehicle selectedVehicle = vehicles[rowSelected];
+                motoGarageNotebookEngine.setCurrentVehicle(selectedVehicle);
+            }
+    }//GEN-LAST:event_vehiclesTableMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -2271,6 +2334,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton graphsButton;
     private javax.swing.JButton helpButton;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem helpMenuItem;
     private javax.swing.JButton importGarageButton;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -2281,6 +2345,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JTabbedPane mainTabbedPane;

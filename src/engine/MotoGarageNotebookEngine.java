@@ -546,7 +546,7 @@ public class MotoGarageNotebookEngine {
      * Method to create the main window, essential for the program
      * <li> connection between main window and engine vital for program at this point
      */
-    public void startMainWindow(){
+    public void startMainWindow() throws URISyntaxException{
         this.mainWindow = new MainWindow(this);
         this.mainWindow.setVisible(true);
         this.mainWindow.refresh();
