@@ -725,6 +725,7 @@ public class MainWindow extends javax.swing.JFrame {
         }else{  
             this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N);
             this.vehicleNameLabel.setText("No Vehicle Selected");
+            this.currentVehicleOdometerLabel.setText("Odometer: ");
         }
         
     }
@@ -1329,7 +1330,7 @@ public class MainWindow extends javax.swing.JFrame {
         helpButton.setToolTipText("Help");
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/help32x32.png"))); // NOI18N
         helpButton.addActionListener(new OpenUrlAction());
-        helpButton.setToolTipText("Visit kelp online on MotoGarage Forums");
+        helpButton.setToolTipText("Visit help online on MotoGarage Forums");
         mainToolBar.add(helpButton);
 
         mechanicPanelNew.setBorder(compound);

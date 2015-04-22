@@ -873,7 +873,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="helpButton.addActionListener(new OpenUrlAction());&#xa;helpButton.setToolTipText(&quot;Visit kelp online on MotoGarage Forums&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="helpButton.addActionListener(new OpenUrlAction());&#xa;helpButton.setToolTipText(&quot;Visit help online on MotoGarage Forums&quot;);"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="helpButton.setToolTipText(&quot;Help&quot;);"/>
           </AuxValues>
         </Component>
