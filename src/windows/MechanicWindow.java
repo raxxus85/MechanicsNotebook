@@ -63,8 +63,18 @@ public class MechanicWindow extends javax.swing.JFrame {
         this.mechanicLastNameTextField.setText(incomingMechanic.getLastName());
         this.mechanicDescriptionTextArea.setText(incomingMechanic.getDescription());
         if(incomingMechanic.getImageIcon()!=null){
-            this.mechanicPictureLabel.setIcon(incomingMechanic.getImageIcon());
-            this.imageIcon=incomingMechanic.getImageIcon();
+            
+            ImageIcon imageIcon = incomingMechanic.getImageIcon(); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it 
+            Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            imageIcon = new ImageIcon(newimg);  // transform it back
+                //this.customerPictureLabel.setIcon(imageIcon);
+            this.imageIcon=imageIcon;
+            this.mechanicPictureLabel.setIcon(imageIcon);
+            
+            // OLD OLD 
+            //this.mechanicPictureLabel.setIcon(incomingMechanic.getImageIcon());
+            //this.imageIcon=incomingMechanic.getImageIcon();
         } 
     }
     
@@ -165,12 +175,12 @@ public class MechanicWindow extends javax.swing.JFrame {
                 .addComponent(clearPictureButton))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(mechanicPictureLabel))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(mechanicPictureLabel)
+                .addComponent(mechanicPictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(openMechanicPictureButton)
@@ -337,10 +347,14 @@ public class MechanicWindow extends javax.swing.JFrame {
                 } catch (IOException ex) {
                 Logger.getLogger(MechanicWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                ImageIcon icon = new ImageIcon(myPicture); 
-                this.mechanicPictureLabel.setIcon(icon);
-                // set the class imageIcon to this now for absorbtion
-                this.imageIcon = icon;
+                //Time to transform!
+                ImageIcon icon = new ImageIcon(myPicture);                 
+                Image image = icon.getImage(); // transform it 
+                Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+                imageIcon = new ImageIcon(newimg);  // transform it back
+                //this.customerPictureLabel.setIcon(imageIcon);
+                //this.imageIcon=imageIcon;
+                this.mechanicPictureLabel.setIcon(imageIcon);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
