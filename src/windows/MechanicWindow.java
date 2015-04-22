@@ -351,9 +351,7 @@ public class MechanicWindow extends javax.swing.JFrame {
                 ImageIcon icon = new ImageIcon(myPicture);                 
                 Image image = icon.getImage(); // transform it 
                 Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-                imageIcon = new ImageIcon(newimg);  // transform it back
-                //this.customerPictureLabel.setIcon(imageIcon);
-                //this.imageIcon=imageIcon;
+                this.imageIcon = new ImageIcon(newimg);  // transform it back
                 this.mechanicPictureLabel.setIcon(imageIcon);
             } catch (Exception ex) {
                 ex.printStackTrace();

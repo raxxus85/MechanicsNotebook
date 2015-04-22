@@ -6,6 +6,7 @@ package windows;
 
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -62,8 +63,16 @@ public class CustomerWindow extends javax.swing.JFrame {
         this.customerLastNameTextField.setText(incomingCustomer.getLastName());
         this.customerDescriptionTextArea.setText(incomingCustomer.getDescription());
         if(incomingCustomer.getImageIcon()!=null){
-            this.customerPictureLabel.setIcon(incomingCustomer.getImageIcon());
-            this.imageIcon = incomingCustomer.getImageIcon();            
+            ImageIcon imageIcon = incomingCustomer.getImageIcon(); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it 
+            Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            this.imageIcon=imageIcon;
+            this.customerPictureLabel.setIcon(imageIcon);
+
+            //old
+            //this.customerPictureLabel.setIcon(incomingCustomer.getImageIcon());
+            //this.imageIcon = incomingCustomer.getImageIcon();            
         }        
     }
     
@@ -214,7 +223,7 @@ public class CustomerWindow extends javax.swing.JFrame {
                             .addComponent(customerMiddleNameLabel)
                             .addComponent(customerMiddleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(customerLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(customerLastNameLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -318,10 +327,21 @@ public class CustomerWindow extends javax.swing.JFrame {
                 } catch (IOException ex) {
                 Logger.getLogger(MechanicWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                ImageIcon icon = new ImageIcon(myPicture); 
-                this.customerPictureLabel.setIcon(icon);
+                //Time to transform!
+                ImageIcon icon = new ImageIcon(myPicture);                 
+                Image image = icon.getImage(); // transform it 
+                Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+                this.imageIcon = new ImageIcon(newimg);  // transform it back
+                this.customerPictureLabel.setIcon(imageIcon);
+                
+                
+                
+                
+                //old
+                //ImageIcon icon = new ImageIcon(myPicture); 
+                //this.customerPictureLabel.setIcon(icon);
                 // set the class imageIcon to this now for absorbtion
-                this.imageIcon = icon;
+                //this.imageIcon = icon;
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

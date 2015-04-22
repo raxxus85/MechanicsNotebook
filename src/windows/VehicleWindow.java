@@ -6,6 +6,7 @@ package windows;
 
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -64,8 +65,17 @@ public class VehicleWindow extends javax.swing.JFrame {
         this.vehicleOdometerTextField.setText(incomingVehicle.getOdometer().toString());
         this.vehicleDescriptionTextArea.setText(incomingVehicle.getDescription());
         if(incomingVehicle.getImageIcon()!=null){
-            this.vehiclePictureLabel.setIcon(incomingVehicle.getImageIcon());
-            this.imageIcon=incomingVehicle.getImageIcon();
+            ImageIcon imageIcon = incomingVehicle.getImageIcon(); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it 
+            Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            this.imageIcon=imageIcon;
+            this.vehiclePictureLabel.setIcon(imageIcon);
+            
+            
+            //old
+            //this.vehiclePictureLabel.setIcon(incomingVehicle.getImageIcon());
+            //this.imageIcon=incomingVehicle.getImageIcon();
         } 
         
     }
@@ -232,9 +242,9 @@ public class VehicleWindow extends javax.swing.JFrame {
                             .addComponent(vehicleMakeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vehicleMakeLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(vehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vehicleModelLabel))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(vehicleModelLabel)
+                            .addComponent(vehicleModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(vehicleYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,10 +376,21 @@ public class VehicleWindow extends javax.swing.JFrame {
                 } catch (IOException ex) {
                 Logger.getLogger(MechanicWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                ImageIcon icon = new ImageIcon(myPicture); 
-                this.vehiclePictureLabel.setIcon(icon);
+                //Time to transform!
+                ImageIcon icon = new ImageIcon(myPicture);                 
+                Image image = icon.getImage(); // transform it 
+                Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+                this.imageIcon = new ImageIcon(newimg);  // transform it back
+                this.vehiclePictureLabel.setIcon(imageIcon);
+                
+                
+                
+                
+                //OLD
+                //ImageIcon icon = new ImageIcon(myPicture); 
+                //this.vehiclePictureLabel.setIcon(icon);
                 // set the class imageIcon to this now for absorbtion
-                this.imageIcon = icon;
+                //this.imageIcon = icon;
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
