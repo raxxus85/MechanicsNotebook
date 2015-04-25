@@ -26,7 +26,12 @@ import objectmodels.MaintenanceType;
 import objectmodels.Modification;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
+import org.parse4j.ParseException;
+import org.parse4j.ParseUser;
+import parse.ParseEngine;
+import parse.TestClass;
 import windows.AboutWindow;
+import windows.CloudUserLoginCreationWindow;
 //import windows.MainWindow;
 //import windows.MainWindow;
 import windows.MainWindow;
@@ -70,11 +75,17 @@ public class MotoGarageNotebookEngine {
     private VehicleTrackersWindow vehicleTrackersWindow;
     private DragStripSlipWindow dragStripSlipWindow;
     private VehicleInformationGraphs vehicleInformationGraphs;
+    private CloudUserLoginCreationWindow cloudUserLoginCreationWindow;
     
     //Other Variables
     private Garage currentGarage;
     private DialogFactory dialogFactory;
     private Boolean saved;
+    
+    // Parse.com variables
+    ParseEngine parseEngine = new ParseEngine(this);
+    Boolean cloudEnabled = false;
+    ParseUser currentParseUser = null;
     
     public MotoGarageNotebookEngine(){
         // TESTING CODE NEW TO REMOVE ONCE WE IMPLEMENT CREATE/ OPEN/ SAVE
@@ -87,7 +98,12 @@ public class MotoGarageNotebookEngine {
      * @param args the command line arguments
      * MAIN PROGRAM ENTRY POINT!
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+        //TESTING
+        //TestClass testClass = new TestClass();
+        //testClass.testRun();
+        
+        //TESTING
         // TODO code application logic here
         MotoGarageNotebookEngine mechanicsNotebookEngine = new MotoGarageNotebookEngine();
         // create a DEFAULT GARAGE as program just opened
@@ -120,6 +136,26 @@ public class MotoGarageNotebookEngine {
         this.currentGarage = newGarage;
     }
     
+    public void setCurrentParseUser(ParseUser incomingParseUser){
+        this.currentParseUser = incomingParseUser;
+    }
+    
+    public ParseUser getCurrentParseUser(){
+        return this.currentParseUser;
+    }
+    
+    public ParseUser signUpUser(String username, String password){
+        ParseUser newUser = this.parseEngine.signUpUser(username, password);
+        this.currentParseUser = newUser;
+        return newUser;
+    }
+    
+    public ParseUser signInUser(String username, String password){
+        ParseUser signedInUser = this.parseEngine.signInUser(username, password);
+        this.currentParseUser = signedInUser;
+        return signedInUser;
+    }
+
 
     /**
      * Private method to open a Garage. Performs:
@@ -668,6 +704,11 @@ public class MotoGarageNotebookEngine {
     public void startNewMaintenanceActionWindow(){
         this.newMaintenenaceActionWindow = new NewMaintenanceActionWindow(this);
         this.newMaintenenaceActionWindow.setVisible(true);
+    }
+    
+    public void startNewCloudUserLoginCreationWindow(){
+        this.cloudUserLoginCreationWindow = new CloudUserLoginCreationWindow(this);
+        this.cloudUserLoginCreationWindow.setVisible(true);
     }
     
     public void startNewFuelEntryWindow(){

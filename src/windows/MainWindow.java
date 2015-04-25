@@ -916,6 +916,8 @@ public class MainWindow extends javax.swing.JFrame {
         mainWindowStatusBar = new org.jdesktop.swingx.JXStatusBar();
         mechanicsNotebookMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        loginMenuItem = new javax.swing.JMenuItem();
+        logoutMenuItem = new javax.swing.JMenuItem();
         newGarageMenuItem = new javax.swing.JMenuItem();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
@@ -1627,6 +1629,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         fileMenu.setText("File");
 
+        loginMenuItem.setText("Login");
+        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(loginMenuItem);
+
+        logoutMenuItem.setText("Logout");
+        fileMenu.add(logoutMenuItem);
+
         newGarageMenuItem.setText("New");
         newGarageMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2253,6 +2266,11 @@ public class MainWindow extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_vehiclesTableMouseReleased
 
+    private void loginMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginMenuItemActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageNotebookEngine.startNewCloudUserLoginCreationWindow();
+    }//GEN-LAST:event_loginMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2349,6 +2367,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JMenuItem loginMenuItem;
+    private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JToolBar mainToolBar;
     private org.jdesktop.swingx.JXStatusBar mainWindowStatusBar;
