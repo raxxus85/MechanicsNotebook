@@ -6,6 +6,7 @@
 package parse;
 
 import engine.MotoGarageNotebookEngine;
+import informationwindows.DialogType;
 import java.util.List;
 import org.json.JSONObject;
 import org.parse4j.Parse;
@@ -47,6 +48,8 @@ public class ParseEngine {
 
         try {
             user.signUp();
+            //user.save();
+            //this.createGarage(user);
             //user = user.login(userName,password);
             //user.signUp()
             //user.save();
@@ -54,19 +57,64 @@ public class ParseEngine {
         } catch (ParseException ex) {
             //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
+            //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, ex.toString());
+            if(ex.getCode() == 202){
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Username " + userName + " is already taken! Please try another.");
+            }
         }        
         return user;
     }
     
-    public void ensureUserHasGarage(ParseUser user){
-        
+        /**
+     * Method to sign in a Parse.com user
+     * @param userName
+     * @param password
+     * @return ParseUser
+     */
+    public ParseUser signInUser(String userName,String password){
+        ParseUser user = new ParseUser();
+        user.setUsername(userName);
+        //user.setEmail(email);
+        user.setPassword(password);    
+        try {
+            //user.signUp();
+            user = user.login(userName,password);
+            System.out.println(user.getSessionToken().toString());
+            //user.signUp()
+            user.save();
+            //this.createGarage(user);
+            this.ensureUserHasGarage(user);
+            //user.logout();      
+            
+        } catch (ParseException ex) {
+            //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, ex.toString());
+            if(ex.getCode()==101){
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Invalid login parameters. Either your username or password is incorrect");
+            }
+
+        }    
+        return user;
+    }
+    
+    
+    public void ensureUserHasGarage(ParseUser user) throws ParseException{       
         ParseQuery<ParseObject> basicQuery = ParseQuery.getQuery("Garage");
         basicQuery.whereEqualTo("User", user);
         basicQuery.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> garageList, ParseException e) {
                 if (e == null) {
-                    if(garageList.size()==0){
+                    if(garageList == null || garageList.isEmpty()){
                         //return true;
+                        System.out.println("0 garages found");
+                        
+                                // build out garage
+                        //ParseObject garage = new ParseObject("Garage");
+                        //garage.put("User", user);
+                        //garage.save();
+                        
+                        return; // exit, as it's either null or 0, and it'll break...
                     }
                     System.out.println("Retrieved " + garageList.size() + " garages");
                     for (ParseObject garage : garageList) {
@@ -82,6 +130,9 @@ public class ParseEngine {
                 }
             }
         });
+        System.out.println("WHOA WE HAVE : " + basicQuery.toString());
+        //basicQuery.
+        
     }
     
     public boolean createGarage(ParseUser incomingUser){
@@ -99,27 +150,5 @@ public class ParseEngine {
         
     }
     
-    /**
-     * Method to sign in a Parse.com user
-     * @param userName
-     * @param password
-     * @return ParseUser
-     */
-    public ParseUser signInUser(String userName,String password){
-        ParseUser user = new ParseUser();
-        user.setUsername(userName);
-        //user.setEmail(email);
-        user.setPassword(password);    
-        try {
-            //user.signUp();
-            user = user.login(userName,password);
-            //user.signUp()
-            user.save();
-            //user.logout();                       
-        } catch (ParseException ex) {
-            //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
-        }    
-        return user;
-    }
+
 }

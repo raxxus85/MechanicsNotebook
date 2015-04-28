@@ -1771,7 +1771,11 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
+        chooser.showOpenDialog(this);
+        //
+        //JFileChooser choice = new JFileChooser()
+        //choice.showOpenDialog(parent);
+        //
         File testFile = chooser.getSelectedFile();
         
         if(testFile != null){
@@ -1805,7 +1809,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        chooser.showSaveDialog(null);
+        chooser.showSaveDialog(this);
         
         if(chooser.getSelectedFile() != null){
             File testFile = chooser.getSelectedFile();
@@ -1829,8 +1833,10 @@ public class MainWindow extends javax.swing.JFrame {
         // 2) clear all data
         // 3) new garage object! nothing tied to it!
         
-        this.motoGarageNotebookEngine.createDefaultGarage();
-        this.refresh();
+        if(this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to create a new garage? Any existing changes won't be saved!")){
+           this.motoGarageNotebookEngine.createDefaultGarage(); 
+           this.refresh();
+        }
     }//GEN-LAST:event_newGarageMenuItemActionPerformed
 
     /**

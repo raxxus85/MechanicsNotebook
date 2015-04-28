@@ -151,7 +151,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JFrame {
             }
             this.dispose();
         }else if(!newUser.isAuthenticated()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" has NOT been created!");
+            //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" has NOT been created!");
         }
     }//GEN-LAST:event_createUserButtonActionPerformed
 
