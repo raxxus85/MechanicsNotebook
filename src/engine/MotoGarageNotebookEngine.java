@@ -197,15 +197,24 @@ public class MotoGarageNotebookEngine {
      */
     public boolean saveGarage(File fileToSaveAs){
         // time to attempt to SAVE!
-        
+        String trimmedFilePath = "";
         try{
             //FileOutputStream fileOutputStream = new FileOutputStream("C:\test");
-            FileOutputStream fileOutputStream = new FileOutputStream(fileToSaveAs.getAbsolutePath() + ".mnb");
+            if(fileToSaveAs.getAbsolutePath().contains(".mnb")){
+                //trimmedFilePath = fileToSaveAs.getAbsolutePath();
+                trimmedFilePath = fileToSaveAs.getAbsolutePath().substring(0,(fileToSaveAs.getAbsolutePath().indexOf(".mnb")));
+                trimmedFilePath = trimmedFilePath + ".mnb";
+            }else{
+                trimmedFilePath = fileToSaveAs.getAbsolutePath() + ".mnb";
+            }
+            
+            FileOutputStream fileOutputStream = new FileOutputStream(trimmedFilePath);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(this.currentGarage);
             objectOutputStream.close();
             fileOutputStream.close();
-            System.out.println("Data saved...");
+            System.out.println("Data saved to ...");
+            System.out.println(trimmedFilePath);
         }catch(IOException ex){
             this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Something went terribly wrong attempting to save!");
             System.out.println("WE FAILED ATTEMPTING TO SAVE!");

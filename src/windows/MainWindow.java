@@ -1814,12 +1814,8 @@ public class MainWindow extends javax.swing.JFrame {
         if(chooser.getSelectedFile() != null){
             File testFile = chooser.getSelectedFile();
             String filePath = testFile.getAbsolutePath();
-            try {
-                System.out.println(filePath);
-            } catch (Exception ex) {
-                System.out.println("dialog must have closed?");
-                ex.printStackTrace();
-            }
+            // TRIM .mnb if already exists
+
             this.motoGarageNotebookEngine.saveGarage(testFile);
         }
         
