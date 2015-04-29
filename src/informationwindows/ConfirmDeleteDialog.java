@@ -4,6 +4,7 @@
  */
 package informationwindows;
 
+import java.awt.Component;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -18,7 +19,7 @@ public class ConfirmDeleteDialog{
      * 
      * @param message 
      */
-    public boolean createConfirmDelete(String message){
+    public boolean createConfirmDelete(Component incomingParent,String message){
         //JOptionPane jOptionPane = new JOptionPane(message,JOptionPane.QUESTION_MESSAGE);
 
 
@@ -26,6 +27,8 @@ public class ConfirmDeleteDialog{
         
         
         JOptionPane jOptionPane = new JOptionPane();
+
+        jOptionPane.setLocation(incomingParent.getLocation());
         Object[] options = { "Confirm", "Cancel" };
         
         int choice = jOptionPane.showOptionDialog(null,message, "Warning!",

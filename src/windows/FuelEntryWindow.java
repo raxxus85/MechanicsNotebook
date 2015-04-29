@@ -184,7 +184,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
             FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()), this.datePicker.getDate(),Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));           
             this.mechanicsNotebookEngine.addFuelEntry(newFuelEntry);
             if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newFuelEntry.getOdometer())){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
                         + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
                 newFuelEntry.getOdometer().toString() + " miles.");
                 this.mechanicsNotebookEngine.updateVehicleMileage(newFuelEntry.getOdometer());

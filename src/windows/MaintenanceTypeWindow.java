@@ -187,7 +187,7 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     private void createOrUpdateMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrUpdateMaintenanceTypeButtonActionPerformed
         // Basic Checks
         if(this.maintenanceTypeNameTextField.getText().equals("")|| this.maintenanceTypeIntervalTextField.equals("") || this.maintenanceTypeDescriptionTextArea.equals("")){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "A Maintenance Type requires a Name, Recommended Interval, and Description.");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "A Maintenance Type requires a Name, Recommended Interval, and Description.");
             return;
         }      
         String newName = this.maintenanceTypeNameTextField.getText();
@@ -198,16 +198,16 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
         if(this.updatingMaintenanceType){
             boolean updatedMaintenanceType = this.mechanicsNotebookEngine.updateMaintenanceType(originalMaintenanceType, newMaintenanceType);
             if(updatedMaintenanceType){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Maintenance Type has been updated!");
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Maintenance Type has been updated!");
                 this.maintenanceTypesMainWindow.refreshMaintenanceTypeTable();
             }else{
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "An error occured attempting to update the Maintenance Type!");
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Maintenance Type!");
             }
             
             this.dispose();
         }else{
             this.mechanicsNotebookEngine.createNewMaintenanceType(newMaintenanceType);
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "New Maintenance Type," + newMaintenanceType.toString() + ", has been created!");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Maintenance Type," + newMaintenanceType.toString() + ", has been created!");
             // REFRESH
             this.maintenanceTypesMainWindow.refreshMaintenanceTypeTable();
             this.dispose();

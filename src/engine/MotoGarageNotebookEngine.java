@@ -6,6 +6,7 @@ package engine;
 
 import informationwindows.DialogFactory;
 import informationwindows.DialogType;
+import java.awt.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -118,9 +119,9 @@ public class MotoGarageNotebookEngine {
         try{
             mechanicsNotebookEngine.startMainWindow();
         }catch(Exception e){
-            mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Something horrible happened! " + e.toString());
-            mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.toString());
-            mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.getMessage());
+            //mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Something horrible happened! " + e.toString());
+            //mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.toString());
+            //mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.getMessage());
             
         }
  
@@ -180,10 +181,10 @@ public class MotoGarageNotebookEngine {
             
         }catch(ClassNotFoundException ex){
             ex.printStackTrace();
-            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!" );
+            this.dialogFactory.createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!" );
         }catch(IOException ex){
             ex.printStackTrace();
-            this.dialogFactory.createDialogMessage(DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file! Version mismatch!");
+            this.dialogFactory.createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file! Version mismatch!");
         }
         
     }
@@ -216,7 +217,7 @@ public class MotoGarageNotebookEngine {
             System.out.println("Data saved to ...");
             System.out.println(trimmedFilePath);
         }catch(IOException ex){
-            this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Something went terribly wrong attempting to save!");
+            this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "Something went terribly wrong attempting to save!");
             System.out.println("WE FAILED ATTEMPTING TO SAVE!");
             ex.printStackTrace();
         }
@@ -397,7 +398,7 @@ public class MotoGarageNotebookEngine {
      */
     public void deleteCurrentMechanic(){
         if(this.getCurrentMechanic()== null){
-            this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Mechanic, when there is none! Error!");
+            this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Mechanic, when there is none! Error!");
             return;
         }    
         this.getGarage().deleteCurrentMechanic();
@@ -411,7 +412,7 @@ public class MotoGarageNotebookEngine {
      */
     public void deleteCurrentCustomer(){
         if(this.getCurrentCustomer()== null){
-            this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Customer, when there is none! Error!");
+            this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Customer, when there is none! Error!");
             return;
         }    
         this.getGarage().deleteCurrentCustomer();
@@ -425,7 +426,7 @@ public class MotoGarageNotebookEngine {
      */
     public void deleteCurrentVehicle(){
         if(this.getCurrentVehicle()== null){
-            this.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Vehicle, when there is none! Error!");
+            this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "Engine is attempting to delete current Vehicle, when there is none! Error!");
             return;
         }       
         this.getGarage().deleteCurrentVehicle();
@@ -638,8 +639,8 @@ public class MotoGarageNotebookEngine {
     /**
      * Method to create a new mechanic window, which prompts user for new mechanic details
      */
-    public void startNewMechanicWindow(){
-        this.mechanicWindow = new MechanicWindow(this);
+    public void startNewMechanicWindow(Component incomingParent){
+        this.mechanicWindow = new MechanicWindow(incomingParent,this);
         this.mechanicWindow.setVisible(true);
     }
     
@@ -657,13 +658,13 @@ public class MotoGarageNotebookEngine {
      * Method to create an Update Mechanic Window, which prompts the user for updated Mechanic details
      *      
      */
-    public void startUpdateMechanicWindow(){
-        this.mechanicWindow = new MechanicWindow(this, this.getCurrentMechanic());
+    public void startUpdateMechanicWindow(Component incomingParent){
+        this.mechanicWindow = new MechanicWindow(incomingParent,this, this.getCurrentMechanic());
         this.mechanicWindow.setVisible(true);
     }
     
-    public void startUpdateVehicleWindow(){
-        this.vehicleWindow = new VehicleWindow(this, this.getCurrentVehicle());
+    public void startUpdateVehicleWindow(Component incomingParent){
+        this.vehicleWindow = new VehicleWindow(incomingParent,this, this.getCurrentVehicle());
         this.vehicleWindow.setVisible(true);
     }
     
@@ -672,8 +673,8 @@ public class MotoGarageNotebookEngine {
     /**
      * Method to create a new Customer Window, which prompts user for new Customer details
      */
-    public void startNewCustomerWindow(){
-        this.customerWindow = new CustomerWindow(this);
+    public void startNewCustomerWindow(Component incomingParent){
+        this.customerWindow = new CustomerWindow(incomingParent,this);
         this.customerWindow.setVisible(true);
     }
     
@@ -695,16 +696,16 @@ public class MotoGarageNotebookEngine {
     /**
      * Method to create a new Update Customer Window, which prompts the user for updated Customer details
      */
-    public void startUpdateCustomerWindow(){
-        this.customerWindow = new CustomerWindow(this, this.getCurrentCustomer());
+    public void startUpdateCustomerWindow(Component incomingParent){
+        this.customerWindow = new CustomerWindow(incomingParent,this, this.getCurrentCustomer());
         this.customerWindow.setVisible(true);
     }
     
     /**
      * Method to create a new Vehicle Window, which prompts the user for new Vehicle details
      */
-    public void startNewVehicleWindow(){
-        this.vehicleWindow = new VehicleWindow(this);
+    public void startNewVehicleWindow(Component incomingParent){
+        this.vehicleWindow = new VehicleWindow(incomingParent,this);
         this.vehicleWindow.setVisible(true);       
     }
         
@@ -726,8 +727,9 @@ public class MotoGarageNotebookEngine {
         this.aboutWindow.setVisible(true);
     }
     
-    public void startVehicleTrackersWindow(){
+    public void startVehicleTrackersWindow(Component incomingParent){
         this.vehicleTrackersWindow = new VehicleTrackersWindow(this);
+        this.vehicleTrackersWindow.setLocationRelativeTo(incomingParent);
         this.vehicleTrackersWindow.setVisible(true);
     }
     
@@ -748,8 +750,8 @@ public class MotoGarageNotebookEngine {
         this.maintenanceTypeWindow.setVisible(true);
     }
     
-    public void startNewMaintenanceActionWindow(){
-        this.newMaintenenaceActionWindow = new NewMaintenanceActionWindow(this);
+    public void startNewMaintenanceActionWindow(Component incomingParent){
+        this.newMaintenenaceActionWindow = new NewMaintenanceActionWindow(incomingParent,this);
         this.newMaintenenaceActionWindow.setVisible(true);
     }
     
@@ -778,13 +780,15 @@ public class MotoGarageNotebookEngine {
         this.fuelEntryWindow.setVisible(true);
     }
     
-    public void startMaintenanceActionWindow(MaintenanceAction incomingMaintenanceAction){
+    public void startMaintenanceActionWindow(Component incomingParent,MaintenanceAction incomingMaintenanceAction){
         this.maintenanceActionWindow = new MaintenanceActionWindow(this, incomingMaintenanceAction);
+        this.maintenanceActionWindow.setLocationRelativeTo(incomingParent);
         this.maintenanceActionWindow.setVisible(true);
     }
     
-    public void startMaintenanceTypesMainWindow(){
+    public void startMaintenanceTypesMainWindow(Component incomingParent){
         this.maintenanceTypesMainWindow = new MaintenanceTypesMainWindow(this);
+        this.maintenanceTypesMainWindow.setLocationRelativeTo(incomingParent);
         this.maintenanceTypesMainWindow.setVisible(true);
     }
     

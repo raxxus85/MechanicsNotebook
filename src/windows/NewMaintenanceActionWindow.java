@@ -6,6 +6,7 @@ package windows;
 
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Date;
 import java.util.Properties;
@@ -32,9 +33,10 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
      /**
      * Creates new form NewMaintenanceActionWindow
      */
-    public NewMaintenanceActionWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public NewMaintenanceActionWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         this.mechanicsNotebookEngine= incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setLocationRelativeTo(incomingParent);
         this.currentVehicleTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().toString());
         this.maintenenaceActionMileageTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
         this.setIcon();
@@ -232,7 +234,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
                     Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.datePerformedDatePicker.getDate(),this.maintenanceActionNotesTextArea.getText());
             this.mechanicsNotebookEngine.addMaintenanceAction(newMaintenanceAction);
             if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
                         + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
                 newMaintenanceAction.getOdometer().toString() + " miles.");
                 this.mechanicsNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());

@@ -59,7 +59,7 @@ public class ParseEngine {
             ex.printStackTrace();
             //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, ex.toString());
             if(ex.getCode() == 202){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Username " + userName + " is already taken! Please try another.");
+                //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Username " + userName + " is already taken! Please try another.");
             }
         }        
         return user;
@@ -91,7 +91,7 @@ public class ParseEngine {
             ex.printStackTrace();
             //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, ex.toString());
             if(ex.getCode()==101){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Invalid login parameters. Either your username or password is incorrect");
+                //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Invalid login parameters. Either your username or password is incorrect");
             }
 
         }    

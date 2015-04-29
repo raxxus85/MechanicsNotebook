@@ -142,11 +142,11 @@ public class CloudUserLoginCreationWindow extends javax.swing.JFrame {
         String password = this.passwordTextField.getText();
         ParseUser newUser = this.motoGarageNotebookEngine.signUpUser(username, password);
         if(newUser.isAuthenticated()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" has been created!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" has been created!");
             // time to sign the user in
             newUser = this.motoGarageNotebookEngine.signInUser(username, password);
             if(newUser.getSessionToken()!= null){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
                 this.motoGarageNotebookEngine.setCurrentParseUser(newUser);
             }
             this.dispose();
@@ -166,11 +166,11 @@ public class CloudUserLoginCreationWindow extends javax.swing.JFrame {
         String password = this.passwordTextField.getText();
         ParseUser newUser = this.motoGarageNotebookEngine.signInUser(username, password);
         if(newUser.isAuthenticated()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
             this.motoGarageNotebookEngine.setCurrentParseUser(newUser);
             this.dispose();
         }else{
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" can not login! Check your username and password and try again.");           
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" can not login! Check your username and password and try again.");           
         }
     }//GEN-LAST:event_loginUserButtonActionPerformed
 

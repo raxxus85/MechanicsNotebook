@@ -480,6 +480,7 @@ public class MainWindow extends javax.swing.JFrame {
             editMaintenanceActionButtonToolBar.setEnabled(true);
             deleteMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
+            vehicleMaintenanceTypeButton.setEnabled(true);
             maintenanceAlertButton.setEnabled(true);
             graphsButton.setEnabled(true);
             int newRowCount = this.motoGarageNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray().length;
@@ -499,7 +500,7 @@ public class MainWindow extends javax.swing.JFrame {
             addMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
             
-            
+            vehicleMaintenanceTypeButton.setEnabled(true);
             
             editMaintenanceActionButtonToolBar.setEnabled(false);
             deleteMaintenanceActionButtonToolBar.setEnabled(false);            
@@ -514,6 +515,7 @@ public class MainWindow extends javax.swing.JFrame {
             editMaintenanceActionButtonToolBar.setEnabled(false);
             deleteMaintenanceActionButtonToolBar.setEnabled(false);
             updateOdometerActionButtonToolBar.setEnabled(false);
+            vehicleMaintenanceTypeButton.setEnabled(false);
         }
     }    
     
@@ -846,6 +848,7 @@ public class MainWindow extends javax.swing.JFrame {
         importGarageButton = new javax.swing.JButton();
         exportGarageButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        vehicleMaintenanceTypeButton = new javax.swing.JButton();
         ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource("/odometer32x32ADD.png"));
         Action actionUpdateOdometerActionToolBar = new AbstractAction("New", updateOdometerActionToolBar) {
             public void actionPerformed(ActionEvent e) {
@@ -960,16 +963,17 @@ public class MainWindow extends javax.swing.JFrame {
         mainWindowStatusBar = new org.jdesktop.swingx.JXStatusBar();
         mechanicsNotebookMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        newGarageMenuItem = new javax.swing.JMenuItem();
         loginMenuItem = new javax.swing.JMenuItem();
         logoutMenuItem = new javax.swing.JMenuItem();
-        newGarageMenuItem = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
         fileMenuSeparator = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
         VehicleTrackersMenuItem = new javax.swing.JMenuItem();
+        viewEditMaintenanceTypesMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -1314,7 +1318,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(editMaintenanceTypesButton);
 
         importGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
-        importGarageButton.setToolTipText("Import Garage");
+        importGarageButton.setToolTipText("Load Garage");
         importGarageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importGarageButtonActionPerformed(evt);
@@ -1323,7 +1327,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(importGarageButton);
 
         exportGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32EXPORT.png"))); // NOI18N
-        exportGarageButton.setToolTipText("Export Garage");
+        exportGarageButton.setToolTipText("Save Garage");
         exportGarageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportGarageButtonActionPerformed(evt);
@@ -1331,6 +1335,13 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(exportGarageButton);
         mainToolBar.add(jSeparator2);
+
+        vehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32EDIT.png"))); // NOI18N
+        vehicleMaintenanceTypeButton.setFocusable(false);
+        vehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        vehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        vehicleMaintenanceTypeButton.setToolTipText("View and Edit Vehicle Specific Maintenance Types");
+        mainToolBar.add(vehicleMaintenanceTypeButton);
 
         updateOdometerActionButtonToolBar.setToolTipText("Update Odometer");
         updateOdometerActionButtonToolBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/odometer32x32ADD.png"))); // NOI18N
@@ -1722,17 +1733,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         fileMenu.setText("File");
 
-        loginMenuItem.setText("Login");
-        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(loginMenuItem);
-
-        logoutMenuItem.setText("Logout");
-        fileMenu.add(logoutMenuItem);
-
         newGarageMenuItem.setText("New");
         newGarageMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1741,7 +1741,21 @@ public class MainWindow extends javax.swing.JFrame {
         });
         fileMenu.add(newGarageMenuItem);
 
-        openMenuItem.setText("Open");
+        loginMenuItem.setText("Login");
+        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginMenuItemActionPerformed(evt);
+            }
+        });
+        loginMenuItem.setEnabled(false);
+        fileMenu.add(loginMenuItem);
+
+        logoutMenuItem.setText("Logout");
+        logoutMenuItem.setEnabled(false);
+        fileMenu.add(logoutMenuItem);
+        fileMenu.add(jSeparator4);
+
+        openMenuItem.setText("Load");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
@@ -1756,14 +1770,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setText("Save As");
-        saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveAsMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(saveAsMenuItem);
         fileMenu.add(fileMenuSeparator);
 
         exitMenuItem.setText("Exit");
@@ -1785,6 +1791,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         optionsMenu.add(VehicleTrackersMenuItem);
+
+        viewEditMaintenanceTypesMenuItem.setText("View / Edit Maintenance Types");
+        viewEditMaintenanceTypesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewEditMaintenanceTypesMenuItemActionPerformed(evt);
+            }
+        });
+        optionsMenu.add(viewEditMaintenanceTypesMenuItem);
 
         mechanicsNotebookMenuBar.add(optionsMenu);
 
@@ -1865,6 +1879,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(this);
+        chooser.setDialogTitle("Load Garage");
         //
         //JFileChooser choice = new JFileChooser()
         //choice.showOpenDialog(parent);
@@ -1903,6 +1918,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         chooser.showSaveDialog(this);
+        chooser.setDialogTitle("Save Garage");
         
         if(chooser.getSelectedFile() != null){
             File testFile = chooser.getSelectedFile();
@@ -1922,35 +1938,11 @@ public class MainWindow extends javax.swing.JFrame {
         // 2) clear all data
         // 3) new garage object! nothing tied to it!
         
-        if(this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to create a new garage? Any existing changes won't be saved!")){
+        if(this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to create a new garage? Any existing changes won't be saved!")){
            this.motoGarageNotebookEngine.createDefaultGarage(); 
            this.refresh();
         }
     }//GEN-LAST:event_newGarageMenuItemActionPerformed
-
-    /**
-     * Private method to "Save As". Should:
-     * <li> Prompt a Save dialog to allow the user to choose where and what to save
-     * @param evt 
-     */
-    private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
-        // TODO add your handling code here:
-                // TODO add your handling code here:
-                // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        chooser.showSaveDialog(this);
-        File testFile = chooser.getSelectedFile();
-        
-        if(testFile != null){
-            String filePath = testFile.getAbsolutePath();
-            try {
-                System.out.println(filePath);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        this.motoGarageNotebookEngine.saveGarage(testFile);
-    }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
     /**
      * Method used when a customer hits the About Menu Item
@@ -1965,30 +1957,30 @@ public class MainWindow extends javax.swing.JFrame {
     private void vehicleAddButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleAddButtonNewActionPerformed
         // TODO add your handling code here:
         if(this.motoGarageNotebookEngine.getCurrentCustomer()== null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must first have a Customer in order to add a Vehicle! Please create a Customer first.");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You must first have a Customer in order to add a Vehicle! Please create a Customer first.");
         }else{
-            this.motoGarageNotebookEngine.startNewVehicleWindow();
+            this.motoGarageNotebookEngine.startNewVehicleWindow(this);
         }
     }//GEN-LAST:event_vehicleAddButtonNewActionPerformed
 
     private void mechanicAddButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicAddButtonNewActionPerformed
         // User hit create new Mechanic button, let's do it!
-        this.motoGarageNotebookEngine.startNewMechanicWindow();
+        this.motoGarageNotebookEngine.startNewMechanicWindow(this);
     }//GEN-LAST:event_mechanicAddButtonNewActionPerformed
 
     private void mechanicButtonEditNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicButtonEditNewActionPerformed
         if(this.motoGarageNotebookEngine.getCurrentMechanic()==null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a Mechanic to edit!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You don't have a Mechanic to edit!");
         }else{
-            this.motoGarageNotebookEngine.startUpdateMechanicWindow();
+            this.motoGarageNotebookEngine.startUpdateMechanicWindow(this);
         }
     }//GEN-LAST:event_mechanicButtonEditNewActionPerformed
 
     private void mechanicDeleteButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicDeleteButtonNewActionPerformed
         if(this.motoGarageNotebookEngine.getCurrentMechanic()== null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Mechanic to delete!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Mechanic to delete!");
         }else{
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the current Mechanic? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the current Mechanic? This is permanent!");
             if(sureToDelete){
                 this.motoGarageNotebookEngine.deleteCurrentMechanic();
             }            
@@ -1997,23 +1989,23 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void customerAddButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerAddButtonNewActionPerformed
         // User pressed the new customer button, time to enact
-        this.motoGarageNotebookEngine.startNewCustomerWindow();
+        this.motoGarageNotebookEngine.startNewCustomerWindow(this);
     }//GEN-LAST:event_customerAddButtonNewActionPerformed
 
     private void customerEditButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerEditButtonNewActionPerformed
         if(this.motoGarageNotebookEngine.getCurrentCustomer()==null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a Customer to edit!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You don't have a Customer to edit!");
         }else{
-            this.motoGarageNotebookEngine.startUpdateCustomerWindow();
+            this.motoGarageNotebookEngine.startUpdateCustomerWindow(this);
         }
     }//GEN-LAST:event_customerEditButtonNewActionPerformed
 
     private void customerDeleteButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerDeleteButtonNewActionPerformed
         // TODO add your handling code here:
         if(this.motoGarageNotebookEngine.getCurrentCustomer()== null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Customer to delete!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Customer to delete!");
         }else{
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the current Customer? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the current Customer? This is permanent!");
             if(sureToDelete){
                 this.motoGarageNotebookEngine.deleteCurrentCustomer();
             }            
@@ -2023,9 +2015,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void vehicleDeleteButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleDeleteButtonNewActionPerformed
         // TODO add your handling code here:
         if(this.motoGarageNotebookEngine.getCurrentVehicle()== null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Vehicle to delete!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Vehicle to delete!");
         }else{
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the current Vehicle? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the current Vehicle? This is permanent!");
             if(sureToDelete){
                 this.motoGarageNotebookEngine.deleteCurrentVehicle();
             }            
@@ -2035,9 +2027,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void vehicleEditButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleEditButtonNewActionPerformed
         // TODO add your handling code here:
         if(this.motoGarageNotebookEngine.getCurrentVehicle()==null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You don't have a Vehicle to edit!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You don't have a Vehicle to edit!");
         }else{
-            this.motoGarageNotebookEngine.startUpdateVehicleWindow();
+            this.motoGarageNotebookEngine.startUpdateVehicleWindow(this);
         }
     }//GEN-LAST:event_vehicleEditButtonNewActionPerformed
 
@@ -2074,7 +2066,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void updateOdometerActionButtonToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOdometerActionButtonToolBarActionPerformed
         // TODO add your handling code here:
         if(this.motoGarageNotebookEngine.getCurrentVehicle()==null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You can't update mileage without a Vehicle!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You can't update mileage without a Vehicle!");
         }else{
             this.motoGarageNotebookEngine.startNewUpdateMileageWindow();
         }
@@ -2083,34 +2075,34 @@ public class MainWindow extends javax.swing.JFrame {
     private void addMaintenanceActionButtonToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceActionButtonToolBarActionPerformed
         // TODO add your handling code here:
         if(this.motoGarageNotebookEngine.getCurrentVehicle()==null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
         }else if(this.motoGarageNotebookEngine.getCurrentMechanic() == null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
         }else if(!this.motoGarageNotebookEngine.hasMaintenanceTypes()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE,"You must have at least one Maintenance Type before adding a Maintenace Action! Please create a Maintenance Type first.");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You must have at least one Maintenance Type before adding a Maintenace Action! Please create a Maintenance Type first.");
         }else{
-            this.motoGarageNotebookEngine.startNewMaintenanceActionWindow();
+            this.motoGarageNotebookEngine.startNewMaintenanceActionWindow(this);
         }
     }//GEN-LAST:event_addMaintenanceActionButtonToolBarActionPerformed
 
     private void addMaintenanceActionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceActionButtonActionPerformed
         // TODO add your handling code here:
         if(this.motoGarageNotebookEngine.getCurrentVehicle()==null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You must have a Vehicle to add a Maintenance Action!");
             return;
         }else if(this.motoGarageNotebookEngine.getCurrentMechanic() == null){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You must have a current Mechanic to create a Maintenance Action!");
         }else if(!this.motoGarageNotebookEngine.hasMaintenanceTypes()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You must have at least one Maintenance Type before adding a Maintenace Action! Please create a Maintenance Type first.");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You must have at least one Maintenance Type before adding a Maintenace Action! Please create a Maintenance Type first.");
         }
         else{
-            this.motoGarageNotebookEngine.startNewMaintenanceActionWindow();
+            this.motoGarageNotebookEngine.startNewMaintenanceActionWindow(this);
         }
     }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed
 
     private void editMaintenanceTypesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMaintenanceTypesButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startMaintenanceTypesMainWindow();
+        this.motoGarageNotebookEngine.startMaintenanceTypesMainWindow(this);
     }//GEN-LAST:event_editMaintenanceTypesButtonActionPerformed
 
     private void editMaintenanceActionButtonToolBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMaintenanceActionButtonToolBarActionPerformed
@@ -2120,9 +2112,9 @@ public class MainWindow extends javax.swing.JFrame {
             if(rowSelected>-1){
                 MaintenanceAction[] currentMaintenanceActions = this.motoGarageNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
                 MaintenanceAction selectedMaintenanceAction = currentMaintenanceActions[rowSelected];                
-                this.motoGarageNotebookEngine.startMaintenanceActionWindow(selectedMaintenanceAction);
+                this.motoGarageNotebookEngine.startMaintenanceActionWindow(this,selectedMaintenanceAction);
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Maintenance Action to Update.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Maintenance Action to Update.");
             }        
     }//GEN-LAST:event_editMaintenanceActionButtonToolBarActionPerformed
 
@@ -2130,7 +2122,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowSelected = maintenanceActionsTable.getSelectedRow();        
         if(rowSelected>-1){
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Maintenance Action? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Maintenance Action? This is permanent!");
             if(sureToDelete){
                 MaintenanceAction[] currentMaintenanceActions = this.motoGarageNotebookEngine.getCurrentVehicle().getMaintenanceActionsArray();
                 MaintenanceAction selectedMaintenanceAction = currentMaintenanceActions[rowSelected]; 
@@ -2138,7 +2130,7 @@ public class MainWindow extends javax.swing.JFrame {
                 this.motoGarageNotebookEngine.deleteMaintenaceAction(selectedMaintenanceAction);
             }    
         }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Maintenance Action to Delete.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Maintenance Action to Delete.");
             }  
         
     }//GEN-LAST:event_deleteMaintenanceActionButtonToolBarActionPerformed
@@ -2195,7 +2187,7 @@ public class MainWindow extends javax.swing.JFrame {
                 FuelEntry selectedFuelEntry = currentFuelEntries[rowSelected];                
                 this.motoGarageNotebookEngine.startViewOrEditFuelEntryWindow(selectedFuelEntry);
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Fuel Entry to Update.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Fuel Entry to Update.");
             } 
     }//GEN-LAST:event_fuelEntryEditButtonActionPerformed
 
@@ -2203,7 +2195,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowSelected = fuelEntriesTable.getSelectedRow();        
         if(rowSelected>-1){
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Fuel Entry? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Fuel Entry? This is permanent!");
             if(sureToDelete){
                 FuelEntry[] currentFuelEntries = this.motoGarageNotebookEngine.getCurrentVehicle().getFuelEntriesArray();
                 FuelEntry selectedFuelEntry = currentFuelEntries[rowSelected]; 
@@ -2211,7 +2203,7 @@ public class MainWindow extends javax.swing.JFrame {
                 this.motoGarageNotebookEngine.deleteFuelEntry(selectedFuelEntry);
             }    
         }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Maintenance Action to Delete.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Maintenance Action to Delete.");
             }  
     }//GEN-LAST:event_fuelEntryDeleteButtonActionPerformed
 
@@ -2224,7 +2216,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowSelected = warrantiesTable.getSelectedRow();        
         if(rowSelected>-1){
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Warranty? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Warranty? This is permanent!");
             if(sureToDelete){
                 Warranty[] currentWarranties = this.motoGarageNotebookEngine.getCurrentVehicle().getWarrantyArray();
                 Warranty selectedWarranty = currentWarranties[rowSelected]; 
@@ -2232,7 +2224,7 @@ public class MainWindow extends javax.swing.JFrame {
                 this.motoGarageNotebookEngine.deleteWarranty(selectedWarranty);
             }    
         }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Warranty to Delete.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Warranty to Delete.");
             }  
     }//GEN-LAST:event_deleteWarrantyButtonActionPerformed
 
@@ -2244,7 +2236,7 @@ public class MainWindow extends javax.swing.JFrame {
                 Warranty selectedWarranty = currentWarranties[rowSelected];                
                 this.motoGarageNotebookEngine.startViewOrEditWarrantyWindow(selectedWarranty);
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Warranty to View / Update.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Warranty to View / Update.");
             } 
     }//GEN-LAST:event_editWarrantyButtonActionPerformed
 
@@ -2257,7 +2249,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowSelected = modificationsTable.getSelectedRow();        
         if(rowSelected>-1){
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Modification? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Modification? This is permanent!");
             if(sureToDelete){
                 Modification[] currentModifications = this.motoGarageNotebookEngine.getCurrentVehicle().getModificationArray();
                 Modification selectedModification = currentModifications[rowSelected]; 
@@ -2265,7 +2257,7 @@ public class MainWindow extends javax.swing.JFrame {
                 this.motoGarageNotebookEngine.deleteModification(selectedModification);
             }    
         }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Modification to Delete.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Modification to Delete.");
             }  
     }//GEN-LAST:event_deleteModificationButtonActionPerformed
 
@@ -2277,13 +2269,13 @@ public class MainWindow extends javax.swing.JFrame {
                 Modification selectedModification = currentModifications[rowSelected];                
                 this.motoGarageNotebookEngine.startViewOrEditModificationWindow(selectedModification);
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Modification to View / Update.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Modification to View / Update.");
             } 
     }//GEN-LAST:event_editModificationButtonActionPerformed
 
     private void VehicleTrackersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VehicleTrackersMenuItemActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startVehicleTrackersWindow();
+        this.motoGarageNotebookEngine.startVehicleTrackersWindow(this);
     }//GEN-LAST:event_VehicleTrackersMenuItemActionPerformed
 
     private void dragStripSlipAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dragStripSlipAddButtonActionPerformed
@@ -2296,7 +2288,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowSelected = dragStripSlipsTable.getSelectedRow();        
         if(rowSelected>-1){
-            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Drag Strip Slip? This is permanent!");
+            boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Drag Strip Slip? This is permanent!");
             if(sureToDelete){
                 DragStripSlip[] currentDragStripSlips = this.motoGarageNotebookEngine.getCurrentVehicle().getDragStripSlipArray();
                 DragStripSlip selectedDragStripSlip = currentDragStripSlips[rowSelected]; 
@@ -2304,7 +2296,7 @@ public class MainWindow extends javax.swing.JFrame {
                 this.motoGarageNotebookEngine.deleteDragStripSlip(selectedDragStripSlip);
             }    
         }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Drag Strip Slip to Delete.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Drag Strip Slip to Delete.");
             }  
     }//GEN-LAST:event_dragStripSlipDeleteButtonActionPerformed
 
@@ -2316,7 +2308,7 @@ public class MainWindow extends javax.swing.JFrame {
                 DragStripSlip selectedDragStripSlip = currentDragStripSlips[rowSelected];                
                 this.motoGarageNotebookEngine.startUpdateDragStripSlipWindow(selectedDragStripSlip);
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE,"You have not selected a Drag Strip Slip to View / Update.");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Drag Strip Slip to View / Update.");
             } 
     }//GEN-LAST:event_dragStripSlipEditButtonActionPerformed
 
@@ -2365,6 +2357,11 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.motoGarageNotebookEngine.startNewCloudUserLoginCreationWindow();
     }//GEN-LAST:event_loginMenuItemActionPerformed
+
+    private void viewEditMaintenanceTypesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEditMaintenanceTypesMenuItemActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageNotebookEngine.startMaintenanceTypesMainWindow(this);
+    }//GEN-LAST:event_viewEditMaintenanceTypesMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2464,6 +2461,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JTabbedPane mainTabbedPane;
@@ -2489,7 +2487,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel oneOdoLabel;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenu optionsMenu;
-    private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JLabel sixOdoLabel;
     private javax.swing.JLabel threeOdoLabel;
@@ -2499,12 +2496,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton vehicleDeleteButtonNew;
     private javax.swing.JButton vehicleEditButtonNew;
     private javax.swing.JPanel vehicleMaintenanceActionsPanel;
+    private javax.swing.JButton vehicleMaintenanceTypeButton;
     private javax.swing.JLabel vehicleNameLabel;
     private javax.swing.JPanel vehiclePanelNew;
     private javax.swing.JLabel vehiclePictureLabel;
     private javax.swing.JToolBar vehicleToolBar;
     private javax.swing.JPanel vehicleWarrantiesPanel;
     private javax.swing.JTable vehiclesTable;
+    private javax.swing.JMenuItem viewEditMaintenanceTypesMenuItem;
     private javax.swing.JTable warrantiesTable;
     private javax.swing.JToolBar warrantyEntryToolBar;
     // End of variables declaration//GEN-END:variables

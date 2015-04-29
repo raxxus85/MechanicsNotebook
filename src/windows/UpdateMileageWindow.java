@@ -109,7 +109,7 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
     private void updateMileageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageButtonActionPerformed
         // TODO add your handling code here:
         if(this.updateMileageTextField.getText().equals("")){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must specify a mileage to update the current vehicle!");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "You must specify a mileage to update the current vehicle!");
             return;
         }else{
             Integer mileage= Integer.parseInt(this.updateMileageTextField.getText());

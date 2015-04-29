@@ -7,6 +7,7 @@ package windows;
 import informationwindows.DialogType;
 import objectmodels.Mechanic;
 import engine.MotoGarageNotebookEngine;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -38,25 +39,29 @@ public class MechanicWindow extends javax.swing.JFrame {
     
     /**
      * Creates new form MechanicWindow for CREATING Mechanic
+     * @param parent
+     * @param incomingMotoGarageMechanicEngine
      */
-    public MechanicWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public MechanicWindow(Component parent, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateMechanicButton.setText("Create Mechanic");
         this.setTitle("Create Mechanic");
+        this.setLocationRelativeTo(parent);
     }
     
     /**
      * Creates new form MechanicWindow for UPDATING Mechanic
      */
-    public MechanicWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
+    public MechanicWindow(Component parent, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateMechanicButton.setText("Update Mechanic");
         this.setTitle("Update Mechanic");
         this.updateMechanic = true;
+        this.setLocationRelativeTo(parent);
         
         this.mechanicFirstNameTextField.setText(incomingMechanic.getFirstName());
         this.mechanicMiddleNameTextField.setText(incomingMechanic.getMiddleName());
@@ -299,7 +304,7 @@ public class MechanicWindow extends javax.swing.JFrame {
         String incomingDescription = this.mechanicDescriptionTextArea.getText();
         
         if(this.mechanicFirstNameTextField.getText().equals("") || this.mechanicMiddleNameTextField.getText().equals("") || this.mechanicLastNameTextField.getText().equals("")){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "A Mechanic requires a first, middle, and last name! Please enter them and try again.");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "A Mechanic requires a first, middle, and last name! Please enter them and try again.");
                 return;
         }
         Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
@@ -312,17 +317,17 @@ public class MechanicWindow extends javax.swing.JFrame {
         if(!this.updateMechanic){            
             boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
             if(mechanicCreated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
             } else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
             }
             this.dispose();
         }else if(this.updateMechanic){
             boolean mechanicUpdated = this.motoGarageMechanicEngine.updateMechanic(newMechanic);
             if(mechanicUpdated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", updated successfully!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", updated successfully!");
             } else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not update a Mechanic with that name!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not update a Mechanic with that name!");
             }
             this.dispose();
         }
@@ -335,7 +340,10 @@ public class MechanicWindow extends javax.swing.JFrame {
     private void openMechanicPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMechanicPictureButtonActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
+        chooser.showOpenDialog(this);
+       
+        
+        
         File testFile = chooser.getSelectedFile();
         String filePath="";
         if(testFile != null){

@@ -6,6 +6,7 @@ package windows;
 
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -30,7 +31,8 @@ public class CustomerWindow extends javax.swing.JFrame {
     /**
      * Creates new form CustomerWindow
      */
-    public CustomerWindow() {
+    public CustomerWindow(Component incomingParent) {
+        this.setLocationRelativeTo(incomingParent);
         initComponents();
     }
     
@@ -38,21 +40,23 @@ public class CustomerWindow extends javax.swing.JFrame {
      * Main constructor, used when creating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public CustomerWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Create Customer");
         this.setTitle("Create Customer");
+        this.setLocationRelativeTo(incomingParent);
     }
     
      /**
      * Main constructor, used when updating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
+    public CustomerWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setLocationRelativeTo(incomingParent);
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Update Customer");
         this.setTitle("Update Customer");
@@ -277,7 +281,7 @@ public class CustomerWindow extends javax.swing.JFrame {
         String incomingLastName = this.customerLastNameTextField.getText();
         String incomingDescription = this.customerDescriptionTextArea.getText();
         if(this.customerFirstNameTextField.getText().equals("") || this.customerMiddleNameTextField.getText().equals("") || this.customerLastNameTextField.getText().equals("")){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "A Customer requires a first, middle, and last name! Please enter them and try again.");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "A Customer requires a first, middle, and last name! Please enter them and try again.");
             return;
         }
         Customer newCustomer = new Customer(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
@@ -290,9 +294,9 @@ public class CustomerWindow extends javax.swing.JFrame {
         boolean customerCreated = this.motoGarageMechanicEngine.createNewCustomer(newCustomer);
 
         if(customerCreated){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", created successfully!");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", created successfully!");
         } else{
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not create a Customer with that name!");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not create a Customer with that name!");
         }
         this.dispose();
         } else if(this.updateCustomer){
@@ -303,9 +307,9 @@ public class CustomerWindow extends javax.swing.JFrame {
             System.out.println("attempting to update with " + newCustomer.toString());
             boolean customerUpdated = this.motoGarageMechanicEngine.updateCustomer(newCustomer);
             if(customerUpdated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", updated successfully!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", updated successfully!");
             } else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Can not updated a Customer with that name!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not updated a Customer with that name!");
             }
             this.dispose();
         }
@@ -315,7 +319,7 @@ public class CustomerWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
+        chooser.showOpenDialog(this);
         File testFile = chooser.getSelectedFile();
         String filePath="";
         if(testFile != null){
@@ -384,7 +388,7 @@ public class CustomerWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerWindow().setVisible(true);
+                //new CustomerWindow().setVisible(true);
             }
         });
     }

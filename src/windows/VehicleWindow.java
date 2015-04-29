@@ -6,6 +6,7 @@ package windows;
 
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -38,9 +39,10 @@ public class VehicleWindow extends javax.swing.JFrame {
     /**
      * Creates new form VehicleWindow, used for creating a Vehicle
      */
-    public VehicleWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public VehicleWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setLocationRelativeTo(incomingParent);
         this.setIcon();
         this.createOrUpdateVehicleButton.setText("Create Vehicle");
         this.setTitle("Create Vehicle");
@@ -49,9 +51,10 @@ public class VehicleWindow extends javax.swing.JFrame {
     /**
      * Creates new form VehicleWindow, used for updating a Vehicle
      */
-    public VehicleWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
+    public VehicleWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
+        this.setLocationRelativeTo(incomingParent);
         this.setIcon();
         this.createOrUpdateVehicleButton.setText("Update Vehicle");
         this.setTitle("View / Update Vehicle");
@@ -321,7 +324,7 @@ public class VehicleWindow extends javax.swing.JFrame {
         String newVehicleDescription = this.vehicleDescriptionTextArea.getText();
         // MUST HAVE AT LEAST A MAKE AND MODEL
         if(newVehicleMake.equals("")||newVehicleModel.equals("")){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "You must specify a Make, Model and Year before creating a Vehicle!");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "You must specify a Make, Model and Year before creating a Vehicle!");
             //if(newVehicleYear
             return;
         }
@@ -331,7 +334,7 @@ public class VehicleWindow extends javax.swing.JFrame {
             newVehicleYear = Integer.parseInt(this.vehicleYearTextField.getText());
             newVehicleOdometer = Integer.parseInt(this.vehicleOdometerTextField.getText());
         }catch(NumberFormatException ex){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
+            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
             return;
         }
         
@@ -343,17 +346,17 @@ public class VehicleWindow extends javax.swing.JFrame {
         if(this.updateVehicle){
             boolean vehicleUpdated = this.motoGarageMechanicEngine.updateVehicle(newVehicle);
             if(vehicleUpdated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been updated!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been updated!");
             }else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle was not updated!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle was not updated!");
             }
             this.dispose();
         }else{ // creating...
             boolean vehicleCreated = this.motoGarageMechanicEngine.createNewVehicle(newVehicle);
             if(vehicleCreated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been created!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been created!");
             }else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "The Vehicle was not created!");
+                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle was not created!");
             }
             this.dispose();  
         }
@@ -364,7 +367,7 @@ public class VehicleWindow extends javax.swing.JFrame {
     private void openPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPictureButtonActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
+        chooser.showOpenDialog(this);
         File testFile = chooser.getSelectedFile();
         String filePath="";
         if(testFile != null){

@@ -231,7 +231,7 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
         
         this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
         if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
                         + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
                 newMaintenanceAction.getOdometer().toString() + " miles.");
                 this.mechanicsNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());

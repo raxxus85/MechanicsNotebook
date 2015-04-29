@@ -228,7 +228,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
             MaintenanceType selectedMaintenanceType = maintenanceTypes[rowSelected];
             this.mechanicsNotebookEngine.startUpdateMaintenanceTypeWindow(this,selectedMaintenanceType);
         }else{
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to edit.");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to edit.");
         }
 
     }//GEN-LAST:event_editMaintenanceTypeButtonActionPerformed
@@ -238,18 +238,18 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
         int rowSelected = this.maintenanceTypesTable.getSelectedRow();
         
         if(rowSelected==-1){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to delete.");
+            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to delete.");
             return;
         }
-        boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage("Are you sure you wish to delete the Maintenance Type? This is permanent!");
+        boolean sureToDelete = this.mechanicsNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Maintenance Type? This is permanent!");
         if(sureToDelete){
             MaintenanceType[] maintenanceTypes = this.mechanicsNotebookEngine.getMaintenaceTypeArray();
             MaintenanceType selectedMaintenanceType = maintenanceTypes[rowSelected];
             if(this.mechanicsNotebookEngine.deleteMaintenanceType(selectedMaintenanceType)){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, "Maintenance Type deleted successfully!");
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Maintenance Type deleted successfully!");
                 this.refreshMaintenanceTypeTable();
             }else{
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Error attempting to delete Maintenace Type! Please report!");
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Maintenace Type! Please report!");
             }
             
         }
