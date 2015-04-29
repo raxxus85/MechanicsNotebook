@@ -28,6 +28,8 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -116,6 +118,8 @@ public class MainWindow extends javax.swing.JFrame {
         
         this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
         initComponents();   
+        
+        
         //this.getContentPane().setBackground(Color.black);
         //this.mainTabbedPane.setBackground(Color.black);
         //this.mechanicsPanel.setBackground(Color.black);
@@ -709,6 +713,14 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void refreshCurrentVehicleInformation(){
+        ArrayList<JLabel> listOfLabels = new ArrayList<>();
+            listOfLabels.add(this.oneOdoLabel);
+            listOfLabels.add(this.twoOdoLabel);
+            listOfLabels.add(this.threeOdoLabel);
+            listOfLabels.add(this.fourOdoLabel);
+            listOfLabels.add(this.fiveOdoLabel);
+            listOfLabels.add(this.sixOdoLabel); 
+            
         if(this.motoGarageNotebookEngine.getCurrentVehicle()!=null){
             Vehicle currentVehicle= this.motoGarageNotebookEngine.getCurrentVehicle();
             if(currentVehicle.getImageIcon()!=null){               
@@ -721,11 +733,36 @@ public class MainWindow extends javax.swing.JFrame {
                 this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N);
             }
             this.vehicleNameLabel.setText(currentVehicle.getYear().toString() + " " +currentVehicle.getMake() + " " + currentVehicle.getModel());
-            this.currentVehicleOdometerLabel.setText("Odometer: " + currentVehicle.getOdometer().toString());
+            //this.currentVehicleOdometerLabel.setText("Odometer: " + currentVehicle.getOdometer().toString());
+            
+            // SET THE ODOMETER
+            
+            // reset the odometer
+            for (JLabel item : listOfLabels) {
+                item.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.motoGarageNotebookEngine.getOdoImagePath(0))));
+            }          
+            
+            Integer currentOdometer = currentVehicle.getOdometer();
+            String testString = String.valueOf(currentOdometer);
+            int length = testString.length();          
+            int currentPlace = 6-length ; // with 4, that'd be 3rd...         
+            int i = 0;
+            while(i<length){
+                int odo = Integer.parseInt(Character.toString(testString.charAt(i)));
+                listOfLabels.get(currentPlace).setIcon(new javax.swing.ImageIcon(getClass().getResource(this.motoGarageNotebookEngine.getOdoImagePath(odo))));
+                i++;
+                currentPlace++;
+            }
+            
         }else{  
             this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N);
             this.vehicleNameLabel.setText("No Vehicle Selected");
-            this.currentVehicleOdometerLabel.setText("Odometer: ");
+
+            // reset the odometer
+            for (JLabel item : listOfLabels) {
+                item.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.motoGarageNotebookEngine.getOdoImagePath(0))));
+            } 
+            
         }
         
     }
@@ -907,6 +944,13 @@ public class MainWindow extends javax.swing.JFrame {
         vehiclePictureLabel = new javax.swing.JLabel();
         vehicleNameLabel = new javax.swing.JLabel();
         currentVehicleOdometerLabel = new javax.swing.JLabel();
+        odometerPanel = new javax.swing.JPanel();
+        oneOdoLabel = new javax.swing.JLabel();
+        twoOdoLabel = new javax.swing.JLabel();
+        threeOdoLabel = new javax.swing.JLabel();
+        fourOdoLabel = new javax.swing.JLabel();
+        fiveOdoLabel = new javax.swing.JLabel();
+        sixOdoLabel = new javax.swing.JLabel();
         currentCustomerPanel = new javax.swing.JPanel();
         customerPictureLabel = new javax.swing.JLabel();
         customerNameLabel = new javax.swing.JLabel();
@@ -1558,6 +1602,49 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentVehicleOdometerLabel.setText("Odometer:");
 
+        oneOdoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oneOdometer.png"))); // NOI18N
+
+        twoOdoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/twoOdometer.png"))); // NOI18N
+
+        threeOdoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/threeOdometer.png"))); // NOI18N
+
+        fourOdoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fourOdometer.png"))); // NOI18N
+
+        fiveOdoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fiveOdometer.png"))); // NOI18N
+
+        sixOdoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sixOdometer.png"))); // NOI18N
+
+        javax.swing.GroupLayout odometerPanelLayout = new javax.swing.GroupLayout(odometerPanel);
+        odometerPanel.setLayout(odometerPanelLayout);
+        odometerPanelLayout.setHorizontalGroup(
+            odometerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(odometerPanelLayout.createSequentialGroup()
+                .addComponent(oneOdoLabel)
+                .addGap(0, 0, 0)
+                .addComponent(twoOdoLabel)
+                .addGap(0, 0, 0)
+                .addComponent(threeOdoLabel)
+                .addGap(0, 0, 0)
+                .addComponent(fourOdoLabel)
+                .addGap(0, 0, 0)
+                .addComponent(fiveOdoLabel)
+                .addGap(0, 0, 0)
+                .addComponent(sixOdoLabel))
+        );
+        odometerPanelLayout.setVerticalGroup(
+            odometerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(odometerPanelLayout.createSequentialGroup()
+                .addGroup(odometerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(sixOdoLabel)
+                    .addComponent(fiveOdoLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(odometerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(oneOdoLabel)
+                        .addComponent(twoOdoLabel)
+                        .addComponent(threeOdoLabel)
+                        .addComponent(fourOdoLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout currentVehiclePanelLayout = new javax.swing.GroupLayout(currentVehiclePanel);
         currentVehiclePanel.setLayout(currentVehiclePanelLayout);
         currentVehiclePanelLayout.setHorizontalGroup(
@@ -1566,8 +1653,12 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vehicleNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                    .addComponent(currentVehicleOdometerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(vehicleNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(currentVehiclePanelLayout.createSequentialGroup()
+                        .addComponent(currentVehicleOdometerLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(odometerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 57, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         currentVehiclePanelLayout.setVerticalGroup(
@@ -1577,7 +1668,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(currentVehiclePanelLayout.createSequentialGroup()
                         .addComponent(vehicleNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(currentVehicleOdometerLabel))
+                        .addGroup(currentVehiclePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(currentVehicleOdometerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(odometerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(vehiclePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1845,7 +1938,7 @@ public class MainWindow extends javax.swing.JFrame {
                 // TODO add your handling code here:
                 // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        chooser.showSaveDialog(null);
+        chooser.showSaveDialog(this);
         File testFile = chooser.getSelectedFile();
         
         if(testFile != null){
@@ -2345,6 +2438,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton exportGarageButton;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPopupMenu.Separator fileMenuSeparator;
+    private javax.swing.JLabel fiveOdoLabel;
+    private javax.swing.JLabel fourOdoLabel;
     private javax.swing.JPanel fuelEntriesPanel;
     private javax.swing.JTable fuelEntriesTable;
     private javax.swing.JButton fuelEntryAddButton;
@@ -2390,10 +2485,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel modificationsPanel;
     private javax.swing.JTable modificationsTable;
     private javax.swing.JMenuItem newGarageMenuItem;
+    private javax.swing.JPanel odometerPanel;
+    private javax.swing.JLabel oneOdoLabel;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenu optionsMenu;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JLabel sixOdoLabel;
+    private javax.swing.JLabel threeOdoLabel;
+    private javax.swing.JLabel twoOdoLabel;
     private javax.swing.JButton updateOdometerActionButtonToolBar;
     private javax.swing.JButton vehicleAddButtonNew;
     private javax.swing.JButton vehicleDeleteButtonNew;

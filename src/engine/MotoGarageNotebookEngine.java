@@ -198,8 +198,6 @@ public class MotoGarageNotebookEngine {
     public boolean saveGarage(File fileToSaveAs){
         // time to attempt to SAVE!
         String trimmedFilePath = "";
-        try{
-            //FileOutputStream fileOutputStream = new FileOutputStream("C:\test");
             if(fileToSaveAs.getAbsolutePath().contains(".mnb")){
                 //trimmedFilePath = fileToSaveAs.getAbsolutePath();
                 trimmedFilePath = fileToSaveAs.getAbsolutePath().substring(0,(fileToSaveAs.getAbsolutePath().indexOf(".mnb")));
@@ -207,12 +205,14 @@ public class MotoGarageNotebookEngine {
             }else{
                 trimmedFilePath = fileToSaveAs.getAbsolutePath() + ".mnb";
             }
-            
+
+        try{
             FileOutputStream fileOutputStream = new FileOutputStream(trimmedFilePath);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(this.currentGarage);
             objectOutputStream.close();
             fileOutputStream.close();
+
             System.out.println("Data saved to ...");
             System.out.println(trimmedFilePath);
         }catch(IOException ex){
@@ -221,6 +221,44 @@ public class MotoGarageNotebookEngine {
             ex.printStackTrace();
         }
         return true;
+    }
+    
+    public String getOdoImagePath(int incomingIndex){
+        String path = "";
+        switch(incomingIndex){
+            case 0:
+                path ="/zeroOdometer.png";
+                break;
+            case 1:
+                path ="/oneOdometer.png";
+                break;
+            case 2:
+                path ="/twoOdometer.png";
+                break;
+            case 3:
+                path ="/threeOdometer.png";
+                break;
+            case 4:
+                path ="/fourOdometer.png";
+                break;    
+            case 5:
+                path ="/fiveOdometer.png";
+                break;    
+            case 6:
+                path ="/sixOdometer.png";
+                break;
+            case 7:
+                path ="/sevenOdometer.png";
+                break;
+            case 8:
+                path ="/eightOdometer.png";
+                break;
+            case 9:
+                path ="/nineOdometer.png";
+                break;  
+  
+        }
+        return path;
     }
     
     public void setVehicleTrackersChanged(Boolean incomingBoolean){
