@@ -969,6 +969,7 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
+        saveAsMenuItem = new javax.swing.JMenuItem();
         fileMenuSeparator = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
@@ -1770,6 +1771,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         fileMenu.add(saveMenuItem);
+
+        saveAsMenuItem.setText("Save As");
+        saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(saveAsMenuItem);
         fileMenu.add(fileMenuSeparator);
 
         exitMenuItem.setText("Exit");
@@ -1916,17 +1925,18 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        chooser.showSaveDialog(this);
-        chooser.setDialogTitle("Save Garage");
-        
-        if(chooser.getSelectedFile() != null){
+        if(this.motoGarageNotebookEngine.getSaveFile()!=null){
+            File fileToSave = this.motoGarageNotebookEngine.getSaveFile();
+            this.motoGarageNotebookEngine.saveGarage(fileToSave);
+        }else{
+            JFileChooser chooser = new JFileChooser();
+            chooser.showSaveDialog(this);
+            chooser.setDialogTitle("Save Garage");
             File testFile = chooser.getSelectedFile();
             String filePath = testFile.getAbsolutePath();
-            // TRIM .mnb if already exists
-
             this.motoGarageNotebookEngine.saveGarage(testFile);
         }
+        
         
     }//GEN-LAST:event_saveMenuItemActionPerformed
 
@@ -2363,6 +2373,22 @@ public class MainWindow extends javax.swing.JFrame {
         this.motoGarageNotebookEngine.startMaintenanceTypesMainWindow(this);
     }//GEN-LAST:event_viewEditMaintenanceTypesMenuItemActionPerformed
 
+    private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+        // TODO add your handling code here:
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.showSaveDialog(this);
+        chooser.setDialogTitle("Save Garage");
+        
+        if(chooser.getSelectedFile() != null){
+            File testFile = chooser.getSelectedFile();
+            String filePath = testFile.getAbsolutePath();
+            // TRIM .mnb if already exists
+
+            this.motoGarageNotebookEngine.saveGarage(testFile);
+        }
+    }//GEN-LAST:event_saveAsMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2487,6 +2513,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel oneOdoLabel;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenu optionsMenu;
+    private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JLabel sixOdoLabel;
     private javax.swing.JLabel threeOdoLabel;

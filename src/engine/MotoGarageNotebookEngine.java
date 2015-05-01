@@ -189,6 +189,12 @@ public class MotoGarageNotebookEngine {
         
     }
     
+    public File getSaveFile(){
+        
+        File currentSaveFile = this.currentGarage.getSaveFile();
+        return currentSaveFile;
+    }
+    
     /**
      * Method used to SAVE the Garage and all it's contents
      * <li> VERY IMPORTANT
@@ -213,6 +219,8 @@ public class MotoGarageNotebookEngine {
             objectOutputStream.writeObject(this.currentGarage);
             objectOutputStream.close();
             fileOutputStream.close();
+            // set garage save file
+            this.currentGarage.setSaveFile(fileToSaveAs);
 
             System.out.println("Data saved to ...");
             System.out.println(trimmedFilePath);

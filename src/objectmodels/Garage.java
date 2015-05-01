@@ -1,5 +1,6 @@
 package objectmodels;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -8,6 +9,9 @@ import java.util.ArrayList;
  * @author Mark
  */
 public class Garage implements Serializable{
+    // save file, only not null if it already exists 
+    File currentSaveFile = null;
+    
     // vehicle trackers
     private Boolean fuelEntriesEnabled = false;
     private Boolean warrantiesEnabled = false;
@@ -29,6 +33,14 @@ public class Garage implements Serializable{
     
     // current object manipulation methods
    
+    public void setSaveFile(File incomingFile){
+        this.currentSaveFile = incomingFile;
+    }
+    
+    public File getSaveFile(){
+        return this.currentSaveFile;
+    }
+    
     public void setVehicleTrackersChanged(Boolean incomingBoolean){
         this.vehicleTrackersChanged = incomingBoolean;
     }
