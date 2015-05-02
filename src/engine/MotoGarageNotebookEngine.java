@@ -221,7 +221,7 @@ public class MotoGarageNotebookEngine {
             fileOutputStream.close();
             // set garage save file
             this.currentGarage.setSaveFile(fileToSaveAs);
-
+            this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.INFORMATION_MESSAGE, "File saved successfully.");
             System.out.println("Data saved to ...");
             System.out.println(trimmedFilePath);
         }catch(IOException ex){

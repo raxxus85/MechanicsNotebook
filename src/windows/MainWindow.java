@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.stage.FileChooser;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -52,6 +53,7 @@ import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import objectmodels.Customer;
 import objectmodels.DragStripSlip;
@@ -63,6 +65,8 @@ import objectmodels.MouseAdapter2;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
 import org.jdesktop.swingx.JXStatusBar;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -964,12 +968,14 @@ public class MainWindow extends javax.swing.JFrame {
         mechanicsNotebookMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newGarageMenuItem = new javax.swing.JMenuItem();
-        loginMenuItem = new javax.swing.JMenuItem();
-        logoutMenuItem = new javax.swing.JMenuItem();
-        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         openMenuItem = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        loginMenuItem = new javax.swing.JMenuItem();
+        logoutMenuItem = new javax.swing.JMenuItem();
         fileMenuSeparator = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
@@ -1741,20 +1747,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         fileMenu.add(newGarageMenuItem);
-
-        loginMenuItem.setText("Login");
-        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginMenuItemActionPerformed(evt);
-            }
-        });
-        loginMenuItem.setEnabled(false);
-        fileMenu.add(loginMenuItem);
-
-        logoutMenuItem.setText("Logout");
-        logoutMenuItem.setEnabled(false);
-        fileMenu.add(logoutMenuItem);
-        fileMenu.add(jSeparator4);
+        fileMenu.add(jSeparator5);
 
         openMenuItem.setText("Load");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -1763,6 +1756,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         fileMenu.add(openMenuItem);
+        fileMenu.add(jSeparator6);
 
         saveMenuItem.setText("Save");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -1779,6 +1773,20 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         fileMenu.add(saveAsMenuItem);
+        fileMenu.add(jSeparator4);
+
+        loginMenuItem.setText("Login");
+        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginMenuItemActionPerformed(evt);
+            }
+        });
+        loginMenuItem.setEnabled(false);
+        fileMenu.add(loginMenuItem);
+
+        logoutMenuItem.setText("Logout");
+        logoutMenuItem.setEnabled(false);
+        fileMenu.add(logoutMenuItem);
         fileMenu.add(fileMenuSeparator);
 
         exitMenuItem.setText("Exit");
@@ -1887,15 +1895,16 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(this);
-        chooser.setDialogTitle("Load Garage");
+        //chooser.showOpenDialog(this);
+        //chooser.setDialogTitle("Load Garage");
+        int returnVal = chooser.showDialog(this, "Load Garage");
         //
         //JFileChooser choice = new JFileChooser()
         //choice.showOpenDialog(parent);
         //
         File testFile = chooser.getSelectedFile();
         
-        if(testFile != null){
+        if(testFile != null && returnVal == 0){
             String filePath = testFile.getAbsolutePath();
             try {
                 System.out.println(filePath);
@@ -1930,11 +1939,26 @@ public class MainWindow extends javax.swing.JFrame {
             this.motoGarageNotebookEngine.saveGarage(fileToSave);
         }else{
             JFileChooser chooser = new JFileChooser();
-            chooser.showSaveDialog(this);
-            chooser.setDialogTitle("Save Garage");
-            File testFile = chooser.getSelectedFile();
-            String filePath = testFile.getAbsolutePath();
-            this.motoGarageNotebookEngine.saveGarage(testFile);
+            
+            //chooser.setDialogTitle("Save Garage");
+            // .mnb FILTER
+            // Set extension filter
+
+            //chooser.setFileFilter(new FileNameExtensionFilter("Mechanic Notebook Files", ".class"));
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+            chooser.setFileFilter(filter);
+
+            int returnVal = chooser.showDialog(this, "Save Garage");
+   
+            // if returnVal == 0, user press accept
+            if(returnVal==0){
+                File testFile = chooser.getSelectedFile();
+                String filePath = testFile.getAbsolutePath();
+                this.motoGarageNotebookEngine.saveGarage(testFile);
+            }
+                
+            
+
         }
         
         
@@ -2377,10 +2401,12 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         JFileChooser chooser = new JFileChooser();
-        chooser.showSaveDialog(this);
-        chooser.setDialogTitle("Save Garage");
+        //chooser.showSaveDialog(this);
+        //chooser.setDialogTitle("Save Garage");
         
-        if(chooser.getSelectedFile() != null){
+        int returnVal = chooser.showDialog(this, "Save Garage");
+        
+        if(chooser.getSelectedFile() != null && returnVal ==0){
             File testFile = chooser.getSelectedFile();
             String filePath = testFile.getAbsolutePath();
             // TRIM .mnb if already exists
@@ -2488,6 +2514,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JTabbedPane mainTabbedPane;
