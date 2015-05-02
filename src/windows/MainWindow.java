@@ -1897,6 +1897,9 @@ public class MainWindow extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         //chooser.showOpenDialog(this);
         //chooser.setDialogTitle("Load Garage");
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+        chooser.setFileFilter(filter);
         int returnVal = chooser.showDialog(this, "Load Garage");
         //
         //JFileChooser choice = new JFileChooser()
@@ -2403,6 +2406,11 @@ public class MainWindow extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         //chooser.showSaveDialog(this);
         //chooser.setDialogTitle("Save Garage");
+        
+        
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+        chooser.setFileFilter(filter);
         
         int returnVal = chooser.showDialog(this, "Save Garage");
         
