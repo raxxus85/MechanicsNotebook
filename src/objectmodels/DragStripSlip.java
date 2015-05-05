@@ -15,7 +15,7 @@ import java.util.Date;
  *
  * @author Mark
  */
-public class DragStripSlip implements Serializable{
+public class DragStripSlip extends BaseObjectModel implements Serializable{
     // eighth
     private Date date;
     private Float reactionTime;

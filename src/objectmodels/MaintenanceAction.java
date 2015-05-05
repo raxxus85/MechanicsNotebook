@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author Mark
  */
-public class MaintenanceAction implements Serializable{
+public class MaintenanceAction extends BaseObjectModel implements Serializable{
     private Mechanic mechanic;
     private Vehicle vehicle;
     private MaintenanceType maintenanceType;

@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  *
  * @author Mark
  */
-public class Vehicle implements Serializable{
+public class Vehicle extends BaseObjectModel implements Serializable{
     //private String vehicleIdentificationNumber;
     private String make;
     private String model;

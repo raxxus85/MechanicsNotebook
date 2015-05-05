@@ -19,6 +19,7 @@ import objectmodels.Mechanic;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import objectmodels.Customer;
 import objectmodels.DragStripSlip;
 import objectmodels.FuelEntry;
@@ -45,10 +46,12 @@ import windows.MaintenanceTypeWindow;
 import windows.MaintenanceTypesMainWindow;
 import windows.MechanicWindow;
 import windows.ModificationWindow;
+import windows.TestVehicleTypesMainWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
 import windows.VehicleInformationGraphs;
 import windows.VehicleTrackersWindow;
+import windows.VehicleTypesMainWindow;
 import windows.WarrantyWindow;
 import windows.WelcomeWindow;
 
@@ -77,6 +80,8 @@ public class MotoGarageNotebookEngine {
     private DragStripSlipWindow dragStripSlipWindow;
     private VehicleInformationGraphs vehicleInformationGraphs;
     private CloudUserLoginCreationWindow cloudUserLoginCreationWindow;
+    //private VehicleTypesMainWindow vehicleTypesMainWindow;
+    private TestVehicleTypesMainWindow vehicleTypesMainWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -798,6 +803,16 @@ public class MotoGarageNotebookEngine {
         this.maintenanceTypesMainWindow = new MaintenanceTypesMainWindow(this);
         this.maintenanceTypesMainWindow.setLocationRelativeTo(incomingParent);
         this.maintenanceTypesMainWindow.setVisible(true);
+    }
+    
+    public void startVehicleTypesMainWindow(Component incomingParent){
+        //this.vehicleTypesMainWindow = new VehicleTypesMainWindow(this);
+        this.vehicleTypesMainWindow = new TestVehicleTypesMainWindow(new JFrame(),true);
+        this.vehicleTypesMainWindow.setLocationRelativeTo(incomingParent);
+        this.vehicleTypesMainWindow.setAlwaysOnTop(true);
+
+        this.vehicleTypesMainWindow.setVisible(true);
+
     }
     
     // End Window Creation Methods

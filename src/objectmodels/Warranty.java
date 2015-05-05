@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author Mark
  */
-public class Warranty implements Serializable{
+public class Warranty extends BaseObjectModel implements Serializable{
     String partName;
     Date date;
     String warrantyDuration;

@@ -2,19 +2,21 @@ package objectmodels;
 
 import java.awt.Image;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
  * Mechanic Class
  * @author Mark
  */
-public class Mechanic implements Serializable{
+public class Mechanic extends BaseObjectModel implements Serializable {
     private String firstName;
     private String middleName;
     private String lastName;
     //private String name;
     private String description;
     private ImageIcon imageIcon;
+    private ArrayList<Attachment> attachements = new ArrayList<>();
 
         
     public Mechanic(String incomingFirstName, String incomingMiddleName, String incomingLastName){

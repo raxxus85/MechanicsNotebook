@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author Mark
  */
-public class MaintenanceType implements Serializable{
+public class MaintenanceType extends BaseObjectModel implements Serializable{
     private String maintenanceTypeName;
     private String description;
     private Integer mileageInterval;

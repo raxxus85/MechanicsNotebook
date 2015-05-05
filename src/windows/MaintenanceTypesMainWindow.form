@@ -94,6 +94,7 @@
       <SubComponents>
         <Container class="javax.swing.JToolBar" name="maintenanceTypeToolBar">
           <Properties>
+            <Property name="floatable" type="boolean" value="false"/>
             <Property name="orientation" type="int" value="1"/>
             <Property name="rollover" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="true" type="code"/>

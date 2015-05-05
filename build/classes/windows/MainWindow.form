@@ -98,7 +98,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="viewEditMaintenanceTypesMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="View / Edit Maintenance Types"/>
+                <Property name="text" type="java.lang.String" value="View / Edit General Maintenance Types"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewEditMaintenanceTypesMenuItemActionPerformed"/>
@@ -788,6 +788,22 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
+        <Component class="javax.swing.JButton" name="editVehicleTypesButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/vehicleType32x32EDIT.png"/>
+            </Property>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editVehicleTypesButtonActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editVehicleTypesButton.setToolTipText(&quot;View / Edit Vehicle Types&quot;);"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JButton" name="editMaintenanceTypesButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -800,7 +816,7 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="mainToolBar.add(actionMaintenanceTypeEdit)"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource(&quot;/maintenanceType32x32EDIT.png&quot;));&#xa;    Action actionMaintenanceTypeEdit = new AbstractAction(&quot;New&quot;, maintenanceTypeEdit) {&#xa;      public void actionPerformed(ActionEvent e) {&#xa;        System.out.println(&quot;MaintenanceTypes Edid!&quot;);&#xa;      }&#xa;    };"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceTypesButton.setToolTipText(&quot;View / Edit Maintenance Types&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceTypesButton.setToolTipText(&quot;View / Edit General Maintenance Types&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="importGarageButton">

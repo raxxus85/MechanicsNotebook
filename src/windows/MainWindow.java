@@ -842,6 +842,7 @@ public class MainWindow extends javax.swing.JFrame {
         dragStripSlipEditButton = new javax.swing.JButton();
         dragStripSlipDeleteButton = new javax.swing.JButton();
         mainToolBar = new javax.swing.JToolBar();
+        editVehicleTypesButton = new javax.swing.JButton();
         ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"));
         Action actionMaintenanceTypeEdit = new AbstractAction("New", maintenanceTypeEdit) {
             public void actionPerformed(ActionEvent e) {
@@ -1315,7 +1316,19 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.setRollover(true);
         mainToolBar.setFloatable(false);
 
-        editMaintenanceTypesButton.setToolTipText("View / Edit Maintenance Types");
+        editVehicleTypesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleType32x32EDIT.png"))); // NOI18N
+        editVehicleTypesButton.setFocusable(false);
+        editVehicleTypesButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editVehicleTypesButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        editVehicleTypesButton.setToolTipText("View / Edit Vehicle Types");
+        editVehicleTypesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editVehicleTypesButtonActionPerformed(evt);
+            }
+        });
+        mainToolBar.add(editVehicleTypesButton);
+
+        editMaintenanceTypesButton.setToolTipText("View / Edit General Maintenance Types");
         editMaintenanceTypesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"))); // NOI18N
         editMaintenanceTypesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1809,7 +1822,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         optionsMenu.add(VehicleTrackersMenuItem);
 
-        viewEditMaintenanceTypesMenuItem.setText("View / Edit Maintenance Types");
+        viewEditMaintenanceTypesMenuItem.setText("View / Edit General Maintenance Types");
         viewEditMaintenanceTypesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewEditMaintenanceTypesMenuItemActionPerformed(evt);
@@ -2423,6 +2436,12 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
+    private void editVehicleTypesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVehicleTypesButtonActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageNotebookEngine.startVehicleTypesMainWindow(this);
+        
+    }//GEN-LAST:event_editVehicleTypesButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2490,6 +2509,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton editMaintenanceActionButtonToolBar;
     private javax.swing.JButton editMaintenanceTypesButton;
     private javax.swing.JButton editModificationButton;
+    private javax.swing.JButton editVehicleTypesButton;
     private javax.swing.JButton editWarrantyButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton exportGarageButton;

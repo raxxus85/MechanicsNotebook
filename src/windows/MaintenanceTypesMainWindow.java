@@ -36,7 +36,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
-        this.setTitle("Maintenance Types");
+        this.setTitle("General Maintenance Types");
         this.refreshMaintenanceTypeTable();
     }
     
@@ -118,6 +118,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        maintenanceTypeToolBar.setFloatable(false);
         maintenanceTypeToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         maintenanceTypeToolBar.setRollover(true);
         maintenanceTypeToolBar.setFloatable(false);

@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author Mark
  */
-public class FuelEntry implements Serializable{
+public class FuelEntry extends BaseObjectModel implements Serializable{
     
     private Integer odometer;
     private Date date;

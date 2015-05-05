@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
  *
  * @author Mark
  */
-public class Customer implements Serializable{
+public class Customer extends BaseObjectModel implements Serializable{
     private String firstName;
     private String middleName;
     private String lastName;
