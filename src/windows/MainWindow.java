@@ -138,7 +138,7 @@ public class MainWindow extends javax.swing.JFrame {
         new Object [][] {
         },
         new String [] {
-            "Make", "Model", "Year", "Odometer"
+            "Make", "Model", "Year"
         }) {           
             @Override
             public boolean isCellEditable(int row, int column) {
