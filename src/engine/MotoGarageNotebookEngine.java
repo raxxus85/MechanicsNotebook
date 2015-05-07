@@ -7,9 +7,11 @@ package engine;
 import informationwindows.DialogFactory;
 import informationwindows.DialogType;
 import java.awt.Component;
-import java.awt.Point;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,11 +34,8 @@ import objectmodels.Warranty;
 import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
 import parse.ParseEngine;
-import parse.TestClass;
 import windows.AboutWindow;
 import windows.CloudUserLoginCreationWindow;
-//import windows.MainWindow;
-//import windows.MainWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
@@ -91,7 +90,7 @@ public class MotoGarageNotebookEngine {
     // Parse.com variables
     ParseEngine parseEngine = new ParseEngine(this);
     Boolean cloudEnabled = false;
-    ParseUser currentParseUser = null;
+
     
     public MotoGarageNotebookEngine(){
         // TESTING CODE NEW TO REMOVE ONCE WE IMPLEMENT CREATE/ OPEN/ SAVE
@@ -142,26 +141,26 @@ public class MotoGarageNotebookEngine {
         this.currentGarage = newGarage;
     }
     
-    public void setCurrentParseUser(ParseUser incomingParseUser){
-        this.currentParseUser = incomingParseUser;
-    }
-    
-    public ParseUser getCurrentParseUser(){
-        return this.currentParseUser;
-    }
-    
     public ParseUser signUpUser(String username, String password){
         ParseUser newUser = this.parseEngine.signUpUser(username, password);
-        this.currentParseUser = newUser;
+        //this.currentParseUser = newUser;
         return newUser;
     }
     
     public ParseUser signInUser(String username, String password){
         ParseUser signedInUser = this.parseEngine.signInUser(username, password);
-        this.currentParseUser = signedInUser;
+        //this.currentParseUser = signedInUser;
         return signedInUser;
     }
 
+    public ParseUser getCurrentParseUser(){
+        return this.parseEngine.getParseUser();
+    }
+    
+    public void setCurrentParseUser(ParseUser incomingParseUser){
+        this.parseEngine.setParseUser(incomingParseUser);
+    }
+    
 
     /**
      * Private method to open a Garage. Performs:
@@ -198,6 +197,54 @@ public class MotoGarageNotebookEngine {
         
         File currentSaveFile = this.currentGarage.getSaveFile();
         return currentSaveFile;
+    }
+    
+    public void openFromCloud(){
+        this.parseEngine.openGarage();
+    }
+    
+    public void saveToCloud() throws FileNotFoundException, IOException, ParseException{
+        System.out.println("TEST1!!!!!!!!!!!!!!");
+        
+        FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Mark\\Documents\\test\\test.mnb");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(this.currentGarage);
+        objectOutputStream.close();
+        fileOutputStream.close();
+        System.out.println("TEST@@@@@@@@@@@@@@!!!!!!!!!!!!!!");
+        // turn object into byte data for cloud transfer...
+        File testFile = new File("C:\\Users\\Mark\\Documents\\test\\test.mnb");
+        byte[] data = serialize(testFile);
+        this.parseEngine.saveGarage(data);
+        
+
+        
+    }
+    
+    /**
+     * Method to take an Object (in this case, a .mnb file), and serialize it to byte[]
+     * @param obj
+     * @return
+     * @throws IOException 
+     */
+    private static byte[] serialize(Object obj) throws IOException {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        ObjectOutputStream o = new ObjectOutputStream(b);
+        o.writeObject(obj);
+        return b.toByteArray();
+    }
+
+    /**
+     * Method to take byte[], and turn it into an object...
+     * @param bytes
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
+    private static Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
+        ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+        ObjectInputStream o = new ObjectInputStream(b);
+        return o.readObject();
     }
     
     /**
@@ -827,7 +874,7 @@ public class MotoGarageNotebookEngine {
     
     public void startViewOrEditWarrantyWindow(Component incomingParent,Warranty incomingWarranty){
         this.warrantyWindow = new WarrantyWindow(new JFrame(),true,this,incomingWarranty);
-        this.fuelEntryWindow.setLocationRelativeTo(incomingParent);
+        this.warrantyWindow.setLocationRelativeTo(incomingParent);
         this.warrantyWindow.setVisible(true);
     }
     
