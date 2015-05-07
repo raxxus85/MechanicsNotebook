@@ -12,14 +12,15 @@ import java.awt.Toolkit;
  *
  * @author Mark
  */
-public class VehicleTrackersWindow extends javax.swing.JFrame {
+public class VehicleTrackersWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageNotebookEngine;
     
     
      /**
      * Creates new form VehicleTrackersWindow
      */
-    public VehicleTrackersWindow(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public VehicleTrackersWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+        super(parent, modal);
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         initComponents();
         this.setIcon();

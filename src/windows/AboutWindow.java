@@ -14,12 +14,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Mark
  */
-public class AboutWindow extends javax.swing.JFrame {
+public class AboutWindow extends javax.swing.JDialog {
     // BUTTON WEB PAGE LINK!!!
     final URI uri = new URI("http://www.motogaragechi.com");
     class OpenUrlAction implements ActionListener {
@@ -30,8 +31,10 @@ public class AboutWindow extends javax.swing.JFrame {
         }
     /**
      * Creates new form AboutWindow
+     * @param parent
      */
-    public AboutWindow() throws URISyntaxException{
+    public AboutWindow(java.awt.Frame parent,boolean modal) throws URISyntaxException{
+        super(parent, modal);
         initComponents();
         this.setIcon();
         //this.getContentPane().setBackground(Color.black);
@@ -184,7 +187,7 @@ public class AboutWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new AboutWindow().setVisible(true);
+                    new AboutWindow(new JFrame(),true).setVisible(true);
                 } catch (URISyntaxException ex) {
                     Logger.getLogger(AboutWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }

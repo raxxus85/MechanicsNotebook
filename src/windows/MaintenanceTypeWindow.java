@@ -13,7 +13,7 @@ import objectmodels.MaintenanceType;
  *
  * @author Mark
  */
-public class MaintenanceTypeWindow extends javax.swing.JFrame {
+public class MaintenanceTypeWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private MaintenanceTypesMainWindow maintenanceTypesMainWindow;
     boolean updatingMaintenanceType = false;
@@ -29,7 +29,8 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     /**
      * Creates new form MaintenanceTypeWindow
      */
-    public MaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+        super(parent, modal);
         this.mechanicsNotebookEngine= incomingMechanicsNotebookEngine;
         this.maintenanceTypesMainWindow = incomingMaintenanceTypesMainWindow;
         initComponents();
@@ -40,7 +41,8 @@ public class MaintenanceTypeWindow extends javax.swing.JFrame {
     /**
      * Creates new form MaintenanceTypeWindow for Updating Maintenance Type
      */
-    public MaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, MaintenanceType incomingMaintenanceType) {
+    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, MaintenanceType incomingMaintenanceType) {
+        super(parent, modal);
         this.mechanicsNotebookEngine= incomingMechanicsNotebookEngine;
         this.maintenanceTypesMainWindow = incomingMaintenanceTypesMainWindow;
         initComponents();

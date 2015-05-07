@@ -20,7 +20,7 @@ import org.jdatepicker.impl.UtilDateModel;
  *
  * @author Mark
  */
-public class NewMaintenanceActionWindow extends javax.swing.JFrame {
+public class NewMaintenanceActionWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
 
     /**
@@ -33,10 +33,11 @@ public class NewMaintenanceActionWindow extends javax.swing.JFrame {
      /**
      * Creates new form NewMaintenanceActionWindow
      */
-    public NewMaintenanceActionWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public NewMaintenanceActionWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+        super(parent, modal);
         this.mechanicsNotebookEngine= incomingMotoGarageMechanicEngine;
         initComponents();
-        this.setLocationRelativeTo(incomingParent);
+        //this.setLocationRelativeTo(incomingParent);
         this.currentVehicleTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().toString());
         this.maintenenaceActionMileageTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
         this.setIcon();

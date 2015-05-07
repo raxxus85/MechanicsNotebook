@@ -15,7 +15,7 @@ import objectmodels.FuelEntry;
  *
  * @author Mark
  */
-public class FuelEntryWindow extends javax.swing.JFrame {
+public class FuelEntryWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private boolean addFuelEntryBoolean;
     private FuelEntry originalFuelEntry;
@@ -24,7 +24,8 @@ public class FuelEntryWindow extends javax.swing.JFrame {
      * Creates new form FuelEntryWindow, for NEW FUEL ENTRY
      * @param incomingMechanicsNotebookEngine
      */
-    public FuelEntryWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public FuelEntryWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.addOrUpdateButton.setText("Add Fuel Entry");
@@ -33,7 +34,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         Date currentDate = new Date();
         this.datePicker.setDate(currentDate);
         this.odometerTextField.setText(incomingMechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
-        addFuelEntryBoolean = true;
+        this.addFuelEntryBoolean = true;
     }
     
     /**
@@ -41,7 +42,8 @@ public class FuelEntryWindow extends javax.swing.JFrame {
      * @param incomingMechanicsNotebookEngine
      * @param incomingFuelEntry
      */
-    public FuelEntryWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, FuelEntry incomingFuelEntry) {
+    public FuelEntryWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, FuelEntry incomingFuelEntry) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         this.originalFuelEntry = incomingFuelEntry;
         initComponents();
@@ -54,7 +56,7 @@ public class FuelEntryWindow extends javax.swing.JFrame {
         this.gallonsTextField.setText(incomingFuelEntry.getGallons().toString());
         this.costPerGallonTextField.setText(incomingFuelEntry.getCostPerGallon().toString());       
         
-        addFuelEntryBoolean = false;
+        this.addFuelEntryBoolean = false;
     }
     
     /**

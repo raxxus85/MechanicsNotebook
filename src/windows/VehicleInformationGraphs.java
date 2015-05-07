@@ -12,13 +12,14 @@ import engine.MotoGarageNotebookEngine;
  *
  * @author Mark
  */
-public class VehicleInformationGraphs extends javax.swing.JFrame {
+public class VehicleInformationGraphs extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
     
     /**
      * Creates new form VehicleInformationGraphs
      */
-    public VehicleInformationGraphs(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public VehicleInformationGraphs(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         

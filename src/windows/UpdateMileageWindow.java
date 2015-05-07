@@ -12,7 +12,7 @@ import java.awt.Toolkit;
  *
  * @author Mark
  */
-public class UpdateMileageWindow extends javax.swing.JFrame {
+public class UpdateMileageWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
 
     /**
@@ -25,7 +25,8 @@ public class UpdateMileageWindow extends javax.swing.JFrame {
         /**
      * Creates new form UpdateMileageWindow
      */
-    public UpdateMileageWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public UpdateMileageWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();

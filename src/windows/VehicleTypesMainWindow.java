@@ -13,7 +13,7 @@ import java.awt.Toolkit;
  * @author Mark
  */
 
-public class VehicleTypesMainWindow extends javax.swing.JFrame {
+public class VehicleTypesMainWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageNotebookEngine;
 
     /**
@@ -26,7 +26,8 @@ public class VehicleTypesMainWindow extends javax.swing.JFrame {
          /**
      * Creates new form MaintenanceTypesMainWindow
      */
-    public VehicleTypesMainWindow(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public VehicleTypesMainWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+        super(parent, modal);
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         initComponents();
         this.setIcon();

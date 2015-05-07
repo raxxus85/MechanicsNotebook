@@ -14,7 +14,7 @@ import objectmodels.Warranty;
  *
  * @author Mark
  */
-public class WarrantyWindow extends javax.swing.JFrame {
+public class WarrantyWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private boolean addWarranty;
     private Warranty originalWarranty;
@@ -23,7 +23,8 @@ public class WarrantyWindow extends javax.swing.JFrame {
      * Creates new form WarrantyWindow, for ADDING
      * @param incomingMechanicsNotebookEngine
      */
-    public WarrantyWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public WarrantyWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
@@ -38,7 +39,8 @@ public class WarrantyWindow extends javax.swing.JFrame {
     /**
      * Creates new form WarrantyWindow, for UPDATING
      */
-    public WarrantyWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Warranty incomingWarranty) {
+    public WarrantyWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Warranty incomingWarranty) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();

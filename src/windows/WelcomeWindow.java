@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
  *
  * @author Mark
  */
-public class WelcomeWindow extends javax.swing.JFrame {
+public class WelcomeWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private Image iconImage;
     private BufferedImage image;
@@ -34,7 +34,8 @@ public class WelcomeWindow extends javax.swing.JFrame {
      /**
      * Creates new form WelcomeWindow
      */
-    public WelcomeWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public WelcomeWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+        super(parent, modal);
         //this.getContentPane().setBackground(Color.black);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();

@@ -7,6 +7,7 @@ package engine;
 import informationwindows.DialogFactory;
 import informationwindows.DialogType;
 import java.awt.Component;
+import java.awt.Point;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -46,7 +47,6 @@ import windows.MaintenanceTypeWindow;
 import windows.MaintenanceTypesMainWindow;
 import windows.MechanicWindow;
 import windows.ModificationWindow;
-import windows.TestVehicleTypesMainWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
 import windows.VehicleInformationGraphs;
@@ -81,7 +81,7 @@ public class MotoGarageNotebookEngine {
     private VehicleInformationGraphs vehicleInformationGraphs;
     private CloudUserLoginCreationWindow cloudUserLoginCreationWindow;
     //private VehicleTypesMainWindow vehicleTypesMainWindow;
-    private TestVehicleTypesMainWindow vehicleTypesMainWindow;
+    private VehicleTypesMainWindow vehicleTypesMainWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -634,8 +634,9 @@ public class MotoGarageNotebookEngine {
     
 
     
-    public void startNewUpdateMileageWindow(){
-        this.updateMileageWindow = new UpdateMileageWindow(this);
+    public void startNewUpdateMileageWindow(Component incomingComponent){
+        this.updateMileageWindow = new UpdateMileageWindow(new JFrame(),true,this);
+        this.updateMileageWindow.setLocationRelativeTo(incomingComponent);
         this.updateMileageWindow.setVisible(true);
     }
     
@@ -653,18 +654,9 @@ public class MotoGarageNotebookEngine {
      * Method to create a new mechanic window, which prompts user for new mechanic details
      */
     public void startNewMechanicWindow(Component incomingParent){
-        this.mechanicWindow = new MechanicWindow(incomingParent,this);
+        this.mechanicWindow = new MechanicWindow(new JFrame(),true,this);
+        this.mechanicWindow.setLocationRelativeTo(incomingParent);
         this.mechanicWindow.setVisible(true);
-    }
-    
-    public void startNewModificationWindow(){
-        this.modificationWindow = new ModificationWindow(this);
-        this.modificationWindow.setVisible(true);
-    }
-    
-    public void startViewOrEditModificationWindow(Modification incomingModification){
-        this.modificationWindow = new ModificationWindow(this, incomingModification);
-        this.modificationWindow.setVisible(true);
     }
     
     /**
@@ -672,55 +664,92 @@ public class MotoGarageNotebookEngine {
      *      
      */
     public void startUpdateMechanicWindow(Component incomingParent){
-        this.mechanicWindow = new MechanicWindow(incomingParent,this, this.getCurrentMechanic());
+        this.mechanicWindow = new MechanicWindow(new JFrame(),true,this,this.getCurrentMechanic());
+        this.mechanicWindow.setLocationRelativeTo(incomingParent);
         this.mechanicWindow.setVisible(true);
     }
     
-    public void startUpdateVehicleWindow(Component incomingParent){
-        this.vehicleWindow = new VehicleWindow(incomingParent,this, this.getCurrentVehicle());
-        this.vehicleWindow.setVisible(true);
+    public void startNewModificationWindow(Component incomingParent){
+        this.modificationWindow = new ModificationWindow(new JFrame(),true,this);
+        this.modificationWindow.setLocationRelativeTo(incomingParent);
+        this.modificationWindow.setVisible(true);
     }
     
-   
-    
-    /**
-     * Method to create a new Customer Window, which prompts user for new Customer details
-     */
-    public void startNewCustomerWindow(Component incomingParent){
-        this.customerWindow = new CustomerWindow(incomingParent,this);
-        this.customerWindow.setVisible(true);
-    }
-    
-    public void startNewDragStripSlipWindow(){
-        this.dragStripSlipWindow = new DragStripSlipWindow(this);
-        this.dragStripSlipWindow.setVisible(true);
-    }
-    
-    public void startVehicleInformationGraphs(){
-        this.vehicleInformationGraphs = new VehicleInformationGraphs(this);
-        this.vehicleInformationGraphs.setVisible(true);
-    }
-    
-    public void startUpdateDragStripSlipWindow(DragStripSlip incomingDragStripSlip){
-        this.dragStripSlipWindow = new DragStripSlipWindow(this, incomingDragStripSlip);
-        this.dragStripSlipWindow.setVisible(true);
-    }
-    
-    /**
-     * Method to create a new Update Customer Window, which prompts the user for updated Customer details
-     */
-    public void startUpdateCustomerWindow(Component incomingParent){
-        this.customerWindow = new CustomerWindow(incomingParent,this, this.getCurrentCustomer());
-        this.customerWindow.setVisible(true);
+    public void startViewOrEditModificationWindow(Component incomingParent,Modification incomingModification){
+        this.modificationWindow = new ModificationWindow(new JFrame(),true,this, incomingModification);
+        this.modificationWindow.setLocationRelativeTo(incomingParent);
+        this.modificationWindow.setVisible(true);
     }
     
     /**
      * Method to create a new Vehicle Window, which prompts the user for new Vehicle details
      */
     public void startNewVehicleWindow(Component incomingParent){
-        this.vehicleWindow = new VehicleWindow(incomingParent,this);
+        this.vehicleWindow = new VehicleWindow(new JFrame(),true,this);
+        this.mechanicWindow.setLocation(incomingParent.getLocation());
         this.vehicleWindow.setVisible(true);       
     }
+    
+    public void startUpdateVehicleWindow(Component incomingParent){
+        this.vehicleWindow = new VehicleWindow(new JFrame(),true,this, this.getCurrentVehicle());
+        this.mechanicWindow.setLocationRelativeTo(incomingParent);
+        this.vehicleWindow.setVisible(true);
+        
+        
+    }
+    
+   
+    
+    /**
+     * Method to create a new Customer Window, which prompts user for new Customer details
+     * @param parentComponent
+     */
+    public void startNewCustomerWindow(Component incomingParent){
+        this.customerWindow = new CustomerWindow(new JFrame(),true,this);
+        this.customerWindow.setLocationRelativeTo(incomingParent);
+        this.customerWindow.setVisible(true);
+        //Point centerPoint = (parentComponent.getLocation().x,2);
+        //int x = parentComponent.getLocation().x / (parentComponent.getWidth()/2);
+        //int y = parentComponent.getLocation().y / (parentComponent.getHeight()/2);
+        //Point centerPoint = new Point(x,y);
+        //System.out.println("x =" + parentComponent.getLocation().x +" y =" + parentComponent.getLocation().y);
+        //System.out.println("width is " + parentComponent.getWidth());
+        //System.out.println("Location of parent is " + parentComponent.getLocation().toString());
+        //this.customerWindow.setLocation(centerPoint);
+
+    }
+    
+    public void startNewDragStripSlipWindow(Component incomingParent){
+        this.dragStripSlipWindow = new DragStripSlipWindow(new JFrame(),true,this);
+        this.dragStripSlipWindow.setLocationRelativeTo(incomingParent);
+        this.dragStripSlipWindow.setVisible(true);
+    }
+    
+    public void startUpdateDragStripSlipWindow(Component incomingParent,DragStripSlip incomingDragStripSlip){
+        this.dragStripSlipWindow = new DragStripSlipWindow(new JFrame(),true,this, incomingDragStripSlip);
+        this.dragStripSlipWindow.setLocationRelativeTo(incomingParent);
+        this.dragStripSlipWindow.setVisible(true);
+    }
+    
+    public void startVehicleInformationGraphs(Component incomingComponent){
+        this.vehicleInformationGraphs = new VehicleInformationGraphs(new JFrame(),true,this);
+        this.vehicleInformationGraphs.setLocationRelativeTo(incomingComponent);
+        this.vehicleInformationGraphs.setVisible(true);
+    }
+    
+    
+    
+    /**
+     * Method to create a new Update Customer Window, which prompts the user for updated Customer details
+     */
+    public void startUpdateCustomerWindow(Component incomingParent){
+        this.customerWindow = new CustomerWindow(new JFrame(),true,this, this.getCurrentCustomer());
+        
+        this.customerWindow.setLocationRelativeTo(incomingParent);
+        this.customerWindow.setVisible(true);
+    }
+    
+  
         
      /**
      * Private method used to start the welcome window
@@ -731,17 +760,18 @@ public class MotoGarageNotebookEngine {
         //this.welcomeWindow.setVisible(true);
     }  
     
-    public void startAboutWindow(){
+    public void startAboutWindow(Component incomingComponent){
         try {
-            this.aboutWindow = new AboutWindow();
+            this.aboutWindow = new AboutWindow(new JFrame(),true);
+            this.aboutWindow.setLocationRelativeTo(incomingComponent);
+            this.aboutWindow.setVisible(true);
         } catch (URISyntaxException ex) {
             Logger.getLogger(MotoGarageNotebookEngine.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.aboutWindow.setVisible(true);
+        }  
     }
     
     public void startVehicleTrackersWindow(Component incomingParent){
-        this.vehicleTrackersWindow = new VehicleTrackersWindow(this);
+        this.vehicleTrackersWindow = new VehicleTrackersWindow(new JFrame(),true,this);
         this.vehicleTrackersWindow.setLocationRelativeTo(incomingParent);
         this.vehicleTrackersWindow.setVisible(true);
     }
@@ -750,7 +780,8 @@ public class MotoGarageNotebookEngine {
      * Method used to start the Maintenance Type Window, to create a new Type
      */
     public void startNewMaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow){
-        this.maintenanceTypeWindow = new MaintenanceTypeWindow(incomingMaintenanceTypesMainWindow,this);
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(new JFrame(),true,incomingMaintenanceTypesMainWindow,this);
+        this.maintenanceTypeWindow.setLocationRelativeTo(incomingMaintenanceTypesMainWindow);
         this.maintenanceTypeWindow.setVisible(true);
     }
     
@@ -759,57 +790,66 @@ public class MotoGarageNotebookEngine {
      * 
      */
     public void startUpdateMaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MaintenanceType originalMaintenanceType){
-        this.maintenanceTypeWindow = new MaintenanceTypeWindow(incomingMaintenanceTypesMainWindow,this,originalMaintenanceType);
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(new JFrame(),true,incomingMaintenanceTypesMainWindow,this,originalMaintenanceType);
+        this.maintenanceTypeWindow.setLocationRelativeTo(incomingMaintenanceTypesMainWindow);
         this.maintenanceTypeWindow.setVisible(true);
     }
     
     public void startNewMaintenanceActionWindow(Component incomingParent){
-        this.newMaintenenaceActionWindow = new NewMaintenanceActionWindow(incomingParent,this);
+        this.newMaintenenaceActionWindow = new NewMaintenanceActionWindow(new JFrame(),true,this);
+        this.newMaintenenaceActionWindow.setLocationRelativeTo(incomingParent);
         this.newMaintenenaceActionWindow.setVisible(true);
     }
     
-    public void startNewCloudUserLoginCreationWindow(){
-        this.cloudUserLoginCreationWindow = new CloudUserLoginCreationWindow(this);
+    public void startNewCloudUserLoginCreationWindow(Component incomingParent){
+        this.cloudUserLoginCreationWindow = new CloudUserLoginCreationWindow(new JFrame(),true,this);
+        this.cloudUserLoginCreationWindow.setLocationRelativeTo(incomingParent);
         this.cloudUserLoginCreationWindow.setVisible(true);
     }
     
-    public void startNewFuelEntryWindow(){
-        this.fuelEntryWindow = new FuelEntryWindow(this);
+    public void startNewFuelEntryWindow(Component incomingParent){
+        this.fuelEntryWindow = new FuelEntryWindow(new JFrame(),true,this);
+        this.fuelEntryWindow.setLocationRelativeTo(incomingParent);
         this.fuelEntryWindow.setVisible(true);
     }
     
-    public void startNewWarrantyWindow(){
-        this.warrantyWindow = new WarrantyWindow(this);
-        this.warrantyWindow.setVisible(true);
-    }
-    
-    public void startViewOrEditWarrantyWindow(Warranty incomingWarranty){
-        this.warrantyWindow = new WarrantyWindow(this,incomingWarranty);
-        this.warrantyWindow.setVisible(true);
-    }
-    
-    public void startViewOrEditFuelEntryWindow(FuelEntry incomingFuelEntry){
-        this.fuelEntryWindow = new FuelEntryWindow(this, incomingFuelEntry);
+    public void startViewOrEditFuelEntryWindow(Component incomingParent,FuelEntry incomingFuelEntry){
+        this.fuelEntryWindow = new FuelEntryWindow(new JFrame(),true,this, incomingFuelEntry);
+        this.fuelEntryWindow.setLocationRelativeTo(incomingParent);
         this.fuelEntryWindow.setVisible(true);
     }
+    
+    public void startNewWarrantyWindow(Component incomingParent){
+        this.warrantyWindow = new WarrantyWindow(new JFrame(),true,this);
+        this.fuelEntryWindow.setLocationRelativeTo(incomingParent);
+        this.warrantyWindow.setVisible(true);
+    }
+    
+    public void startViewOrEditWarrantyWindow(Component incomingParent,Warranty incomingWarranty){
+        this.warrantyWindow = new WarrantyWindow(new JFrame(),true,this,incomingWarranty);
+        this.fuelEntryWindow.setLocationRelativeTo(incomingParent);
+        this.warrantyWindow.setVisible(true);
+    }
+    
+    
     
     public void startMaintenanceActionWindow(Component incomingParent,MaintenanceAction incomingMaintenanceAction){
-        this.maintenanceActionWindow = new MaintenanceActionWindow(this, incomingMaintenanceAction);
+        this.maintenanceActionWindow = new MaintenanceActionWindow(new JFrame(),true,this, incomingMaintenanceAction);
         this.maintenanceActionWindow.setLocationRelativeTo(incomingParent);
         this.maintenanceActionWindow.setVisible(true);
     }
     
     public void startMaintenanceTypesMainWindow(Component incomingParent){
-        this.maintenanceTypesMainWindow = new MaintenanceTypesMainWindow(this);
+        this.maintenanceTypesMainWindow = new MaintenanceTypesMainWindow(new JFrame(),true,this);
         this.maintenanceTypesMainWindow.setLocationRelativeTo(incomingParent);
         this.maintenanceTypesMainWindow.setVisible(true);
     }
     
     public void startVehicleTypesMainWindow(Component incomingParent){
         //this.vehicleTypesMainWindow = new VehicleTypesMainWindow(this);
-        this.vehicleTypesMainWindow = new TestVehicleTypesMainWindow(new JFrame(),true);
+        this.vehicleTypesMainWindow = new VehicleTypesMainWindow(new JFrame(),true,this);
         this.vehicleTypesMainWindow.setLocationRelativeTo(incomingParent);
-        this.vehicleTypesMainWindow.setAlwaysOnTop(true);
+        //this.vehicleTypesMainWindow.setAlwaysOnTop(true);
 
         this.vehicleTypesMainWindow.setVisible(true);
 

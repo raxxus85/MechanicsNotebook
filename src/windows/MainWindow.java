@@ -2000,7 +2000,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         // Time to open the About Window
-        this.motoGarageNotebookEngine.startAboutWindow();
+        this.motoGarageNotebookEngine.startAboutWindow(this);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     
@@ -2118,7 +2118,7 @@ public class MainWindow extends javax.swing.JFrame {
         if(this.motoGarageNotebookEngine.getCurrentVehicle()==null){
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You can't update mileage without a Vehicle!");
         }else{
-            this.motoGarageNotebookEngine.startNewUpdateMileageWindow();
+            this.motoGarageNotebookEngine.startNewUpdateMileageWindow(this);
         }
     }//GEN-LAST:event_updateOdometerActionButtonToolBarActionPerformed
 
@@ -2226,7 +2226,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void fuelEntryAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelEntryAddButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewFuelEntryWindow();
+        this.motoGarageNotebookEngine.startNewFuelEntryWindow(this);
     }//GEN-LAST:event_fuelEntryAddButtonActionPerformed
 
     private void fuelEntryEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelEntryEditButtonActionPerformed
@@ -2235,7 +2235,7 @@ public class MainWindow extends javax.swing.JFrame {
             if(rowSelected>-1){
                 FuelEntry[] currentFuelEntries = this.motoGarageNotebookEngine.getCurrentVehicle().getFuelEntriesArray();
                 FuelEntry selectedFuelEntry = currentFuelEntries[rowSelected];                
-                this.motoGarageNotebookEngine.startViewOrEditFuelEntryWindow(selectedFuelEntry);
+                this.motoGarageNotebookEngine.startViewOrEditFuelEntryWindow(this,selectedFuelEntry);
             }else{
                 this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Fuel Entry to Update.");
             } 
@@ -2259,7 +2259,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void addWarrantyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWarrantyButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewWarrantyWindow();
+        this.motoGarageNotebookEngine.startNewWarrantyWindow(this);
     }//GEN-LAST:event_addWarrantyButtonActionPerformed
 
     private void deleteWarrantyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteWarrantyButtonActionPerformed
@@ -2284,7 +2284,7 @@ public class MainWindow extends javax.swing.JFrame {
             if(rowSelected>-1){
                 Warranty[] currentWarranties = this.motoGarageNotebookEngine.getCurrentVehicle().getWarrantyArray();
                 Warranty selectedWarranty = currentWarranties[rowSelected];                
-                this.motoGarageNotebookEngine.startViewOrEditWarrantyWindow(selectedWarranty);
+                this.motoGarageNotebookEngine.startViewOrEditWarrantyWindow(this,selectedWarranty);
             }else{
                 this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Warranty to View / Update.");
             } 
@@ -2292,7 +2292,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void addModificationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addModificationButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewModificationWindow();
+        this.motoGarageNotebookEngine.startNewModificationWindow(this);
     }//GEN-LAST:event_addModificationButtonActionPerformed
 
     private void deleteModificationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteModificationButtonActionPerformed
@@ -2317,7 +2317,7 @@ public class MainWindow extends javax.swing.JFrame {
             if(rowSelected>-1){
                 Modification[] currentModifications = this.motoGarageNotebookEngine.getCurrentVehicle().getModificationArray();
                 Modification selectedModification = currentModifications[rowSelected];                
-                this.motoGarageNotebookEngine.startViewOrEditModificationWindow(selectedModification);
+                this.motoGarageNotebookEngine.startViewOrEditModificationWindow(this,selectedModification);
             }else{
                 this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Modification to View / Update.");
             } 
@@ -2331,7 +2331,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void dragStripSlipAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dragStripSlipAddButtonActionPerformed
         // TODO add your handling code here:
 
-        this.motoGarageNotebookEngine.startNewDragStripSlipWindow();
+        this.motoGarageNotebookEngine.startNewDragStripSlipWindow(this);
     }//GEN-LAST:event_dragStripSlipAddButtonActionPerformed
 
     private void dragStripSlipDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dragStripSlipDeleteButtonActionPerformed
@@ -2356,7 +2356,7 @@ public class MainWindow extends javax.swing.JFrame {
             if(rowSelected>-1){
                 DragStripSlip[] currentDragStripSlips = this.motoGarageNotebookEngine.getCurrentVehicle().getDragStripSlipArray();
                 DragStripSlip selectedDragStripSlip = currentDragStripSlips[rowSelected];                
-                this.motoGarageNotebookEngine.startUpdateDragStripSlipWindow(selectedDragStripSlip);
+                this.motoGarageNotebookEngine.startUpdateDragStripSlipWindow(this,selectedDragStripSlip);
             }else{
                 this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE,"You have not selected a Drag Strip Slip to View / Update.");
             } 
@@ -2364,12 +2364,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void fuelEntryMainToolBarAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelEntryMainToolBarAddButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewFuelEntryWindow();
+        this.motoGarageNotebookEngine.startNewFuelEntryWindow(this);
     }//GEN-LAST:event_fuelEntryMainToolBarAddButtonActionPerformed
 
     private void graphsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graphsButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startVehicleInformationGraphs();
+        this.motoGarageNotebookEngine.startVehicleInformationGraphs(this);
     }//GEN-LAST:event_graphsButtonActionPerformed
 
     private void mechanicsTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mechanicsTableMouseReleased
@@ -2405,7 +2405,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void loginMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginMenuItemActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewCloudUserLoginCreationWindow();
+        this.motoGarageNotebookEngine.startNewCloudUserLoginCreationWindow(this);
     }//GEN-LAST:event_loginMenuItemActionPerformed
 
     private void viewEditMaintenanceTypesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEditMaintenanceTypesMenuItemActionPerformed

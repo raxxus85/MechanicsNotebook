@@ -23,7 +23,7 @@ import objectmodels.Vehicle;
  *
  * @author Mark
  */
-public class VehicleWindow extends javax.swing.JFrame {
+public class VehicleWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
     boolean updateVehicle = false;
@@ -39,10 +39,11 @@ public class VehicleWindow extends javax.swing.JFrame {
     /**
      * Creates new form VehicleWindow, used for creating a Vehicle
      */
-    public VehicleWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public VehicleWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+        super(parent, modal);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
-        this.setLocationRelativeTo(incomingParent);
+        //.this.setLocationRelativeTo(incomingParent);
         this.setIcon();
         this.createOrUpdateVehicleButton.setText("Create Vehicle");
         this.setTitle("Create Vehicle");
@@ -51,10 +52,11 @@ public class VehicleWindow extends javax.swing.JFrame {
     /**
      * Creates new form VehicleWindow, used for updating a Vehicle
      */
-    public VehicleWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
+    public VehicleWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
+        super(parent, modal);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
-        this.setLocationRelativeTo(incomingParent);
+        //this.setLocationRelativeTo(incomingParent);
         this.setIcon();
         this.createOrUpdateVehicleButton.setText("Update Vehicle");
         this.setTitle("View / Update Vehicle");

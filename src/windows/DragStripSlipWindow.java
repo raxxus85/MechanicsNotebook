@@ -16,7 +16,7 @@ import objectmodels.DragStripSlip;
  *
  * @author Mark
  */
-public class DragStripSlipWindow extends javax.swing.JFrame {
+public class DragStripSlipWindow extends javax.swing.JDialog {
     MotoGarageNotebookEngine motoGarageNotebookEngine;
     private Boolean addDragStripSlip;
     private DragStripSlip originalDragStripSlip;
@@ -24,7 +24,8 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
     /**
      * Creates new form DragStripSlipWindow, for ADDING
      */
-    public DragStripSlipWindow(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public DragStripSlipWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+        super(parent, modal);
         initComponents();
         this.setIcon();
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
@@ -40,7 +41,8 @@ public class DragStripSlipWindow extends javax.swing.JFrame {
      * @param incomingMotoGarageNotebookEngine
      * @param incomingDragStripSlip
      */
-    public DragStripSlipWindow(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine, DragStripSlip incomingDragStripSlip) {
+    public DragStripSlipWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine, DragStripSlip incomingDragStripSlip) {
+        super(parent, modal);
         initComponents();
         this.setIcon();
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;

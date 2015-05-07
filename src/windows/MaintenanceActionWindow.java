@@ -19,7 +19,7 @@ import objectmodels.Vehicle;
  *
  * @author Mark
  */
-public class MaintenanceActionWindow extends javax.swing.JFrame {
+public class MaintenanceActionWindow extends javax.swing.JDialog {
     MotoGarageNotebookEngine mechanicsNotebookEngine;
     MaintenanceAction maintenanceAction;
     
@@ -33,7 +33,8 @@ public class MaintenanceActionWindow extends javax.swing.JFrame {
     /**
      * Creates new form MaintenanceActionWindow
      */
-    public MaintenanceActionWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, MaintenanceAction incomingMaintenanceAction) {
+    public MaintenanceActionWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, MaintenanceAction incomingMaintenanceAction) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         this.maintenanceAction = incomingMaintenanceAction;
         initComponents();

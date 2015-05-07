@@ -16,15 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import objectmodels.Customer;
-import objectmodels.Mechanic;
 
 /**
  *
  * @author Mark
  */
-public class CustomerWindow extends javax.swing.JFrame {
+public class CustomerWindow extends JDialog {
     private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
     private boolean updateCustomer = false;
@@ -40,23 +40,38 @@ public class CustomerWindow extends javax.swing.JFrame {
      * Main constructor, used when creating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    //public CustomerWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    //    this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+    //    initComponents();
+    //    this.setIcon();
+    //    this.createOrUpdateCustomerButton.setText("Create Customer");
+    //    this.setTitle("Create Customer");
+    //    this.setLocationRelativeTo(incomingParent);
+    //}
+    
+        /**
+     * Main constructor, used when creating Customer
+     * @param incomingMotoGarageMechanicEngine 
+     */
+    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+        super(parent, modal);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Create Customer");
         this.setTitle("Create Customer");
-        this.setLocationRelativeTo(incomingParent);
+        //this.setLocationRelativeTo(incomingParent);
     }
     
      /**
      * Main constructor, used when updating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
+    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
+        super(parent, modal);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
-        this.setLocationRelativeTo(incomingParent);
+        //this.setLocationRelativeTo(incomingParent);
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Update Customer");
         this.setTitle("Update Customer");

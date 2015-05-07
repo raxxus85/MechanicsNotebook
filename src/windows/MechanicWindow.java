@@ -28,7 +28,7 @@ import objectmodels.Attachment;
  *
  * @author Mark
  */
-public class MechanicWindow extends javax.swing.JFrame {
+public class MechanicWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageMechanicEngine;
     private ImageIcon imageIcon;
     private boolean updateMechanic = false;
@@ -46,19 +46,21 @@ public class MechanicWindow extends javax.swing.JFrame {
      * @param parent
      * @param incomingMotoGarageMechanicEngine
      */
-    public MechanicWindow(Component parent, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public MechanicWindow(java.awt.Frame parent,boolean modal, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+        super(parent, modal);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateMechanicButton.setText("Create Mechanic");
         this.setTitle("Create Mechanic");
-        this.setLocationRelativeTo(parent);
+        //this.setLocationRelativeTo(parent);
     }
     
     /**
      * Creates new form MechanicWindow for UPDATING Mechanic
      */
-    public MechanicWindow(Component parent, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
+    public MechanicWindow(java.awt.Frame parent,boolean modal, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
+        super(parent, modal);
         this.currentMechanic = incomingMechanic;
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
         initComponents();
@@ -66,7 +68,7 @@ public class MechanicWindow extends javax.swing.JFrame {
         this.createOrUpdateMechanicButton.setText("Update Mechanic");
         this.setTitle("Update Mechanic");
         this.updateMechanic = true;
-        this.setLocationRelativeTo(parent);
+        //this.setLocationRelativeTo(parent);
         
         this.mechanicFirstNameTextField.setText(incomingMechanic.getFirstName());
         this.mechanicMiddleNameTextField.setText(incomingMechanic.getMiddleName());

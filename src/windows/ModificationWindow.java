@@ -14,7 +14,7 @@ import objectmodels.Modification;
  *
  * @author Mark
  */
-public class ModificationWindow extends javax.swing.JFrame {
+public class ModificationWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private Boolean addModification;
     private Modification originalModification;
@@ -23,7 +23,8 @@ public class ModificationWindow extends javax.swing.JFrame {
     /**
      * Creates new form ModificationWindow, for ADDING
      */
-    public ModificationWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public ModificationWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
@@ -38,7 +39,8 @@ public class ModificationWindow extends javax.swing.JFrame {
     /**
      * Creates new form ModificationWindow, for UPDATING
      */
-    public ModificationWindow(MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Modification incomingModification) {
+    public ModificationWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Modification incomingModification) {
+        super(parent, modal);
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();

@@ -14,7 +14,7 @@ import org.parse4j.ParseUser;
  *
  * @author Mark
  */
-public class CloudUserLoginCreationWindow extends javax.swing.JFrame {
+public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageNotebookEngine;
     
     /**
@@ -24,7 +24,8 @@ public class CloudUserLoginCreationWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CloudUserLoginCreationWindow(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public CloudUserLoginCreationWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+        super(parent, modal);
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         initComponents();
         this.setIcon();
