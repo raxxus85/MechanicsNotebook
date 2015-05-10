@@ -1434,9 +1434,11 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="vehiclePictureLabel">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
-          </AuxValues>
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/noImage50x50.png"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="vehicleNameLabel">
           <Properties>
@@ -1569,9 +1571,11 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="customerPictureLabel">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="customerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
-          </AuxValues>
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/noImage50x50.png"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="customerNameLabel">
           <Properties>
@@ -1620,9 +1624,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="mechanicPictureLabel">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/noImage50x50.png&quot;))); // NOI18N"/>
-          </AuxValues>
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/noImage50x50.png"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

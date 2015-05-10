@@ -102,13 +102,9 @@ public class MotoGarageNotebookEngine {
     /**
      * @param args the command line arguments
      * MAIN PROGRAM ENTRY POINT!
+     * @throws org.parse4j.ParseException
      */
     public static void main(String[] args) throws ParseException {
-        //TESTING
-        //TestClass testClass = new TestClass();
-        //testClass.testRun();
-        
-        //TESTING
         // TODO code application logic here
         MotoGarageNotebookEngine mechanicsNotebookEngine = new MotoGarageNotebookEngine();
         // create a DEFAULT GARAGE as program just opened
@@ -177,6 +173,7 @@ public class MotoGarageNotebookEngine {
      * <li> Opens a file
      * <li> loads that file as the main garage
      * 
+     * @param fileToOpen
      */
     public void openGarage(File fileToOpen){
         // DO THIS
@@ -193,10 +190,8 @@ public class MotoGarageNotebookEngine {
             System.out.println("ATTEMPTING TO OPEN.." + pathOfFileToOpen);
             
         }catch(ClassNotFoundException ex){
-            ex.printStackTrace();
             this.dialogFactory.createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file!" );
         }catch(IOException ex){
-            ex.printStackTrace();
             this.dialogFactory.createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "We encountered a critical error attempting to open that file! Version mismatch!");
         }
         
@@ -207,33 +202,16 @@ public class MotoGarageNotebookEngine {
     }
     
     public void saveToCloud() throws FileNotFoundException, IOException, ParseException, ClassNotFoundException{
-        System.out.println("TEST1!!!!!!!!!!!!!!");
-        
         FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Mark\\Documents\\test\\test.mnb");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(this.currentGarage);
         objectOutputStream.close();
         fileOutputStream.close();
-        
-        
         // turn object into byte data for cloud transfer...
         File testFile = new File("C:\\Users\\Mark\\Documents\\test\\test.mnb");
         System.out.println("LENGTH IS :" + testFile.length());
         byte[] data = serializeTest(testFile);
-        this.parseEngine.saveGarage(data);
-        
-        // TEST
-        //deserializeTest(data);
-        //Object object = deserialize(data);
-        //object = (Garage) object;
-        //FileOutputStream fileOutputStream2 = new FileOutputStream("C:\\Users\\Mark\\Documents\\test\\testDESERIALIZE.mnb");
-        //ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(fileOutputStream);
-        //objectOutputStream2.writeObject(object);
-        //objectOutputStream2.close();
-        //fileOutputStream2.close();
-        
-
-        
+        this.parseEngine.saveGarage(data);      
     }
     
     /**

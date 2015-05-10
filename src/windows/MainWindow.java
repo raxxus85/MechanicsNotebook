@@ -645,11 +645,9 @@ public class MainWindow extends javax.swing.JFrame {
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        
         if(this.motoGarageNotebookEngine.getCustomerArray().length >0){
             customerEditButtonNew.setEnabled(true);
             customerDeleteButtonNew.setEnabled(true);
-            System.out.println("TEST1");
             Customer[] customers = this.motoGarageNotebookEngine.getCustomerArray();
             int newRowCount = customers.length;
             for (int i = 0  ; i <newRowCount ; i++) {
@@ -662,8 +660,8 @@ public class MainWindow extends javax.swing.JFrame {
                 System.out.println("SHIT!");
                 System.out.println(currentRowSelected);
                 ListSelectionModel selectionModel =customersTable.getSelectionModel();
-                selectionModel.setSelectionInterval(currentRowSelected, currentRowSelected); // HERE REPLACE WITH 0
-                
+                selectionModel.setSelectionInterval(currentRowSelected, currentRowSelected); // 
+          
             }else if((currentRowSelected==-1) && this.motoGarageNotebookEngine.getCurrentCustomer()!=null ){
                 System.out.println("SHIT!!!!");
                 System.out.println(currentRowSelected);
@@ -679,7 +677,6 @@ public class MainWindow extends javax.swing.JFrame {
         }else{
             customerEditButtonNew.setEnabled(false);
             customerDeleteButtonNew.setEnabled(false);
-            System.out.println("TEST2");
         }
     }
     
