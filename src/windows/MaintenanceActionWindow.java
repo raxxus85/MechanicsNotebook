@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Mechanic;
@@ -47,12 +48,16 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         
         // maintenance type
         MaintenanceType currentMaintenanceType = incomingMaintenanceAction.getMaintenanceType();
-        this.maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray()));
+        Object[] testArray = mechanicsNotebookEngine.getMechanicArray();
+        DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
+        //DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
+        this.maintenanceTypeJComboBox.setModel(test1);
         this.maintenanceTypeJComboBox.setSelectedItem(currentMaintenanceType);
         
         // mechanic
         Mechanic currentMechanic = incomingMaintenanceAction.getMechanic();
-        this.mechanicJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMechanicArray()));
+        DefaultComboBoxModel test = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
+        this.mechanicJComboBox.setModel(test);
         this.mechanicJComboBox.setSelectedItem(currentMechanic);
         
         // date

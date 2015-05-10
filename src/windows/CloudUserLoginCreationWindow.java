@@ -47,11 +47,11 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
-        passwordTextField = new javax.swing.JTextField();
         createUserButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         loginUserButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        passwordTextField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MotoGarage Cloud Login");
@@ -98,9 +98,10 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
                                     .addComponent(passwordLabel)
                                     .addComponent(usernameLabel))
                                 .addGap(70, 70, 70)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(usernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                    .addComponent(passwordTextField))
+                                .addGap(1, 1, 1))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(createUserButton)
                                 .addGap(18, 18, 18)
@@ -110,7 +111,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(158, 158, 158)
                         .addComponent(jLabel1)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,8 +141,10 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
     private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
         // TODO add your handling code here:
         String username = this.usernameTextField.getText();
-        String password = this.passwordTextField.getText();
-        ParseUser newUser = this.motoGarageNotebookEngine.signUpUser(username, password);
+        //String password = this.passwordTextField.getText();
+        String password = new String(this.passwordTextField.getPassword());
+        ParseUser newUser = this.motoGarageNotebookEngine.signUpUser(this,username, password);
+
         if(newUser.isAuthenticated()){
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" has been created!");
             // time to sign the user in
@@ -152,7 +155,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
             }
             this.dispose();
         }else if(!newUser.isAuthenticated()){
-            //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" has NOT been created!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" has NOT been created! A user with this login already exists.");
         }
     }//GEN-LAST:event_createUserButtonActionPerformed
 
@@ -164,7 +167,8 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
     private void loginUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginUserButtonActionPerformed
         // TODO add your handling code here:
         String username = this.usernameTextField.getText();
-        String password = this.passwordTextField.getText();
+        //String password = this.passwordTextField.getText();
+        String password = new String(this.passwordTextField.getPassword());
         ParseUser newUser = this.motoGarageNotebookEngine.signInUser(username, password);
         if(newUser.isAuthenticated()){
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
@@ -216,7 +220,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginUserButton;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables

@@ -60,7 +60,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginMenuItemActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="loginMenuItem.setEnabled(false);"/>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="loginMenuItem.setEnabled(true);"/>
               </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="logoutMenuItem">
@@ -68,7 +68,7 @@
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="logoutMenuItem.setEnabled(false);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="logoutMenuItem.setEnabled(true);"/>
               </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="fileMenuSeparator">
@@ -829,7 +829,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importGarageButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="importGarageButton.setToolTipText(&quot;Load Garage&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="importGarageButton.setToolTipText(&quot;Load Garage from Cloud&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="exportGarageButton">
@@ -842,7 +842,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportGarageButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="exportGarageButton.setToolTipText(&quot;Save Garage&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="exportGarageButton.setToolTipText(&quot;Save Garage to Cloud&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">

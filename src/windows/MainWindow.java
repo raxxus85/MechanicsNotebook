@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -67,6 +68,7 @@ import objectmodels.Warranty;
 import org.jdesktop.swingx.JXStatusBar;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.parse4j.ParseException;
 
 /**
  *
@@ -241,6 +243,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void refreshVehiclesTab(){
+        System.out.println("Vehicles tab being refreshed..");
         this.refreshCurrentVehicleInformation();
         this.refreshVehicleList();
         
@@ -527,7 +530,6 @@ public class MainWindow extends javax.swing.JFrame {
      * Method use to update the Mechanic List
      */
     private void refreshMechanicsList(){
-        System.out.println("REFRESH MECHINCS LIST BEING CALLED");
         DefaultTableModel model = (DefaultTableModel) mechanicsTable.getModel();
         // time to remove the maintenance actions here
         int rowCount = model.getRowCount();
@@ -626,6 +628,7 @@ public class MainWindow extends javax.swing.JFrame {
      * Method used to refresh the entire Customers Tabs
      */
     private void refreshCustomersTab(){
+        System.out.println("Refresh customers tab being called");
         this.refreshCustomerList();
         this.refreshCurrentCustomerInformation();
     }
@@ -634,7 +637,6 @@ public class MainWindow extends javax.swing.JFrame {
      * Method used to update the Customer List (JTable)
      */
     private void refreshCustomerList(){
-        System.out.println("REFRESH CUSTOMER  LIST BEING CALLED");
         DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
         // time to remove the maintenance actions here
         int rowCount = model.getRowCount();
@@ -643,9 +645,11 @@ public class MainWindow extends javax.swing.JFrame {
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
+        
         if(this.motoGarageNotebookEngine.getCustomerArray().length >0){
             customerEditButtonNew.setEnabled(true);
             customerDeleteButtonNew.setEnabled(true);
+            System.out.println("TEST1");
             Customer[] customers = this.motoGarageNotebookEngine.getCustomerArray();
             int newRowCount = customers.length;
             for (int i = 0  ; i <newRowCount ; i++) {
@@ -654,13 +658,20 @@ public class MainWindow extends javax.swing.JFrame {
             }
             
             // since there ARE customers, let's ensure the 'selected' remains selected
-            if(currentRowSelected==-1 && this.motoGarageNotebookEngine.getCurrentCustomer()!=null){
+            if(currentRowSelected>-1 && this.motoGarageNotebookEngine.getCurrentCustomer()!=null){
+                System.out.println("SHIT!");
+                System.out.println(currentRowSelected);
+                ListSelectionModel selectionModel =customersTable.getSelectionModel();
+                selectionModel.setSelectionInterval(currentRowSelected, currentRowSelected); // HERE REPLACE WITH 0
+                
+            }else if((currentRowSelected==-1) && this.motoGarageNotebookEngine.getCurrentCustomer()!=null ){
+                System.out.println("SHIT!!!!");
+                System.out.println(currentRowSelected);
                 ListSelectionModel selectionModel =customersTable.getSelectionModel();
                 selectionModel.setSelectionInterval(0, 0);
-            }else if((currentRowSelected>-1) && this.motoGarageNotebookEngine.getCurrentCustomer()!=null ){
-                ListSelectionModel selectionModel =customersTable.getSelectionModel();
-                selectionModel.setSelectionInterval(currentRowSelected, currentRowSelected);
+                this.motoGarageNotebookEngine.setCurrentCustomer(customers[0]);
             }else if(currentRowSelected==-1 && this.motoGarageNotebookEngine.getCurrentCustomer() == null){
+                System.out.println("SHIT!!!!!!!!!!!!!");
                 ListSelectionModel selectionModel =customersTable.getSelectionModel();
                 selectionModel.setSelectionInterval(0, 0);
                 this.motoGarageNotebookEngine.setCurrentCustomer(customers[0]);
@@ -668,6 +679,7 @@ public class MainWindow extends javax.swing.JFrame {
         }else{
             customerEditButtonNew.setEnabled(false);
             customerDeleteButtonNew.setEnabled(false);
+            System.out.println("TEST2");
         }
     }
     
@@ -676,6 +688,7 @@ public class MainWindow extends javax.swing.JFrame {
      * Method used to refresh everything within the Mechanics Tab
      */
     private void refreshMechanicsTab(){
+        System.out.println("Refresh mechanics tab being called.");
         this.refreshCurrentMechanicInformation();
         this.refreshMechanicsList();
     }
@@ -1338,7 +1351,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(editMaintenanceTypesButton);
 
         importGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
-        importGarageButton.setToolTipText("Load Garage");
+        importGarageButton.setToolTipText("Load Garage from Cloud");
         importGarageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importGarageButtonActionPerformed(evt);
@@ -1347,7 +1360,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(importGarageButton);
 
         exportGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32EXPORT.png"))); // NOI18N
-        exportGarageButton.setToolTipText("Save Garage");
+        exportGarageButton.setToolTipText("Save Garage to Cloud");
         exportGarageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportGarageButtonActionPerformed(evt);
@@ -1794,11 +1807,11 @@ public class MainWindow extends javax.swing.JFrame {
                 loginMenuItemActionPerformed(evt);
             }
         });
-        loginMenuItem.setEnabled(false);
+        loginMenuItem.setEnabled(true);
         fileMenu.add(loginMenuItem);
 
         logoutMenuItem.setText("Logout");
-        logoutMenuItem.setEnabled(false);
+        logoutMenuItem.setEnabled(true);
         fileMenu.add(logoutMenuItem);
         fileMenu.add(fileMenuSeparator);
 
@@ -2187,41 +2200,72 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void importGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importGarageButtonActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Import Garage");
-        
-        
-        chooser.showOpenDialog(this);
-        File testFile = chooser.getSelectedFile();
-        
-        if(testFile != null){
-            String filePath = testFile.getAbsolutePath();
-            try {
-                System.out.println(filePath);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            this.motoGarageNotebookEngine.openGarage(testFile);
+        if(this.motoGarageNotebookEngine.getCurrentParseUser()==null){
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "There is no Cloud User logged in to import a Garage from the MotoGarage Cloud!");
+        }else{
+            this.motoGarageNotebookEngine.openFromCloud();
         }
+        
+        
+        //JFileChooser chooser = new JFileChooser();
+        //chooser.setDialogTitle("Import Garage");
+        
+        
+        //chooser.showOpenDialog(this);
+        //File testFile = chooser.getSelectedFile();
+        
+        //if(testFile != null){
+        //    String filePath = testFile.getAbsolutePath();
+        //    try {
+        //        System.out.println(filePath);
+        //    } catch (Exception ex) {
+        //        ex.printStackTrace();
+        //    }
+        //    this.motoGarageNotebookEngine.openGarage(testFile);
+        //}
     }//GEN-LAST:event_importGarageButtonActionPerformed
 
     private void exportGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportGarageButtonActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Export Garage");
-        chooser.showSaveDialog(this);
         
-        if(chooser.getSelectedFile() != null){
-            File testFile = chooser.getSelectedFile();
-            String filePath = testFile.getAbsolutePath();
-            try {
-                System.out.println(filePath);
-            } catch (Exception ex) {
-                System.out.println("dialog must have closed?");
-                ex.printStackTrace();
+        if(this.motoGarageNotebookEngine.getCurrentParseUser()!=null){
+            
+            if(this.motoGarageNotebookEngine.getCurrentParseUser().getSessionToken()!=null){
+                try {
+                    try {
+                        this.motoGarageNotebookEngine.saveToCloud();
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                System.out.println("User doesn't have session token?");
             }
-            this.motoGarageNotebookEngine.saveGarage(testFile);
+        }else{
+            System.out.println("User is NULL?!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "There is no Cloud User logged in to save a Garage to the MotoGarage Cloud!");
         }
+        //JFileChooser chooser = new JFileChooser();
+        //chooser.setDialogTitle("Export Garage");
+        //chooser.showSaveDialog(this);
+        
+        //if(chooser.getSelectedFile() != null){
+        //    File testFile = chooser.getSelectedFile();
+        //    String filePath = testFile.getAbsolutePath();
+        //    try {
+        //        System.out.println(filePath);
+        //    } catch (Exception ex) {
+        //        System.out.println("dialog must have closed?");
+        //        ex.printStackTrace();
+        //    }
+        //    this.motoGarageNotebookEngine.saveGarage(testFile);
+        //}
     }//GEN-LAST:event_exportGarageButtonActionPerformed
 
     private void fuelEntryAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelEntryAddButtonActionPerformed
