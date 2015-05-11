@@ -40,19 +40,6 @@ public class CustomerWindow extends JDialog {
      * Main constructor, used when creating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    //public CustomerWindow(Component incomingParent,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
-    //    this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
-    //    initComponents();
-    //    this.setIcon();
-    //    this.createOrUpdateCustomerButton.setText("Create Customer");
-    //    this.setTitle("Create Customer");
-    //    this.setLocationRelativeTo(incomingParent);
-    //}
-    
-        /**
-     * Main constructor, used when creating Customer
-     * @param incomingMotoGarageMechanicEngine 
-     */
     public CustomerWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         super(parent, modal);
         this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
@@ -60,7 +47,6 @@ public class CustomerWindow extends JDialog {
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Create Customer");
         this.setTitle("Create Customer");
-        //this.setLocationRelativeTo(incomingParent);
     }
     
      /**
@@ -87,11 +73,7 @@ public class CustomerWindow extends JDialog {
             Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             imageIcon = new ImageIcon(newimg);  // transform it back
             this.imageIcon=imageIcon;
-            this.customerPictureLabel.setIcon(imageIcon);
-
-            //old
-            //this.customerPictureLabel.setIcon(incomingCustomer.getImageIcon());
-            //this.imageIcon = incomingCustomer.getImageIcon();            
+            this.customerPictureLabel.setIcon(imageIcon);       
         }        
     }
     

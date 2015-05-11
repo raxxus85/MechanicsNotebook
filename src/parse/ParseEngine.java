@@ -31,8 +31,8 @@ import org.parse4j.callback.GetDataCallback;
 public class ParseEngine {
     private MotoGarageNotebookEngine motoGarageNotebookEngine;
     private ParseUser currentUser = null;
-    private String appId = "ijXu9OWAFfekiM8hFlLjrHa7A2BK3kWir8X1v5nM";
-    private String restApiAppId ="sB8eqMDf5M8gyEzgkwJ8EzQRhYGaTeAbTPhfhTNE";
+    private final String appId = "ijXu9OWAFfekiM8hFlLjrHa7A2BK3kWir8X1v5nM";
+    private final String restApiAppId ="sB8eqMDf5M8gyEzgkwJ8EzQRhYGaTeAbTPhfhTNE";
     
     public ParseEngine(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine){
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;

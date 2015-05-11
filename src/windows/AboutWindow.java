@@ -101,7 +101,7 @@ public class AboutWindow extends javax.swing.JDialog {
         jButton2.addActionListener(new OpenUrlAction());
         jButton2.setToolTipText("Visit http://www.motogaragechi.com");
 
-        jLabel4.setText("Version 0.3");
+        jLabel4.setText("Version 0.1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

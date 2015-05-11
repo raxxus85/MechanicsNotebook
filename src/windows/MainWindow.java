@@ -209,7 +209,8 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGfavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+
     }
 
  
@@ -692,6 +693,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void refreshCurrentMechanicInformation(){
         if(this.motoGarageNotebookEngine.getCurrentMechanic()!=null){
+            System.out.println("FAIL 696");
             Mechanic currentMechanic= this.motoGarageNotebookEngine.getCurrentMechanic();
             if(currentMechanic.getImageIcon()!=null){               
                 ImageIcon imageIcon = this.motoGarageNotebookEngine.getCurrentMechanic().getImageIcon(); // load the image to a imageIcon
@@ -711,6 +713,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void refreshCurrentCustomerInformation(){
         if(this.motoGarageNotebookEngine.getCurrentCustomer()!=null){
+            System.out.println("FAIL 716");
             Customer currentCustomer= this.motoGarageNotebookEngine.getCurrentCustomer();
             if(currentCustomer.getImageIcon()!=null){               
                 ImageIcon imageIcon = this.motoGarageNotebookEngine.getCurrentCustomer().getImageIcon(); // load the image to a imageIcon
@@ -738,6 +741,7 @@ public class MainWindow extends javax.swing.JFrame {
             listOfLabels.add(this.sixOdoLabel); 
             
         if(this.motoGarageNotebookEngine.getCurrentVehicle()!=null){
+            System.out.println("FAIL 744");
             Vehicle currentVehicle= this.motoGarageNotebookEngine.getCurrentVehicle();
             if(currentVehicle.getImageIcon()!=null){               
                 ImageIcon imageIcon = this.motoGarageNotebookEngine.getCurrentVehicle().getImageIcon(); // load the image to a imageIcon
@@ -756,6 +760,8 @@ public class MainWindow extends javax.swing.JFrame {
             // reset the odometer
             for (JLabel item : listOfLabels) {
                 item.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.motoGarageNotebookEngine.getOdoImagePath(0))));
+
+                System.out.println(this.motoGarageNotebookEngine.getOdoImagePath(0));
             }          
             
             Integer currentOdometer = currentVehicle.getOdometer();
@@ -777,6 +783,7 @@ public class MainWindow extends javax.swing.JFrame {
             // reset the odometer
             for (JLabel item : listOfLabels) {
                 item.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.motoGarageNotebookEngine.getOdoImagePath(0))));
+                System.out.println(this.motoGarageNotebookEngine.getOdoImagePath(0));
             } 
             
         }
@@ -975,7 +982,6 @@ public class MainWindow extends javax.swing.JFrame {
         currentMechanicPanel = new javax.swing.JPanel();
         mechanicNameLabel = new javax.swing.JLabel();
         mechanicPictureLabel = new javax.swing.JLabel();
-        mainWindowStatusBar = new org.jdesktop.swingx.JXStatusBar();
         mechanicsNotebookMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newGarageMenuItem = new javax.swing.JMenuItem();
@@ -1866,7 +1872,6 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -1901,9 +1906,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(customerPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainWindowStatusBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -2589,7 +2592,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JToolBar mainToolBar;
-    private org.jdesktop.swingx.JXStatusBar mainWindowStatusBar;
     private javax.swing.JTable maintenanceActionsTable;
     private javax.swing.JToolBar maintenanceActionsToolBar;
     private javax.swing.JButton maintenanceAlertButton;
