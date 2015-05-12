@@ -201,6 +201,7 @@ public class MechanicWindow extends javax.swing.JDialog {
 
         mechanicDescriptionTextArea.setColumns(20);
         mechanicDescriptionTextArea.setRows(5);
+        mechanicDescriptionTextArea.setLineWrap(true);
         jScrollPane1.setViewportView(mechanicDescriptionTextArea);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
