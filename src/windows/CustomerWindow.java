@@ -135,6 +135,7 @@ public class CustomerWindow extends JDialog {
 
         customerDescriptionTextArea.setColumns(20);
         customerDescriptionTextArea.setRows(5);
+        customerDescriptionTextArea.setLineWrap(true);
         jScrollPane1.setViewportView(customerDescriptionTextArea);
 
         customerDescriptionLabel.setText("Description");

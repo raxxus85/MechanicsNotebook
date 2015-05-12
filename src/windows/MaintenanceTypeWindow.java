@@ -107,6 +107,7 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
 
         maintenanceTypeDescriptionTextArea.setColumns(20);
         maintenanceTypeDescriptionTextArea.setRows(5);
+        maintenanceTypeDescriptionTextArea.setLineWrap(true);
         jScrollPane1.setViewportView(maintenanceTypeDescriptionTextArea);
 
         maintenanceTypeIntervalLabel.setText("Recommended Interval");

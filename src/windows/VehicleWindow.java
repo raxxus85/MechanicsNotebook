@@ -158,6 +158,7 @@ public class VehicleWindow extends javax.swing.JDialog {
 
         vehicleDescriptionTextArea.setColumns(20);
         vehicleDescriptionTextArea.setRows(5);
+        vehicleDescriptionTextArea.setLineWrap(true);
         jScrollPane1.setViewportView(vehicleDescriptionTextArea);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Vehicle Picture"));

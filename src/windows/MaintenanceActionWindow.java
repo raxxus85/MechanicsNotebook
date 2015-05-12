@@ -133,6 +133,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
 
         notesTextArea.setColumns(20);
         notesTextArea.setRows(5);
+        notesTextArea.setLineWrap(true);
         jScrollPane1.setViewportView(notesTextArea);
 
         notesLabel.setText("Notes");
