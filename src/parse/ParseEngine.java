@@ -86,13 +86,7 @@ public class ParseEngine {
 
         try {
             user.signUp();
-            this.currentUser = user;
-            //user.save();
-            //this.createGarage(user);
-            //user = user.login(userName,password);
-            //user.signUp()
-            //user.save();
-            //user.logout();                       
+            this.currentUser = user;                   
         } catch (ParseException ex) {
             //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();

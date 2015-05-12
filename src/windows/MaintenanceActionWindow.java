@@ -48,7 +48,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         
         // maintenance type
         MaintenanceType currentMaintenanceType = incomingMaintenanceAction.getMaintenanceType();
-        Object[] testArray = mechanicsNotebookEngine.getMechanicArray();
+        Object[] testArray = mechanicsNotebookEngine.getMaintenaceTypeArray();
         DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
         //DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
         this.maintenanceTypeJComboBox.setModel(test1);
@@ -228,6 +228,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         // TODO add your handling code here:
         Vehicle newVehicle = this.maintenanceAction.getVehicle();
         MaintenanceType newMaintenanceType = (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem();
+        //MaintenanceAction newMaintenanceAction = (MaintenanceAction)this.maintenanceTypeJComboBox.getSelectedItem();
         Mechanic newMechanic = (Mechanic) this.mechanicJComboBox.getSelectedItem();
         Integer newOdometer = Integer.parseInt(this.odometerTextField.getText());
         String newNotes = this.notesTextArea.getText();

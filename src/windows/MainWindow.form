@@ -143,6 +143,7 @@
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[800, 600]"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="mechanicsNotebookMenuBar"/>
@@ -164,27 +165,22 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="mainToolBar" max="32767" attributes="0"/>
+          <Component id="mainToolBar" pref="1048" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="currentMechanicPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="currentCustomerPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="currentVehiclePanel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="vehiclePanelNew" alignment="0" max="32767" attributes="0"/>
-                          <Component id="mechanicPanelNew" alignment="0" max="32767" attributes="0"/>
-                          <Component id="customerPanelNew" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="mainTabbedPane" min="-2" pref="735" max="-2" attributes="0"/>
-                  </Group>
+              <Component id="currentMechanicPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="currentCustomerPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="currentVehiclePanel" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="vehiclePanelNew" alignment="0" max="32767" attributes="0"/>
+                  <Component id="mechanicPanelNew" alignment="0" max="32767" attributes="0"/>
+                  <Component id="customerPanelNew" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="mainTabbedPane" min="-2" pref="664" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -199,20 +195,17 @@
                   <Component id="currentVehiclePanel" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="mechanicPanelNew" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="customerPanelNew" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="vehiclePanelNew" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="vehiclePanelNew" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="mainTabbedPane" min="-2" pref="584" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="mainTabbedPane" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -237,7 +230,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane6" pref="730" max="32767" attributes="0"/>
+                  <Component id="jScrollPane6" pref="659" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="maintenanceActionsToolBar" max="32767" attributes="0"/>
@@ -251,7 +244,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="maintenanceActionsToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane6" pref="498" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" pref="386" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -374,7 +367,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane4" alignment="0" pref="730" max="32767" attributes="0"/>
+                  <Component id="jScrollPane4" alignment="0" pref="659" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fuelEntryToolBar" max="32767" attributes="0"/>
@@ -388,7 +381,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fuelEntryToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" pref="498" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="386" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -478,7 +471,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="730" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="659" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="warrantyEntryToolBar" max="32767" attributes="0"/>
@@ -492,7 +485,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="warrantyEntryToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="498" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="386" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -584,7 +577,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" pref="730" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" pref="659" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="modificationEntryToolBar" max="32767" attributes="0"/>
@@ -598,7 +591,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="modificationEntryToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="498" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="386" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -688,7 +681,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane5" alignment="1" pref="730" max="32767" attributes="0"/>
+                  <Component id="jScrollPane5" alignment="1" pref="659" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dragStripSlipToolBar" max="32767" attributes="0"/>
@@ -702,7 +695,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dragStripSlipToolBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane5" pref="498" max="32767" attributes="0"/>
+                      <Component id="jScrollPane5" pref="386" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -974,11 +967,8 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="1" attributes="0">
-              <Group type="102" attributes="0">
-                  <Component id="mechanicToolBar" min="-2" pref="134" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
-              </Group>
-              <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
+              <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="mechanicToolBar" alignment="0" pref="134" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -1121,10 +1111,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Component id="customerToolBar" min="-2" pref="138" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
-              </Group>
+              <Component id="customerToolBar" max="32767" attributes="0"/>
               <Component id="jScrollPane7" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -1267,8 +1254,8 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="vehicleToolBar" max="32767" attributes="0"/>
               <Component id="jScrollPane8" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="vehicleToolBar" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

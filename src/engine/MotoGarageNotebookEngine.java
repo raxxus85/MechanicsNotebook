@@ -307,13 +307,11 @@ public class MotoGarageNotebookEngine {
         // time to attempt to SAVE!
         String trimmedFilePath = "";
             if(fileToSaveAs.getAbsolutePath().contains(".mnb")){
-                //trimmedFilePath = fileToSaveAs.getAbsolutePath();
                 trimmedFilePath = fileToSaveAs.getAbsolutePath().substring(0,(fileToSaveAs.getAbsolutePath().indexOf(".mnb")));
                 trimmedFilePath = trimmedFilePath + ".mnb";
             }else{
                 trimmedFilePath = fileToSaveAs.getAbsolutePath() + ".mnb";
             }
-
         try{
             FileOutputStream fileOutputStream = new FileOutputStream(trimmedFilePath);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -323,7 +321,7 @@ public class MotoGarageNotebookEngine {
             // set garage save file
             this.currentGarage.setSaveFile(fileToSaveAs);
             this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.INFORMATION_MESSAGE, "File saved successfully.");
-            System.out.println("Data saved to ...");
+            System.out.print("Garage saved locally to:");
             System.out.println(trimmedFilePath);
         }catch(IOException ex){
             this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.ERROR_MESSAGE, "Something went terribly wrong attempting to save!");
