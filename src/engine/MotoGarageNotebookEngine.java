@@ -90,6 +90,7 @@ public class MotoGarageNotebookEngine {
     // Parse.com variables
     ParseEngine parseEngine = new ParseEngine(this);
     Boolean cloudEnabled = false;
+    String garageObjectId = null;
 
     
     public MotoGarageNotebookEngine(){
@@ -97,6 +98,14 @@ public class MotoGarageNotebookEngine {
         //Garage testGarage = new Garage();
         //this.currentGarage = testGarage;
         this.dialogFactory = new DialogFactory();
+    }
+    
+    public void setGarageObjectId(String incomingGarageObjectId){
+        this.garageObjectId = incomingGarageObjectId;
+    }
+    
+    public String getGarageObjectId(){
+        return this.garageObjectId;
     }
     
     /**
@@ -137,6 +146,10 @@ public class MotoGarageNotebookEngine {
         this.currentGarage = newGarage;
     }
     
+    public void signOutUser() throws ParseException{
+        this.parseEngine.signOutUser();
+    }
+    
     public ParseUser signUpUser(Component incomingComponent,String username, String password){
         ParseUser newUser = this.parseEngine.signUpUser(username, password);
 
@@ -146,7 +159,6 @@ public class MotoGarageNotebookEngine {
     
     public ParseUser signInUser(String username, String password){
         ParseUser signedInUser = this.parseEngine.signInUser(username, password);
-        //this.currentParseUser = signedInUser;
         return signedInUser;
     }
 
@@ -178,6 +190,7 @@ public class MotoGarageNotebookEngine {
     public void openGarage(File fileToOpen){
         // DO THIS
         String pathOfFileToOpen = fileToOpen.getAbsolutePath();
+        //System.out.println("!!!!!! engine line 181 - absolute path is..." + fileToOpen.getAbsolutePath());
         try{
             FileInputStream fileInputStream = new FileInputStream(pathOfFileToOpen);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -198,19 +211,30 @@ public class MotoGarageNotebookEngine {
     }
     
     public void openFromCloud(){
-        this.parseEngine.openUserGarages();
+        this.parseEngine.openUsersGarage();
+        //this.parseEngine.checkUserGarages();
+        //if(this.parseEngine.getCurrentGarage()!=null){
+        //    this.parseEngine.openGarage(this.parseEngine.getCurrentGarage());
+        //}else{
+        //    System.out.println("USER HAS NO GARAGE MAN!!!!!!!!!!!!!!!!!!");
+        //}
     }
     
     public void saveToCloud() throws FileNotFoundException, IOException, ParseException, ClassNotFoundException{
-        FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Mark\\Documents\\test\\test.mnb");
+        //create a temp file
+    	File tempFile = File.createTempFile("motoGarageNotebookTempFile", ".tmp"); 
+        //System.out.println("Temp file : " + tempFile.getAbsolutePath());
+        //TEST 
+        FileOutputStream fileOutputStream = new FileOutputStream(tempFile.getAbsoluteFile());
+        //FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Mark\\Documents\\test\\test.mnb");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(this.currentGarage);
         objectOutputStream.close();
         fileOutputStream.close();
         // turn object into byte data for cloud transfer...
-        File testFile = new File("C:\\Users\\Mark\\Documents\\test\\test.mnb");
-        System.out.println("LENGTH IS :" + testFile.length());
-        byte[] data = serializeTest(testFile);
+        //File testFile = new File("C:\\Users\\Mark\\Documents\\test\\test.mnb");
+        //System.out.println("LENGTH IS :" + tempFile.length());
+        byte[] data = serializeTest(tempFile);
         this.parseEngine.saveGarage(data);      
     }
     
@@ -220,6 +244,7 @@ public class MotoGarageNotebookEngine {
      * @return
      * @throws IOException 
      */
+    @Deprecated
     private static byte[] serialize(Object obj) throws IOException {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         ObjectOutputStream o = new ObjectOutputStream(b);
@@ -248,12 +273,13 @@ public class MotoGarageNotebookEngine {
         
     public static File deserializeTest(byte[] bytes) throws FileNotFoundException, IOException{
         //below is the different part
-        File someFile = new File("C:\\Users\\Mark\\Documents\\test\\testDESERIALIZE.mnb");
-        FileOutputStream fos = new FileOutputStream(someFile);
+        //File someFile = new File("C:\\Users\\Mark\\Documents\\test\\testDESERIALIZE.mnb");
+        File tempFile = File.createTempFile("motoGarageNotebookTempFile", ".tmp");         
+        FileOutputStream fos = new FileOutputStream(tempFile);
         fos.write(bytes);
         fos.flush();
         fos.close();
-        return someFile;
+        return tempFile;
     }
 
     /**
@@ -263,6 +289,7 @@ public class MotoGarageNotebookEngine {
      * @throws IOException
      * @throws ClassNotFoundException 
      */
+    @Deprecated
     private static Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
         ByteArrayInputStream b = new ByteArrayInputStream(bytes);
         ObjectInputStream o = new ObjectInputStream(b);

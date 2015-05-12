@@ -184,7 +184,6 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
     private void loginUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginUserButtonActionPerformed
         // TODO add your handling code here:
         String username = this.usernameTextField.getText();
-        //String password = this.passwordTextField.getText();
         String password = new String(this.passwordTextField.getPassword());
         ParseUser newUser = this.motoGarageNotebookEngine.signInUser(username, password);
         if(newUser.isAuthenticated()){

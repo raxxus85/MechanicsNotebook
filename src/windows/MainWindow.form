@@ -67,6 +67,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutMenuItemActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="logoutMenuItem.setEnabled(true);"/>
               </AuxValues>
@@ -162,7 +165,6 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="mainToolBar" max="32767" attributes="0"/>
-          <Component id="mainWindowStatusBar" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -203,12 +205,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="customerPanelNew" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="vehiclePanelNew" min="-2" max="-2" attributes="0"/>
+                      <Component id="vehiclePanelNew" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="mainTabbedPane" min="-2" pref="584" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="mainTabbedPane" min="-2" pref="584" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="mainWindowStatusBar" min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -1263,8 +1267,8 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane8" pref="160" max="32767" attributes="0"/>
-              <Component id="vehicleToolBar" pref="160" max="32767" attributes="0"/>
+              <Component id="vehicleToolBar" max="32767" attributes="0"/>
+              <Component id="jScrollPane8" alignment="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -1631,8 +1635,6 @@
           </Properties>
         </Component>
       </SubComponents>
-    </Container>
-    <Container class="org.jdesktop.swingx.JXStatusBar" name="mainWindowStatusBar">
     </Container>
   </SubComponents>
 </Form>

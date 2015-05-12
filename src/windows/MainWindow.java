@@ -577,11 +577,11 @@ public class MainWindow extends javax.swing.JFrame {
      * Method used to update the Vehicle List
      */
     private void refreshVehicleList(){
-        System.out.println("REFRESH VEHICLE  LIST BEING CALLED");
         DefaultTableModel model = (DefaultTableModel) vehiclesTable.getModel();
         // time to remove the maintenance actions here
         int rowCount = model.getRowCount();
         Integer currentRowSelected = vehiclesTable.getSelectedRow();
+
         //Remove rows one by one from the end of the table
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
@@ -658,19 +658,19 @@ public class MainWindow extends javax.swing.JFrame {
             
             // since there ARE customers, let's ensure the 'selected' remains selected
             if(currentRowSelected>-1 && this.motoGarageNotebookEngine.getCurrentCustomer()!=null){
-                System.out.println("SHIT!");
-                System.out.println(currentRowSelected);
+                //System.out.println("SHIT!");
+                //System.out.println(currentRowSelected);
                 ListSelectionModel selectionModel =customersTable.getSelectionModel();
                 selectionModel.setSelectionInterval(currentRowSelected, currentRowSelected); // 
           
             }else if((currentRowSelected==-1) && this.motoGarageNotebookEngine.getCurrentCustomer()!=null ){
-                System.out.println("SHIT!!!!");
-                System.out.println(currentRowSelected);
+                //System.out.println("SHIT!!!!");
+                //System.out.println(currentRowSelected);
                 ListSelectionModel selectionModel =customersTable.getSelectionModel();
                 selectionModel.setSelectionInterval(0, 0);
                 this.motoGarageNotebookEngine.setCurrentCustomer(customers[0]);
             }else if(currentRowSelected==-1 && this.motoGarageNotebookEngine.getCurrentCustomer() == null){
-                System.out.println("SHIT!!!!!!!!!!!!!");
+                //System.out.println("SHIT!!!!!!!!!!!!!");
                 ListSelectionModel selectionModel =customersTable.getSelectionModel();
                 selectionModel.setSelectionInterval(0, 0);
                 this.motoGarageNotebookEngine.setCurrentCustomer(customers[0]);
@@ -693,7 +693,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void refreshCurrentMechanicInformation(){
         if(this.motoGarageNotebookEngine.getCurrentMechanic()!=null){
-            System.out.println("FAIL 696");
+            //System.out.println("FAIL 696");
             Mechanic currentMechanic= this.motoGarageNotebookEngine.getCurrentMechanic();
             if(currentMechanic.getImageIcon()!=null){               
                 ImageIcon imageIcon = this.motoGarageNotebookEngine.getCurrentMechanic().getImageIcon(); // load the image to a imageIcon
@@ -713,7 +713,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void refreshCurrentCustomerInformation(){
         if(this.motoGarageNotebookEngine.getCurrentCustomer()!=null){
-            System.out.println("FAIL 716");
+            //System.out.println("FAIL 716");
             Customer currentCustomer= this.motoGarageNotebookEngine.getCurrentCustomer();
             if(currentCustomer.getImageIcon()!=null){               
                 ImageIcon imageIcon = this.motoGarageNotebookEngine.getCurrentCustomer().getImageIcon(); // load the image to a imageIcon
@@ -741,7 +741,6 @@ public class MainWindow extends javax.swing.JFrame {
             listOfLabels.add(this.sixOdoLabel); 
             
         if(this.motoGarageNotebookEngine.getCurrentVehicle()!=null){
-            System.out.println("FAIL 744");
             Vehicle currentVehicle= this.motoGarageNotebookEngine.getCurrentVehicle();
             if(currentVehicle.getImageIcon()!=null){               
                 ImageIcon imageIcon = this.motoGarageNotebookEngine.getCurrentVehicle().getImageIcon(); // load the image to a imageIcon
@@ -760,8 +759,6 @@ public class MainWindow extends javax.swing.JFrame {
             // reset the odometer
             for (JLabel item : listOfLabels) {
                 item.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.motoGarageNotebookEngine.getOdoImagePath(0))));
-
-                System.out.println(this.motoGarageNotebookEngine.getOdoImagePath(0));
             }          
             
             Integer currentOdometer = currentVehicle.getOdometer();
@@ -783,7 +780,6 @@ public class MainWindow extends javax.swing.JFrame {
             // reset the odometer
             for (JLabel item : listOfLabels) {
                 item.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.motoGarageNotebookEngine.getOdoImagePath(0))));
-                System.out.println(this.motoGarageNotebookEngine.getOdoImagePath(0));
             } 
             
         }
@@ -1636,8 +1632,8 @@ public class MainWindow extends javax.swing.JFrame {
         );
         vehiclePanelNewLayout.setVerticalGroup(
             vehiclePanelNewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-            .addComponent(vehicleToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(vehicleToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         //currentVehiclePanel.setBorder(compound);
@@ -1815,6 +1811,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         logoutMenuItem.setText("Logout");
         logoutMenuItem.setEnabled(true);
+        logoutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(logoutMenuItem);
         fileMenu.add(fileMenuSeparator);
 
@@ -1905,8 +1906,11 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerPanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vehiclePanelNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(vehiclePanelNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))))
         );
 
         pack();
@@ -2239,9 +2243,7 @@ public class MainWindow extends javax.swing.JFrame {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (IOException ex) {
-                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ParseException ex) {
+                } catch (IOException | ParseException ex) {
                     Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{
@@ -2485,6 +2487,15 @@ public class MainWindow extends javax.swing.JFrame {
         this.motoGarageNotebookEngine.startVehicleTypesMainWindow(this);
         
     }//GEN-LAST:event_editVehicleTypesButtonActionPerformed
+
+    private void logoutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMenuItemActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.motoGarageNotebookEngine.signOutUser();
+        } catch (ParseException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_logoutMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

@@ -23,6 +23,7 @@ import org.parse4j.ParseUser;
 import org.parse4j.callback.FindCallback;
 import org.parse4j.callback.GetCallback;
 import org.parse4j.callback.GetDataCallback;
+import org.parse4j.callback.ProgressCallback;
 
 /**
  *
@@ -31,8 +32,10 @@ import org.parse4j.callback.GetDataCallback;
 public class ParseEngine {
     private MotoGarageNotebookEngine motoGarageNotebookEngine;
     private ParseUser currentUser = null;
+    private ParseObject currentGarage = null;
     private final String appId = "ijXu9OWAFfekiM8hFlLjrHa7A2BK3kWir8X1v5nM";
     private final String restApiAppId ="sB8eqMDf5M8gyEzgkwJ8EzQRhYGaTeAbTPhfhTNE";
+    private ParseFile tempFile = null;
     
     public ParseEngine(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine){
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
@@ -41,6 +44,23 @@ public class ParseEngine {
     
     public ParseEngine(){
         Parse.initialize(appId, restApiAppId);
+    }
+    
+    public void setTempFile(ParseFile incomingTempFile){
+        this.tempFile = incomingTempFile;
+    }
+    
+    public ParseFile getTempFile(){
+        return this.tempFile;
+    }
+    
+    
+    public void setCurrentGarage(ParseObject object){
+        this.currentGarage= object;
+    }
+    
+    public ParseObject getCurrentGarage(){
+        return this.currentGarage;
     }
     
     public void setParseUser(ParseUser incomingParseUser){
@@ -84,7 +104,23 @@ public class ParseEngine {
         return user;
     }
     
-        /**
+    public void signOutUser() throws ParseException{
+        if(this.currentUser==null || this.currentUser.getSessionToken().equals("")){
+            System.out.println("THERE IS NO CURRENT USER. OR SESSION.");
+            return;
+        }
+
+        try {
+            this.currentUser.logout();
+            this.currentUser = null; // REMOVE WHEN WE USE SESSION TOKENS FOR REALS
+        } catch (ParseException ex) {
+            Logger.getLogger(ParseEngine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            System.out.println("User is logged out");
+
+    }
+    
+    /**
      * Method to sign in a Parse.com user
      * @param userName
      * @param password
@@ -98,14 +134,14 @@ public class ParseEngine {
         try {
             //user.signUp();
             user = user.login(userName,password);
-            System.out.println(user.getSessionToken().toString());
+            
+            //System.out.println(user.getSessionToken().toString());
             //user.signUp()
             user.save();
             //this.createGarage(user);
-            this.ensureUserHasGarage(user);
+            //this.ensureUserHasGarage(user);
             this.currentUser = user;
-            //user.logout();      
-            
+            //user.logout();                  
         } catch (ParseException ex) {
             //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
@@ -172,30 +208,63 @@ public class ParseEngine {
     }
     
     public void saveGarage(byte[] incomingData) throws ParseException{
-        System.out.println("Incoming byte array length is: " + incomingData.length);
-        
-        
+        System.out.println("Outgoing byte array length is: " + incomingData.length);
+
         ParseFile file = new ParseFile("test2.mnb", incomingData);
 
-        file.save();
+        //file.save();
+        file.save(new ProgressCallback() {
+        @Override
+        public void done(Integer percentDone) {
+                //do something
+                System.out.println(" PERCENT DONE : " + percentDone);
+                if(percentDone==100){
+                    printMessage("File saved to cloud successfully.");
+                }else{
+                    printMessage("File saved to cloud unsuccessfully.");
+                }
+            
+            }
+        });
+        this.setTempFile(file);
         //file.saveInBackground();
         
+        // HERE WE NEED TO CHECK TO SEE IF THERE IS A GARAGE, and if THERE IS, SAVE TO IT INSTEAD OF NEW ONE...
+        this.checkUserGarages();
+        try {
+            Thread.sleep(5000);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
         
-        ParseObject garage = new ParseObject("Garage");
-        //garage.put("User", "Joe Smith");
-        garage.put("User", this.currentUser);
-        garage.put("GarageFile", file);
-        garage.save();
-        //garage.saveInBackground();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Garage");
+        // Retrieve the object by id
+        query.getInBackground(this.getCurrentGarage().getObjectId(), new GetCallback<ParseObject>() {
+            public void done(ParseObject garage, ParseException e) {
+                if (e == null) {
+                // Now let's update it with some new data. In this case, only cheatMode and score
+                // will get sent to the Parse Cloud. playerName hasn't changed.
+                    garage.put("GarageFile", getTempFile());
+                    garage.saveInBackground();
+                }
+            }
+        });
         
-        
-        // TEST
-        
-        //byte[] data = "Working at Parse is great!".getBytes();
-        //ParseFile file2 = new ParseFile("resume.txt", data);
-        //file2.put("User", this.currentUser);
-        //file2.save();
+ 
+
+            //ParseObject garage = new ParseObject("Garage");
+            //garage.put("User", this.currentUser);
+            //garage.put("GarageFile", file);
+            //garage.put("objectId", this.getCurrentGarage().getObjectId());
+            //garage.save();
+
     }
+    
+    public void printMessage(String message){
+        this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(null, DialogType.INFORMATION_MESSAGE, message);
+    }
+    
+    
     
     public void openGarage(final ParseObject garage){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Garage");
@@ -205,7 +274,8 @@ public class ParseEngine {
 
                     ParseFile garageFile = (ParseFile) garage.get("GarageFile");
                     try {
-                        byte[] testBytes = garageFile.getData();
+                        byte[] testBytes = garageFile.getData();                       
+                        
                         System.out.println(" DID WE DOWNLOAD IT? SIZE IS..." + testBytes.length);
                         setGarage(testBytes);
   
@@ -222,14 +292,14 @@ public class ParseEngine {
     }
     
     public void setGarage(byte[] bytes) throws IOException{
-        System.out.println("WE ARE OUT OF THAT INNER CLASS BOYYYYYYYYYYYYYYY " +  bytes.length);
+        //System.out.println("WE ARE OUT OF THAT INNER CLASS BOYYYYYYYYYYYYYYY " +  bytes.length);
         File cloudFile = this.motoGarageNotebookEngine.deserializeTest(bytes);
         this.motoGarageNotebookEngine.openGarage(cloudFile);
         //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(null, DialogType.CONFIRM, appId);
     }
     
     
-    public void openUserGarages(){
+    public void openUsersGarage(){
         // first, list the garages the user has...
         if(this.currentUser!=null){
             ParseQuery<ParseObject> basicQuery = ParseQuery.getQuery("Garage");
@@ -237,11 +307,10 @@ public class ParseEngine {
             basicQuery.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> garageList, ParseException e) {
                 if (e == null) {
-                    //System.out.println("Ok confused... size is.. " + garageList.size());
-                    if(garageList == null || garageList.isEmpty()){
-                        //return true;
+                    System.out.println("Ok confused... size is.. " + garageList.size());
+                    if(garageList.isEmpty()){
                         System.out.println("0 garages found!!! Can't open a garage when one doesn't exist!!");
-
+                        //TODO  should auto create one here?
                     }else if(garageList.size()==1){
                         System.out.println("User has ONE garage. this is a good thing......................");
                         ParseObject garage = garageList.get(0);
@@ -268,7 +337,65 @@ public class ParseEngine {
             System.out.println("THERE IS NO CURRENT USER! :(");
         }   
     }
+    
+    /**
+     * Method to check the user garages
+     * <li> If 0, do...
+     * <li> If 1, set the current garage as it (with corresponding objectId)
+     * <li> If 1+, .... crap
+     */
+    public void checkUserGarages(){
+        // first, list the garages the user has...
+        if(this.currentUser!=null){
+            ParseQuery<ParseObject> basicQuery = ParseQuery.getQuery("Garage");
+            basicQuery.whereEqualTo("User", this.currentUser);
+            basicQuery.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> garageList, ParseException e) {
+                if (e == null) {
+                    //System.out.println("Ok confused... size is.. " + garageList.size());
+                    if(garageList == null || garageList.isEmpty()){
+                        //return true;
+                        System.out.println("0 garages found!!! Can't open a garage when one doesn't exist!!");
 
+                    }else if(garageList.size()==1){
+                        System.out.println("User has ONE garage. this is a good thing......................");
+                        ParseObject garage = garageList.get(0);
+                        System.out.println("The user garage object id is ..." + garage.getObjectId());
+                        //openGarage(garage);
+                        //setUserGarageObjectId(garage.getObjectId());
+                        setCurrentGarage(garage);
+                    }else{
+                        System.out.println("Retrieved " + garageList.size() + " garages!!!!!!!!!");
+                        for (ParseObject garage : garageList) {
+                            System.out.println(garage.getObjectId());
+                            JSONObject test = garage.getParseData();
+                            System.out.println(test.toString());
+                            System.out.println("WWEWEJOWIPEHJOAWHEOIAWEH:");
+                            
+                        }
+                    }
+                    // TEST TEST TEST 
+                    //ParseFile garageFile = (ParseFile) garage.get("applicantResumeFile");
+                } else {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+        });
+        System.out.println("WHOA WE HAVEEEE : " + basicQuery.toString());                             
+        }else{
+            System.out.println("THERE IS NO CURRENT USER! :(");
+        }   
+    }
+
+    //public void setUserGarageObjectId(String objectId){
+    //    this.motoGarageNotebookEngine.setGarageObjectId(objectId);
+    //}
+    
+    //public String getUserGarageObjectId(){
+    //    return this.motoGarageNotebookEngine.getGarageObjectId();
+    //}
+    
+    @Deprecated
     public void downloadGarage(){
         ParseObject tempGarage = new ParseObject("Garage");
         //garage.put("User", "Joe Smith");
