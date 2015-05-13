@@ -30,10 +30,6 @@ public class ConfirmDeleteDialog{
         
         JOptionPane jOptionPane = new JOptionPane();
         //jOptionPane.setIcon(null);
-  
-        //jOptionPane.setLocation(incomingParent.getLocation());
-        System.out.println(incomingParent.getLocation());
-        //jOptionPane.setLocation(incomingParent.getLocation());
 
         Object[] options = { "Confirm", "Cancel" };
         

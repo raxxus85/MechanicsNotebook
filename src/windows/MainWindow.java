@@ -123,6 +123,12 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) throws URISyntaxException{
         
         this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
+        //TESTING
+        //ImagePanel panel = new ImagePanel(new ImageIcon("images/background.png").getImage());
+//        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/motoGarageLogoTrans.png"));
+//        ImagePanel panel = new ImagePanel(test.getImage());
+        //mechanicButtonEditNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanic32x32EDIT.png")));
+        //TESTING
         initComponents();   
         
         
@@ -1868,7 +1874,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
+            .addComponent(mainToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(currentMechanicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
