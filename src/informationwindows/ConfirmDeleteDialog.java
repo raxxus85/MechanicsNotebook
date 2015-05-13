@@ -31,13 +31,16 @@ public class ConfirmDeleteDialog{
         JOptionPane jOptionPane = new JOptionPane();
         //jOptionPane.setIcon(null);
   
-        jOptionPane.setLocation(incomingParent.getLocation());
+        //jOptionPane.setLocation(incomingParent.getLocation());
+        System.out.println(incomingParent.getLocation());
+        //jOptionPane.setLocation(incomingParent.getLocation());
+
         Object[] options = { "Confirm", "Cancel" };
         
-        int choice = jOptionPane.showOptionDialog(null,message, "Warning!",
+        int choice = jOptionPane.showOptionDialog(incomingParent,message, "Warning!",
         jOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
         null, options, options[0]); 
-        System.out.println("User PRESSED : " +choice);
+        //jOptionPane.setLocation(incomingParent.getLocation());
         // 0 is delete, 1 is CANCEL
         if(choice == 0){
             return true;

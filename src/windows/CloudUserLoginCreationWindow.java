@@ -81,7 +81,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        usernameLabel.setText("Username");
+        usernameLabel.setText("E-mail");
 
         passwordLabel.setText("Password");
 

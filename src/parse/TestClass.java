@@ -29,7 +29,7 @@ public class TestClass {
         
         ParseEngine parseEngine = new ParseEngine();
         
-        ParseUser user = parseEngine.signInUser("mark.p.milford@gmail.com", "password");
+        ParseUser user = parseEngine.signInUser("mark@gmail.com", "password");
         
         //String appId="ijXu9OWAFfekiM8hFlLjrHa7A2BK3kWir8X1v5nM";
         //String restAppId= "sB8eqMDf5M8gyEzgkwJ8EzQRhYGaTeAbTPhfhTNE";        
