@@ -37,6 +37,10 @@ public class ParseEngine {
     private final String restApiAppId ="sB8eqMDf5M8gyEzgkwJ8EzQRhYGaTeAbTPhfhTNE";
     private ParseFile tempFile = null;
     
+    // test
+    
+    private boolean hasGarage = false;
+    
     public ParseEngine(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine){
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         Parse.initialize(appId, restApiAppId);
@@ -57,9 +61,11 @@ public class ParseEngine {
     
     public void setCurrentGarage(ParseObject object){
         this.currentGarage= object;
+        this.hasGarage = true;
     }
     
     public ParseObject getCurrentGarage(){
+        
         return this.currentGarage;
     }
     
@@ -230,27 +236,26 @@ public class ParseEngine {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Garage");
-        // Retrieve the object by id
-        query.getInBackground(this.getCurrentGarage().getObjectId(), new GetCallback<ParseObject>() {
+        if(this.hasGarage){    
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Garage");
+            // Retrieve the object by id
+            query.getInBackground(this.getCurrentGarage().getObjectId(), new GetCallback<ParseObject>() {
             public void done(ParseObject garage, ParseException e) {
                 if (e == null) {
                 // Now let's update it with some new data. In this case, only cheatMode and score
                 // will get sent to the Parse Cloud. playerName hasn't changed.
                     garage.put("GarageFile", getTempFile());
                     garage.saveInBackground();
+                    }
                 }
+            });
+        }else{
+            ParseObject garage = new ParseObject("Garage");
+            garage.put("User", this.currentUser);
+            garage.put("GarageFile", file);
+            garage.save(); 
             }
-        });
-        
- 
 
-            //ParseObject garage = new ParseObject("Garage");
-            //garage.put("User", this.currentUser);
-            //garage.put("GarageFile", file);
-            //garage.put("objectId", this.getCurrentGarage().getObjectId());
-            //garage.save();
 
     }
     

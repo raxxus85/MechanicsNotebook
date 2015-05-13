@@ -210,7 +210,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
-
     }
 
  
@@ -1940,8 +1939,10 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         // KILL the program
-        System.exit(0);
-        
+        boolean sureToExit = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Exiting before saving will erase any progess made. Do you wish to continue?");
+        if(sureToExit){
+            System.exit(0);
+        }        
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     /**
@@ -2188,7 +2189,10 @@ public class MainWindow extends javax.swing.JFrame {
         if(this.motoGarageNotebookEngine.getCurrentParseUser()==null){
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "There is no Cloud User logged in to import a Garage from the MotoGarage Cloud!");
         }else{
-            this.motoGarageNotebookEngine.openFromCloud();
+            boolean sureToDownload = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Downloading from the cloud will erase any unsaved progress. Do you wish to continue?");
+            if(sureToDownload){
+                this.motoGarageNotebookEngine.openFromCloud();
+            }
         }
         
         
@@ -2218,7 +2222,11 @@ public class MainWindow extends javax.swing.JFrame {
             if(this.motoGarageNotebookEngine.getCurrentParseUser().getSessionToken()!=null){
                 try {
                     try {
-                        this.motoGarageNotebookEngine.saveToCloud();
+                        boolean sureToUpload = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Uploading to the cloud will update and overwrite your current garage. Do you wish to continue?");
+                        if(sureToUpload){
+                            this.motoGarageNotebookEngine.saveToCloud();
+                        }
+                        
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ClassNotFoundException ex) {

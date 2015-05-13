@@ -44,7 +44,7 @@ public class VehicleTrackersWindow extends javax.swing.JDialog {
 
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGfavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
     /**
      * This method is called from within the constructor to initialize the form.

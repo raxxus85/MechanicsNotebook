@@ -5,6 +5,8 @@
 package informationwindows;
 
 import java.awt.Component;
+import java.awt.Toolkit;
+import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -27,7 +29,8 @@ public class ConfirmDeleteDialog{
         
         
         JOptionPane jOptionPane = new JOptionPane();
-
+        //jOptionPane.setIcon(null);
+  
         jOptionPane.setLocation(incomingParent.getLocation());
         Object[] options = { "Confirm", "Cancel" };
         
@@ -48,4 +51,6 @@ public class ConfirmDeleteDialog{
         //dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         //dialog.setVisible(true);
     }
+    
+
 }
