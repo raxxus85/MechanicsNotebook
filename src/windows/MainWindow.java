@@ -756,7 +756,7 @@ public class MainWindow extends javax.swing.JFrame {
             }else{
                 this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N);
             }
-            this.vehicleNameLabel.setText(currentVehicle.getYear().toString() + " " +currentVehicle.getMake() + " " + currentVehicle.getModel());
+            this.vehicleNameLabel.setText(currentVehicle.getYear().toString() + " " +currentVehicle.getVehicleType().getMake() + " " + currentVehicle.getVehicleType().getModel());
             //this.currentVehicleOdometerLabel.setText("Odometer: " + currentVehicle.getOdometer().toString());
             
             // SET THE ODOMETER

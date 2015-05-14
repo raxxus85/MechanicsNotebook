@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
  */
 public class Vehicle extends BaseObjectModel implements Serializable{
     //private String vehicleIdentificationNumber;
+    private VehicleType vehicleType;
     private String make;
     private String model;
     private Integer year;
@@ -30,8 +31,9 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     private ArrayList<DragStripSlip> dragStripSlips = new ArrayList<>();
     
     private ImageIcon imageIcon;
+    
     /**
-     * Main Constructor for Vehicle
+     * OLD Constructor for Vehicle
      * @param incomingMake
      * @param incomingModel
      * @param incomingYear
@@ -45,6 +47,32 @@ public class Vehicle extends BaseObjectModel implements Serializable{
         this.vin = incomingVIN;
         this.odometer = incomingOdometer;
         this.description = incomingDescription;
+    }
+    
+        /**
+     * Main Constructor for Vehicle
+     * @param incomingVehicleType
+     * @param incomingYear
+     * @param incomingColor
+     * @param incomingVIN
+     * @param incomingOdometer
+     * @param incomingDescription 
+     */
+    public Vehicle(VehicleType incomingVehicleType,Integer incomingYear,String incomingColor, String incomingVIN,  Integer incomingOdometer, String incomingDescription){
+        this.vehicleType = incomingVehicleType;
+        this.year = incomingYear;
+        this.color = incomingColor;
+        this.vin = incomingVIN;
+        this.odometer = incomingOdometer;
+        this.description = incomingDescription;
+    }
+    
+    public void setVehicleType(VehicleType incomingVehicleType){
+        this.vehicleType = incomingVehicleType;
+    }
+    
+    public VehicleType getVehicleType(){
+        return this.vehicleType;
     }
     
     public void editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction updatedMaintenanceAction){
@@ -136,7 +164,8 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     }
     
     public Object[] getVehicleObject(){
-        String[] stringArray = {this.make,this.model, this.year.toString()};
+        //String[] stringArray = {this.make,this.model, this.year.toString()};
+        String[] stringArray = {this.getVehicleType().getMake(),this.getVehicleType().getModel(), this.year.toString()};
         return stringArray;
     }
     
@@ -313,18 +342,22 @@ public class Vehicle extends BaseObjectModel implements Serializable{
         this.warranties.remove(incomingWarranty);
     }
     
+    @Deprecated
     public String getMake(){
         return this.make;
     }
     
+    @Deprecated
     public void setMake(String incomingMake){
         this.make = incomingMake;
     }
     
+    @Deprecated
     public String getModel(){
         return this.model;
     }
     
+    @Deprecated
     public void setModel(String incomingModel){
         this.model = incomingModel;
     }

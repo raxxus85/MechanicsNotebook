@@ -25,19 +25,16 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      <Component id="createOrUpdateVehicleButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                      <Component id="newVehicleCancelButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+              <Component id="createOrUpdateVehicleButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="newVehicleCancelButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,9 +44,9 @@
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="createOrUpdateVehicleButton" min="-2" max="-2" attributes="0"/>
-                  <Component id="newVehicleCancelButton" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="newVehicleCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="createOrUpdateVehicleButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -92,13 +89,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="vehicleModelLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="vehicleMakeLabel" min="-2" max="-2" attributes="0"/>
                       <Component id="vehicleYearLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="vehicleColorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="vehicleVinLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="vehicleOdometerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="vehicleDescriptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -106,9 +102,8 @@
                       <Component id="vehicleVINTextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="vehicleColorTextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="vehicleYearTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="vehicleModelTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="vehicleMakeTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="144" max="32767" attributes="0"/>
+                      <Component id="vehicleTypeComboBox" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -130,28 +125,28 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="vehicleMakeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="vehicleMakeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="vehicleTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="vehicleModelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="vehicleModelTextField" min="-2" max="-2" attributes="0"/>
+                              <Component id="vehicleYearLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="vehicleYearTextField" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="vehicleYearTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="vehicleYearLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="vehicleColorTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="vehicleColorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="vehicleVINTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="vehicleVinLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="vehicleOdometerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="vehicleOdometerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -162,34 +157,18 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="vehicleOdometerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="vehicleOdometerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="clearPictureButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="openPictureButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
                       <Component id="vehicleDescriptionLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="129" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="vehicleMakeTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="vehicleModelTextField">
-        </Component>
-        <Component class="javax.swing.JLabel" name="vehicleMakeLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Make"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="vehicleYearTextField">
         </Component>
         <Component class="javax.swing.JTextField" name="vehicleColorTextField">
@@ -197,11 +176,6 @@
         <Component class="javax.swing.JTextField" name="vehicleVINTextField">
         </Component>
         <Component class="javax.swing.JTextField" name="vehicleOdometerTextField">
-        </Component>
-        <Component class="javax.swing.JLabel" name="vehicleModelLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Model"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="vehicleYearLabel">
           <Properties>
@@ -239,6 +213,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleDescriptionTextArea.setLineWrap(true);"/>
@@ -303,6 +278,18 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearPictureButtonActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="vehicleTypeComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleTypeArray())" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Make and Model"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
