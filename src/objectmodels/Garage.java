@@ -29,7 +29,7 @@ public class Garage implements Serializable{
     private ArrayList<Mechanic> mechanics = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<MaintenanceType> maintenanceTypes = new ArrayList<>();
-    
+    private ArrayList<VehicleType> vehicleTypes = new ArrayList<>();
     
     // current object manipulation methods
    
@@ -81,6 +81,9 @@ public class Garage implements Serializable{
         return this.dragStripSlipsEnabled;
     }
     
+    public void addVehicleType(VehicleType incomingVehicleType){
+        this.vehicleTypes.add(incomingVehicleType);
+    }
     
     /**
      * Method to add a new MaintenanceType to the Garage
@@ -101,8 +104,18 @@ public class Garage implements Serializable{
         return maintenanceTypeArray;
     }
     
+    public VehicleType[] getVehicleTypeArray(){
+        ArrayList<VehicleType> vehicleTypeArrayList = this.vehicleTypes;
+        VehicleType[] vehicleTypeArray = vehicleTypeArrayList.toArray(new VehicleType[vehicleTypeArrayList.size()]);
+        return vehicleTypeArray;
+    }
+    
     public ArrayList<MaintenanceType> getMaintenanceTypeArrayList(){
         return this.maintenanceTypes;
+    }
+    
+    public ArrayList<VehicleType> getVehicleTypeArrayList(){
+        return this.vehicleTypes;
     }
     
     /**
@@ -150,6 +163,16 @@ public class Garage implements Serializable{
         }
     }
     
+    public boolean updateVehicleType(VehicleType originalVehicleType, VehicleType updatedVehicleType){
+        Integer originalIndex = this.getVehicleTypeArrayList().indexOf(originalVehicleType);
+        this.getVehicleTypeArrayList().set(originalIndex, updatedVehicleType);
+        if(!this.getVehicleTypeArrayList().contains(originalVehicleType)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     /**
      * Method to delete Maintenance Type
      * @param incomingMaintenanceType
@@ -159,6 +182,21 @@ public class Garage implements Serializable{
         ArrayList<MaintenanceType> currentMaintenanceTypes = this.getMaintenanceTypeArrayList();
         if(currentMaintenanceTypes.contains(incomingMaintenanceType)){
             currentMaintenanceTypes.remove(incomingMaintenanceType);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    /**
+     * Method to delete Vehicle Type
+     * @param incomingVehicleType
+     * @return true if successful
+     */
+    public boolean deleteVehicleType(VehicleType incomingVehicleType){
+        ArrayList<VehicleType> currentVehicleTypes = this.getVehicleTypeArrayList();
+        if(currentVehicleTypes.contains(incomingVehicleType)){
+            currentVehicleTypes.remove(incomingVehicleType);
             return true;
         }else{
             return false;
@@ -207,6 +245,8 @@ public class Garage implements Serializable{
             this.currentVehicle.setImageIcon(updatedVehicle.getImageIcon());
         }
     }
+    
+ 
     
     
     /**

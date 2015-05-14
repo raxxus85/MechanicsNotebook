@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import objectmodels.DragStripSlip;
 
 /**
@@ -87,7 +88,8 @@ public class DragStripSlipWindow extends javax.swing.JDialog {
 
         cancelButton = new javax.swing.JButton();
         addOrUpdateButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MGLogoTrans2.png"));
+        jPanel1 = new ImagePanel(test.getImage());
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();

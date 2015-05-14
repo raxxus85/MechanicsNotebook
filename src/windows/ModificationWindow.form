@@ -34,7 +34,7 @@
               <Component id="addOrUpdateButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
               <Component id="closeButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,6 +78,10 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ImagePanel(test.getImage())"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon test = new javax.swing.ImageIcon(getClass().getResource(&quot;/MGLogoTrans2.png&quot;));"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -148,9 +152,9 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="descriptionTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="descriptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="descriptionTextField" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">

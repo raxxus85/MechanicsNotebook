@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Date;
 import java.util.Properties;
+import javax.swing.ImageIcon;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -63,7 +64,8 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
 
         cancelButton = new javax.swing.JButton();
         addMaintenanceActionButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MGLogoTrans2.png"));
+        jPanel1 = new ImagePanel(test.getImage());
         currentVehicleTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         mechanicTextField = new javax.swing.JTextField();

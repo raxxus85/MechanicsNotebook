@@ -30,6 +30,7 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Modification;
 import objectmodels.Vehicle;
+import objectmodels.VehicleType;
 import objectmodels.Warranty;
 import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
@@ -51,6 +52,7 @@ import windows.UpdateMileageWindow;
 import windows.VehicleInformationGraphs;
 import windows.VehicleTrackersWindow;
 import windows.VehicleTypesMainWindow;
+import windows.VehicleTypesWindow;
 import windows.WarrantyWindow;
 import windows.WelcomeWindow;
 
@@ -79,6 +81,7 @@ public class MotoGarageNotebookEngine {
     private DragStripSlipWindow dragStripSlipWindow;
     private VehicleInformationGraphs vehicleInformationGraphs;
     private CloudUserLoginCreationWindow cloudUserLoginCreationWindow;
+    private VehicleTypesWindow vehicleTypesWindow;
     //private VehicleTypesMainWindow vehicleTypesMainWindow;
     private VehicleTypesMainWindow vehicleTypesMainWindow;
     
@@ -469,6 +472,12 @@ public class MotoGarageNotebookEngine {
         return updatedType;
     }
     
+    public boolean updateVehicleType(VehicleType originalVehicleType, VehicleType updatedVehicleType){
+        boolean updatedType =this.getGarage().updateVehicleType(originalVehicleType, updatedVehicleType);
+        this.mainWindow.refresh();
+        return updatedType;
+    }
+    
     public boolean editWarranty(Warranty originalWarranty, Warranty updatedWarranty){
         this.getGarage().getCurrentVehicle().editWarranty(originalWarranty, updatedWarranty);
         this.mainWindow.refresh();
@@ -564,6 +573,12 @@ public class MotoGarageNotebookEngine {
         return deleted;
     }
     
+    public boolean deleteVehicleType(VehicleType incomingVehicleType){
+        boolean deleted = this.getGarage().deleteVehicleType(incomingVehicleType);
+        this.mainWindow.refresh();
+        return deleted;
+    }
+    
     public boolean deleteMaintenaceAction(MaintenanceAction incomingMaintenanceAction){
         this.getCurrentVehicle().deleteMaintenanceAction(incomingMaintenanceAction);
         this.mainWindow.refresh();
@@ -590,6 +605,12 @@ public class MotoGarageNotebookEngine {
     public boolean createNewMaintenanceType(MaintenanceType incomingMaintenanceType){
         this.currentGarage.addMaintenanceType(incomingMaintenanceType);
         // TIME TO REFRESH
+        this.mainWindow.refresh();
+        return true;
+    }
+    
+    public boolean createNewVehicleType(VehicleType incomingVehicleType){
+        this.currentGarage.addVehicleType(incomingVehicleType);
         this.mainWindow.refresh();
         return true;
     }
@@ -676,6 +697,9 @@ public class MotoGarageNotebookEngine {
         return this.currentGarage.getMaintenaceTypeArray();
     }
     
+    public VehicleType[] getVehicleTypeArray(){
+        return this.currentGarage.getVehicleTypeArray();
+    }
  
     public void addMaintenanceType(MaintenanceType incomingMaintenanceType){
         this.currentGarage.addMaintenanceType(incomingMaintenanceType);
@@ -879,6 +903,19 @@ public class MotoGarageNotebookEngine {
         this.maintenanceTypeWindow.setVisible(true);
     }
     
+    public void startNewVehicleTypeWindow(VehicleTypesMainWindow incomingVehicleTypesMainWindow){
+        this.vehicleTypesWindow = new VehicleTypesWindow(new JFrame(),true,incomingVehicleTypesMainWindow,this);
+        this.vehicleTypesWindow.setLocationRelativeTo(incomingVehicleTypesMainWindow);
+        this.vehicleTypesWindow.setVisible(true);
+    }
+    
+    public void startUpdateVehicleTypeWindow(VehicleTypesMainWindow incomingVehicleTypesMainWindow,VehicleType incomingVehicleType){
+        this.vehicleTypesWindow = new VehicleTypesWindow(new JFrame(),true,incomingVehicleTypesMainWindow,this, incomingVehicleType);
+        this.vehicleTypesWindow.setLocationRelativeTo(incomingVehicleTypesMainWindow);
+        this.vehicleTypesWindow.setVisible(true);
+    }
+    
+    
      /**
      * Method used to start the Maintenance Type Window, to Update a Type
      * 
@@ -915,7 +952,7 @@ public class MotoGarageNotebookEngine {
     
     public void startNewWarrantyWindow(Component incomingParent){
         this.warrantyWindow = new WarrantyWindow(new JFrame(),true,this);
-        this.fuelEntryWindow.setLocationRelativeTo(incomingParent);
+        this.warrantyWindow.setLocationRelativeTo(incomingParent);
         this.warrantyWindow.setVisible(true);
     }
     

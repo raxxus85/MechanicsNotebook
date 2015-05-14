@@ -78,6 +78,10 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ImagePanel(test.getImage())"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon test = new javax.swing.ImageIcon(getClass().getResource(&quot;/MGLogoTrans2.png&quot;));"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -142,7 +146,6 @@
                           <Component id="durationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="durationSlider" min="-2" max="-2" attributes="0"/>
                       <Component id="lifeTimeCheckBox" min="-2" max="-2" attributes="0"/>

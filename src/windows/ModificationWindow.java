@@ -8,6 +8,7 @@ package windows;
 import engine.MotoGarageNotebookEngine;
 import java.awt.Toolkit;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import objectmodels.Modification;
 
 /**
@@ -100,7 +101,8 @@ public class ModificationWindow extends javax.swing.JDialog {
 
         closeButton = new javax.swing.JButton();
         addOrUpdateButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MGLogoTrans2.png"));
+        jPanel1 = new ImagePanel(test.getImage());
         partLabel = new javax.swing.JLabel();
         datePurchasedLabel = new javax.swing.JLabel();
         warrantyDurationLabel = new javax.swing.JLabel();
@@ -221,9 +223,9 @@ public class ModificationWindow extends javax.swing.JDialog {
                         .addComponent(lifetimeCheckBox)
                         .addComponent(noWarrantyCheckBox)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(descriptionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(descriptionLabel))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descriptionLabel)
+                    .addComponent(descriptionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(costTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,7 +246,7 @@ public class ModificationWindow extends javax.swing.JDialog {
                 .addComponent(addOrUpdateButton)
                 .addGap(80, 80, 80)
                 .addComponent(closeButton)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

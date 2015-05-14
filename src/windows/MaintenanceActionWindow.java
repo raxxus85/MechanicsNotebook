@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Mechanic;
@@ -80,7 +81,8 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
 
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MGLogoTrans2.png"));
+        jPanel1 = new ImagePanel(test.getImage());
         vehicleTextField = new javax.swing.JTextField();
         vehicleLabel = new javax.swing.JLabel();
         mechanicJComboBox = new javax.swing.JComboBox();

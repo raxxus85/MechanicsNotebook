@@ -9,6 +9,7 @@ import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import objectmodels.FuelEntry;
 
 /**
@@ -81,7 +82,8 @@ public class FuelEntryWindow extends javax.swing.JDialog {
 
         cancelButton = new javax.swing.JButton();
         addOrUpdateButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MGLogoTrans2.png"));
+        jPanel1 = new ImagePanel(test.getImage());
         jLabel1 = new javax.swing.JLabel();
         datePicker = new org.jdesktop.swingx.JXDatePicker();
         odometerLabel = new javax.swing.JLabel();

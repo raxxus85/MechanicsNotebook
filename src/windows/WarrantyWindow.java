@@ -8,6 +8,7 @@ package windows;
 import engine.MotoGarageNotebookEngine;
 import java.awt.Toolkit;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import objectmodels.Warranty;
 
 /**
@@ -88,7 +89,8 @@ public class WarrantyWindow extends javax.swing.JDialog {
 
         cancelButton = new javax.swing.JButton();
         addOrUpdateButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/MGLogoTrans2.png"));
+        jPanel1 = new ImagePanel(test.getImage());
         descriptionLabel = new javax.swing.JLabel();
         costLabel = new javax.swing.JLabel();
         durationTextField = new javax.swing.JTextField();
@@ -194,7 +196,6 @@ public class WarrantyWindow extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(durationLabel)
                         .addComponent(durationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(durationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lifeTimeCheckBox))

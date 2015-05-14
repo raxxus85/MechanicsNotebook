@@ -81,6 +81,10 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ImagePanel(test.getImage())"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon test = new javax.swing.ImageIcon(getClass().getResource(&quot;/MGLogoTrans2.png&quot;));"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
