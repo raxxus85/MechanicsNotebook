@@ -232,8 +232,7 @@ public class Garage implements Serializable{
     }
     
     public void updateCurrentVehicle(Vehicle updatedVehicle){
-        this.currentVehicle.setMake(updatedVehicle.getMake());
-        this.currentVehicle.setModel(updatedVehicle.getModel());
+        this.currentVehicle.setVehicleType(updatedVehicle.getVehicleType());
         this.currentVehicle.setYear(updatedVehicle.getYear());
         this.currentVehicle.setColor(updatedVehicle.getColor());
         this.currentVehicle.setVIN(updatedVehicle.getVIN());
