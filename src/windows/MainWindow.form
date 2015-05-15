@@ -785,20 +785,20 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="editVehicleTypesButton">
+        <Component class="javax.swing.JButton" name="editVehicleModelsButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/vehicleType32x32EDIT.png"/>
+              <Image iconType="3" name="/vehicleModel32x32EDIT.png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editVehicleTypesButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editVehicleModelsButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editVehicleTypesButton.setToolTipText(&quot;View / Edit Vehicle Types&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="editVehicleModelsButton.setToolTipText(&quot;View / Edit Vehicle Models&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="editMaintenanceTypesButton">
@@ -854,7 +854,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleMaintenanceTypeButton.setToolTipText(&quot;View and Edit Vehicle Specific Maintenance Types&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleMaintenanceTypeButton.setToolTipText(&quot;View and Edit Vehicle Model Specific Maintenance Types&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="updateOdometerActionButtonToolBar">

@@ -10,33 +10,33 @@ import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
-import objectmodels.VehicleType;
+import objectmodels.VehicleModel;
 
 /**
  *
  * @author Mark
  */
 
-public class VehicleTypesMainWindow extends javax.swing.JDialog {
+public class VehicleModelsMainWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageNotebookEngine;
 
     /**
-     * Creates new form VehicleTypesMainWindow
+     * Creates new form VehicleModelsMainWindow
      */
-    public VehicleTypesMainWindow() {
+    public VehicleModelsMainWindow() {
         initComponents();
     }
 
          /**
      * Creates new form MaintenanceTypesMainWindow
      */
-    public VehicleTypesMainWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public VehicleModelsMainWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
         super(parent, modal);
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         initComponents();
         this.setIcon();
-        this.setTitle("Vehicle Types");
-        this.refreshVehicleTypeTable();
+        this.setTitle("Vehicle Models");
+        this.refreshVehicleModelTable();
     }
     
     private void setIcon(){
@@ -47,9 +47,9 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
         /**
      * Method used to refresh the Maintenance Type Table
      */
-    public void refreshVehicleTypeTable(){
+    public void refreshVehicleModelTable(){
         
-        DefaultTableModel model = (DefaultTableModel) vehicleTypesJTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) vehicleModelsJTable.getModel();
 
         int rowCount = model.getRowCount();
         //Integer currentRowSelected = maintenanceTypesTable.getSelectedRow();
@@ -58,12 +58,12 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
             model.removeRow(i);
         }
         
-        if(this.motoGarageNotebookEngine.getVehicleTypeArray().length>0){
-            VehicleType[] vehicleTypes = this.motoGarageNotebookEngine.getVehicleTypeArray();
-            int newRowCount = vehicleTypes.length;
+        if(this.motoGarageNotebookEngine.getVehicleModelArray().length>0){
+            VehicleModel[] vehicleModels = this.motoGarageNotebookEngine.getVehicleModelArray();
+            int newRowCount = vehicleModels.length;
             for (int i = 0  ; i <newRowCount ; i++) {
-                Object[]VehicleTypeObject = vehicleTypes[i].getVehicleTypeObject();
-                model.addRow(VehicleTypeObject);       
+                Object[]VehicleModelObject = vehicleModels[i].getVehicleModelObject();
+                model.addRow(VehicleModelObject);       
             }
         }
         
@@ -79,66 +79,69 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        vehicleTypeToolBar = new javax.swing.JToolBar();
-        vehicleTypeAddButton = new javax.swing.JButton();
-        vehicleTypeEditButton = new javax.swing.JButton();
-        vehicleTypeDeleteButton = new javax.swing.JButton();
+        vehicleModelToolBar = new javax.swing.JToolBar();
+        vehicleModelAddButton = new javax.swing.JButton();
+        vehicleModelEditButton = new javax.swing.JButton();
+        vehicleModelDeleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        vehicleTypesJTable = new javax.swing.JTable();
+        vehicleModelsJTable = new javax.swing.JTable();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        vehicleTypeToolBar.setFloatable(false);
-        vehicleTypeToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        vehicleTypeToolBar.setRollover(true);
+        vehicleModelToolBar.setFloatable(false);
+        vehicleModelToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        vehicleModelToolBar.setRollover(true);
 
-        vehicleTypeAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleType32x32ADD.png"))); // NOI18N
-        vehicleTypeAddButton.setFocusable(false);
-        vehicleTypeAddButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        vehicleTypeAddButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        vehicleTypeAddButton.addActionListener(new java.awt.event.ActionListener() {
+        vehicleModelAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32ADD.png"))); // NOI18N
+        vehicleModelAddButton.setFocusable(false);
+        vehicleModelAddButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        vehicleModelAddButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        vehicleModelAddButton.setToolTipText("Add a Vehicle Model");
+        vehicleModelAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vehicleTypeAddButtonActionPerformed(evt);
+                vehicleModelAddButtonActionPerformed(evt);
             }
         });
-        vehicleTypeToolBar.add(vehicleTypeAddButton);
+        vehicleModelToolBar.add(vehicleModelAddButton);
 
-        vehicleTypeEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleType32x32EDIT.png"))); // NOI18N
-        vehicleTypeEditButton.setFocusable(false);
-        vehicleTypeEditButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        vehicleTypeEditButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        vehicleTypeEditButton.addActionListener(new java.awt.event.ActionListener() {
+        vehicleModelEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32EDIT.png"))); // NOI18N
+        vehicleModelEditButton.setFocusable(false);
+        vehicleModelEditButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        vehicleModelEditButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        vehicleModelEditButton.setToolTipText("Edit a Vehicle Model");
+        vehicleModelEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vehicleTypeEditButtonActionPerformed(evt);
+                vehicleModelEditButtonActionPerformed(evt);
             }
         });
-        vehicleTypeToolBar.add(vehicleTypeEditButton);
+        vehicleModelToolBar.add(vehicleModelEditButton);
 
-        vehicleTypeDeleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleType32x32DELETE.png"))); // NOI18N
-        vehicleTypeDeleteButton.setFocusable(false);
-        vehicleTypeDeleteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        vehicleTypeDeleteButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        vehicleTypeDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+        vehicleModelDeleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32DELETE.png"))); // NOI18N
+        vehicleModelDeleteButton.setFocusable(false);
+        vehicleModelDeleteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        vehicleModelDeleteButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        vehicleModelDeleteButton.setToolTipText("Delete a Vehicle Model");
+        vehicleModelDeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vehicleTypeDeleteButtonActionPerformed(evt);
+                vehicleModelDeleteButtonActionPerformed(evt);
             }
         });
-        vehicleTypeToolBar.add(vehicleTypeDeleteButton);
+        vehicleModelToolBar.add(vehicleModelDeleteButton);
 
-        vehicleTypesJTable.setModel(new javax.swing.table.DefaultTableModel(
+        vehicleModelsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
             new String [] {
                 "Make", "Model"
             }
         ));
-        vehicleTypesJTable.setOpaque(true);
-        vehicleTypesJTable.setFillsViewportHeight(true);
-        vehicleTypesJTable.setBackground(Color.WHITE);
-        jScrollPane1.setViewportView(vehicleTypesJTable);
+        vehicleModelsJTable.setOpaque(true);
+        vehicleModelsJTable.setFillsViewportHeight(true);
+        vehicleModelsJTable.setBackground(Color.WHITE);
+        jScrollPane1.setViewportView(vehicleModelsJTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,10 +149,10 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(vehicleTypeToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vehicleModelToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +162,7 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(vehicleTypeToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(vehicleModelToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -175,12 +178,13 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(closeButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(closeButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -201,28 +205,28 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void vehicleTypeAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleTypeAddButtonActionPerformed
+    private void vehicleModelAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelAddButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewVehicleTypeWindow(this);
-    }//GEN-LAST:event_vehicleTypeAddButtonActionPerformed
+        this.motoGarageNotebookEngine.startNewVehicleModelWindow(this);
+    }//GEN-LAST:event_vehicleModelAddButtonActionPerformed
 
-    private void vehicleTypeEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleTypeEditButtonActionPerformed
+    private void vehicleModelEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelEditButtonActionPerformed
         // TODO add your handling code here:
-        int rowSelected = this.vehicleTypesJTable.getSelectedRow();
+        int rowSelected = this.vehicleModelsJTable.getSelectedRow();
         if(rowSelected>-1){
-            VehicleType[] vehicleTypes = this.motoGarageNotebookEngine.getVehicleTypeArray();
-            VehicleType selectedVehicleType = vehicleTypes[rowSelected];
-            this.motoGarageNotebookEngine.startUpdateVehicleTypeWindow(this, selectedVehicleType);
+            VehicleModel[] vehicleModels = this.motoGarageNotebookEngine.getVehicleModelArray();
+            VehicleModel selectedVehicleModel = vehicleModels[rowSelected];
+            this.motoGarageNotebookEngine.startUpdateVehicleModelWindow(this, selectedVehicleModel);
         }else{
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to edit.");
         }
         
-    }//GEN-LAST:event_vehicleTypeEditButtonActionPerformed
+    }//GEN-LAST:event_vehicleModelEditButtonActionPerformed
 
-    private void vehicleTypeDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleTypeDeleteButtonActionPerformed
+    private void vehicleModelDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelDeleteButtonActionPerformed
         // TODO add your handling code here:
         
-        int rowSelected = this.vehicleTypesJTable.getSelectedRow();
+        int rowSelected = this.vehicleModelsJTable.getSelectedRow();
 
         if(rowSelected==-1){
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to delete.");
@@ -230,17 +234,17 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
         }
         boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Type? This is permanent!");
         if(sureToDelete){
-            VehicleType[] vehicleTypes = this.motoGarageNotebookEngine.getVehicleTypeArray();
-            VehicleType selectedVehicleType = vehicleTypes[rowSelected];
-            if(this.motoGarageNotebookEngine.deleteVehicleType(selectedVehicleType)){
+            VehicleModel[] vehicleModel = this.motoGarageNotebookEngine.getVehicleModelArray();
+            VehicleModel selectedVehicleModel = vehicleModel[rowSelected];
+            if(this.motoGarageNotebookEngine.deleteVehicleModel(selectedVehicleModel)){
                 this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Type deleted successfully!");
-                this.refreshVehicleTypeTable();
+                this.refreshVehicleModelTable();
             }else{
                 this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Vehicle Type! :( Please report!");
             }
 //            
         }
-    }//GEN-LAST:event_vehicleTypeDeleteButtonActionPerformed
+    }//GEN-LAST:event_vehicleModelDeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,20 +263,21 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VehicleTypesMainWindow().setVisible(true);
+                new VehicleModelsMainWindow().setVisible(true);
             }
         });
     }
@@ -281,10 +286,10 @@ public class VehicleTypesMainWindow extends javax.swing.JDialog {
     private javax.swing.JButton closeButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton vehicleTypeAddButton;
-    private javax.swing.JButton vehicleTypeDeleteButton;
-    private javax.swing.JButton vehicleTypeEditButton;
-    private javax.swing.JToolBar vehicleTypeToolBar;
-    private javax.swing.JTable vehicleTypesJTable;
+    private javax.swing.JButton vehicleModelAddButton;
+    private javax.swing.JButton vehicleModelDeleteButton;
+    private javax.swing.JButton vehicleModelEditButton;
+    private javax.swing.JToolBar vehicleModelToolBar;
+    private javax.swing.JTable vehicleModelsJTable;
     // End of variables declaration//GEN-END:variables
 }

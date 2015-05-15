@@ -8,17 +8,17 @@ package windows;
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
-import objectmodels.VehicleType;
+import objectmodels.VehicleModel;
 
 /**
  *
  * @author Mark
  */
-public class VehicleTypesWindow extends javax.swing.JDialog {
+public class VehicleModelsWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine motoGarageNotebookEngine;
-    private VehicleTypesMainWindow vehicleTypesMainWindow;
-    private boolean updatingVehicleType = false;
-    private VehicleType originalVehicleType = null;
+    private VehicleModelsMainWindow vehicleModelsMainWindow;
+    private boolean updatingVehicleModel = false;
+    private VehicleModel originalVehicleModel = null;
     
     
     /**
@@ -26,43 +26,43 @@ public class VehicleTypesWindow extends javax.swing.JDialog {
      * @param parent
      * @param modal 
      */
-    public VehicleTypesWindow(java.awt.Frame parent,boolean modal){
+    public VehicleModelsWindow(java.awt.Frame parent,boolean modal){
         super(parent, modal);
         initComponents();
     }
     
     /**
-     * Creates new form vehicleTypesWindow
+     * Creates new form vehicleModelsWindow
      */
-    public VehicleTypesWindow(java.awt.Frame parent,boolean modal,VehicleTypesMainWindow incomingVehicleTypesMainWindow 
+    public VehicleModelsWindow(java.awt.Frame parent,boolean modal,VehicleModelsMainWindow incomingVehicleModelsMainWindow 
             ,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
         super(parent, modal);
         this.motoGarageNotebookEngine= incomingMotoGarageNotebookEngine;
-        this.vehicleTypesMainWindow = incomingVehicleTypesMainWindow;
+        this.vehicleModelsMainWindow = incomingVehicleModelsMainWindow;
         initComponents();
         this.setIcon();
-        this.setTitle("Create Vehicle Type");
-        this.createOrUpdateButton.setText("Create Vehicle Type");
+        this.setTitle("Create Vehicle Model");
+        this.createOrUpdateButton.setText("Create Vehicle Model");
     }
     
     /**
-     * Creates new form vehicleTypesWindow
+     * Creates new form vehicleModelsWindow
      */
-    public VehicleTypesWindow(java.awt.Frame parent,boolean modal,VehicleTypesMainWindow incomingVehicleTypesMainWindow 
-            ,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine, VehicleType incomingVehicleType) {
+    public VehicleModelsWindow(java.awt.Frame parent,boolean modal,VehicleModelsMainWindow incomingVehicleModelsMainWindow 
+            ,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine, VehicleModel incomingVehicleModel) {
         super(parent, modal);
         this.motoGarageNotebookEngine= incomingMotoGarageNotebookEngine;
-        this.vehicleTypesMainWindow = incomingVehicleTypesMainWindow;
+        this.vehicleModelsMainWindow = incomingVehicleModelsMainWindow;
         initComponents();
         this.setIcon();
-        this.setTitle("Update Vehicle Type");
-        this.createOrUpdateButton.setText("Update Vehicle Type");
+        this.setTitle("Update Vehicle Model");
+        this.createOrUpdateButton.setText("Update Vehicle Model");
         
-        this.updatingVehicleType = true;
-        this.originalVehicleType = incomingVehicleType;
+        this.updatingVehicleModel = true;
+        this.originalVehicleModel = incomingVehicleModel;
         
-        this.makeTextField.setText(incomingVehicleType.getMake());
-        this.modelTextField.setText(incomingVehicleType.getModel());
+        this.makeTextField.setText(incomingVehicleModel.getMake());
+        this.modelTextField.setText(incomingVehicleModel.getModel());
 
     }
 
@@ -176,28 +176,28 @@ public class VehicleTypesWindow extends javax.swing.JDialog {
         // TODO add your handling code here:
         // Basic Checks
         if(this.makeTextField.getText().equals("")|| this.modelTextField.getText().equals("")){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "A Vehicle Type requires a Make and Model.");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "A Vehicle Model requires a Make and Model.");
             return;
         }
         String newMake = this.makeTextField.getText();
         String newModel = this.modelTextField.getText();
-        VehicleType newVehicleType = new VehicleType(newMake,newModel);       
+        VehicleModel newVehicleModel = new VehicleModel(newMake,newModel);       
         // onto create / update
-        if(this.updatingVehicleType){
-            boolean updatedVehicleType = this.motoGarageNotebookEngine.updateVehicleType(originalVehicleType, newVehicleType);
+        if(this.updatingVehicleModel){
+            boolean updatedVehicleModel = this.motoGarageNotebookEngine.updateVehicleModel(originalVehicleModel, newVehicleModel);
         
-            if(updatedVehicleType){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Type has been updated!");
-                this.vehicleTypesMainWindow.refreshVehicleTypeTable();
+            if(updatedVehicleModel){
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Model has been updated!");
+                this.vehicleModelsMainWindow.refreshVehicleModelTable();
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Vehicle Type!");
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Vehicle Model!");
             }
             this.dispose();
         }else{
-            this.motoGarageNotebookEngine.createNewVehicleType(newVehicleType);
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Vehicle Type," + newVehicleType.toString() + ", has been created!");
+            this.motoGarageNotebookEngine.createNewVehicleModel(newVehicleModel);
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Vehicle Model," + newVehicleModel.toString() + ", has been created!");
             // REFRESH
-            this.vehicleTypesMainWindow.refreshVehicleTypeTable();
+            this.vehicleModelsMainWindow.refreshVehicleModelTable();
             this.dispose();
         }
     }//GEN-LAST:event_createOrUpdateButtonActionPerformed
@@ -219,21 +219,23 @@ public class VehicleTypesWindow extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VehicleTypesWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleModelsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VehicleTypesWindow dialog = new VehicleTypesWindow(new javax.swing.JFrame(), true);
+                VehicleModelsWindow dialog = new VehicleModelsWindow(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

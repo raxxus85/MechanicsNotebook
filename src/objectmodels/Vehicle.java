@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
  */
 public class Vehicle extends BaseObjectModel implements Serializable{
     //private String vehicleIdentificationNumber;
-    private VehicleType vehicleType;
+    private VehicleModel vehicleModel;
     private String make;
     private String model;
     private Integer year;
@@ -58,8 +58,8 @@ public class Vehicle extends BaseObjectModel implements Serializable{
      * @param incomingOdometer
      * @param incomingDescription 
      */
-    public Vehicle(VehicleType incomingVehicleType,Integer incomingYear,String incomingColor, String incomingVIN,  Integer incomingOdometer, String incomingDescription){
-        this.vehicleType = incomingVehicleType;
+    public Vehicle(VehicleModel incomingVehicleModel,Integer incomingYear,String incomingColor, String incomingVIN,  Integer incomingOdometer, String incomingDescription){
+        this.vehicleModel = incomingVehicleModel;
         this.year = incomingYear;
         this.color = incomingColor;
         this.vin = incomingVIN;
@@ -67,12 +67,12 @@ public class Vehicle extends BaseObjectModel implements Serializable{
         this.description = incomingDescription;
     }
     
-    public void setVehicleType(VehicleType incomingVehicleType){
-        this.vehicleType = incomingVehicleType;
+    public void setVehicleModel(VehicleModel incomingVehicleModel){
+        this.vehicleModel = incomingVehicleModel;
     }
     
-    public VehicleType getVehicleType(){
-        return this.vehicleType;
+    public VehicleModel getVehicleModel(){
+        return this.vehicleModel;
     }
     
     public void editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction updatedMaintenanceAction){
@@ -165,7 +165,7 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     
     public Object[] getVehicleObject(){
         //String[] stringArray = {this.make,this.model, this.year.toString()};
-        String[] stringArray = {this.getVehicleType().getMake(),this.getVehicleType().getModel(), this.year.toString()};
+        String[] stringArray = {this.getVehicleModel().getMake(),this.getVehicleModel().getModel(), this.year.toString()};
         return stringArray;
     }
     
@@ -388,7 +388,7 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     
     @Override
     public String toString() {
-        return this.getYear() + " " + this.getMake()+ " " + this.getModel();
+        return this.getYear() + " " + this.getVehicleModel().getMake()+ " " + this.getVehicleModel().getModel();
   }
     
 }

@@ -19,7 +19,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import objectmodels.Vehicle;
-import objectmodels.VehicleType;
+import objectmodels.VehicleModel;
 
 /**
  *
@@ -65,11 +65,11 @@ public class VehicleWindow extends javax.swing.JDialog {
         this.updateVehicle = true;
         
         // Vehicle Type
-        VehicleType currentVehicleType = incomingVehicle.getVehicleType();
-        Object[] testArray = motoGarageNotebookEngine.getVehicleTypeArray();
+        VehicleModel currentVehicleModel = incomingVehicle.getVehicleModel();
+        Object[] testArray = motoGarageNotebookEngine.getVehicleModelArray();
         DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
-        this.vehicleTypeComboBox.setModel(test1);
-        this.vehicleTypeComboBox.setSelectedItem(currentVehicleType);
+        this.vehicleModelComboBox.setModel(test1);
+        this.vehicleModelComboBox.setSelectedItem(currentVehicleModel);
         
         this.vehicleYearTextField.setText(incomingVehicle.getYear().toString());
         this.vehicleColorTextField.setText(incomingVehicle.getColor());
@@ -120,7 +120,7 @@ public class VehicleWindow extends javax.swing.JDialog {
         vehiclePictureLabel = new javax.swing.JLabel();
         openPictureButton = new javax.swing.JButton();
         clearPictureButton = new javax.swing.JButton();
-        vehicleTypeComboBox = new javax.swing.JComboBox();
+        vehicleModelComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -192,7 +192,7 @@ public class VehicleWindow extends javax.swing.JDialog {
             }
         });
 
-        vehicleTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleTypeArray()));
+        vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray()));
 
         jLabel1.setText("Make and Model");
 
@@ -216,7 +216,7 @@ public class VehicleWindow extends javax.swing.JDialog {
                     .addComponent(vehicleColorTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vehicleYearTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                    .addComponent(vehicleTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(vehicleModelComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +233,7 @@ public class VehicleWindow extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(vehicleTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vehicleModelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,8 +327,8 @@ public class VehicleWindow extends javax.swing.JDialog {
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
             return;
         }
-        VehicleType selectedVehicleType = (VehicleType)this.vehicleTypeComboBox.getSelectedItem();
-        Vehicle newVehicle = new Vehicle(selectedVehicleType,newVehicleYear,newVehicleColor, newVehicleVIN,newVehicleOdometer,newVehicleDescription);
+        VehicleModel selectedVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        Vehicle newVehicle = new Vehicle(selectedVehicleModel,newVehicleYear,newVehicleColor, newVehicleVIN,newVehicleOdometer,newVehicleDescription);
         if(this.imageIcon!=null){
             newVehicle.setImageIcon(imageIcon);
         }
@@ -435,10 +435,10 @@ public class VehicleWindow extends javax.swing.JDialog {
     private javax.swing.JTextField vehicleColorTextField;
     private javax.swing.JLabel vehicleDescriptionLabel;
     private javax.swing.JTextArea vehicleDescriptionTextArea;
+    private javax.swing.JComboBox vehicleModelComboBox;
     private javax.swing.JLabel vehicleOdometerLabel;
     private javax.swing.JTextField vehicleOdometerTextField;
     private javax.swing.JLabel vehiclePictureLabel;
-    private javax.swing.JComboBox vehicleTypeComboBox;
     private javax.swing.JTextField vehicleVINTextField;
     private javax.swing.JLabel vehicleVinLabel;
     private javax.swing.JLabel vehicleYearLabel;

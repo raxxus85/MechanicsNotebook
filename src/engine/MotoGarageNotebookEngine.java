@@ -30,7 +30,7 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Modification;
 import objectmodels.Vehicle;
-import objectmodels.VehicleType;
+import objectmodels.VehicleModel;
 import objectmodels.Warranty;
 import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
@@ -51,8 +51,8 @@ import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
 import windows.VehicleInformationGraphs;
 import windows.VehicleTrackersWindow;
-import windows.VehicleTypesMainWindow;
-import windows.VehicleTypesWindow;
+import windows.VehicleModelsMainWindow;
+import windows.VehicleModelsWindow;
 import windows.WarrantyWindow;
 import windows.WelcomeWindow;
 
@@ -81,9 +81,9 @@ public class MotoGarageNotebookEngine {
     private DragStripSlipWindow dragStripSlipWindow;
     private VehicleInformationGraphs vehicleInformationGraphs;
     private CloudUserLoginCreationWindow cloudUserLoginCreationWindow;
-    private VehicleTypesWindow vehicleTypesWindow;
-    //private VehicleTypesMainWindow vehicleTypesMainWindow;
-    private VehicleTypesMainWindow vehicleTypesMainWindow;
+    private VehicleModelsWindow vehicleModelsWindow;
+    //private VehicleModelsMainWindow vehicleModelsMainWindow;
+    private VehicleModelsMainWindow vehicleModelsMainWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -472,8 +472,8 @@ public class MotoGarageNotebookEngine {
         return updatedType;
     }
     
-    public boolean updateVehicleType(VehicleType originalVehicleType, VehicleType updatedVehicleType){
-        boolean updatedType =this.getGarage().updateVehicleType(originalVehicleType, updatedVehicleType);
+    public boolean updateVehicleModel(VehicleModel originalVehicleModel, VehicleModel updatedVehicleModel){
+        boolean updatedType =this.getGarage().updateVehicleModel(originalVehicleModel, updatedVehicleModel);
         this.mainWindow.refresh();
         return updatedType;
     }
@@ -550,6 +550,14 @@ public class MotoGarageNotebookEngine {
         this.mainWindow.refresh();
     }
     
+    public boolean hasVehicleModels(){
+        if(this.getGarage().getVehicleModelArray().length>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     /**
      * Method to check to see if we have any maintenance Types
      * @return true if we do
@@ -573,8 +581,8 @@ public class MotoGarageNotebookEngine {
         return deleted;
     }
     
-    public boolean deleteVehicleType(VehicleType incomingVehicleType){
-        boolean deleted = this.getGarage().deleteVehicleType(incomingVehicleType);
+    public boolean deleteVehicleModel(VehicleModel incomingVehicleModel){
+        boolean deleted = this.getGarage().deleteVehicleModel(incomingVehicleModel);
         this.mainWindow.refresh();
         return deleted;
     }
@@ -609,8 +617,8 @@ public class MotoGarageNotebookEngine {
         return true;
     }
     
-    public boolean createNewVehicleType(VehicleType incomingVehicleType){
-        this.currentGarage.addVehicleType(incomingVehicleType);
+    public boolean createNewVehicleModel(VehicleModel incomingVehicleModel){
+        this.currentGarage.addVehicleModel(incomingVehicleModel);
         this.mainWindow.refresh();
         return true;
     }
@@ -697,8 +705,8 @@ public class MotoGarageNotebookEngine {
         return this.currentGarage.getMaintenaceTypeArray();
     }
     
-    public VehicleType[] getVehicleTypeArray(){
-        return this.currentGarage.getVehicleTypeArray();
+    public VehicleModel[] getVehicleModelArray(){
+        return this.currentGarage.getVehicleModelArray();
     }
  
     public void addMaintenanceType(MaintenanceType incomingMaintenanceType){
@@ -903,16 +911,16 @@ public class MotoGarageNotebookEngine {
         this.maintenanceTypeWindow.setVisible(true);
     }
     
-    public void startNewVehicleTypeWindow(VehicleTypesMainWindow incomingVehicleTypesMainWindow){
-        this.vehicleTypesWindow = new VehicleTypesWindow(new JFrame(),true,incomingVehicleTypesMainWindow,this);
-        this.vehicleTypesWindow.setLocationRelativeTo(incomingVehicleTypesMainWindow);
-        this.vehicleTypesWindow.setVisible(true);
+    public void startNewVehicleModelWindow(VehicleModelsMainWindow incomingVehicleModelsMainWindow){
+        this.vehicleModelsWindow = new VehicleModelsWindow(new JFrame(),true,incomingVehicleModelsMainWindow,this);
+        this.vehicleModelsWindow.setLocationRelativeTo(incomingVehicleModelsMainWindow);
+        this.vehicleModelsWindow.setVisible(true);
     }
     
-    public void startUpdateVehicleTypeWindow(VehicleTypesMainWindow incomingVehicleTypesMainWindow,VehicleType incomingVehicleType){
-        this.vehicleTypesWindow = new VehicleTypesWindow(new JFrame(),true,incomingVehicleTypesMainWindow,this, incomingVehicleType);
-        this.vehicleTypesWindow.setLocationRelativeTo(incomingVehicleTypesMainWindow);
-        this.vehicleTypesWindow.setVisible(true);
+    public void startUpdateVehicleModelWindow(VehicleModelsMainWindow incomingVehicleModelsMainWindow,VehicleModel incomingVehicleModel){
+        this.vehicleModelsWindow = new VehicleModelsWindow(new JFrame(),true,incomingVehicleModelsMainWindow,this, incomingVehicleModel);
+        this.vehicleModelsWindow.setLocationRelativeTo(incomingVehicleModelsMainWindow);
+        this.vehicleModelsWindow.setVisible(true);
     }
     
     
@@ -976,13 +984,11 @@ public class MotoGarageNotebookEngine {
         this.maintenanceTypesMainWindow.setVisible(true);
     }
     
-    public void startVehicleTypesMainWindow(Component incomingParent){
-        //this.vehicleTypesMainWindow = new VehicleTypesMainWindow(this);
-        this.vehicleTypesMainWindow = new VehicleTypesMainWindow(new JFrame(),true,this);
-        this.vehicleTypesMainWindow.setLocationRelativeTo(incomingParent);
-        //this.vehicleTypesMainWindow.setAlwaysOnTop(true);
+    public void startVehicleModelsMainWindow(Component incomingParent){
+        this.vehicleModelsMainWindow = new VehicleModelsMainWindow(new JFrame(),true,this);
+        this.vehicleModelsMainWindow.setLocationRelativeTo(incomingParent);
 
-        this.vehicleTypesMainWindow.setVisible(true);
+        this.vehicleModelsMainWindow.setVisible(true);
 
     }
     

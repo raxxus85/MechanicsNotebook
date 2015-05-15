@@ -23,14 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
-              <Component id="closeButton" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="closeButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -62,10 +65,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="vehicleTypeToolBar" min="-2" max="-2" attributes="0"/>
+                  <Component id="vehicleModelToolBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="352" max="-2" attributes="0"/>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="260" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -78,7 +81,7 @@
                           <Component id="jScrollPane1" min="-2" pref="163" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="vehicleTypeToolBar" max="32767" attributes="0"/>
+                      <Component id="vehicleModelToolBar" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -86,7 +89,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JToolBar" name="vehicleTypeToolBar">
+        <Container class="javax.swing.JToolBar" name="vehicleModelToolBar">
           <Properties>
             <Property name="floatable" type="boolean" value="false"/>
             <Property name="orientation" type="int" value="1"/>
@@ -95,44 +98,53 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="vehicleTypeAddButton">
+            <Component class="javax.swing.JButton" name="vehicleModelAddButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/vehicleType32x32ADD.png"/>
+                  <Image iconType="3" name="/vehicleModel32x32ADD.png"/>
                 </Property>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleTypeAddButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleModelAddButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleModelAddButton.setToolTipText(&quot;Add a Vehicle Model&quot;);"/>
+              </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="vehicleTypeEditButton">
+            <Component class="javax.swing.JButton" name="vehicleModelEditButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/vehicleType32x32EDIT.png"/>
+                  <Image iconType="3" name="/vehicleModel32x32EDIT.png"/>
                 </Property>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleTypeEditButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleModelEditButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleModelEditButton.setToolTipText(&quot;Edit a Vehicle Model&quot;);"/>
+              </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="vehicleTypeDeleteButton">
+            <Component class="javax.swing.JButton" name="vehicleModelDeleteButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/vehicleType32x32DELETE.png"/>
+                  <Image iconType="3" name="/vehicleModel32x32DELETE.png"/>
                 </Property>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleTypeDeleteButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleModelDeleteButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleModelDeleteButton.setToolTipText(&quot;Delete a Vehicle Model&quot;);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -143,14 +155,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="vehicleTypesJTable">
+            <Component class="javax.swing.JTable" name="vehicleModelsJTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Make&quot;, &quot;Model&quot;&#xa;    }&#xa;)" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleTypesJTable.setOpaque(true);&#xa;vehicleTypesJTable.setFillsViewportHeight(true);&#xa;vehicleTypesJTable.setBackground(Color.WHITE);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleModelsJTable.setOpaque(true);&#xa;vehicleModelsJTable.setFillsViewportHeight(true);&#xa;vehicleModelsJTable.setBackground(Color.WHITE);"/>
               </AuxValues>
             </Component>
           </SubComponents>

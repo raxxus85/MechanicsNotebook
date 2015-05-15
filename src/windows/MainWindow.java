@@ -756,7 +756,7 @@ public class MainWindow extends javax.swing.JFrame {
             }else{
                 this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N);
             }
-            this.vehicleNameLabel.setText(currentVehicle.getYear().toString() + " " +currentVehicle.getVehicleType().getMake() + " " + currentVehicle.getVehicleType().getModel());
+            this.vehicleNameLabel.setText(currentVehicle.getYear().toString() + " " +currentVehicle.getVehicleModel().getMake() + " " + currentVehicle.getVehicleModel().getModel());
             //this.currentVehicleOdometerLabel.setText("Odometer: " + currentVehicle.getOdometer().toString());
             
             // SET THE ODOMETER
@@ -860,7 +860,7 @@ public class MainWindow extends javax.swing.JFrame {
         dragStripSlipEditButton = new javax.swing.JButton();
         dragStripSlipDeleteButton = new javax.swing.JButton();
         mainToolBar = new javax.swing.JToolBar();
-        editVehicleTypesButton = new javax.swing.JButton();
+        editVehicleModelsButton = new javax.swing.JButton();
         ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"));
         Action actionMaintenanceTypeEdit = new AbstractAction("New", maintenanceTypeEdit) {
             public void actionPerformed(ActionEvent e) {
@@ -1334,17 +1334,17 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.setRollover(true);
         mainToolBar.setFloatable(false);
 
-        editVehicleTypesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleType32x32EDIT.png"))); // NOI18N
-        editVehicleTypesButton.setFocusable(false);
-        editVehicleTypesButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        editVehicleTypesButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        editVehicleTypesButton.setToolTipText("View / Edit Vehicle Types");
-        editVehicleTypesButton.addActionListener(new java.awt.event.ActionListener() {
+        editVehicleModelsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32EDIT.png"))); // NOI18N
+        editVehicleModelsButton.setFocusable(false);
+        editVehicleModelsButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editVehicleModelsButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        editVehicleModelsButton.setToolTipText("View / Edit Vehicle Models");
+        editVehicleModelsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editVehicleTypesButtonActionPerformed(evt);
+                editVehicleModelsButtonActionPerformed(evt);
             }
         });
-        mainToolBar.add(editVehicleTypesButton);
+        mainToolBar.add(editVehicleModelsButton);
 
         editMaintenanceTypesButton.setToolTipText("View / Edit General Maintenance Types");
         editMaintenanceTypesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"))); // NOI18N
@@ -1378,7 +1378,7 @@ public class MainWindow extends javax.swing.JFrame {
         vehicleMaintenanceTypeButton.setFocusable(false);
         vehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         vehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        vehicleMaintenanceTypeButton.setToolTipText("View and Edit Vehicle Specific Maintenance Types");
+        vehicleMaintenanceTypeButton.setToolTipText("View and Edit Vehicle Model Specific Maintenance Types");
         mainToolBar.add(vehicleMaintenanceTypeButton);
 
         updateOdometerActionButtonToolBar.setToolTipText("Update Odometer");
@@ -2014,7 +2014,11 @@ public class MainWindow extends javax.swing.JFrame {
         if(this.motoGarageNotebookEngine.getCurrentCustomer()== null){
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You must first have a Customer in order to add a Vehicle! Please create a Customer first.");
         }else{
-            this.motoGarageNotebookEngine.startNewVehicleWindow(this);
+             if(this.motoGarageNotebookEngine.hasVehicleModels()){
+                 this.motoGarageNotebookEngine.startNewVehicleWindow(this);
+             }else{
+                 this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE,"You must first have at least one Vehicle Model in order to add a Vehicle! Please create a Vehicle Model first.");
+             }
         }
     }//GEN-LAST:event_vehicleAddButtonNewActionPerformed
 
@@ -2477,11 +2481,11 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
-    private void editVehicleTypesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVehicleTypesButtonActionPerformed
+    private void editVehicleModelsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVehicleModelsButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startVehicleTypesMainWindow(this);
+        this.motoGarageNotebookEngine.startVehicleModelsMainWindow(this);
         
-    }//GEN-LAST:event_editVehicleTypesButtonActionPerformed
+    }//GEN-LAST:event_editVehicleModelsButtonActionPerformed
 
     private void logoutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMenuItemActionPerformed
         try {
@@ -2559,7 +2563,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton editMaintenanceActionButtonToolBar;
     private javax.swing.JButton editMaintenanceTypesButton;
     private javax.swing.JButton editModificationButton;
-    private javax.swing.JButton editVehicleTypesButton;
+    private javax.swing.JButton editVehicleModelsButton;
     private javax.swing.JButton editWarrantyButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton exportGarageButton;

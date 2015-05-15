@@ -29,7 +29,7 @@ public class Garage implements Serializable{
     private ArrayList<Mechanic> mechanics = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<MaintenanceType> maintenanceTypes = new ArrayList<>();
-    private ArrayList<VehicleType> vehicleTypes = new ArrayList<>();
+    private ArrayList<VehicleModel> vehicleModels = new ArrayList<>();
     
     // current object manipulation methods
    
@@ -81,8 +81,8 @@ public class Garage implements Serializable{
         return this.dragStripSlipsEnabled;
     }
     
-    public void addVehicleType(VehicleType incomingVehicleType){
-        this.vehicleTypes.add(incomingVehicleType);
+    public void addVehicleModel(VehicleModel incomingVehicleModel){
+        this.vehicleModels.add(incomingVehicleModel);
     }
     
     /**
@@ -104,18 +104,18 @@ public class Garage implements Serializable{
         return maintenanceTypeArray;
     }
     
-    public VehicleType[] getVehicleTypeArray(){
-        ArrayList<VehicleType> vehicleTypeArrayList = this.vehicleTypes;
-        VehicleType[] vehicleTypeArray = vehicleTypeArrayList.toArray(new VehicleType[vehicleTypeArrayList.size()]);
-        return vehicleTypeArray;
+    public VehicleModel[] getVehicleModelArray(){
+        ArrayList<VehicleModel> vehicleModelArrayList = this.vehicleModels;
+        VehicleModel[] vehicleModelArray = vehicleModelArrayList.toArray(new VehicleModel[vehicleModelArrayList.size()]);
+        return vehicleModelArray;
     }
     
     public ArrayList<MaintenanceType> getMaintenanceTypeArrayList(){
         return this.maintenanceTypes;
     }
     
-    public ArrayList<VehicleType> getVehicleTypeArrayList(){
-        return this.vehicleTypes;
+    public ArrayList<VehicleModel> getVehicleModelArrayList(){
+        return this.vehicleModels;
     }
     
     /**
@@ -163,10 +163,10 @@ public class Garage implements Serializable{
         }
     }
     
-    public boolean updateVehicleType(VehicleType originalVehicleType, VehicleType updatedVehicleType){
-        Integer originalIndex = this.getVehicleTypeArrayList().indexOf(originalVehicleType);
-        this.getVehicleTypeArrayList().set(originalIndex, updatedVehicleType);
-        if(!this.getVehicleTypeArrayList().contains(originalVehicleType)){
+    public boolean updateVehicleModel(VehicleModel originalVehicleModel, VehicleModel updatedVehicleModel){
+        Integer originalIndex = this.getVehicleModelArrayList().indexOf(originalVehicleModel);
+        this.getVehicleModelArrayList().set(originalIndex, updatedVehicleModel);
+        if(!this.getVehicleModelArrayList().contains(originalVehicleModel)){
             return true;
         }else{
             return false;
@@ -190,13 +190,13 @@ public class Garage implements Serializable{
     
     /**
      * Method to delete Vehicle Type
-     * @param incomingVehicleType
+     * @param incomingVehicleModel
      * @return true if successful
      */
-    public boolean deleteVehicleType(VehicleType incomingVehicleType){
-        ArrayList<VehicleType> currentVehicleTypes = this.getVehicleTypeArrayList();
-        if(currentVehicleTypes.contains(incomingVehicleType)){
-            currentVehicleTypes.remove(incomingVehicleType);
+    public boolean deleteVehicleModel(VehicleModel incomingVehicleModel){
+        ArrayList<VehicleModel> currentVehicleModels = this.getVehicleModelArrayList();
+        if(currentVehicleModels.contains(incomingVehicleModel)){
+            currentVehicleModels.remove(incomingVehicleModel);
             return true;
         }else{
             return false;
@@ -232,7 +232,7 @@ public class Garage implements Serializable{
     }
     
     public void updateCurrentVehicle(Vehicle updatedVehicle){
-        this.currentVehicle.setVehicleType(updatedVehicle.getVehicleType());
+        this.currentVehicle.setVehicleModel(updatedVehicle.getVehicleModel());
         this.currentVehicle.setYear(updatedVehicle.getYear());
         this.currentVehicle.setColor(updatedVehicle.getColor());
         this.currentVehicle.setVIN(updatedVehicle.getVIN());
