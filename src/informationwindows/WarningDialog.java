@@ -25,7 +25,7 @@ public class WarningDialog implements DialogInterface{
 
         dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
         //dialog.setLocationRelativeTo(incomingParent);
-        dialog.setLocation(incomingParent.getLocation());
+        dialog.setLocationRelativeTo(incomingParent);
         dialog.setVisible(true);
         
     }

@@ -6,6 +6,7 @@ package engine;
 
 import informationwindows.DialogFactory;
 import informationwindows.DialogType;
+import informationwindows.ProgressDialog;
 import java.awt.Component;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -84,6 +85,7 @@ public class MotoGarageNotebookEngine {
     private VehicleModelsWindow vehicleModelsWindow;
     //private VehicleModelsMainWindow vehicleModelsMainWindow;
     private VehicleModelsMainWindow vehicleModelsMainWindow;
+    private ProgressDialog progressDialogWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -101,6 +103,20 @@ public class MotoGarageNotebookEngine {
         //Garage testGarage = new Garage();
         //this.currentGarage = testGarage;
         this.dialogFactory = new DialogFactory();
+    }
+    
+    public void startProgressDialogWindow(String incomingString){
+        //this.progressDialogWindow = new ProgressDialog(new JFrame(), true);
+        //Component mainWindow2 = this.mainWindow.getl
+        //this.progressDialogWindow = new ProgressDialog(uploading);
+        this.progressDialogWindow = new ProgressDialog(incomingString);
+        //java.awt.Frame parent, boolean modal
+        this.progressDialogWindow.setVisible(true);
+    }    
+    
+    public void stopProgressDialogWindow(){
+        this.progressDialogWindow.setVisible(false);
+        this.progressDialogWindow = null;
     }
     
     public void setGarageObjectId(String incomingGarageObjectId){
@@ -136,7 +152,7 @@ public class MotoGarageNotebookEngine {
             //mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.getMessage());
             
         }
- 
+
     }
     
     /**
@@ -224,6 +240,12 @@ public class MotoGarageNotebookEngine {
     }
     
     public void saveToCloud() throws FileNotFoundException, IOException, ParseException, ClassNotFoundException{
+        //this.startProgressDialogWindow("test");
+//                try {
+//            Thread.sleep(5000);                 //1000 milliseconds is one second.
+//        } catch(InterruptedException ex) {
+//            Thread.currentThread().interrupt();
+//        }
         //create a temp file
     	File tempFile = File.createTempFile("motoGarageNotebookTempFile", ".tmp"); 
         //System.out.println("Temp file : " + tempFile.getAbsolutePath());

@@ -2234,6 +2234,7 @@ public class MainWindow extends javax.swing.JFrame {
                     try {
                         boolean sureToUpload = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Uploading to the cloud will update and overwrite your current garage. Do you wish to continue?");
                         if(sureToUpload){
+                            //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
                             this.motoGarageNotebookEngine.saveToCloud();
                         }
                         

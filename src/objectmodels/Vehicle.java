@@ -24,7 +24,9 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     private String vin;
     private Integer odometer;
     private String description;
-    private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();   
+    // Lists
+    private ArrayList<MaintenanceAction> maintenanceActions = new ArrayList<>();  
+    private ArrayList<ModelSpecificMaintenanceType> maintenanceTypes = new ArrayList<>();
     private ArrayList<FuelEntry> fuelEntries = new ArrayList<>();
     private ArrayList<Warranty> warranties = new ArrayList<>();
     private ArrayList<Modification> modifications = new ArrayList<>();
@@ -74,6 +76,8 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     public VehicleModel getVehicleModel(){
         return this.vehicleModel;
     }
+    
+    
     
     public void editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction updatedMaintenanceAction){
         //int indexOfExistingMaintenanceAction = this.maintenanceActions.get(1);
@@ -130,6 +134,22 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     
     public ArrayList<DragStripSlip> getDragStripSlipList(){
         return this.dragStripSlips;
+    }
+    
+    public ArrayList<ModelSpecificMaintenanceType> getMaintenanceTypes(){
+        return this.maintenanceTypes;
+    }
+    
+    public void addMaintenaceType(ModelSpecificMaintenanceType incomingModelSpecificMaintenaceType){
+        this.maintenanceTypes.add(incomingModelSpecificMaintenaceType);
+    }
+    
+    public void editMaintenanceType(ModelSpecificMaintenanceType orginalModelSpecificMaintenanceType, ModelSpecificMaintenanceType updatedModelSpecificMaintenanceType){
+        int indexOfExistingModification = this.maintenanceTypes.indexOf(orginalModelSpecificMaintenanceType);
+        
+        this.maintenanceTypes.get(indexOfExistingModification).setMaintenanceTypeName(updatedModelSpecificMaintenanceType.getMaintenanceTypeName());
+        this.maintenanceTypes.get(indexOfExistingModification).setMileageInterval(updatedModelSpecificMaintenanceType.getMileageInterval());
+        this.maintenanceTypes.get(indexOfExistingModification).setDescription(updatedModelSpecificMaintenanceType.getDescription());      
     }
     
     public DragStripSlip[] getDragStripSlipArray(){
