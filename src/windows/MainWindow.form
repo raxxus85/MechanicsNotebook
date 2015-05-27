@@ -816,30 +816,30 @@
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceTypesButton.setToolTipText(&quot;View / Edit General Maintenance Types&quot;);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="importGarageButton">
+        <Component class="javax.swing.JButton" name="loadFromCloudButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/garage32x32IMPORT.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importGarageButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadFromCloudButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="importGarageButton.setToolTipText(&quot;Load Garage from Cloud&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="loadFromCloudButton.setToolTipText(&quot;Load Garage from Cloud&quot;);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="exportGarageButton">
+        <Component class="javax.swing.JButton" name="saveToCloudButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/garage32x32EXPORT.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportGarageButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveToCloudButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="exportGarageButton.setToolTipText(&quot;Save Garage to Cloud&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="saveToCloudButton.setToolTipText(&quot;Save Garage to Cloud&quot;);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">

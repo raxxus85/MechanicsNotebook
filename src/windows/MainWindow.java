@@ -5,68 +5,39 @@
 package windows;
 
 
-import customclasses.ButtonActions;
-import customclasses.VehicleButton;
 import java.io.File;
 import javax.swing.JFileChooser;
 import objectmodels.Mechanic;
 import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.stage.FileChooser;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JProgressBar;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import objectmodels.Customer;
 import objectmodels.DragStripSlip;
 import objectmodels.FuelEntry;
 import objectmodels.MaintenanceAction;
-import objectmodels.MaintenanceType;
 import objectmodels.Modification;
-import objectmodels.MouseAdapter2;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
-import org.jdesktop.swingx.JXStatusBar;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.parse4j.ParseException;
 
@@ -868,8 +839,8 @@ public class MainWindow extends javax.swing.JFrame {
             }
         };
         editMaintenanceTypesButton = mainToolBar.add(actionMaintenanceTypeEdit);
-        importGarageButton = new javax.swing.JButton();
-        exportGarageButton = new javax.swing.JButton();
+        loadFromCloudButton = new javax.swing.JButton();
+        saveToCloudButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         vehicleMaintenanceTypeButton = new javax.swing.JButton();
         ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource("/odometer32x32ADD.png"));
@@ -1355,23 +1326,23 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(editMaintenanceTypesButton);
 
-        importGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
-        importGarageButton.setToolTipText("Load Garage from Cloud");
-        importGarageButton.addActionListener(new java.awt.event.ActionListener() {
+        loadFromCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
+        loadFromCloudButton.setToolTipText("Load Garage from Cloud");
+        loadFromCloudButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importGarageButtonActionPerformed(evt);
+                loadFromCloudButtonActionPerformed(evt);
             }
         });
-        mainToolBar.add(importGarageButton);
+        mainToolBar.add(loadFromCloudButton);
 
-        exportGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32EXPORT.png"))); // NOI18N
-        exportGarageButton.setToolTipText("Save Garage to Cloud");
-        exportGarageButton.addActionListener(new java.awt.event.ActionListener() {
+        saveToCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32EXPORT.png"))); // NOI18N
+        saveToCloudButton.setToolTipText("Save Garage to Cloud");
+        saveToCloudButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exportGarageButtonActionPerformed(evt);
+                saveToCloudButtonActionPerformed(evt);
             }
         });
-        mainToolBar.add(exportGarageButton);
+        mainToolBar.add(saveToCloudButton);
         mainToolBar.add(jSeparator2);
 
         vehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32EDIT.png"))); // NOI18N
@@ -2194,8 +2165,9 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_deleteMaintenanceActionButtonToolBarActionPerformed
 
-    private void importGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importGarageButtonActionPerformed
+    private void loadFromCloudButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFromCloudButtonActionPerformed
         // TODO add your handling code here:
+
         if(this.motoGarageNotebookEngine.getCurrentParseUser()==null){
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "There is no Cloud User logged in to import a Garage from the MotoGarage Cloud!");
         }else{
@@ -2222,29 +2194,37 @@ public class MainWindow extends javax.swing.JFrame {
         //    }
         //    this.motoGarageNotebookEngine.openGarage(testFile);
         //}
-    }//GEN-LAST:event_importGarageButtonActionPerformed
+    }//GEN-LAST:event_loadFromCloudButtonActionPerformed
 
-    private void exportGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportGarageButtonActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Method called when a user pressed the 'save to cloud' button
+     * @param evt 
+     */
+    private void saveToCloudButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToCloudButtonActionPerformed
+        // check to ensure there is a logged in parse user first
         
         if(this.motoGarageNotebookEngine.getCurrentParseUser()!=null){
-            
+            // ensure there is a valid session token
             if(this.motoGarageNotebookEngine.getCurrentParseUser().getSessionToken()!=null){
                 try {
+                    //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
                     try {
                         boolean sureToUpload = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Uploading to the cloud will update and overwrite your current garage. Do you wish to continue?");
+                        
                         if(sureToUpload){
+                            //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
+//            if(1==1){
+//                return;
+//            }     
                             //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
                             this.motoGarageNotebookEngine.saveToCloud();
                         }
                         
-                    } catch (FileNotFoundException ex) {
-                        Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (FileNotFoundException | ClassNotFoundException ex) {
+                        //Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } catch (IOException | ParseException ex) {
-                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{
                 System.out.println("User doesn't have session token?");
@@ -2268,7 +2248,7 @@ public class MainWindow extends javax.swing.JFrame {
         //    }
         //    this.motoGarageNotebookEngine.saveGarage(testFile);
         //}
-    }//GEN-LAST:event_exportGarageButtonActionPerformed
+    }//GEN-LAST:event_saveToCloudButtonActionPerformed
 
     private void fuelEntryAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelEntryAddButtonActionPerformed
         // TODO add your handling code here:
@@ -2567,7 +2547,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton editVehicleModelsButton;
     private javax.swing.JButton editWarrantyButton;
     private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JButton exportGarageButton;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPopupMenu.Separator fileMenuSeparator;
     private javax.swing.JLabel fiveOdoLabel;
@@ -2583,7 +2562,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton helpButton;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem helpMenuItem;
-    private javax.swing.JButton importGarageButton;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2599,6 +2577,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JButton loadFromCloudButton;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JTabbedPane mainTabbedPane;
@@ -2625,6 +2604,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu optionsMenu;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JButton saveToCloudButton;
     private javax.swing.JLabel sixOdoLabel;
     private javax.swing.JLabel threeOdoLabel;
     private javax.swing.JLabel twoOdoLabel;

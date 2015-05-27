@@ -64,7 +64,6 @@ import windows.WelcomeWindow;
 public class MotoGarageNotebookEngine {
     
     //Window Variables
-    private WelcomeWindow welcomeWindow;
     private MainWindow mainWindow;
     private MechanicWindow mechanicWindow;
     private CustomerWindow customerWindow;
@@ -89,7 +88,7 @@ public class MotoGarageNotebookEngine {
     
     //Other Variables
     private Garage currentGarage;
-    private DialogFactory dialogFactory;
+    private final DialogFactory dialogFactory;
     private Boolean saved;
     
     // Parse.com variables
@@ -99,24 +98,7 @@ public class MotoGarageNotebookEngine {
 
     
     public MotoGarageNotebookEngine(){
-        // TESTING CODE NEW TO REMOVE ONCE WE IMPLEMENT CREATE/ OPEN/ SAVE
-        //Garage testGarage = new Garage();
-        //this.currentGarage = testGarage;
         this.dialogFactory = new DialogFactory();
-    }
-    
-    public void startProgressDialogWindow(String incomingString){
-        //this.progressDialogWindow = new ProgressDialog(new JFrame(), true);
-        //Component mainWindow2 = this.mainWindow.getl
-        //this.progressDialogWindow = new ProgressDialog(uploading);
-        this.progressDialogWindow = new ProgressDialog(incomingString);
-        //java.awt.Frame parent, boolean modal
-        this.progressDialogWindow.setVisible(true);
-    }    
-    
-    public void stopProgressDialogWindow(){
-        this.progressDialogWindow.setVisible(false);
-        this.progressDialogWindow = null;
     }
     
     public void setGarageObjectId(String incomingGarageObjectId){
@@ -143,15 +125,15 @@ public class MotoGarageNotebookEngine {
         mechanicsNotebookEngine.addMaintenanceType(oilChange);
         mechanicsNotebookEngine.addMaintenanceType(rotateTires);
 
-        //mechanicsNotebookEngine.startWelcomeWindow();
-        try{
-            mechanicsNotebookEngine.startMainWindow();
-        }catch(Exception e){
-            //mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.ERROR_MESSAGE, "Something horrible happened! " + e.toString());
-            //mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.toString());
-            //mechanicsNotebookEngine.getDialogFactory().createDialogMessage(DialogType.INFORMATION_MESSAGE, e.getMessage());
+        try {
+            //mechanicsNotebookEngine.startWelcomeWindow();
             
+            mechanicsNotebookEngine.startMainWindow();
+        } catch (URISyntaxException ex) {
+            System.out.println("Please report to Dev the following bug!");
+            System.out.println(ex.toString());
         }
+
 
     }
     
@@ -231,21 +213,9 @@ public class MotoGarageNotebookEngine {
     
     public void openFromCloud(){
         this.parseEngine.openUsersGarage();
-        //this.parseEngine.checkUserGarages();
-        //if(this.parseEngine.getCurrentGarage()!=null){
-        //    this.parseEngine.openGarage(this.parseEngine.getCurrentGarage());
-        //}else{
-        //    System.out.println("USER HAS NO GARAGE MAN!!!!!!!!!!!!!!!!!!");
-        //}
     }
     
     public void saveToCloud() throws FileNotFoundException, IOException, ParseException, ClassNotFoundException{
-        //this.startProgressDialogWindow("test");
-//                try {
-//            Thread.sleep(5000);                 //1000 milliseconds is one second.
-//        } catch(InterruptedException ex) {
-//            Thread.currentThread().interrupt();
-//        }
         //create a temp file
     	File tempFile = File.createTempFile("motoGarageNotebookTempFile", ".tmp"); 
         //System.out.println("Temp file : " + tempFile.getAbsolutePath());
