@@ -35,7 +35,7 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         super(parent, modal);
         this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         initComponents();
-        this.setTitle("Vehicle Model Specific Maintenance Types");
+        this.setTitle("Vehicle Specific Maintenance Types");
         this.setIcon();
         this.refreshVehicleMaintenanceTypesTable();
     }
@@ -94,6 +94,7 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
 
@@ -144,6 +145,11 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         jScrollPane1.setViewportView(vehicleMaintenanceTypesTable);
 
         vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray()));
+        vehicleModelComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehicleModelComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Vehicle Model");
 
@@ -156,11 +162,11 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addComponent(vehicleModelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,6 +263,13 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_deleteVehicleMaintenanceTypeButtonActionPerformed
+
+    private void vehicleModelComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelComboBoxActionPerformed
+        // TODO add your handling code here:
+        //VehicleModel selectedVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        //System.out.println(selectedVehicleModel.getVehicleModelObject());
+        this.refreshVehicleMaintenanceTypesTable();
+    }//GEN-LAST:event_vehicleModelComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
