@@ -816,6 +816,22 @@
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="editMaintenanceTypesButton.setToolTipText(&quot;View / Edit General Maintenance Types&quot;);"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JButton" name="vehicleMaintenanceTypeButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/vehicleMaintenanceType32x32EDIT.png"/>
+            </Property>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleMaintenanceTypeButtonActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleMaintenanceTypeButton.setToolTipText(&quot;View and Edit Vehicle Model Specific Maintenance Types&quot;);"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JButton" name="loadFromCloudButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -843,19 +859,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
-        </Component>
-        <Component class="javax.swing.JButton" name="vehicleMaintenanceTypeButton">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/vehicleMaintenanceType32x32EDIT.png"/>
-            </Property>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="vehicleMaintenanceTypeButton.setToolTipText(&quot;View and Edit Vehicle Model Specific Maintenance Types&quot;);"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="updateOdometerActionButtonToolBar">
           <Properties>

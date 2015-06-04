@@ -19,6 +19,7 @@ public class MaintenanceAction extends BaseObjectModel implements Serializable{
     
     /**
      * Main constructor
+     * <li> Used when using regular Maintenance Type
      * @param incomingMechanic
      * @param incomingVehicle
      * @param incomingMaintenanceType
@@ -30,6 +31,25 @@ public class MaintenanceAction extends BaseObjectModel implements Serializable{
         this.mechanic = incomingMechanic;
         this.vehicle = incomingVehicle;
         this.maintenanceType = incomingMaintenanceType;
+        this.odometer = incomingOdometer;
+        this.date = incomingDate;
+        this.notes = incomingNotes;
+    }
+    
+     /**
+     * Main constructor
+     * <li> Used when using Vehicle Maintenance Type
+     * @param incomingMechanic
+     * @param incomingVehicle
+     * @param incomingVehicleMaintenanceType
+     * @param incomingOdometer
+     * @param incomingDate
+     * @param incomingNotes 
+     */
+    public MaintenanceAction(Mechanic incomingMechanic, Vehicle incomingVehicle, VehicleMaintenanceType incomingVehicleMaintenanceType, Integer incomingOdometer, Date incomingDate, String incomingNotes){
+        this.mechanic = incomingMechanic;
+        this.vehicle = incomingVehicle;
+        this.maintenanceType = incomingVehicleMaintenanceType;
         this.odometer = incomingOdometer;
         this.date = incomingDate;
         this.notes = incomingNotes;
@@ -56,6 +76,19 @@ public class MaintenanceAction extends BaseObjectModel implements Serializable{
      */
     public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, MaintenanceType incomingMaintenanceType, Integer incomingOdometer, Date incomingDate){
         this(incomingMechanic,incomingVehicle,incomingMaintenanceType,incomingOdometer, incomingDate, "");
+    }
+    
+    /**
+     * Second constructor, when not supplying "notes" for action
+     * <li> When using Vehicle Maintenance Type
+     * @param incomingMechanic
+     * @param incomingVehicle
+     * @param incomingVehicleMaintenanceType
+     * @param incomingOdometer 
+     * @param incomingDate 
+     */
+    public MaintenanceAction(Mechanic incomingMechanic,Vehicle incomingVehicle, VehicleMaintenanceType incomingVehicleMaintenanceType, Integer incomingOdometer, Date incomingDate){
+        this(incomingMechanic,incomingVehicle,incomingVehicleMaintenanceType,incomingOdometer, incomingDate, "");
     }
     
     /**

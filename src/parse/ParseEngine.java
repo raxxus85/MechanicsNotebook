@@ -203,63 +203,27 @@ public class ParseEngine {
         
     }
     
-    public void startProgressDialog(String incomingString){
-        this.motoGarageNotebookEngine.startProgressDialogWindow(incomingString);
-    }
-    
-    public void stopProgressDialog(){
-        this.motoGarageNotebookEngine.stopProgressDialogWindow();
-    }
     
     public void saveGarage(byte[] incomingData) throws ParseException{
         this.checkUserGarages();
-        System.out.println("Outgoing byte array length is: " + incomingData.length);
-        //startProgressDialog(true);
-        startProgressDialog("Uploading...");
-
+        //System.out.println("Outgoing byte array length is: " + incomingData.length);
+  
         ParseFile file = new ParseFile("test2.mnb", incomingData);
-
-        //file.save();
-
         file.save(new ProgressCallback() {   
         @Override
         public void done(Integer percentDone) {
                 //do something
                 System.out.println(" PERCENT DONE : " + percentDone);
                 if(percentDone==100){
-                    //printMessage("File saved to cloud successfully.");
+                    printMessage("File saved to cloud successfully.");
                 }else{
-    
                     printMessage("File saved to cloud unsuccessfully.");
-                }
-            
+                }        
             }
         });
-
-        
-//        file.saveInBackground(new SaveCallback() {
-//  public void done(ParseException e) {
-//    // Handle success or failure here ...
-//      System.out.println(" UPLOAD DONE?!?!?!?????");
-//  }
-//}, new ProgressCallback() {
-//  public void done(Integer percentDone) {
-//    // Update your progress spinner here. percentDone will be between 0 and 100.
-//      System.out.println(percentDone + " : PERCENT DONE!!!!!!!!!!!");
-//  }
-//});
         
         this.setTempFile(file);
-        //file.saveInBackground();
-        
-        // HERE WE NEED TO CHECK TO SEE IF THERE IS A GARAGE, and if THERE IS, SAVE TO IT INSTEAD OF NEW ONE...
-        //this.checkUserGarages();
 
-//        try {
-//            Thread.sleep(5000);                 //1000 milliseconds is one second.
-//        } catch(InterruptedException ex) {
-//            Thread.currentThread().interrupt();
-//        }
         System.out.println("USER HAS GARAGE? : " + this.hasGarage);
         if(this.hasGarage){    
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Garage");
@@ -285,8 +249,8 @@ public class ParseEngine {
             garage.save(); 
             }
 
-        stopProgressDialog(); 
-        printMessage("File saved to cloud successfully.");
+        //stopProgressDialog(); 
+        //printMessage("File saved to cloud successfully.");
 
     }
     
@@ -303,13 +267,13 @@ public class ParseEngine {
                 if (e == null) {
 
                     ParseFile garageFile = (ParseFile) garage.get("GarageFile");
-                    startProgressDialog("Downloading...");
+                    //startProgressDialog("Downloading...");
                     try {
                         byte[] testBytes = garageFile.getData();                       
-                        
+                        printMessage("File downloaded from the cloud successfully.");
                         //System.out.println(" DID WE DOWNLOAD IT? SIZE IS..." + testBytes.length);
                         setGarage(testBytes);
-                        stopProgressDialog();
+                        //stopProgressDialog();
   
                     } catch (ParseException ex) {
                         Logger.getLogger(ParseEngine.class.getName()).log(Level.SEVERE, null, ex);
@@ -340,9 +304,10 @@ public class ParseEngine {
             public void done(List<ParseObject> garageList, ParseException e) {
                 if (e == null) {
                     //System.out.println("Ok confused... size is.. " + garageList.size());
-                    if(garageList.isEmpty()){
+                    if(garageList == null || garageList.isEmpty()){
                         System.out.println("0 garages found!!! Can't open a garage when one doesn't exist!!");
-                        //TODO  should auto create one here?
+                        //TODO should inform user tthere is no cloud garage
+                        printMessage("The user does not have a garage in the Cloud.");
                     }else if(garageList.size()==1){
                         System.out.println("User has ONE garage. this is a good thing......................");
                         ParseObject garage = garageList.get(0);
@@ -353,9 +318,9 @@ public class ParseEngine {
                             System.out.println(garage.getObjectId());
                             JSONObject test = garage.getParseData();
                             System.out.println(test.toString());
-                            System.out.println("WWEWEJOWIPEHJOAWHEOIAWEH:");
                             
                         }
+                        printMessage("We found multiple garages belonging to this user in the CLoud. Please report bug to mark.p.milford@gmail.com");
                     }
                     // TEST TEST TEST 
                     //ParseFile garageFile = (ParseFile) garage.get("applicantResumeFile");

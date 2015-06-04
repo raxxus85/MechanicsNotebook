@@ -202,11 +202,25 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshCustomersTab();
         this.refreshVehiclesTab();
         this.refreshModifications();
+        this.refreshVehicleMaintenanceTypeButton();
+        
         
         //this.refreshMainWindowStatusBar();
         
         // TESTING TESTING DELETE
 
+    }
+    
+    /**
+     * Method to update the Vehicle Specific Maintenance Types Button
+     * <li> Only enabled IF there are Vehicle Models to add it to
+     */
+    private void refreshVehicleMaintenanceTypeButton(){
+        if(this.motoGarageNotebookEngine.getVehicleModelArray().length>0){
+            vehicleMaintenanceTypeButton.setEnabled(true);
+        }else{
+            vehicleMaintenanceTypeButton.setEnabled(false);
+        }
     }
     
     private void refreshMainWindowStatusBar(){
@@ -464,7 +478,6 @@ public class MainWindow extends javax.swing.JFrame {
             editMaintenanceActionButtonToolBar.setEnabled(true);
             deleteMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
-            vehicleMaintenanceTypeButton.setEnabled(true);
             maintenanceAlertButton.setEnabled(true);
             graphsButton.setEnabled(true);
             int newRowCount = this.motoGarageNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray().length;
@@ -484,7 +497,7 @@ public class MainWindow extends javax.swing.JFrame {
             addMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
             
-            vehicleMaintenanceTypeButton.setEnabled(true);
+
             
             editMaintenanceActionButtonToolBar.setEnabled(false);
             deleteMaintenanceActionButtonToolBar.setEnabled(false);            
@@ -499,7 +512,7 @@ public class MainWindow extends javax.swing.JFrame {
             editMaintenanceActionButtonToolBar.setEnabled(false);
             deleteMaintenanceActionButtonToolBar.setEnabled(false);
             updateOdometerActionButtonToolBar.setEnabled(false);
-            vehicleMaintenanceTypeButton.setEnabled(false);
+
         }
     }    
     
@@ -839,10 +852,10 @@ public class MainWindow extends javax.swing.JFrame {
             }
         };
         editMaintenanceTypesButton = mainToolBar.add(actionMaintenanceTypeEdit);
+        vehicleMaintenanceTypeButton = new javax.swing.JButton();
         loadFromCloudButton = new javax.swing.JButton();
         saveToCloudButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        vehicleMaintenanceTypeButton = new javax.swing.JButton();
         ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource("/odometer32x32ADD.png"));
         Action actionUpdateOdometerActionToolBar = new AbstractAction("New", updateOdometerActionToolBar) {
             public void actionPerformed(ActionEvent e) {
@@ -1326,6 +1339,18 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(editMaintenanceTypesButton);
 
+        vehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32EDIT.png"))); // NOI18N
+        vehicleMaintenanceTypeButton.setFocusable(false);
+        vehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        vehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        vehicleMaintenanceTypeButton.setToolTipText("View and Edit Vehicle Model Specific Maintenance Types");
+        vehicleMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehicleMaintenanceTypeButtonActionPerformed(evt);
+            }
+        });
+        mainToolBar.add(vehicleMaintenanceTypeButton);
+
         loadFromCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
         loadFromCloudButton.setToolTipText("Load Garage from Cloud");
         loadFromCloudButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1344,13 +1369,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(saveToCloudButton);
         mainToolBar.add(jSeparator2);
-
-        vehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32EDIT.png"))); // NOI18N
-        vehicleMaintenanceTypeButton.setFocusable(false);
-        vehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        vehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        vehicleMaintenanceTypeButton.setToolTipText("View and Edit Vehicle Model Specific Maintenance Types");
-        mainToolBar.add(vehicleMaintenanceTypeButton);
 
         updateOdometerActionButtonToolBar.setToolTipText("Update Odometer");
         updateOdometerActionButtonToolBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/odometer32x32ADD.png"))); // NOI18N
@@ -2476,6 +2494,11 @@ public class MainWindow extends javax.swing.JFrame {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_logoutMenuItemActionPerformed
+
+    private void vehicleMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleMaintenanceTypeButtonActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageNotebookEngine.startVehicleMaintenaceTypesMainWindow(this);
+    }//GEN-LAST:event_vehicleMaintenanceTypeButtonActionPerformed
 
     /**
      * @param args the command line arguments

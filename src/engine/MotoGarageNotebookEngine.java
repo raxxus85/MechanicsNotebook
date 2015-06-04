@@ -51,6 +51,7 @@ import windows.ModificationWindow;
 import windows.VehicleWindow;
 import windows.UpdateMileageWindow;
 import windows.VehicleInformationGraphs;
+import windows.VehicleMaintenanceTypesMainWindow;
 import windows.VehicleTrackersWindow;
 import windows.VehicleModelsMainWindow;
 import windows.VehicleModelsWindow;
@@ -85,6 +86,7 @@ public class MotoGarageNotebookEngine {
     //private VehicleModelsMainWindow vehicleModelsMainWindow;
     private VehicleModelsMainWindow vehicleModelsMainWindow;
     private ProgressDialog progressDialogWindow;
+    private VehicleMaintenanceTypesMainWindow vehicleMaintenanceTypesMainWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -974,6 +976,12 @@ public class MotoGarageNotebookEngine {
         this.maintenanceTypesMainWindow = new MaintenanceTypesMainWindow(new JFrame(),true,this);
         this.maintenanceTypesMainWindow.setLocationRelativeTo(incomingParent);
         this.maintenanceTypesMainWindow.setVisible(true);
+    }
+    
+    public void startVehicleMaintenaceTypesMainWindow(Component incomingParent){
+        this.vehicleMaintenanceTypesMainWindow = new VehicleMaintenanceTypesMainWindow(new JFrame(), true, this);
+        this.vehicleMaintenanceTypesMainWindow.setLocationRelativeTo(incomingParent);
+        this.vehicleMaintenanceTypesMainWindow.setVisible(true);
     }
     
     public void startVehicleModelsMainWindow(Component incomingParent){
