@@ -167,7 +167,7 @@ public class MainWindow extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "Odometer", "Date","Maintenance Type", "Notes", "Performed By"
+                "Odometer", "Date","Maintenance Type", "Notes", "Performed By","Model Specific"
             }
                 
                 ) {
@@ -1001,7 +1001,7 @@ public class MainWindow extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "Odometer", "Date","Maintenance Type", "Notes", "Performed By"
+                "Odometer", "Date","Maintenance Type", "Notes", "Performed By","Vehicle Specific"
             }
         ));
         maintenanceActionsTable.setOpaque(true);

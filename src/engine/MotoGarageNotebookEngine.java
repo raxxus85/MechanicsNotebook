@@ -564,11 +564,23 @@ public class MotoGarageNotebookEngine {
      * @return true if we do
      */
     public boolean hasMaintenanceTypes(){
-        if(this.getGarage().getMaintenanceTypeArrayList().isEmpty()){
-            return false;
-        }else{
+        Vehicle currentVehicle = this.getCurrentVehicle();
+        
+        
+        if(currentVehicle.getVehicleModel()!=null && !currentVehicle.getVehicleModel().getVehicleMaintenanceTypesList().isEmpty()){
             return true;
+            
+        }else if(!this.getGarage().getMaintenanceTypeArrayList().isEmpty()){
+            return true;
+        }else{
+            return false;
         }
+        
+//        if(this.getGarage().getMaintenanceTypeArrayList().isEmpty()){
+//            return false;
+//        }else{
+//            return true;
+//        }
     }
     
     /**

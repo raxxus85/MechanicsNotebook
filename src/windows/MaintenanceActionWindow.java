@@ -16,6 +16,8 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Mechanic;
 import objectmodels.Vehicle;
+import objectmodels.VehicleMaintenanceType;
+import objectmodels.VehicleModel;
 
 /**
  *
@@ -47,13 +49,53 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         this.odometerTextField.setText(incomingMaintenanceAction.getOdometer().toString());
         this.notesTextArea.setText(incomingMaintenanceAction.getNotes()); 
         
-        // maintenance type
-        MaintenanceType currentMaintenanceType = incomingMaintenanceAction.getMaintenanceType();
-        Object[] testArray = mechanicsNotebookEngine.getMaintenaceTypeArray();
-        DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
-        //DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
-        this.maintenanceTypeJComboBox.setModel(test1);
-        this.maintenanceTypeJComboBox.setSelectedItem(currentMaintenanceType);
+
+        // maintenance types stuff
+        if(this.mechanicsNotebookEngine.getMaintenaceTypeArray().length>0){
+            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray()));
+            this.maintenanceTypeJComboBox.setEnabled(true);
+            this.generalRadioButton.setEnabled(true);
+        }else{
+            this.maintenanceTypeJComboBox.setEnabled(false);
+            this.generalRadioButton.setEnabled(false);
+            this.generalRadioButton.setSelected(false);
+        }
+        // vehicle specific stuff
+        if(!this.mechanicsNotebookEngine.getCurrentVehicle().getVehicleModel().getVehicleMaintenanceTypesList().isEmpty()){
+            VehicleModel currentVehicleModel = this.mechanicsNotebookEngine.getCurrentVehicle().getVehicleModel();
+            vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel)));
+
+            this.vehicleMaintenanceTypeJComboBox.setEnabled(true);
+            this.modelSpecificRadioButton.setEnabled(true);
+        }else{
+            this.vehicleMaintenanceTypeJComboBox.setEnabled(false);
+            this.modelSpecificRadioButton.setEnabled(false);
+            this.modelSpecificRadioButton.setSelected(false);
+        }
+        
+        boolean isVehicleMaintenanceAction = incomingMaintenanceAction.getMaintenanceType() instanceof VehicleMaintenanceType;
+        if(isVehicleMaintenanceAction){
+            VehicleMaintenanceType currentVehicleMaintenanceType = (VehicleMaintenanceType)incomingMaintenanceAction.getMaintenanceType();
+            VehicleModel currentVehicleModel = this.mechanicsNotebookEngine.getCurrentVehicle().getVehicleModel();
+            Object[] testArray = mechanicsNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+            DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
+            this.vehicleMaintenanceTypeJComboBox.setModel(test1);
+            this.vehicleMaintenanceTypeJComboBox.setSelectedItem(currentVehicleMaintenanceType);
+            this.modelSpecificRadioButton.setSelected(true);
+            this.generalRadioButton.setSelected(false);
+        }else{
+            // general maintenance type
+            MaintenanceType currentMaintenanceType = incomingMaintenanceAction.getMaintenanceType();
+            Object[] testArray = mechanicsNotebookEngine.getMaintenaceTypeArray();
+            DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
+            //DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
+            this.maintenanceTypeJComboBox.setModel(test1);
+            this.maintenanceTypeJComboBox.setSelectedItem(currentMaintenanceType);
+            this.modelSpecificRadioButton.setSelected(false);
+            this.generalRadioButton.setSelected(true);
+        }
+        
+
         
         // mechanic
         Mechanic currentMechanic = incomingMaintenanceAction.getMechanic();
@@ -97,9 +139,9 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         notesTextArea = new javax.swing.JTextArea();
         notesLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        vehicleMaintenanceTypeJComboBox = new javax.swing.JComboBox();
+        modelSpecificRadioButton = new javax.swing.JRadioButton();
+        generalRadioButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -146,7 +188,19 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
 
         jLabel2.setText("Model Specific Maintenance Type");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
+
+        modelSpecificRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modelSpecificRadioButtonActionPerformed(evt);
+            }
+        });
+
+        generalRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generalRadioButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,8 +214,8 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
                     .addComponent(vehicleLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1))
+                            .addComponent(generalRadioButton)
+                            .addComponent(modelSpecificRadioButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -176,7 +230,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
                     .addComponent(maintenanceTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mechanicJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vehicleTextField)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(vehicleMaintenanceTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -193,15 +247,15 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2))
-                    .addComponent(jRadioButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(maintenanceTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(maintenanceTypeLabel))
-                    .addComponent(jRadioButton2))
+                    .addComponent(generalRadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(vehicleMaintenanceTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
+                    .addComponent(modelSpecificRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(odometerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +268,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(notesLabel))
-                .addGap(63, 63, 63))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,27 +276,26 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(saveButton)
-                        .addGap(124, 124, 124)
-                        .addComponent(cancelButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(saveButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancelButton)
+                .addGap(111, 111, 111))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(saveButton))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -257,16 +310,22 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         Vehicle newVehicle = this.maintenanceAction.getVehicle();
-        MaintenanceType newMaintenanceType = (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem();
-        //MaintenanceAction newMaintenanceAction = (MaintenanceAction)this.maintenanceTypeJComboBox.getSelectedItem();
         Mechanic newMechanic = (Mechanic) this.mechanicJComboBox.getSelectedItem();
         Integer newOdometer = Integer.parseInt(this.odometerTextField.getText());
         String newNotes = this.notesTextArea.getText();
         Date newDate = this.datePerformedDatePicker.getDate();
+        MaintenanceAction newMaintenanceAction;
+        if(this.generalRadioButton.isSelected()){
+            MaintenanceType newMaintenanceType = (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem();
+            newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newMaintenanceType,newOdometer,newDate,newNotes );
+            this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
+        }else{
+            VehicleMaintenanceType newVehicleMaintenanceType = (VehicleMaintenanceType)this.vehicleMaintenanceTypeJComboBox.getSelectedItem();
+            newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newVehicleMaintenanceType,newOdometer,newDate,newNotes );
+            this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
+        } 
 
-        MaintenanceAction newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newMaintenanceType,newOdometer,newDate,newNotes );
-        
-        this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
+
         if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
                 this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
                         + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
@@ -275,6 +334,18 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         }
         this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void generalRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generalRadioButtonActionPerformed
+        // TODO add your handling code here:
+        this.generalRadioButton.setSelected(true);
+        this.modelSpecificRadioButton.setSelected(false);
+    }//GEN-LAST:event_generalRadioButtonActionPerformed
+
+    private void modelSpecificRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelSpecificRadioButtonActionPerformed
+        // TODO add your handling code here:
+        this.generalRadioButton.setSelected(false);
+        this.modelSpecificRadioButton.setSelected(true);
+    }//GEN-LAST:event_modelSpecificRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,23 +384,23 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private org.jdesktop.swingx.JXDatePicker datePerformedDatePicker;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JRadioButton generalRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox maintenanceTypeJComboBox;
     private javax.swing.JLabel maintenanceTypeLabel;
     private javax.swing.JComboBox mechanicJComboBox;
     private javax.swing.JLabel mechanicLabel;
+    private javax.swing.JRadioButton modelSpecificRadioButton;
     private javax.swing.JLabel notesLabel;
     private javax.swing.JTextArea notesTextArea;
     private javax.swing.JLabel odometerLabel;
     private javax.swing.JTextField odometerTextField;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel vehicleLabel;
+    private javax.swing.JComboBox vehicleMaintenanceTypeJComboBox;
     private javax.swing.JTextField vehicleTextField;
     // End of variables declaration//GEN-END:variables
 }

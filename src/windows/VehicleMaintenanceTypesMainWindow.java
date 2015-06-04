@@ -266,8 +266,6 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
 
     private void vehicleModelComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelComboBoxActionPerformed
         // TODO add your handling code here:
-        //VehicleModel selectedVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
-        //System.out.println(selectedVehicleModel.getVehicleModelObject());
         this.refreshVehicleMaintenanceTypesTable();
     }//GEN-LAST:event_vehicleModelComboBoxActionPerformed
 

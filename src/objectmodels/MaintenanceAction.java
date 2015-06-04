@@ -97,8 +97,17 @@ public class MaintenanceAction extends BaseObjectModel implements Serializable{
      */
     public Object[] getMaintenaceActionObject(){
         DateFormat dateInstance = SimpleDateFormat.getDateInstance();
-        String[] stringArray = {this.odometer.toString(), dateInstance.format(this.date),this.maintenanceType.toString(), this.notes, this.mechanic.toString()};
-        return stringArray;
+        //boolean isInstance = someObject instanceof SomeTypeOrInterface;
+        boolean isVehicleMaintenanceAction = this.maintenanceType instanceof VehicleMaintenanceType;
+
+        if(isVehicleMaintenanceAction){
+            String[] stringArray1 = {this.odometer.toString(), dateInstance.format(this.date),this.maintenanceType.toString(), this.notes, this.mechanic.toString(),"True"};
+            return stringArray1;
+        }else{
+            String[] stringArray2 = {this.odometer.toString(), dateInstance.format(this.date),this.maintenanceType.toString(), this.notes, this.mechanic.toString(),"False"};
+            return stringArray2;
+        }
+
     }
     
     public void setDate(Date incomingDate){

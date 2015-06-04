@@ -13,6 +13,9 @@ import java.util.Properties;
 import javax.swing.ImageIcon;
 import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
+import objectmodels.Vehicle;
+import objectmodels.VehicleMaintenanceType;
+import objectmodels.VehicleModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -22,7 +25,7 @@ import org.jdatepicker.impl.UtilDateModel;
  * @author Mark
  */
 public class NewMaintenanceActionWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine mechanicsNotebookEngine;
+    private MotoGarageNotebookEngine motoGarageNotebookEngine;
 
     /**
      * Creates new form NewMaintenanceActionWindow
@@ -36,16 +39,43 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
      */
     public NewMaintenanceActionWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
         super(parent, modal);
-        this.mechanicsNotebookEngine= incomingMotoGarageMechanicEngine;
+        this.motoGarageNotebookEngine= incomingMotoGarageMechanicEngine;
+        Vehicle currentVehicle = this.motoGarageNotebookEngine.getCurrentVehicle();
         initComponents();
         //this.setLocationRelativeTo(incomingParent);
-        this.currentVehicleTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().toString());
-        this.maintenenaceActionMileageTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
+        this.currentVehicleTextField.setText(currentVehicle.toString());
+        this.maintenenaceActionMileageTextField.setText(currentVehicle.getOdometer().toString());
         this.setIcon();
         this.setTitle("New Maintenance Action");
         
         Date currentDate = new Date();
         this.datePerformedDatePicker.setDate(currentDate);
+        
+        // maintenance types stuff
+        if(this.motoGarageNotebookEngine.getMaintenaceTypeArray().length>0){
+            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getMaintenaceTypeArray()));
+            this.maintenanceTypeJComboBox.setEnabled(true);
+            this.generalRadioButton.setEnabled(true);
+        }else{
+            this.maintenanceTypeJComboBox.setEnabled(false);
+            this.generalRadioButton.setEnabled(false);
+            this.generalRadioButton.setSelected(false);
+        }
+        
+        
+        // vehicle specific stuff
+        if(!currentVehicle.getVehicleModel().getVehicleMaintenanceTypesList().isEmpty()){
+            VehicleModel currentVehicleModel = currentVehicle.getVehicleModel();
+            vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel)));
+
+            this.vehicleMaintenanceTypeJComboBox.setEnabled(true);
+            this.modelSpecificRadioButton.setEnabled(true);
+        }else{
+            this.vehicleMaintenanceTypeJComboBox.setEnabled(false);
+            this.modelSpecificRadioButton.setEnabled(false);
+            this.modelSpecificRadioButton.setSelected(false);
+        }
+        
     }
     
     private void setIcon(){
@@ -79,6 +109,10 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
         maintenanceActionNotesLabel = new javax.swing.JLabel();
         datePerformedDatePicker = new org.jdesktop.swingx.JXDatePicker();
         datePerformedLabel = new javax.swing.JLabel();
+        vehicleMaintenanceTypeJComboBox = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        modelSpecificRadioButton = new javax.swing.JRadioButton();
+        generalRadioButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -104,15 +138,15 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
 
         jLabel5.setText("Vehicle ");
 
-        mechanicTextField.setText(mechanicsNotebookEngine.getCurrentMechanic().toString());
+        mechanicTextField.setText(motoGarageNotebookEngine.getCurrentMechanic().toString());
         mechanicTextField.setEditable(false);
         mechanicTextField.setFocusable(false);
 
         mechanicLabel.setText("Mechanic");
 
-        maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray()));
+        maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getMaintenaceTypeArray()));
 
-        jLabel2.setText("Maintenance Type");
+        jLabel2.setText("General Maintenance Type");
 
         jLabel3.setText("Odometer");
 
@@ -125,36 +159,59 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
 
         datePerformedLabel.setText("Date Performed");
 
+        vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
+
+        jLabel1.setText("Model Specific Maintenance Type");
+
+        modelSpecificRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modelSpecificRadioButtonActionPerformed(evt);
+            }
+        });
+
+        generalRadioButton.setSelected(true);
+        generalRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generalRadioButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(maintenanceActionNotesLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(maintenenaceActionMileageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(datePerformedLabel)
-                                .addComponent(maintenanceActionNotesLabel))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mechanicLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(generalRadioButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(modelSpecificRadioButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel1)))
+                            .addComponent(datePerformedLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(maintenenaceActionMileageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                                .addComponent(datePerformedDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(mechanicLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(vehicleMaintenanceTypeJComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 194, Short.MAX_VALUE)
                                 .addComponent(mechanicTextField)
-                                .addComponent(maintenanceTypeJComboBox, 0, 194, Short.MAX_VALUE)
-                                .addComponent(currentVehicleTextField)))))
+                                .addComponent(maintenanceTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(currentVehicleTextField))
+                            .addComponent(datePerformedDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,13 +226,23 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
                     .addComponent(mechanicLabel)
                     .addComponent(mechanicTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(maintenanceTypeJComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(maintenanceTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(vehicleMaintenanceTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(generalRadioButton)
+                        .addGap(4, 4, 4)
+                        .addComponent(modelSpecificRadioButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(maintenenaceActionMileageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maintenenaceActionMileageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(datePerformedDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +251,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maintenanceActionNotesLabel))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,22 +259,22 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(addMaintenanceActionButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cancelButton)
                 .addGap(62, 62, 62))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addMaintenanceActionButton)
                     .addComponent(cancelButton))
@@ -229,20 +296,47 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
             System.out.println("FAIL");
             return;
         }else{
-            MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.mechanicsNotebookEngine.getCurrentMechanic(),this.mechanicsNotebookEngine.getCurrentVehicle(),
-                    (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),
-                    Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.datePerformedDatePicker.getDate(),this.maintenanceActionNotesTextArea.getText());
-            this.mechanicsNotebookEngine.addMaintenanceAction(newMaintenanceAction);
-            if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
-                        + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
-                newMaintenanceAction.getOdometer().toString() + " miles.");
-                this.mechanicsNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
-            }
+            if(this.generalRadioButton.isSelected()){
+                MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageNotebookEngine.getCurrentMechanic(),this.motoGarageNotebookEngine.getCurrentVehicle(),
+                (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),
+                Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.datePerformedDatePicker.getDate(),this.maintenanceActionNotesTextArea.getText());
+                this.motoGarageNotebookEngine.addMaintenanceAction(newMaintenanceAction);
+                if(this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
+                    this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+                    newMaintenanceAction.getOdometer().toString() + " miles.");
+                    this.motoGarageNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
+                }
+            }else if(this.modelSpecificRadioButton.isSelected()){
+                //VehicleModel currentVehicleModel = this.motoGarageNotebookEngine.getCurrentVehicle().getVehicleModel();
+                MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageNotebookEngine.getCurrentMechanic(),this.motoGarageNotebookEngine.getCurrentVehicle(),
+                (VehicleMaintenanceType)this.vehicleMaintenanceTypeJComboBox.getSelectedItem(),
+                Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.datePerformedDatePicker.getDate(),this.maintenanceActionNotesTextArea.getText());
+                this.motoGarageNotebookEngine.addMaintenanceAction(newMaintenanceAction);
+                if(this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
+                    this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+                    newMaintenanceAction.getOdometer().toString() + " miles.");
+                    this.motoGarageNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
+                }
+        }
+
 
         }
         this.dispose();
     }//GEN-LAST:event_addMaintenanceActionButtonActionPerformed
+
+    private void generalRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generalRadioButtonActionPerformed
+        // TODO add your handling code here:
+        this.generalRadioButton.setSelected(true);
+        this.modelSpecificRadioButton.setSelected(false);
+    }//GEN-LAST:event_generalRadioButtonActionPerformed
+
+    private void modelSpecificRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelSpecificRadioButtonActionPerformed
+        // TODO add your handling code here:
+        this.generalRadioButton.setSelected(false);
+        this.modelSpecificRadioButton.setSelected(true);
+    }//GEN-LAST:event_modelSpecificRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,6 +378,8 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
     private javax.swing.JTextField currentVehicleTextField;
     private org.jdesktop.swingx.JXDatePicker datePerformedDatePicker;
     private javax.swing.JLabel datePerformedLabel;
+    private javax.swing.JRadioButton generalRadioButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -295,5 +391,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
     private javax.swing.JTextField maintenenaceActionMileageTextField;
     private javax.swing.JLabel mechanicLabel;
     private javax.swing.JTextField mechanicTextField;
+    private javax.swing.JRadioButton modelSpecificRadioButton;
+    private javax.swing.JComboBox vehicleMaintenanceTypeJComboBox;
     // End of variables declaration//GEN-END:variables
 }
