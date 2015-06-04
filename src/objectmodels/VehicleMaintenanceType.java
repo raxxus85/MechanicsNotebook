@@ -28,4 +28,14 @@ public class VehicleMaintenanceType extends MaintenanceType implements Serializa
         return this.vehicleModel;
     }
     
+        /**
+     * Method used for the sole purpose of filling out a JTable 
+     * <li> Last item in array is True, as IS vehicle model Specific
+     * @return 
+     */
+    @Override
+    public Object[] getMaintenanceTypeObject(){
+        String[] stringArray = {this.getMaintenanceTypeName(),this.getMileageInterval().toString(), this.getDescription(),"True"};
+        return stringArray;
+    }
 }

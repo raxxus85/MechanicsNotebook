@@ -6,7 +6,12 @@
 package windows;
 
 import engine.MotoGarageNotebookEngine;
+import informationwindows.DialogType;
+import java.awt.Color;
 import java.awt.Toolkit;
+import javax.swing.table.DefaultTableModel;
+import objectmodels.VehicleMaintenanceType;
+import objectmodels.VehicleModel;
 
 /**
  *
@@ -32,6 +37,32 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         initComponents();
         this.setTitle("Vehicle Model Specific Maintenance Types");
         this.setIcon();
+        this.refreshVehicleMaintenanceTypesTable();
+    }
+    
+            /**
+     * Method used to refresh the Vehicle Maintenance Types Type Table
+     */
+    public void refreshVehicleMaintenanceTypesTable(){
+        
+        DefaultTableModel model = (DefaultTableModel) vehicleMaintenanceTypesTable.getModel();
+
+        int rowCount = model.getRowCount();
+
+        // remove all mechanics
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        if(this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel).length>0){
+            VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+            int newRowCount = vehicleMaintenanceTypes.length;
+            for (int i = 0  ; i <newRowCount ; i++) {
+                Object[]vehicleMaintenanceTypeObject = vehicleMaintenanceTypes[i].getMaintenanceTypeObject();
+                model.addRow(vehicleMaintenanceTypeObject);       
+            }
+        }
+        
     }
     
     private void setIcon(){
@@ -51,11 +82,11 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         vehicleMaintenanceTypeAddButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        updateVehicleMaintenanceTypeButton = new javax.swing.JButton();
+        deleteVehicleMaintenanceTypeButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox();
+        vehicleMaintenanceTypesTable = new javax.swing.JTable();
+        vehicleModelComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -70,34 +101,49 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         vehicleMaintenanceTypeAddButton.setFocusable(false);
         vehicleMaintenanceTypeAddButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         vehicleMaintenanceTypeAddButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        vehicleMaintenanceTypeAddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehicleMaintenanceTypeAddButtonActionPerformed(evt);
+            }
+        });
         jToolBar1.add(vehicleMaintenanceTypeAddButton);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32EDIT.png"))); // NOI18N
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        updateVehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32EDIT.png"))); // NOI18N
+        updateVehicleMaintenanceTypeButton.setFocusable(false);
+        updateVehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        updateVehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        updateVehicleMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateVehicleMaintenanceTypeButtonActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(updateVehicleMaintenanceTypeButton);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32DELETE.png"))); // NOI18N
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        deleteVehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32DELETE.png"))); // NOI18N
+        deleteVehicleMaintenanceTypeButton.setFocusable(false);
+        deleteVehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteVehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        deleteVehicleMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteVehicleMaintenanceTypeButtonActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(deleteVehicleMaintenanceTypeButton);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        vehicleMaintenanceTypesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Interval", "Description"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        vehicleMaintenanceTypesTable.setOpaque(true);
+        vehicleMaintenanceTypesTable.setFillsViewportHeight(true);
+        vehicleMaintenanceTypesTable.setBackground(Color.WHITE);
+        vehicleMaintenanceTypesTable.getColumnModel().getColumn(1).setMaxWidth(60);
+        jScrollPane1.setViewportView(vehicleMaintenanceTypesTable);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray()));
 
         jLabel1.setText("Vehicle Model");
 
@@ -113,7 +159,7 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vehicleModelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,7 +168,7 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vehicleModelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,6 +214,50 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void vehicleMaintenanceTypeAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleMaintenanceTypeAddButtonActionPerformed
+        // TODO add your handling code here:
+        VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        this.motoGarageNotebookEngine.startNewVehicleMaintenanceTypeWindow(this,currentVehicleModel);
+    }//GEN-LAST:event_vehicleMaintenanceTypeAddButtonActionPerformed
+
+    private void updateVehicleMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateVehicleMaintenanceTypeButtonActionPerformed
+        // TODO add your handling code here:
+        //VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        //this.motoGarageNotebookEngine.startUpdateVehicleMaintenanceTypeWindow(this,currentVehicleModel);
+        VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        int rowSelected = this.vehicleMaintenanceTypesTable.getSelectedRow();
+        if(rowSelected>-1){            
+            VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+            VehicleMaintenanceType selectedVehicleMaintenanceType = vehicleMaintenanceTypes[rowSelected];
+            this.motoGarageNotebookEngine.startUpdateVehicleMaintenanceTypeWindow(this,selectedVehicleMaintenanceType,currentVehicleModel);
+        }else{
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to edit.");
+        }
+        
+    }//GEN-LAST:event_updateVehicleMaintenanceTypeButtonActionPerformed
+
+    private void deleteVehicleMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehicleMaintenanceTypeButtonActionPerformed
+        // TODO add your handling code here:
+        VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        int rowSelected = this.vehicleMaintenanceTypesTable.getSelectedRow();
+        if(rowSelected==-1){
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to delete.");
+            return;
+        }
+        boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Specific Maintenance Type? This is permanent!");
+        if(sureToDelete){
+            if(rowSelected>-1){            
+                VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+                VehicleMaintenanceType selectedVehicleMaintenanceType = vehicleMaintenanceTypes[rowSelected];
+                this.motoGarageNotebookEngine.deleteVehicleMaintenanceType(selectedVehicleMaintenanceType, currentVehicleModel);
+                this.refreshVehicleMaintenanceTypesTable();
+                //this.motoGarageNotebookEngine.startUpdateVehicleMaintenanceTypeWindow(this,selectedVehicleMaintenanceType,currentVehicleModel);
+            }else{
+                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to delete.");
+            }
+        }
+    }//GEN-LAST:event_deleteVehicleMaintenanceTypeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,15 +301,15 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteVehicleMaintenanceTypeButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton updateVehicleMaintenanceTypeButton;
     private javax.swing.JButton vehicleMaintenanceTypeAddButton;
+    private javax.swing.JTable vehicleMaintenanceTypesTable;
+    private javax.swing.JComboBox vehicleModelComboBox;
     // End of variables declaration//GEN-END:variables
 }

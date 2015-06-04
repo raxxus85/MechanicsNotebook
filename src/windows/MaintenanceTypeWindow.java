@@ -8,6 +8,8 @@ import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import objectmodels.MaintenanceType;
+import objectmodels.VehicleMaintenanceType;
+import objectmodels.VehicleModel;
 
 /**
  *
@@ -16,8 +18,12 @@ import objectmodels.MaintenanceType;
 public class MaintenanceTypeWindow extends javax.swing.JDialog {
     private MotoGarageNotebookEngine mechanicsNotebookEngine;
     private MaintenanceTypesMainWindow maintenanceTypesMainWindow;
+    private VehicleMaintenanceTypesMainWindow vehicleMaintenanceTypesMainWindow;
     boolean updatingMaintenanceType = false;
     MaintenanceType originalMaintenanceType = null;
+    VehicleMaintenanceType originalVehicleMaintenanceType = null;
+    private VehicleModel vehicleModel = null;
+    private boolean vehicleSpecific = false;
 
     /**
      * Creates new form MaintenanceTypeWindow
@@ -27,15 +33,42 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
     }
     
     /**
-     * Creates new form MaintenanceTypeWindow
+     * Creates new form MaintenanceTypeWindow, for creating Maintenance Type
+     * @param parent
+     * @param modal
+     * @param incomingMaintenanceTypesMainWindow
+     * @param incomingMechanicsNotebookEngine
      */
-    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,
+            MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
         super(parent, modal);
         this.mechanicsNotebookEngine= incomingMechanicsNotebookEngine;
         this.maintenanceTypesMainWindow = incomingMaintenanceTypesMainWindow;
         initComponents();
         this.setIcon();
         this.setTitle("Create Maintenance Type");
+    }
+    
+    /**
+     * Creates new form MaintenanceTypeWindow, for creating Maintenance Type
+     * <li> Vehicle Model Specific!
+     * @param parent
+     * @param modal
+     * @param incomingVehicleMaintenanceTypesMainWindow
+     * @param incomingVehicleModel
+     * @param incomingMechanicsNotebookEngine
+     */
+    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,
+            VehicleMaintenanceTypesMainWindow incomingVehicleMaintenanceTypesMainWindow,VehicleModel incomingVehicleModel, MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+        super(parent, modal);
+        this.mechanicsNotebookEngine= incomingMechanicsNotebookEngine;
+        //this.maintenanceTypesMainWindow = incomingMaintenanceTypesMainWindow;
+        this.vehicleMaintenanceTypesMainWindow = incomingVehicleMaintenanceTypesMainWindow;
+        initComponents();
+        this.setIcon();
+        this.setTitle("Create Vehicle Model SpecificMaintenance Type");
+        this.vehicleModel =  incomingVehicleModel;
+        //this.vehicleSpecific = true;
     }
     
     /**
@@ -56,6 +89,33 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         this.maintenanceTypeNameTextField.setText(incomingMaintenanceType.getMaintenanceTypeName());
         this.maintenanceTypeIntervalTextField.setText(incomingMaintenanceType.getMileageInterval().toString());
         this.maintenanceTypeDescriptionTextArea.setText(incomingMaintenanceType.getDescription());
+
+    }
+    
+    /**
+     * Creates new form MaintenanceTypeWindow for Updating Maintenance Type
+     * <li> for Vehicle Specific Maintenance Types!
+     * @param parent
+     * @param modal
+     * @param incomingVehicleMaintenanceType
+     * @param incomingMechanicsNotebookEngine
+     */
+    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,VehicleMaintenanceTypesMainWindow incomingVehicleMaintenanceTypesMainWindow,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, VehicleMaintenanceType incomingVehicleMaintenanceType, VehicleModel incomingVehicleModel) {
+        super(parent, modal);
+        this.mechanicsNotebookEngine= incomingMechanicsNotebookEngine;
+        this.vehicleMaintenanceTypesMainWindow = incomingVehicleMaintenanceTypesMainWindow;
+        initComponents();
+        this.setIcon();
+        this.setTitle("Update Maintenance Type");
+        this.createOrUpdateMaintenanceTypeButton.setText("Update Maintenance Type");
+        this.vehicleModel =  incomingVehicleModel;
+        
+        this.updatingMaintenanceType = true;
+        this.originalVehicleMaintenanceType = incomingVehicleMaintenanceType;
+        
+        this.maintenanceTypeNameTextField.setText(incomingVehicleMaintenanceType.getMaintenanceTypeName());
+        this.maintenanceTypeIntervalTextField.setText(incomingVehicleMaintenanceType.getMileageInterval().toString());
+        this.maintenanceTypeDescriptionTextArea.setText(incomingVehicleMaintenanceType.getDescription());
 
     }
     
@@ -196,24 +256,45 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         String newName = this.maintenanceTypeNameTextField.getText();
         Integer newInterval = Integer.parseInt(this.maintenanceTypeIntervalTextField.getText());
         String newDescription = this.maintenanceTypeDescriptionTextArea.getText();
-        MaintenanceType newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription);        
+        
+        
         // onto create / update
-        if(this.updatingMaintenanceType){
-            boolean updatedMaintenanceType = this.mechanicsNotebookEngine.updateMaintenanceType(originalMaintenanceType, newMaintenanceType);
-            if(updatedMaintenanceType){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Maintenance Type has been updated!");
-                this.maintenanceTypesMainWindow.refreshMaintenanceTypeTable();
+        if(this.vehicleModel==null){
+            MaintenanceType newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription);
+            if(this.updatingMaintenanceType){
+                boolean updatedMaintenanceType = this.mechanicsNotebookEngine.updateMaintenanceType(originalMaintenanceType, newMaintenanceType);
+                if(updatedMaintenanceType){
+                    this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Maintenance Type has been updated!");
+                    this.maintenanceTypesMainWindow.refreshMaintenanceTypeTable();
+                }else{
+                    this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Maintenance Type!");
+                }
+                this.dispose();
             }else{
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Maintenance Type!");
+                this.mechanicsNotebookEngine.createNewMaintenanceType(newMaintenanceType);
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Maintenance Type," + newMaintenanceType.toString() + ", has been created!");
+                // REFRESH
+                this.maintenanceTypesMainWindow.refreshMaintenanceTypeTable();
+                this.dispose();
             }
-            
-            this.dispose();
         }else{
-            this.mechanicsNotebookEngine.createNewMaintenanceType(newMaintenanceType);
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Maintenance Type," + newMaintenanceType.toString() + ", has been created!");
-            // REFRESH
-            this.maintenanceTypesMainWindow.refreshMaintenanceTypeTable();
-            this.dispose();
+            VehicleMaintenanceType newVehicleMaintenanceType = new VehicleMaintenanceType(this.vehicleModel,newName,newInterval,newDescription);
+            if(this.updatingMaintenanceType){
+                boolean updatedVehicleMaintenanceType = this.mechanicsNotebookEngine.updateVehicleMaintenanceType(originalVehicleMaintenanceType, newVehicleMaintenanceType, this.vehicleModel);
+                if(updatedVehicleMaintenanceType){
+                    this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Model Specific Maintenance Type has been updated!");
+                    this.vehicleMaintenanceTypesMainWindow.refreshVehicleMaintenanceTypesTable();
+                }else{
+                    this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Vehicle Specific Maintenance Type!!");
+                }
+                this.dispose();
+            }else{
+                this.mechanicsNotebookEngine.createNewVehicleMaintenanceType(newVehicleMaintenanceType,this.vehicleModel);
+                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Vehicle Specific Maintenance Type," + newVehicleMaintenanceType.toString() + ", has been created!");
+                // REFRESH
+                this.vehicleMaintenanceTypesMainWindow.refreshVehicleMaintenanceTypesTable();
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_createOrUpdateMaintenanceTypeButtonActionPerformed
 

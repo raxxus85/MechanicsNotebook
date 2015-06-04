@@ -31,6 +31,7 @@ import objectmodels.MaintenanceAction;
 import objectmodels.MaintenanceType;
 import objectmodels.Modification;
 import objectmodels.Vehicle;
+import objectmodels.VehicleMaintenanceType;
 import objectmodels.VehicleModel;
 import objectmodels.Warranty;
 import org.parse4j.ParseException;
@@ -466,6 +467,12 @@ public class MotoGarageNotebookEngine {
         return updatedType;
     }
     
+    public boolean updateVehicleMaintenanceType(VehicleMaintenanceType originalVehicleMaintenanceType, VehicleMaintenanceType updatedVehicleMaintenanceType, VehicleModel incomingVehicleModel){
+        boolean updatedType = this.currentGarage.updateVehicleMaintenanceType(originalVehicleMaintenanceType, updatedVehicleMaintenanceType, incomingVehicleModel);
+        this.mainWindow.refresh();
+        return updatedType;
+    }
+    
     public boolean updateVehicleModel(VehicleModel originalVehicleModel, VehicleModel updatedVehicleModel){
         boolean updatedType =this.getGarage().updateVehicleModel(originalVehicleModel, updatedVehicleModel);
         this.mainWindow.refresh();
@@ -575,6 +582,11 @@ public class MotoGarageNotebookEngine {
         return deleted;
     }
     
+    public boolean deleteVehicleMaintenanceType(VehicleMaintenanceType incomingVehicleMaintenanceType, VehicleModel incomingModel){
+        boolean deleted = this.getGarage().deleteVehicleMaintenanceType(incomingVehicleMaintenanceType, incomingModel);
+        return deleted;
+    }
+    
     public boolean deleteVehicleModel(VehicleModel incomingVehicleModel){
         boolean deleted = this.getGarage().deleteVehicleModel(incomingVehicleModel);
         this.mainWindow.refresh();
@@ -609,6 +621,10 @@ public class MotoGarageNotebookEngine {
         // TIME TO REFRESH
         this.mainWindow.refresh();
         return true;
+    }
+    
+    public boolean createNewVehicleMaintenanceType(VehicleMaintenanceType incomingVehicleMaintenanceType, VehicleModel incomingVehicleModel){
+        return this.currentGarage.addVehicleMaintenanceType(incomingVehicleMaintenanceType, incomingVehicleModel);
     }
     
     public boolean createNewVehicleModel(VehicleModel incomingVehicleModel){
@@ -701,6 +717,10 @@ public class MotoGarageNotebookEngine {
     
     public VehicleModel[] getVehicleModelArray(){
         return this.currentGarage.getVehicleModelArray();
+    }
+    
+    public VehicleMaintenanceType[] getVehicleMaintenanceTypesArray(VehicleModel incomingVehicleModel){
+        return this.currentGarage.getVehicleMaintenanceTypesArray(incomingVehicleModel);
     }
  
     public void addMaintenanceType(MaintenanceType incomingMaintenanceType){
@@ -905,6 +925,20 @@ public class MotoGarageNotebookEngine {
         this.maintenanceTypeWindow.setVisible(true);
     }
     
+     /**
+     * Method used to start the Maintenance Type Window, to create a new Type
+     * <li> Vehicle Model Specific!
+     * @param incomingVehicleMaintenanceTypesMainWindow
+     * @param incomingVehicleModel
+     */
+    public void startNewVehicleMaintenanceTypeWindow(VehicleMaintenanceTypesMainWindow incomingVehicleMaintenanceTypesMainWindow, VehicleModel incomingVehicleModel){
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(new JFrame(),true,incomingVehicleMaintenanceTypesMainWindow,incomingVehicleModel,this);
+        this.maintenanceTypeWindow.setLocationRelativeTo(incomingVehicleMaintenanceTypesMainWindow);
+        this.maintenanceTypeWindow.setVisible(true);
+    }
+    
+    
+    
     public void startNewVehicleModelWindow(VehicleModelsMainWindow incomingVehicleModelsMainWindow){
         this.vehicleModelsWindow = new VehicleModelsWindow(new JFrame(),true,incomingVehicleModelsMainWindow,this);
         this.vehicleModelsWindow.setLocationRelativeTo(incomingVehicleModelsMainWindow);
@@ -925,6 +959,12 @@ public class MotoGarageNotebookEngine {
     public void startUpdateMaintenanceTypeWindow(MaintenanceTypesMainWindow incomingMaintenanceTypesMainWindow,MaintenanceType originalMaintenanceType){
         this.maintenanceTypeWindow = new MaintenanceTypeWindow(new JFrame(),true,incomingMaintenanceTypesMainWindow,this,originalMaintenanceType);
         this.maintenanceTypeWindow.setLocationRelativeTo(incomingMaintenanceTypesMainWindow);
+        this.maintenanceTypeWindow.setVisible(true);
+    }
+    
+    public void startUpdateVehicleMaintenanceTypeWindow(VehicleMaintenanceTypesMainWindow incomingVehicleMaintenanceTypesMainWindow,VehicleMaintenanceType originalVehicleMaintenanceType, VehicleModel incomingVehicleModel){
+        this.maintenanceTypeWindow = new MaintenanceTypeWindow(new JFrame(), true, incomingVehicleMaintenanceTypesMainWindow,this,originalVehicleMaintenanceType,incomingVehicleModel);
+        this.maintenanceTypeWindow.setLocationRelativeTo(incomingVehicleMaintenanceTypesMainWindow);
         this.maintenanceTypeWindow.setVisible(true);
     }
     

@@ -33,6 +33,22 @@ public class Garage implements Serializable{
     
     // current object manipulation methods
    
+    /**
+     * Method to get all the Vehicle Maintenance Types that pertain to a specific Vehicle Model
+     * @param incomingVehicleModel
+     * @return all Vehicle Maintenance Types corresponding to it
+     */
+    public VehicleMaintenanceType[] getVehicleMaintenanceTypesArray(VehicleModel incomingVehicleModel){
+        int indexOfVehicleModel = this.vehicleModels.indexOf(incomingVehicleModel);
+        VehicleModel currentVehicleModel = this.vehicleModels.get(indexOfVehicleModel);
+        VehicleMaintenanceType[] vehicleMaintenanceTypes = currentVehicleModel.getVehicleMaintenanceTypesArray();
+        return vehicleMaintenanceTypes;
+    }
+    
+    public ArrayList<VehicleModel> getVehicleModelList(){
+        return this.vehicleModels;
+    }
+    
     public void setSaveFile(File incomingFile){
         this.currentSaveFile = incomingFile;
     }
@@ -162,6 +178,51 @@ public class Garage implements Serializable{
             return false;
         }
     }
+    
+        /**
+     * Method used to update a Vehicle Specific Maintenance Type
+     * @param originalVehicleMaintenanceType
+     * @param updatedVehicleMaintenanceType
+     * @param incomingVehicleModel
+     * @return true if successful
+     */
+    public boolean updateVehicleMaintenanceType(VehicleMaintenanceType originalVehicleMaintenanceType, VehicleMaintenanceType updatedVehicleMaintenanceType, VehicleModel incomingVehicleModel){
+        Integer originalVehicleModelIndex = this.getVehicleModelArrayList().indexOf(incomingVehicleModel);
+        VehicleModel vehicleModel = this.getVehicleModelArrayList().get(originalVehicleModelIndex);        
+        vehicleModel.editVehicleMaintenanceType(originalVehicleMaintenanceType, updatedVehicleMaintenanceType);
+        
+        
+        return true;
+//        if(!vehicleModel.getVehicleMaintenanceTypesList().contains(originalVehicleMaintenanceType)){
+//            return true;
+//        }else{
+//            return false;
+//        }
+    }
+    
+    public boolean deleteVehicleMaintenanceType(VehicleMaintenanceType incomingVehicleMaintenanceType, VehicleModel incomingVehicleModel){
+        Integer originalVehicleModelIndex = this.getVehicleModelArrayList().indexOf(incomingVehicleModel);
+        VehicleModel vehicleModel = this.getVehicleModelArrayList().get(originalVehicleModelIndex);    
+        vehicleModel.deleteVehicleMaintenanceType(incomingVehicleMaintenanceType);
+        return true;
+    }
+    
+    public boolean addVehicleMaintenanceType(VehicleMaintenanceType incomingVehicleMaintenanceType, VehicleModel incomingVehicleModel){
+        Integer originalVehicleModelIndex = this.getVehicleModelArrayList().indexOf(incomingVehicleModel);
+        VehicleModel vehicleModel = this.getVehicleModelArrayList().get(originalVehicleModelIndex);  
+        vehicleModel.addVehicleMaintenanceType(incomingVehicleMaintenanceType);
+        if(vehicleModel.getVehicleMaintenanceTypesList().contains(incomingVehicleMaintenanceType)){
+            return true;
+        }else{
+            return false;
+        }
+        
+        
+    }
+    
+    
+    
+    
     
     public boolean updateVehicleModel(VehicleModel originalVehicleModel, VehicleModel updatedVehicleModel){
         Integer originalIndex = this.getVehicleModelArrayList().indexOf(originalVehicleModel);

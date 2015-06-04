@@ -30,10 +30,11 @@ public class MaintenanceType extends BaseObjectModel implements Serializable{
     
     /**
      * Method used for the sole purpose of filling out a JTable 
+     * <li> last item in array is "False" as is not Vehicle Model Specific
      * @return 
      */
     public Object[] getMaintenanceTypeObject(){
-        String[] stringArray = {this.maintenanceTypeName,this.mileageInterval.toString(), this.description};
+        String[] stringArray = {this.maintenanceTypeName,this.mileageInterval.toString(), this.description,"False"};
         return stringArray;
     }
     
