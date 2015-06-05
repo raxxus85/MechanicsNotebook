@@ -21,6 +21,8 @@ import java.net.URISyntaxException;
 import objectmodels.Garage;
 import objectmodels.Mechanic;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -647,46 +649,69 @@ public class MotoGarageNotebookEngine {
         return true;
     }
     
-    /**
-     * SUPER IMPORTANT MEthod
-     * <li> takes a vehicle
-     * <li> returns a list of OVERDUE maintenance actions
-     * @param incomingVehicle
-     * @return 
-     */
-    //public ArrayList<MaintenanceAction> getOverDueMaintenanceActions(Vehicle incomingVehicle){
-        
-    //}
-    
-    //public Integer totalOverDueMaintenanceActions(){
-        
-    //}
-    
+  
     /**
      * Method to return true if the incoming customer has a vehicle with over due maintenance actions!
      * <li> used to indicate the "alert" button on or off
      * @return true if ANY Vehicle has an overdue maintenance action
      */
     public boolean hasOverDueMaintenanceActions(){
-        boolean hasOverDueMaintenanceActions = false;
+        //boolean hasOverDueMaintenanceActions = false;
         if(this.getCurrentCustomer()==null || this.getCurrentCustomer().getVehicles().isEmpty()){
             return false;
         }
         ArrayList<Vehicle> vehicles = this.getCurrentCustomer().getVehicles();
         // iterante over each vehicle
         for(Vehicle temp: vehicles){
-            int currentOdo = temp.getOdometer();
-            // iterate over each maintenance action to see if it's over due
-            for(MaintenanceAction maintenanceAction : temp.getMaintenanceActions()){    
-                if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
-                    hasOverDueMaintenanceActions = true;
-                    // go ahead and end here
-                    // TODO implement a way to count?
-                    return hasOverDueMaintenanceActions;
-                }
+            if(this.vehicleHasOverDueMaintenanceActions(temp)){
+                return true;
             }
         }
-        return hasOverDueMaintenanceActions;
+        return false;
+    }
+    
+    /**
+     * Method to take a Vehicle, and return an ArrayList of Maintenance Actions that are the latest
+     * <li> Three oil changes (3000 miles, 6000 miles, 9000 miles) would return only the 9000 miles oil change
+     * <li> Used to determine if 'overdue' 
+     * @param incomingVehicle
+     * @return ArrayList of the Latest Maintenance Actions
+     */
+    public ArrayList<MaintenanceAction> getLatestMaintenanceActions(Vehicle incomingVehicle){
+        ArrayList<MaintenanceType> currentVehicleMaintenanceTypes = new ArrayList<>();
+        // find all the types...
+        for(MaintenanceAction maintenanceAction : incomingVehicle.getMaintenanceActions()){    
+           if(!currentVehicleMaintenanceTypes.contains(maintenanceAction.getMaintenanceType())){
+               currentVehicleMaintenanceTypes.add(maintenanceAction.getMaintenanceType());   
+               //System.out.println("We are adding maintenance type..." + maintenanceAction.getMaintenanceType());
+           }           
+        }
+        
+
+        // go back over list and get the 'latest' one 
+        ArrayList<MaintenanceAction> latestVehicleMaintenanceActions = new ArrayList<>();
+       
+        for(MaintenanceType currentType: currentVehicleMaintenanceTypes){
+            latestVehicleMaintenanceActions.add(this.getLatestAction(incomingVehicle.getMaintenanceActions(), currentType));
+        }
+        
+        return latestVehicleMaintenanceActions;
+    }
+    
+    private MaintenanceAction getLatestAction(ArrayList<MaintenanceAction> actionList, MaintenanceType incomingType){
+        MaintenanceAction currentLatest = null;
+        for(MaintenanceAction tempAction : actionList){
+            if(tempAction.getMaintenanceType().equals(incomingType)){
+                if(currentLatest == null){
+                    currentLatest = tempAction;
+                }else{
+                    if(tempAction.getOdometer()>currentLatest.getOdometer()){
+                        currentLatest = tempAction;
+                    }
+                }
+            }          
+        }
+        return currentLatest;
     }
     
     /**
@@ -696,10 +721,14 @@ public class MotoGarageNotebookEngine {
      * @return true if vehicle has over due maintenance actions
      */
     public boolean vehicleHasOverDueMaintenanceActions(Vehicle incomingVehicle){
-       boolean hasOverDueMaintenanceActions = false;
-       int currentOdo = incomingVehicle.getOdometer();
-        // iterate over each maintenance action to see if it's over due
-        for(MaintenanceAction maintenanceAction : incomingVehicle.getMaintenanceActions()){    
+        boolean hasOverDueMaintenanceActions = false;
+        int currentOdo = incomingVehicle.getOdometer();
+       
+        ArrayList<MaintenanceAction> newestVehicleMaintenanceActions = this.getLatestMaintenanceActions(incomingVehicle);
+       
+       
+        // iterate over each maintenance action to see if it's over due (in the list of the 'newest' maintenance actions
+        for(MaintenanceAction maintenanceAction : newestVehicleMaintenanceActions){    
             if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
                 hasOverDueMaintenanceActions = true;
                 // go ahead and end here
@@ -719,8 +748,12 @@ public class MotoGarageNotebookEngine {
         ArrayList<MaintenanceAction> overDueMaintenanceActions = new ArrayList<MaintenanceAction>();
         // iterate over list and add over due ones to it
         int currentOdo = incomingVehicle.getOdometer();
-        for(MaintenanceAction maintenanceAction : incomingVehicle.getMaintenanceActions()){    
-            if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
+
+        ArrayList<MaintenanceAction> newestVehicleMaintenanceActions = this.getLatestMaintenanceActions(incomingVehicle);
+        
+        // iterate over each maintenance action to see if it's over due (in the list of the 'newest' maintenance actions
+        for(MaintenanceAction maintenanceAction : newestVehicleMaintenanceActions){                
+            if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){               
                 overDueMaintenanceActions.add(maintenanceAction);
             }
         }

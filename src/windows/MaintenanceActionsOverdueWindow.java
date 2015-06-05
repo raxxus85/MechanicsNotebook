@@ -79,7 +79,8 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
                 ArrayList<MaintenanceAction> overDueMaintenanceActions = this.motoGarageNotebookEngine.getOverDueMaintenanceActions(vehicle);
                 // time to add them to the vehicle node here
                 for(MaintenanceAction temp : overDueMaintenanceActions){
-                    vehicleNode.add(new DefaultMutableTreeNode(temp.toString()));
+                    int testInt = vehicle.getOdometer() - (temp.getOdometer() + temp.getMaintenanceType().getMileageInterval());
+                    vehicleNode.add(new DefaultMutableTreeNode(temp.toString() + ", "+testInt + " miles over due!"));
                 }
                 root.add(vehicleNode);
             }
