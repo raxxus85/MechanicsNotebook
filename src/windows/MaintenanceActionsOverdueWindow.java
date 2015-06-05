@@ -8,8 +8,10 @@ package windows;
 import engine.MotoGarageNotebookEngine;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import objectmodels.MaintenanceAction;
 import objectmodels.Vehicle;
@@ -65,11 +67,6 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.motoGarageNotebookEngine.getCurrentCustomer().toString());
         DefaultTreeModel model = (DefaultTreeModel) overdueMaintenanceActionsJTree.getModel();
         model.setRoot(root);
-        //DefaultMutableTreeNode root2 = (DefaultMutableTreeNode) model.getRoot();
-        //model.insertNodeInto(new DefaultMutableTreeNode("another_child"), root2, root2.getChildCount());
-        //model.reload();
-        //test
-        //create the child nodes
         
         for(Vehicle vehicle :this.motoGarageNotebookEngine.getCurrentCustomer().getVehicles()){
             if(this.motoGarageNotebookEngine.vehicleHasOverDueMaintenanceActions(vehicle)){
@@ -83,21 +80,13 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
                     vehicleNode.add(new DefaultMutableTreeNode(temp.toString() + ", "+testInt + " miles over due!"));
                 }
                 root.add(vehicleNode);
-            }
-            
+            }           
         }
-        
-//        DefaultMutableTreeNode vegetableNode = new DefaultMutableTreeNode("Vegetables");
-//        vegetableNode.add(new DefaultMutableTreeNode("Capsicum"));
-//        vegetableNode.add(new DefaultMutableTreeNode("Carrot"));
-//        vegetableNode.add(new DefaultMutableTreeNode("Tomato"));
-//        vegetableNode.add(new DefaultMutableTreeNode("Potato"));
-//        DefaultMutableTreeNode fruitNode = new DefaultMutableTreeNode("Fruits");
-// 
-//        //add the child nodes to the root node
-//        root.add(vegetableNode);
-//        root.add(fruitNode);
-        
+        // set the maintenance action icons... 
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/maintenanceAction16x16ALERT.png"));
+        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+        renderer.setLeafIcon(imageIcon);
+        overdueMaintenanceActionsJTree.setCellRenderer(renderer);
         model.reload();
     }
     
@@ -105,6 +94,10 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
     }
+    
+    //ImageIcon imageIcon = new ImageIcon(getClass().getResource("/maintenanceAction32x32ALERT.png"));
+    //DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+    //renderer.setLeafIcon(imageIcon);
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,10 +109,12 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
     private void initComponents() {
 
         closeButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         overdueMaintenanceActionsJTree = new javax.swing.JTree();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -128,26 +123,46 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         jScrollPane1.setViewportView(overdueMaintenanceActionsJTree);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(closeButton)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(closeButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -206,6 +221,7 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree overdueMaintenanceActionsJTree;
     // End of variables declaration//GEN-END:variables
