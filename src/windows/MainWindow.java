@@ -450,10 +450,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
     
-    private void refreshMaintenanceAlert(){
-        // TODO
-    }
-    
     /**
      * One of the most important Refresh methods, refreshes all the maintenance actions for current vehicle
      */
@@ -478,7 +474,7 @@ public class MainWindow extends javax.swing.JFrame {
             editMaintenanceActionButtonToolBar.setEnabled(true);
             deleteMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
-            maintenanceAlertButton.setEnabled(true);
+
             graphsButton.setEnabled(true);
             int newRowCount = this.motoGarageNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray().length;
             MaintenanceAction[] maintenanceArray = this.motoGarageNotebookEngine.getCurrentVehicle().getSortedMaintenanceActionsArray();
@@ -492,7 +488,7 @@ public class MainWindow extends javax.swing.JFrame {
             // main tool bar
             addMaintenanceActionButton.setEnabled(true);
             graphsButton.setEnabled(true);
-            maintenanceAlertButton.setEnabled(true);
+
             
             addMaintenanceActionButtonToolBar.setEnabled(true);
             updateOdometerActionButtonToolBar.setEnabled(true);
@@ -506,7 +502,7 @@ public class MainWindow extends javax.swing.JFrame {
             // main tool bar
             addMaintenanceActionButton.setEnabled(false);
             graphsButton.setEnabled(false);
-            maintenanceAlertButton.setEnabled(false);
+
             
             addMaintenanceActionButtonToolBar.setEnabled(false);
             editMaintenanceActionButtonToolBar.setEnabled(false);
@@ -616,11 +612,31 @@ public class MainWindow extends javax.swing.JFrame {
     
     /**
      * Method used to refresh the entire Customers Tabs
+     * <li> Here we will refresh the maintenance alerts
      */
     private void refreshCustomersTab(){
         System.out.println("Refresh customers tab being called");
         this.refreshCustomerList();
         this.refreshCurrentCustomerInformation();
+        
+        // testing
+        this.refreshMaintenanceAlerts();
+    }
+    
+    
+    private void refreshMaintenanceAlerts(){
+        // if no vehicles, no maintenance tasks due
+//        if(this.motoGarageNotebookEngine.getCurrentCustomer().getVehicles().isEmpty()){
+//            maintenanceAlertButton.setEnabled(false);
+//        }
+        if(this.motoGarageNotebookEngine.hasOverDueMaintenanceActions()){
+            maintenanceAlertButton.setEnabled(true);
+            maintenanceAlertButton.setToolTipText("You have Maintenance Actions over due!");
+        }else{
+            maintenanceAlertButton.setEnabled(false);
+            maintenanceAlertButton.setToolTipText("There are no overdue Maintenance Actions.");
+        }
+
     }
     
     /**

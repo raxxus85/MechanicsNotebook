@@ -645,6 +645,50 @@ public class MotoGarageNotebookEngine {
         return true;
     }
     
+    /**
+     * SUPER IMPORTANT MEthod
+     * <li> takes a vehicle
+     * <li> returns a list of OVERDUE maintenance actions
+     * @param incomingVehicle
+     * @return 
+     */
+    //public ArrayList<MaintenanceAction> getOverDueMaintenanceActions(Vehicle incomingVehicle){
+        
+    //}
+    
+    //public Integer totalOverDueMaintenanceActions(){
+        
+    //}
+    
+    /**
+     * Method to return true if the incoming customer has a vehicle with over due maintenance actions!
+     * @param incomingCustomer
+     * @return 
+     */
+    public boolean hasOverDueMaintenanceActions(){
+        boolean hasOverDueMaintenanceActions = false;
+        if(this.getCurrentCustomer()==null){
+            return false;
+        }
+        ArrayList<Vehicle> vehicles = this.getCurrentCustomer().getVehicles();
+                //incomingCustomer.getVehicles();
+        // iterante over each vehicle
+        for(Vehicle temp: vehicles){
+            int currentOdo = temp.getOdometer();
+            // iterate over each maintenance action to see if it's over due
+            for(MaintenanceAction maintenanceAction : temp.getMaintenanceActions()){    
+                System.out.println("THIS IS A TEST");
+                System.out.println(maintenanceAction.getOdometer());
+                System.out.println(maintenanceAction.getMaintenanceType().getMileageInterval());
+                System.out.println(currentOdo);
+                if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
+                    hasOverDueMaintenanceActions = true;
+                    return hasOverDueMaintenanceActions;
+                }
+            }
+        }
+        return hasOverDueMaintenanceActions;
+    }
     
     public boolean editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction newMaintenanceAction){
         this.getCurrentVehicle().editMaintenanceAction(existingMaintenanceAction, newMaintenanceAction); 
