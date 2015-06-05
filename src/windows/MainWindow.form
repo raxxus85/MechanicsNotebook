@@ -896,6 +896,9 @@
               <Image iconType="3" name="/maintenanceAction32x32ALERT.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maintenanceAlertButtonActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="maintenanceAlertButton.setToolTipText(&quot;There are 0 maintenance reminders for this Vehicle&quot;);"/>
           </AuxValues>

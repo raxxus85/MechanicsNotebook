@@ -1406,6 +1406,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         maintenanceAlertButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32ALERT.png"))); // NOI18N
         maintenanceAlertButton.setToolTipText("There are 0 maintenance reminders for this Vehicle");
+        maintenanceAlertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maintenanceAlertButtonActionPerformed(evt);
+            }
+        });
         mainToolBar.add(maintenanceAlertButton);
 
         fuelEntryMainToolBarAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fuelEntry32x32ADD.png"))); // NOI18N
@@ -2515,6 +2520,11 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.motoGarageNotebookEngine.startVehicleMaintenaceTypesMainWindow(this);
     }//GEN-LAST:event_vehicleMaintenanceTypeButtonActionPerformed
+
+    private void maintenanceAlertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceAlertButtonActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageNotebookEngine.startMaintenanceActionsOverdueWindow(this);
+    }//GEN-LAST:event_maintenanceAlertButtonActionPerformed
 
     /**
      * @param args the command line arguments

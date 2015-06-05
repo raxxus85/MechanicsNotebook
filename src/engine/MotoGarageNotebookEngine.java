@@ -44,6 +44,7 @@ import windows.MaintenanceActionWindow;
 import windows.CustomerWindow;
 import windows.DragStripSlipWindow;
 import windows.FuelEntryWindow;
+import windows.MaintenanceActionsOverdueWindow;
 import windows.NewMaintenanceActionWindow;
 import windows.MaintenanceTypeWindow;
 import windows.MaintenanceTypesMainWindow;
@@ -88,6 +89,7 @@ public class MotoGarageNotebookEngine {
     private VehicleModelsMainWindow vehicleModelsMainWindow;
     private ProgressDialog progressDialogWindow;
     private VehicleMaintenanceTypesMainWindow vehicleMaintenanceTypesMainWindow;
+    private MaintenanceActionsOverdueWindow maintenanceActionsOverdueWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -662,32 +664,67 @@ public class MotoGarageNotebookEngine {
     
     /**
      * Method to return true if the incoming customer has a vehicle with over due maintenance actions!
-     * @param incomingCustomer
-     * @return 
+     * <li> used to indicate the "alert" button on or off
+     * @return true if ANY Vehicle has an overdue maintenance action
      */
     public boolean hasOverDueMaintenanceActions(){
         boolean hasOverDueMaintenanceActions = false;
-        if(this.getCurrentCustomer()==null){
+        if(this.getCurrentCustomer()==null || this.getCurrentCustomer().getVehicles().isEmpty()){
             return false;
         }
         ArrayList<Vehicle> vehicles = this.getCurrentCustomer().getVehicles();
-                //incomingCustomer.getVehicles();
         // iterante over each vehicle
         for(Vehicle temp: vehicles){
             int currentOdo = temp.getOdometer();
             // iterate over each maintenance action to see if it's over due
             for(MaintenanceAction maintenanceAction : temp.getMaintenanceActions()){    
-                System.out.println("THIS IS A TEST");
-                System.out.println(maintenanceAction.getOdometer());
-                System.out.println(maintenanceAction.getMaintenanceType().getMileageInterval());
-                System.out.println(currentOdo);
                 if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
                     hasOverDueMaintenanceActions = true;
+                    // go ahead and end here
+                    // TODO implement a way to count?
                     return hasOverDueMaintenanceActions;
                 }
             }
         }
         return hasOverDueMaintenanceActions;
+    }
+    
+    /**
+     * Method used to determine IF a vehicle has over due maintenance actions
+     * <li> used by MaintenanceActionsOverdueWindow
+     * @param incomingVehicle
+     * @return true if vehicle has over due maintenance actions
+     */
+    public boolean vehicleHasOverDueMaintenanceActions(Vehicle incomingVehicle){
+       boolean hasOverDueMaintenanceActions = false;
+       int currentOdo = incomingVehicle.getOdometer();
+        // iterate over each maintenance action to see if it's over due
+        for(MaintenanceAction maintenanceAction : incomingVehicle.getMaintenanceActions()){    
+            if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
+                hasOverDueMaintenanceActions = true;
+                // go ahead and end here
+                return hasOverDueMaintenanceActions;
+            }
+        }
+        return hasOverDueMaintenanceActions;
+    }
+    
+    /**
+     * Method to take a Vehicle and return a list of OVERDUE maintenance Actions
+     * <li> used by MaintenanceActionsOverdueWindow
+     * @param incomingVehicle
+     * @return ArrayList<MaintenanceAction> overdue items
+     */
+    public ArrayList<MaintenanceAction> getOverDueMaintenanceActions(Vehicle incomingVehicle){
+        ArrayList<MaintenanceAction> overDueMaintenanceActions = new ArrayList<MaintenanceAction>();
+        // iterate over list and add over due ones to it
+        int currentOdo = incomingVehicle.getOdometer();
+        for(MaintenanceAction maintenanceAction : incomingVehicle.getMaintenanceActions()){    
+            if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
+                overDueMaintenanceActions.add(maintenanceAction);
+            }
+        }
+        return overDueMaintenanceActions;
     }
     
     public boolean editMaintenanceAction(MaintenanceAction existingMaintenanceAction, MaintenanceAction newMaintenanceAction){
@@ -1066,6 +1103,12 @@ public class MotoGarageNotebookEngine {
         this.maintenanceActionWindow = new MaintenanceActionWindow(new JFrame(),true,this, incomingMaintenanceAction);
         this.maintenanceActionWindow.setLocationRelativeTo(incomingParent);
         this.maintenanceActionWindow.setVisible(true);
+    }
+    
+    public void startMaintenanceActionsOverdueWindow(Component incomingParent){
+        this.maintenanceActionsOverdueWindow = new MaintenanceActionsOverdueWindow(new JFrame(),true,this);
+        this.maintenanceActionsOverdueWindow.setLocationRelativeTo(incomingParent);
+        this.maintenanceActionsOverdueWindow.setVisible(true);
     }
     
     public void startMaintenanceTypesMainWindow(Component incomingParent){
