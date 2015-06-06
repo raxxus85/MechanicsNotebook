@@ -860,6 +860,11 @@ public class MainWindow extends javax.swing.JFrame {
         dragStripSlipEditButton = new javax.swing.JButton();
         dragStripSlipDeleteButton = new javax.swing.JButton();
         mainToolBar = new javax.swing.JToolBar();
+        openGarageButton = new javax.swing.JButton();
+        saveGarageButton = new javax.swing.JButton();
+        loadFromCloudButton = new javax.swing.JButton();
+        saveToCloudButton = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JToolBar.Separator();
         editVehicleModelsButton = new javax.swing.JButton();
         ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"));
         Action actionMaintenanceTypeEdit = new AbstractAction("New", maintenanceTypeEdit) {
@@ -869,8 +874,6 @@ public class MainWindow extends javax.swing.JFrame {
         };
         editMaintenanceTypesButton = mainToolBar.add(actionMaintenanceTypeEdit);
         vehicleMaintenanceTypeButton = new javax.swing.JButton();
-        loadFromCloudButton = new javax.swing.JButton();
-        saveToCloudButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         ImageIcon updateOdometerActionToolBar = new ImageIcon(getClass().getResource("/odometer32x32ADD.png"));
         Action actionUpdateOdometerActionToolBar = new AbstractAction("New", updateOdometerActionToolBar) {
@@ -1334,6 +1337,49 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.setRollover(true);
         mainToolBar.setFloatable(false);
 
+        openGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarage32x32OPEN.png"))); // NOI18N
+        openGarageButton.setFocusable(false);
+        openGarageButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        openGarageButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        openGarageButton.setToolTipText("Open a Garage");
+        openGarageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openGarageButtonActionPerformed(evt);
+            }
+        });
+        mainToolBar.add(openGarageButton);
+
+        saveGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarage32x32SAVE.png"))); // NOI18N
+        saveGarageButton.setFocusable(false);
+        saveGarageButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        saveGarageButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        saveGarageButton.setToolTipText("Save Current Garage");
+        saveGarageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveGarageButtonActionPerformed(evt);
+            }
+        });
+        mainToolBar.add(saveGarageButton);
+
+        loadFromCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageCloud32x32DOWNLOAD.png"))); // NOI18N
+        loadFromCloudButton.setToolTipText("Load Garage from Cloud");
+        loadFromCloudButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadFromCloudButtonActionPerformed(evt);
+            }
+        });
+        mainToolBar.add(loadFromCloudButton);
+
+        saveToCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageCloud32x32UPLOAD.png"))); // NOI18N
+        saveToCloudButton.setToolTipText("Save Garage to Cloud");
+        saveToCloudButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToCloudButtonActionPerformed(evt);
+            }
+        });
+        mainToolBar.add(saveToCloudButton);
+        mainToolBar.add(jSeparator7);
+
         editVehicleModelsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32EDIT.png"))); // NOI18N
         editVehicleModelsButton.setFocusable(false);
         editVehicleModelsButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1366,24 +1412,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         mainToolBar.add(vehicleMaintenanceTypeButton);
-
-        loadFromCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32IMPORT.png"))); // NOI18N
-        loadFromCloudButton.setToolTipText("Load Garage from Cloud");
-        loadFromCloudButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadFromCloudButtonActionPerformed(evt);
-            }
-        });
-        mainToolBar.add(loadFromCloudButton);
-
-        saveToCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/garage32x32EXPORT.png"))); // NOI18N
-        saveToCloudButton.setToolTipText("Save Garage to Cloud");
-        saveToCloudButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveToCloudButtonActionPerformed(evt);
-            }
-        });
-        mainToolBar.add(saveToCloudButton);
         mainToolBar.add(jSeparator2);
 
         updateOdometerActionButtonToolBar.setToolTipText("Update Odometer");
@@ -2526,6 +2554,51 @@ public class MainWindow extends javax.swing.JFrame {
         this.motoGarageNotebookEngine.startMaintenanceActionsOverdueWindow(this);
     }//GEN-LAST:event_maintenanceAlertButtonActionPerformed
 
+    private void openGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openGarageButtonActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showDialog(this, "Load Garage");
+
+        File testFile = chooser.getSelectedFile();
+        
+        if(testFile != null && returnVal == 0){
+            String filePath = testFile.getAbsolutePath();
+            try {
+                System.out.println(filePath);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            this.motoGarageNotebookEngine.openGarage(testFile);
+        }
+
+    }//GEN-LAST:event_openGarageButtonActionPerformed
+
+    private void saveGarageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveGarageButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.motoGarageNotebookEngine.getSaveFile()!=null){
+            File fileToSave = this.motoGarageNotebookEngine.getSaveFile();
+            this.motoGarageNotebookEngine.saveGarage(fileToSave);
+        }else{
+            JFileChooser chooser = new JFileChooser();
+
+            // .mnb FILTER
+            // Set extension filter
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+            chooser.setFileFilter(filter);
+
+            int returnVal = chooser.showDialog(this, "Save Garage");
+   
+            // if returnVal == 0, user pressed accept
+            if(returnVal==0){
+                File testFile = chooser.getSelectedFile();
+                this.motoGarageNotebookEngine.saveGarage(testFile);
+            }
+        }  
+    }//GEN-LAST:event_saveGarageButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2626,6 +2699,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JButton loadFromCloudButton;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
@@ -2649,9 +2723,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem newGarageMenuItem;
     private javax.swing.JPanel odometerPanel;
     private javax.swing.JLabel oneOdoLabel;
+    private javax.swing.JButton openGarageButton;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenu optionsMenu;
     private javax.swing.JMenuItem saveAsMenuItem;
+    private javax.swing.JButton saveGarageButton;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JButton saveToCloudButton;
     private javax.swing.JLabel sixOdoLabel;
