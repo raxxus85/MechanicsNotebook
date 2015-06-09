@@ -142,7 +142,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
         });
         maintenanceTypeToolBar.add(editMaintenanceTypeButton);
 
-        deleteMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceAction32x32DELETE.png"))); // NOI18N
+        deleteMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32DELETE.png"))); // NOI18N
         deleteMaintenanceTypeButton.setToolTipText("Delete Selected Maintenance Type");
         deleteMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

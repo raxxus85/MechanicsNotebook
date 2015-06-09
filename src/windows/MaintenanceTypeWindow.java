@@ -90,6 +90,17 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         this.maintenanceTypeIntervalTextField.setText(incomingMaintenanceType.getMileageInterval().toString());
         this.maintenanceTypeDescriptionTextArea.setText(incomingMaintenanceType.getDescription());
 
+        // recurring stuff
+        if(incomingMaintenanceType.getMileageInterval()== 0){
+            this.updateRecurring();
+        }
+    }
+    
+    private void updateRecurring(){
+            this.nonrecurringCheckBox.setSelected(true);
+            this.maintenanceTypeIntervalTextField.setText("0");
+            this.maintenanceTypeIntervalTextField.setEnabled(false);
+
     }
     
     /**
@@ -116,7 +127,11 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         this.maintenanceTypeNameTextField.setText(incomingVehicleMaintenanceType.getMaintenanceTypeName());
         this.maintenanceTypeIntervalTextField.setText(incomingVehicleMaintenanceType.getMileageInterval().toString());
         this.maintenanceTypeDescriptionTextArea.setText(incomingVehicleMaintenanceType.getDescription());
-
+        
+        // recurring stuff
+        if(incomingVehicleMaintenanceType.getMileageInterval()== 0){
+            this.updateRecurring();
+        }
     }
     
     private void setIcon(){
@@ -143,6 +158,7 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         maintenanceTypeDescriptionTextArea = new javax.swing.JTextArea();
         maintenanceTypeIntervalLabel = new javax.swing.JLabel();
         maintenanceTypeDescriptionLabel = new javax.swing.JLabel();
+        nonrecurringCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -174,6 +190,13 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
 
         maintenanceTypeDescriptionLabel.setText("Description");
 
+        nonrecurringCheckBox.setText("Nonrecurring");
+        nonrecurringCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nonrecurringCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,9 +209,12 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
                     .addComponent(maintenanceTypeNameLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nonrecurringCheckBox)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(maintenanceTypeNameTextField)
                     .addComponent(maintenanceTypeIntervalTextField)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -202,13 +228,13 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(maintenanceTypeIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maintenanceTypeIntervalLabel))
+                .addGap(13, 13, 13)
+                .addComponent(nonrecurringCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(maintenanceTypeDescriptionLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maintenanceTypeDescriptionLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,26 +242,26 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(createOrUpdateMaintenanceTypeButton)
-                .addGap(60, 60, 60)
-                .addComponent(cancelButton)
-                .addContainerGap(94, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(11, 11, 11))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(createOrUpdateMaintenanceTypeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancelButton)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createOrUpdateMaintenanceTypeButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelButton)
+                    .addComponent(createOrUpdateMaintenanceTypeButton))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -298,6 +324,17 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_createOrUpdateMaintenanceTypeButtonActionPerformed
 
+    private void nonrecurringCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonrecurringCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(this.nonrecurringCheckBox.isSelected()){
+            this.maintenanceTypeIntervalTextField.setText("0");
+            this.maintenanceTypeIntervalTextField.setEnabled(false);
+        }else{
+            this.maintenanceTypeIntervalTextField.setText("");
+            this.maintenanceTypeIntervalTextField.setEnabled(true);
+        }
+    }//GEN-LAST:event_nonrecurringCheckBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,5 +380,6 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
     private javax.swing.JTextField maintenanceTypeIntervalTextField;
     private javax.swing.JLabel maintenanceTypeNameLabel;
     private javax.swing.JTextField maintenanceTypeNameTextField;
+    private javax.swing.JCheckBox nonrecurringCheckBox;
     // End of variables declaration//GEN-END:variables
 }

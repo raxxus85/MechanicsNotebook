@@ -156,6 +156,7 @@ public class MotoGarageNotebookEngine {
     
     public void signOutUser() throws ParseException{
         this.parseEngine.signOutUser();
+        this.mainWindow.refresh();
     }
     
     public ParseUser signUpUser(Component incomingComponent,String username, String password){
@@ -176,6 +177,7 @@ public class MotoGarageNotebookEngine {
     
     public void setCurrentParseUser(ParseUser incomingParseUser){
         this.parseEngine.setParseUser(incomingParseUser);
+        this.mainWindow.refresh();
     }
     
 
@@ -698,6 +700,12 @@ public class MotoGarageNotebookEngine {
         return latestVehicleMaintenanceActions;
     }
     
+    /**
+     * Helpful internal method to take a list of actions for a vehicle and the type, and return the latest completed action based on that type
+     * @param actionList
+     * @param incomingType
+     * @return 
+     */
     private MaintenanceAction getLatestAction(ArrayList<MaintenanceAction> actionList, MaintenanceType incomingType){
         MaintenanceAction currentLatest = null;
         for(MaintenanceAction tempAction : actionList){
@@ -730,7 +738,10 @@ public class MotoGarageNotebookEngine {
         // iterate over each maintenance action to see if it's over due (in the list of the 'newest' maintenance actions
         for(MaintenanceAction maintenanceAction : newestVehicleMaintenanceActions){    
             if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){
-                hasOverDueMaintenanceActions = true;
+                if(maintenanceAction.getMaintenanceType().getMileageInterval()>0){
+                    hasOverDueMaintenanceActions = true;
+                }
+                
                 // go ahead and end here
                 return hasOverDueMaintenanceActions;
             }
@@ -753,8 +764,14 @@ public class MotoGarageNotebookEngine {
         
         // iterate over each maintenance action to see if it's over due (in the list of the 'newest' maintenance actions
         for(MaintenanceAction maintenanceAction : newestVehicleMaintenanceActions){                
-            if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){               
-                overDueMaintenanceActions.add(maintenanceAction);
+            if((maintenanceAction.getOdometer() + maintenanceAction.getMaintenanceType().getMileageInterval()) < currentOdo){ 
+                if(maintenanceAction.getMaintenanceType().getMileageInterval()>0){
+                    overDueMaintenanceActions.add(maintenanceAction);
+                }
+                
+                
+                // ex oil change done AT 10000 miles. 3000 mile interval. car is now 14000 miles.
+                // 13000 < 14000, so OVER DUE
             }
         }
         return overDueMaintenanceActions;

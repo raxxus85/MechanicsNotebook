@@ -139,7 +139,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="MotoGarage Notebook"/>
+    <Property name="title" type="java.lang.String" value="MotoLog"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[800, 600]"/>
     </Property>
@@ -1467,7 +1467,7 @@
         <Component class="javax.swing.JLabel" name="vehiclePictureLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/noImage50x50.png"/>
+              <Image iconType="3" name="/noVehicle50x50.png"/>
             </Property>
           </Properties>
         </Component>

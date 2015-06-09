@@ -203,13 +203,28 @@ public class MainWindow extends javax.swing.JFrame {
         this.refreshVehiclesTab();
         this.refreshModifications();
         this.refreshVehicleMaintenanceTypeButton();
-        
+        this.refreshCloudIcons();
         
         //this.refreshMainWindowStatusBar();
         
         // TESTING TESTING DELETE
 
     }
+    
+    /**
+     * Method to refresh the cloud buttons
+     * <li> checking to see if the users is authenticated
+     */
+    private void refreshCloudIcons(){
+        if(this.motoGarageNotebookEngine.getCurrentParseUser()!=null && this.motoGarageNotebookEngine.getCurrentParseUser().isAuthenticated()){
+            this.loadFromCloudButton.setEnabled(true);
+            this.saveToCloudButton.setEnabled(true);
+        }else{
+            this.loadFromCloudButton.setEnabled(false);
+            this.saveToCloudButton.setEnabled(false);
+        }
+    }
+    
     
     /**
      * Method to update the Vehicle Specific Maintenance Types Button
@@ -754,7 +769,7 @@ public class MainWindow extends javax.swing.JFrame {
                 imageIcon = new ImageIcon(newimg);  // transform it back
                 this.vehiclePictureLabel.setIcon(imageIcon);
             }else{
-                this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N);
+                this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle50x50.png"))); // NOI18N);
             }
             this.vehicleNameLabel.setText(currentVehicle.getYear().toString() + " " +currentVehicle.getVehicleModel().getMake() + " " + currentVehicle.getVehicleModel().getModel());
             //this.currentVehicleOdometerLabel.setText("Odometer: " + currentVehicle.getOdometer().toString());
@@ -779,7 +794,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
             
         }else{  
-            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N);
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle50x50.png"))); // NOI18N);
             this.vehicleNameLabel.setText("No Vehicle Selected");
 
             // reset the odometer
@@ -1010,7 +1025,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("MotoGarage Notebook");
+        setTitle("MotoLog");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
@@ -1679,7 +1694,7 @@ public class MainWindow extends javax.swing.JFrame {
         //currentVehiclePanel.setBorder(compound);
         currentVehiclePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Selected Vehicle"));
 
-        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage50x50.png"))); // NOI18N
+        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle50x50.png"))); // NOI18N
 
         vehicleNameLabel.setText("No Vehicle Selected");
 

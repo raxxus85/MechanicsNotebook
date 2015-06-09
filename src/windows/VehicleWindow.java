@@ -160,7 +160,7 @@ public class VehicleWindow extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Vehicle Picture"));
 
-        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
+        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle100x100.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -385,7 +385,7 @@ public class VehicleWindow extends javax.swing.JDialog {
     private void clearPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPictureButtonActionPerformed
         // TODO add your handling code here:
         this.imageIcon=null;
-        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noImage.png"))); // NOI18N
+        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle100x100.png"))); // NOI18N
     }//GEN-LAST:event_clearPictureButtonActionPerformed
 
     /**
