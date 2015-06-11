@@ -9,6 +9,7 @@ import engine.MotoGarageNotebookEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import objectmodels.VehicleModel;
+import objectmodels.VehicleType;
 
 /**
  *
@@ -43,10 +44,14 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
         this.setIcon();
         this.setTitle("Create Vehicle Model");
         this.createOrUpdateButton.setText("Create Vehicle Model");
+        
+        // we are ASSUMING they are creating a motorcycle vehicle type... it is for MotoGarage afterall...
+        this.motorcycleRadioButton.setSelected(true);
     }
     
     /**
      * Creates new form vehicleModelsWindow
+     * <li> used when UPDATING vehicle model
      */
     public VehicleModelsWindow(java.awt.Frame parent,boolean modal,VehicleModelsMainWindow incomingVehicleModelsMainWindow 
             ,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine, VehicleModel incomingVehicleModel) {
@@ -63,6 +68,14 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
         
         this.makeTextField.setText(incomingVehicleModel.getMake());
         this.modelTextField.setText(incomingVehicleModel.getModel());
+        
+        if(incomingVehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.motorcycleRadioButton.setSelected(false);
+            this.carTruckRadioButton.setSelected(true);
+        }else if(incomingVehicleModel.getVehicleType().equals(VehicleType.MOTORCYCLE)){
+            this.motorcycleRadioButton.setSelected(true);
+            this.carTruckRadioButton.setSelected(false);
+        }
 
     }
 
@@ -84,6 +97,8 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
         modelLabel = new javax.swing.JLabel();
         makeTextField = new javax.swing.JTextField();
         modelTextField = new javax.swing.JTextField();
+        motorcycleRadioButton = new javax.swing.JRadioButton();
+        carTruckRadioButton = new javax.swing.JRadioButton();
         createOrUpdateButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -95,6 +110,20 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
 
         modelLabel.setText("Model");
 
+        motorcycleRadioButton.setText("Motorcycle");
+        motorcycleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorcycleRadioButtonActionPerformed(evt);
+            }
+        });
+
+        carTruckRadioButton.setText("Car / Truck");
+        carTruckRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carTruckRadioButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -102,26 +131,37 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(makeLabel)
-                    .addComponent(modelLabel))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(modelTextField)
-                    .addComponent(makeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(modelLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(modelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(makeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(makeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(motorcycleRadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(carTruckRadioButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(motorcycleRadioButton)
+                    .addComponent(carTruckRadioButton))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(makeLabel)
                     .addComponent(makeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modelLabel)
-                    .addComponent(modelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(modelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modelLabel))
+                .addContainerGap())
         );
 
         createOrUpdateButton.setText("Create or Update");
@@ -150,18 +190,18 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cancelButton))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createOrUpdateButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelButton)
+                    .addComponent(createOrUpdateButton))
+                .addContainerGap())
         );
 
         pack();
@@ -181,7 +221,14 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
         }
         String newMake = this.makeTextField.getText();
         String newModel = this.modelTextField.getText();
-        VehicleModel newVehicleModel = new VehicleModel(newMake,newModel);       
+        
+        VehicleType vehicleType = null;
+        if(this.motorcycleRadioButton.isSelected()){
+            vehicleType = VehicleType.MOTORCYCLE;
+        }else if(this.carTruckRadioButton.isSelected()){
+            vehicleType = VehicleType.CARORTRUCK;
+        }
+        VehicleModel newVehicleModel = new VehicleModel(newMake,newModel,vehicleType);       
         // onto create / update
         if(this.updatingVehicleModel){
             boolean updatedVehicleModel = this.motoGarageNotebookEngine.updateVehicleModel(originalVehicleModel, newVehicleModel);
@@ -201,6 +248,16 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_createOrUpdateButtonActionPerformed
+
+    private void motorcycleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorcycleRadioButtonActionPerformed
+        // TODO add your handling code here:
+        this.carTruckRadioButton.setSelected(false);
+    }//GEN-LAST:event_motorcycleRadioButtonActionPerformed
+
+    private void carTruckRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carTruckRadioButtonActionPerformed
+        // TODO add your handling code here:
+        this.motorcycleRadioButton.setSelected(false);
+    }//GEN-LAST:event_carTruckRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,11 +306,13 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JRadioButton carTruckRadioButton;
     private javax.swing.JButton createOrUpdateButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel makeLabel;
     private javax.swing.JTextField makeTextField;
     private javax.swing.JLabel modelLabel;
     private javax.swing.JTextField modelTextField;
+    private javax.swing.JRadioButton motorcycleRadioButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,6 +39,7 @@ import objectmodels.Modification;
 import objectmodels.Vehicle;
 import objectmodels.Warranty;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import objectmodels.VehicleType;
 import org.parse4j.ParseException;
 
 /**
@@ -117,7 +118,7 @@ public class MainWindow extends javax.swing.JFrame {
         new Object [][] {
         },
         new String [] {
-            "Make", "Model", "Year"
+            "Make", "Model", "Year", "Type"
         }) {           
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -769,7 +770,12 @@ public class MainWindow extends javax.swing.JFrame {
                 imageIcon = new ImageIcon(newimg);  // transform it back
                 this.vehiclePictureLabel.setIcon(imageIcon);
             }else{
-                this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle50x50.png"))); // NOI18N);
+                if(currentVehicle.getVehicleModel().getVehicleType().equals(VehicleType.MOTORCYCLE)){
+                    this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle50x50.png"))); // NOI18N);
+                }else{
+                    this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noCar50x50.png"))); // NOI18N);
+                }
+
             }
             this.vehicleNameLabel.setText(currentVehicle.getYear().toString() + " " +currentVehicle.getVehicleModel().getMake() + " " + currentVehicle.getVehicleModel().getModel());
             //this.currentVehicleOdometerLabel.setText("Odometer: " + currentVehicle.getOdometer().toString());
@@ -794,7 +800,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
             
         }else{  
-            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle50x50.png"))); // NOI18N);
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle50x50.png"))); // NOI18N);
             this.vehicleNameLabel.setText("No Vehicle Selected");
 
             // reset the odometer
@@ -1660,7 +1666,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Make", "Model", "Year", "Vin"
+                "Make", "Model", "Year", "Type"
             }
         ));
         vehiclesTable.setOpaque(true);
@@ -1694,7 +1700,7 @@ public class MainWindow extends javax.swing.JFrame {
         //currentVehiclePanel.setBorder(compound);
         currentVehiclePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Selected Vehicle"));
 
-        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle50x50.png"))); // NOI18N
+        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle50x50.png"))); // NOI18N
 
         vehicleNameLabel.setText("No Vehicle Selected");
 

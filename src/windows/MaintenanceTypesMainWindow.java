@@ -155,7 +155,7 @@ public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
             new Object [][] {
             },
             new String [] {
-                "Name", "Interval", "Description"
+                "Name", "Interval", "Description", "Vehicle Type"
             }
         ));
         maintenanceTypesTable.setOpaque(true);

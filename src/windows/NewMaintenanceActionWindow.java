@@ -16,6 +16,7 @@ import objectmodels.MaintenanceType;
 import objectmodels.Vehicle;
 import objectmodels.VehicleMaintenanceType;
 import objectmodels.VehicleModel;
+import objectmodels.VehicleType;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -52,8 +53,11 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
         this.datePerformedDatePicker.setDate(currentDate);
         
         // maintenance types stuff
-        if(this.motoGarageNotebookEngine.getMaintenaceTypeArray().length>0){
-            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getMaintenaceTypeArray()));
+        if(this.motoGarageNotebookEngine.getMaintenaceTypeArray(currentVehicle.getVehicleModel().getVehicleType()).length>0){
+            // time to ensure it gets the right vehicle type here....
+            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getMaintenaceTypeArray(currentVehicle.getVehicleModel().getVehicleType())));
+ 
+            // end testing
             this.maintenanceTypeJComboBox.setEnabled(true);
             this.generalRadioButton.setEnabled(true);
         }else{
@@ -144,7 +148,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
 
         mechanicLabel.setText("Mechanic");
 
-        maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getMaintenaceTypeArray()));
+        maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel());
 
         jLabel2.setText("General Maintenance Type");
 

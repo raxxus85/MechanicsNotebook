@@ -112,9 +112,27 @@ public class Garage implements Serializable{
 
     /**
      * Method to return an ARRAY of the Maintenance Type, used to populate ComboBoxes, etc
+     * <li> Will take the vehicle type to return the general maintenance types
+     * @param incomingVehicleType
      * @return 
      */
-    public MaintenanceType[] getMaintenaceTypeArray(){
+    public MaintenanceType[] getMaintenaceTypeArray(VehicleType incomingVehicleType){
+        ArrayList<MaintenanceType> maintenanceTypeArrayList = this.maintenanceTypes;
+        ArrayList<MaintenanceType> maintenanceTypeArrayListSorted = new ArrayList<>();
+        
+        //
+        for(MaintenanceType temp: maintenanceTypeArrayList){
+            if(temp.getVehicleType().equals(incomingVehicleType)){
+                maintenanceTypeArrayListSorted.add(temp);
+            }
+        }
+        
+        
+        MaintenanceType[] maintenanceTypeArray = maintenanceTypeArrayListSorted.toArray(new MaintenanceType[maintenanceTypeArrayListSorted.size()]);
+        return maintenanceTypeArray;
+    }
+    
+    public MaintenanceType[] getMaintenanceTypeArray(){
         ArrayList<MaintenanceType> maintenanceTypeArrayList = this.maintenanceTypes;
         MaintenanceType[] maintenanceTypeArray = maintenanceTypeArrayList.toArray(new MaintenanceType[maintenanceTypeArrayList.size()]);
         return maintenanceTypeArray;

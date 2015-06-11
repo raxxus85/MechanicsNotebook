@@ -185,7 +185,13 @@ public class Vehicle extends BaseObjectModel implements Serializable{
     
     public Object[] getVehicleObject(){
         //String[] stringArray = {this.make,this.model, this.year.toString()};
-        String[] stringArray = {this.getVehicleModel().getMake(),this.getVehicleModel().getModel(), this.year.toString()};
+        String vehicleType = "";
+        if(this.getVehicleModel().getVehicleType().equals(VehicleType.CARORTRUCK)){
+            vehicleType = "Car/Truck";
+        }else{
+            vehicleType = "Motorcycle";
+        }
+        String[] stringArray = {this.getVehicleModel().getMake(),this.getVehicleModel().getModel(), this.year.toString(),vehicleType};
         return stringArray;
     }
     

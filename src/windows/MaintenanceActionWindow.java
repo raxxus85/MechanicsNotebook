@@ -18,6 +18,7 @@ import objectmodels.Mechanic;
 import objectmodels.Vehicle;
 import objectmodels.VehicleMaintenanceType;
 import objectmodels.VehicleModel;
+import objectmodels.VehicleType;
 
 /**
  *
@@ -44,6 +45,8 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         initComponents();
         this.setIcon();
         this.setTitle("View / Edit Maintenance Action");
+        Vehicle vehicle = incomingMaintenanceAction.getVehicle();
+        VehicleType vehicleType = vehicle.getVehicleModel().getVehicleType();
         // Update Fields
         this.vehicleTextField.setText(incomingMaintenanceAction.getVehicle().toString());
         this.odometerTextField.setText(incomingMaintenanceAction.getOdometer().toString());
@@ -51,8 +54,8 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         
 
         // maintenance types stuff
-        if(this.mechanicsNotebookEngine.getMaintenaceTypeArray().length>0){
-            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray()));
+        if(this.mechanicsNotebookEngine.getMaintenaceTypeArray(vehicleType).length>0){
+            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray(vehicleType)));
             this.maintenanceTypeJComboBox.setEnabled(true);
             this.generalRadioButton.setEnabled(true);
         }else{
@@ -86,7 +89,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         }else{
             // general maintenance type
             MaintenanceType currentMaintenanceType = incomingMaintenanceAction.getMaintenanceType();
-            Object[] testArray = mechanicsNotebookEngine.getMaintenaceTypeArray();
+            Object[] testArray = mechanicsNotebookEngine.getMaintenaceTypeArray(vehicleType);
             DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
             //DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
             this.maintenanceTypeJComboBox.setModel(test1);

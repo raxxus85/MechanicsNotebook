@@ -14,10 +14,20 @@ public class VehicleModel implements Serializable{
     private String make;
     private String model;
     private ArrayList<VehicleMaintenanceType> vehicleMaintenanceTypes = new ArrayList<>();
+    private VehicleType vehicleType;
     
-    public VehicleModel(String incomingMake, String incomingModel){
+    public VehicleModel(String incomingMake, String incomingModel,VehicleType incomingVehicleType){
         this.make=incomingMake;
         this.model=incomingModel;
+        this.vehicleType = incomingVehicleType;
+    }
+    
+    public void editVehicleType(VehicleType incomingVehicleType){
+        this.vehicleType = incomingVehicleType;
+    }
+    
+    public VehicleType getVehicleType(){
+        return this.vehicleType;
     }
     
     public void addVehicleMaintenanceType(VehicleMaintenanceType incomingVehicleMaintenanceType){
@@ -53,7 +63,15 @@ public class VehicleModel implements Serializable{
      * @return 
      */
     public Object[] getVehicleModelObject(){
-        String[] stringArray = {this.make,this.model};
+        String vehicleTypeString = "";
+        if(this.vehicleType.equals(VehicleType.MOTORCYCLE)){
+            vehicleTypeString = "Motorcycle";
+        }else if(this.vehicleType.equals((VehicleType.CARORTRUCK))){
+            vehicleTypeString = "Car/Truck";
+        }else{
+            vehicleTypeString = "ERROR PLEASE REPORT";
+        }
+        String[] stringArray = {this.make,this.model,vehicleTypeString};
         return stringArray;
     }
     

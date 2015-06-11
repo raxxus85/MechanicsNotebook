@@ -35,6 +35,7 @@ import objectmodels.Modification;
 import objectmodels.Vehicle;
 import objectmodels.VehicleMaintenanceType;
 import objectmodels.VehicleModel;
+import objectmodels.VehicleType;
 import objectmodels.Warranty;
 import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
@@ -127,8 +128,8 @@ public class MotoGarageNotebookEngine {
         // create a DEFAULT GARAGE as program just opened
         mechanicsNotebookEngine.createDefaultGarage();
         //add some maintenance TYPES
-        MaintenanceType oilChange = new MaintenanceType("Oil Change", 3000,"Simple Oil Change");
-        MaintenanceType rotateTires = new MaintenanceType("Tire Rotation", 5000,"Rotating the tires (LF-> LR, LR->LF, etc)");
+        MaintenanceType oilChange = new MaintenanceType("Oil Change", 3000,"Simple Oil Change",VehicleType.CARORTRUCK);
+        MaintenanceType rotateTires = new MaintenanceType("Tire Rotation", 5000,"Rotating the tires (LF-> LR, LR->LF, etc)",VehicleType.CARORTRUCK);
         mechanicsNotebookEngine.addMaintenanceType(oilChange);
         mechanicsNotebookEngine.addMaintenanceType(rotateTires);
 
@@ -854,9 +855,19 @@ public class MotoGarageNotebookEngine {
     
     //ACCESSORS and GETTORS
     
-    public MaintenanceType[] getMaintenaceTypeArray(){
-        return this.currentGarage.getMaintenaceTypeArray();
+    /**
+     * Used to get maintenance types correlating to specific vehicleType
+     * @param incomingVehicleType
+     * @return 
+     */
+    public MaintenanceType[] getMaintenaceTypeArray(VehicleType incomingVehicleType){
+        return this.currentGarage.getMaintenaceTypeArray(incomingVehicleType);
     }
+    
+    public MaintenanceType[] getMaintenaceTypeArray(){
+        return this.currentGarage.getMaintenanceTypeArray();
+    }
+    
     
     public VehicleModel[] getVehicleModelArray(){
         return this.currentGarage.getVehicleModelArray();
@@ -969,7 +980,7 @@ public class MotoGarageNotebookEngine {
      */
     public void startNewVehicleWindow(Component incomingParent){
         this.vehicleWindow = new VehicleWindow(new JFrame(),true,this);
-        this.vehicleWindow.setLocation(incomingParent.getLocation());
+        this.vehicleWindow.setLocationRelativeTo(incomingParent);
         this.vehicleWindow.setVisible(true);       
     }
     

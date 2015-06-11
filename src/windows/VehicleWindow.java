@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import objectmodels.Vehicle;
 import objectmodels.VehicleModel;
+import objectmodels.VehicleType;
 
 /**
  *
@@ -83,7 +84,13 @@ public class VehicleWindow extends javax.swing.JDialog {
             imageIcon = new ImageIcon(newimg);  // transform it back
             this.imageIcon=imageIcon;
             this.vehiclePictureLabel.setIcon(imageIcon);
-        } 
+        }else{
+            if(incomingVehicle.getVehicleModel().getVehicleType().equals(VehicleType.CARORTRUCK)){
+                vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noCar100x100.png"))); // NOI18N
+            }else{
+                vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle100x100.png"))); // NOI18N
+            }
+        }
         
     }
     
@@ -160,7 +167,7 @@ public class VehicleWindow extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Vehicle Picture"));
 
-        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle100x100.png"))); // NOI18N
+        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle100x100.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,6 +200,11 @@ public class VehicleWindow extends javax.swing.JDialog {
         });
 
         vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray()));
+        vehicleModelComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehicleModelComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Make and Model");
 
@@ -385,8 +397,26 @@ public class VehicleWindow extends javax.swing.JDialog {
     private void clearPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPictureButtonActionPerformed
         // TODO add your handling code here:
         this.imageIcon=null;
-        vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noVehicle100x100.png"))); // NOI18N
+        //vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle100x100.png"))); // NOI18N
+        VehicleModel vehicleModel = null;
+        vehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        if(vehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noCar100x100.png")));
+        }else{
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle100x100.png")));
+        }
     }//GEN-LAST:event_clearPictureButtonActionPerformed
+
+    private void vehicleModelComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelComboBoxActionPerformed
+        // TODO add your handling code here:
+        VehicleModel vehicleModel = null;
+        vehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        if(vehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noCar100x100.png")));
+        }else{
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle100x100.png")));
+        }
+    }//GEN-LAST:event_vehicleModelComboBoxActionPerformed
 
     /**
      * @param args the command line arguments

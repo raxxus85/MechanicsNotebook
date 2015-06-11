@@ -14,6 +14,9 @@ public class MaintenanceType extends BaseObjectModel implements Serializable{
     private String maintenanceTypeName;
     private String description;
     private Integer mileageInterval;
+    // testing
+    
+    private VehicleType vehicleType;
     // private Date timeInterval?
     
     /**
@@ -28,13 +31,42 @@ public class MaintenanceType extends BaseObjectModel implements Serializable{
         this.mileageInterval = incomingMileageInterval;
     }
     
+     /**
+     * Main Constructor when using VehicleType...
+     * @param incomingMaintenanceTypeName
+     * @param incomingDescription
+     * @param incomingMileageInterval 
+     * @param incomingVehicleType 
+     */
+    public MaintenanceType(String incomingMaintenanceTypeName, Integer incomingMileageInterval,String incomingDescription, VehicleType incomingVehicleType){
+        this.maintenanceTypeName=incomingMaintenanceTypeName;
+        this.description = incomingDescription;
+        this.mileageInterval = incomingMileageInterval;
+        this.vehicleType = incomingVehicleType;
+    }
+    
+    public void setVehicleType(VehicleType incomingVehicleType){
+        this.vehicleType = incomingVehicleType;
+    }
+    
+    public VehicleType getVehicleType(){
+        return this.vehicleType;
+    }
+    
     /**
      * Method used for the sole purpose of filling out a JTable 
      * <li> last item in array is "False" as is not Vehicle Model Specific
      * @return 
      */
     public Object[] getMaintenanceTypeObject(){
-        String[] stringArray = {this.maintenanceTypeName,this.mileageInterval.toString(), this.description,"False"};
+        //String[] stringArray = {this.maintenanceTypeName,this.mileageInterval.toString(), this.description,"False"};
+        String vehicleType = "";
+        if(this.vehicleType.equals(VehicleType.CARORTRUCK)){
+            vehicleType = "Car/Truck";
+        }else{
+            vehicleType = "Motorcycle";
+        }
+        String[] stringArray = {this.maintenanceTypeName,this.mileageInterval.toString(), this.description,vehicleType};
         return stringArray;
     }
     

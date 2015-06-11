@@ -257,7 +257,7 @@
             <Component class="javax.swing.JLabel" name="vehiclePictureLabel">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/noVehicle100x100.png"/>
+                  <Image iconType="3" name="/noMotorcycle100x100.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -285,6 +285,9 @@
               <Connection code="new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray())" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleModelComboBoxActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

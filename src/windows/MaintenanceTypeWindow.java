@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import objectmodels.MaintenanceType;
 import objectmodels.VehicleMaintenanceType;
 import objectmodels.VehicleModel;
+import objectmodels.VehicleType;
 
 /**
  *
@@ -47,6 +48,8 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         initComponents();
         this.setIcon();
         this.setTitle("Create Maintenance Type");
+        // set motorcycle by default!
+        this.motorcycleRadioButton.setSelected(true);
     }
     
     /**
@@ -69,6 +72,19 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         this.setTitle("Create Vehicle Model SpecificMaintenance Type");
         this.vehicleModel =  incomingVehicleModel;
         //this.vehicleSpecific = true;
+        // updating a VEHICLE MODEL SPECIFIC, they CAN"T CHOOSE TYPE HERE
+        if(this.vehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.carTruckButton.setEnabled(false);
+            this.motorcycleRadioButton.setEnabled(false);
+            this.carTruckButton.setSelected(true);
+            this.motorcycleRadioButton.setSelected(false);
+        }else{
+            this.carTruckButton.setEnabled(false);
+            this.motorcycleRadioButton.setEnabled(false);
+            this.carTruckButton.setSelected(false);
+            this.motorcycleRadioButton.setSelected(true);
+        }
+        
     }
     
     /**
@@ -93,6 +109,12 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         // recurring stuff
         if(incomingMaintenanceType.getMileageInterval()== 0){
             this.updateRecurring();
+        }
+        // vehicle type stuff
+        if(this.originalMaintenanceType.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.carTruckButton.setSelected(true);
+        }else{
+            this.motorcycleRadioButton.setSelected(true);
         }
     }
     
@@ -159,6 +181,8 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         maintenanceTypeIntervalLabel = new javax.swing.JLabel();
         maintenanceTypeDescriptionLabel = new javax.swing.JLabel();
         nonrecurringCheckBox = new javax.swing.JCheckBox();
+        motorcycleRadioButton = new javax.swing.JRadioButton();
+        carTruckButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -197,6 +221,20 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
             }
         });
 
+        motorcycleRadioButton.setText("Motorcycle");
+        motorcycleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorcycleRadioButtonActionPerformed(evt);
+            }
+        });
+
+        carTruckButton.setText("Car / Truck");
+        carTruckButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carTruckButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -204,23 +242,35 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maintenanceTypeIntervalLabel)
-                    .addComponent(maintenanceTypeDescriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(maintenanceTypeNameLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(nonrecurringCheckBox)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(maintenanceTypeNameTextField)
-                    .addComponent(maintenanceTypeIntervalTextField)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(maintenanceTypeIntervalLabel)
+                            .addComponent(maintenanceTypeNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(maintenanceTypeDescriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(nonrecurringCheckBox)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(maintenanceTypeNameTextField)
+                            .addComponent(maintenanceTypeIntervalTextField)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(motorcycleRadioButton)
+                        .addGap(46, 46, 46)
+                        .addComponent(carTruckButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(0, 13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(motorcycleRadioButton)
+                    .addComponent(carTruckButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(maintenanceTypeNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maintenanceTypeNameLabel))
@@ -228,13 +278,13 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(maintenanceTypeIntervalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maintenanceTypeIntervalLabel))
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nonrecurringCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maintenanceTypeDescriptionLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,22 +296,22 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(11, 11, 11))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(50, 50, 50)
                 .addComponent(createOrUpdateMaintenanceTypeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(74, 74, 74)
                 .addComponent(cancelButton)
-                .addGap(95, 95, 95))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
-                    .addComponent(createOrUpdateMaintenanceTypeButton))
-                .addGap(19, 19, 19))
+                    .addComponent(createOrUpdateMaintenanceTypeButton)
+                    .addComponent(cancelButton))
+                .addContainerGap())
         );
 
         pack();
@@ -286,7 +336,13 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         
         // onto create / update
         if(this.vehicleModel==null){
-            MaintenanceType newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription);
+            MaintenanceType newMaintenanceType = null;//= new MaintenanceType(newName,newInterval,newDescription);
+            if(this.motorcycleRadioButton.isSelected()){
+                newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription,VehicleType.MOTORCYCLE);
+            }else{
+                newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription,VehicleType.CARORTRUCK);
+            }
+            //MaintenanceType newMaintenanceType = new MaintenanceType(newName,newInterval,newDescription);
             if(this.updatingMaintenanceType){
                 boolean updatedMaintenanceType = this.mechanicsNotebookEngine.updateMaintenanceType(originalMaintenanceType, newMaintenanceType);
                 if(updatedMaintenanceType){
@@ -335,6 +391,16 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_nonrecurringCheckBoxActionPerformed
 
+    private void motorcycleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorcycleRadioButtonActionPerformed
+        // TODO add your handling code here:
+        this.carTruckButton.setSelected(false);
+    }//GEN-LAST:event_motorcycleRadioButtonActionPerformed
+
+    private void carTruckButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carTruckButtonActionPerformed
+        // TODO add your handling code here:
+        this.motorcycleRadioButton.setSelected(false);
+    }//GEN-LAST:event_carTruckButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -371,6 +437,7 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JRadioButton carTruckButton;
     private javax.swing.JButton createOrUpdateMaintenanceTypeButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -380,6 +447,7 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
     private javax.swing.JTextField maintenanceTypeIntervalTextField;
     private javax.swing.JLabel maintenanceTypeNameLabel;
     private javax.swing.JTextField maintenanceTypeNameTextField;
+    private javax.swing.JRadioButton motorcycleRadioButton;
     private javax.swing.JCheckBox nonrecurringCheckBox;
     // End of variables declaration//GEN-END:variables
 }

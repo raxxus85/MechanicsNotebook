@@ -135,7 +135,7 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
             new Object [][] {
             },
             new String [] {
-                "Make", "Model"
+                "Make", "Model","Type"
             }
         ));
         vehicleModelsJTable.setOpaque(true);
