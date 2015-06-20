@@ -8,7 +8,7 @@ package windows;
 import java.io.File;
 import javax.swing.JFileChooser;
 import objectmodels.Mechanic;
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -47,7 +47,7 @@ import org.parse4j.ParseException;
  * @author Mark
  */
 public class MainWindow extends javax.swing.JFrame {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoGarageNotebookEngine;
     //DefaultListModel model = new DefaultListModel();
     DefaultTableModel tableModel = new DefaultTableModel();
     //JList maintenanceActionList2;
@@ -92,7 +92,7 @@ public class MainWindow extends javax.swing.JFrame {
      /**
      * Creates new form MainWindow
      */
-    public MainWindow(MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) throws URISyntaxException{
+    public MainWindow(MotoLogEngine incomingMotoGarageMechanicEngine) throws URISyntaxException{
         
         this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
         //TESTING
@@ -187,7 +187,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoGarageNotebookEngine.getMotoLogIcon())));
     }
 
  

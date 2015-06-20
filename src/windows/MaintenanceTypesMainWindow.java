@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -20,7 +20,7 @@ import objectmodels.MaintenanceType;
  * @author Mark
  */
 public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
-    MotoGarageNotebookEngine motoGarageNotebookEngine;
+    MotoLogEngine motoLogEngine;
     
     /**
      * Creates new form MaintenanceTypesMainWindow
@@ -32,9 +32,9 @@ public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
      /**
      * Creates new form MaintenanceTypesMainWindow
      */
-    public MaintenanceTypesMainWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public MaintenanceTypesMainWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         this.setTitle("General Maintenance Types");
@@ -56,8 +56,8 @@ public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
             model.removeRow(i);
         }
         
-        if(this.motoGarageNotebookEngine.getMaintenaceTypeArray().length>0){
-            MaintenanceType[] maintenanceTypes = this.motoGarageNotebookEngine.getMaintenaceTypeArray();
+        if(this.motoLogEngine.getMaintenaceTypeArray().length>0){
+            MaintenanceType[] maintenanceTypes = this.motoLogEngine.getMaintenaceTypeArray();
             int newRowCount = maintenanceTypes.length;
             for (int i = 0  ; i <newRowCount ; i++) {
                 Object[]maintenanceTypeObject = maintenanceTypes[i].getMaintenanceTypeObject();
@@ -68,7 +68,8 @@ public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     /**
@@ -219,18 +220,18 @@ public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
 
     private void addMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaintenanceTypeButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewMaintenanceTypeWindow(this);
+        this.motoLogEngine.startNewMaintenanceTypeWindow(this);
     }//GEN-LAST:event_addMaintenanceTypeButtonActionPerformed
 
     private void editMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMaintenanceTypeButtonActionPerformed
         // TODO add your handling code here:
         int rowSelected = this.maintenanceTypesTable.getSelectedRow();
         if(rowSelected>-1){
-            MaintenanceType[] maintenanceTypes = this.motoGarageNotebookEngine.getMaintenaceTypeArray();
+            MaintenanceType[] maintenanceTypes = this.motoLogEngine.getMaintenaceTypeArray();
             MaintenanceType selectedMaintenanceType = maintenanceTypes[rowSelected];
-            this.motoGarageNotebookEngine.startUpdateMaintenanceTypeWindow(this,selectedMaintenanceType);
+            this.motoLogEngine.startUpdateMaintenanceTypeWindow(this,selectedMaintenanceType);
         }else{
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to edit.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to edit.");
         }
 
     }//GEN-LAST:event_editMaintenanceTypeButtonActionPerformed
@@ -240,18 +241,18 @@ public class MaintenanceTypesMainWindow extends javax.swing.JDialog {
         int rowSelected = this.maintenanceTypesTable.getSelectedRow();
         
         if(rowSelected==-1){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to delete.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Maintenance Type to delete.");
             return;
         }
-        boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Maintenance Type? This is permanent!");
+        boolean sureToDelete = this.motoLogEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Maintenance Type? This is permanent!");
         if(sureToDelete){
-            MaintenanceType[] maintenanceTypes = this.motoGarageNotebookEngine.getMaintenaceTypeArray();
+            MaintenanceType[] maintenanceTypes = this.motoLogEngine.getMaintenaceTypeArray();
             MaintenanceType selectedMaintenanceType = maintenanceTypes[rowSelected];
-            if(this.motoGarageNotebookEngine.deleteMaintenanceType(selectedMaintenanceType)){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Maintenance Type deleted successfully!");
+            if(this.motoLogEngine.deleteMaintenanceType(selectedMaintenanceType)){
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Maintenance Type deleted successfully!");
                 this.refreshMaintenanceTypeTable();
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Maintenace Type! Please report!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Maintenace Type! Please report!");
             }
             
         }

@@ -165,7 +165,7 @@
         <Component class="javax.swing.JComboBox" name="vehicleModelComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray())" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(this.motoLogEngine.getVehicleModelArray())" type="code"/>
             </Property>
           </Properties>
           <Events>

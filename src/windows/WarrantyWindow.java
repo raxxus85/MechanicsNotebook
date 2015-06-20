@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -16,7 +16,7 @@ import objectmodels.Warranty;
  * @author Mark
  */
 public class WarrantyWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine mechanicsNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     private boolean addWarranty;
     private Warranty originalWarranty;
 
@@ -24,9 +24,9 @@ public class WarrantyWindow extends javax.swing.JDialog {
      * Creates new form WarrantyWindow, for ADDING
      * @param incomingMechanicsNotebookEngine
      */
-    public WarrantyWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public WarrantyWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         addWarranty=true;
@@ -40,9 +40,9 @@ public class WarrantyWindow extends javax.swing.JDialog {
     /**
      * Creates new form WarrantyWindow, for UPDATING
      */
-    public WarrantyWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Warranty incomingWarranty) {
+    public WarrantyWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMechanicsNotebookEngine, Warranty incomingWarranty) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
         addWarranty = false;
@@ -75,7 +75,9 @@ public class WarrantyWindow extends javax.swing.JDialog {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+
     }
 
     /**
@@ -250,9 +252,9 @@ public class WarrantyWindow extends javax.swing.JDialog {
         Warranty newWarranty = new Warranty(this.partTextField.getText(), this.datePicker.getDate(), 
             this.durationTextField.getText(),this.descriptionTextField.getText(), Float.parseFloat(this.costTextField.getText()));
         if(this.addWarranty){
-            this.mechanicsNotebookEngine.addWarranty(newWarranty);
+            this.motoLogEngine.addWarranty(newWarranty);
         }else{
-            this.mechanicsNotebookEngine.editWarranty(this.originalWarranty, newWarranty);
+            this.motoLogEngine.editWarranty(this.originalWarranty, newWarranty);
         }
         this.dispose();
     }//GEN-LAST:event_addOrUpdateButtonActionPerformed

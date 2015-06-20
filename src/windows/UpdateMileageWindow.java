@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 
@@ -13,7 +13,7 @@ import java.awt.Toolkit;
  * @author Mark
  */
 public class UpdateMileageWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine mechanicsNotebookEngine;
+    private MotoLogEngine motoLogEngine;
 
     /**
      * Creates new form UpdateMileageWindow
@@ -25,18 +25,19 @@ public class UpdateMileageWindow extends javax.swing.JDialog {
         /**
      * Creates new form UpdateMileageWindow
      */
-    public UpdateMileageWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public UpdateMileageWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         this.setTitle("Update Vehicle Mileage");
-        this.updateMileageTextField.setText(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString());
+        this.updateMileageTextField.setText(this.motoLogEngine.getCurrentVehicle().getOdometer().toString());
     }
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     /**
@@ -129,12 +130,12 @@ public class UpdateMileageWindow extends javax.swing.JDialog {
     private void updateMileageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMileageButtonActionPerformed
         // TODO add your handling code here:
         if(this.updateMileageTextField.getText().equals("")){
-            this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "You must specify a mileage to update the current vehicle!");
-            return;
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "You must specify a mileage to update the current vehicle!");
+            //return;
         }else{
             Integer mileage= Integer.parseInt(this.updateMileageTextField.getText());
             //this.motoGarageMechanicEngine.getCurrentVehicle().updateMileage(mileage);
-            this.mechanicsNotebookEngine.updateVehicleMileage(mileage);
+            this.motoLogEngine.updateVehicleMileage(mileage);
             this.dispose();
         }
 

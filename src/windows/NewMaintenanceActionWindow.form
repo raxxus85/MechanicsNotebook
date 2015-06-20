@@ -206,7 +206,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicTextField.setText(motoGarageNotebookEngine.getCurrentMechanic().toString());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mechanicTextField.setText(motoLogEngine.getCurrentMechanic().toString());"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="mechanicLabel">

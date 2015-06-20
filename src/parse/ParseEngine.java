@@ -1,6 +1,6 @@
 package parse;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import org.parse4j.callback.SaveCallback;
  * @author Mark
  */
 public class ParseEngine {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     private ParseUser currentUser = null;
     private ParseObject currentGarage = null;
     private final String appId = "ijXu9OWAFfekiM8hFlLjrHa7A2BK3kWir8X1v5nM";
@@ -37,8 +37,8 @@ public class ParseEngine {
     
     private boolean hasGarage = false;
     
-    public ParseEngine(MotoGarageNotebookEngine incomingMotoGarageNotebookEngine){
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
+    public ParseEngine(MotoLogEngine incomingMotoGarageNotebookEngine){
+        this.motoLogEngine = incomingMotoGarageNotebookEngine;
         Parse.initialize(appId, restApiAppId);
     }
     
@@ -255,7 +255,7 @@ public class ParseEngine {
     }
     
     public void printMessage(String message){
-        this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(null, DialogType.INFORMATION_MESSAGE, message);
+        this.motoLogEngine.getDialogFactory().createDialogMessage(null, DialogType.INFORMATION_MESSAGE, message);
     }
     
     
@@ -289,8 +289,8 @@ public class ParseEngine {
     
     public void setGarage(byte[] bytes) throws IOException{
         //System.out.println("WE ARE OUT OF THAT INNER CLASS BOYYYYYYYYYYYYYYY " +  bytes.length);
-        File cloudFile = this.motoGarageNotebookEngine.deserializeTest(bytes);
-        this.motoGarageNotebookEngine.openGarage(cloudFile);
+        File cloudFile = this.motoLogEngine.deserializeTest(bytes);
+        this.motoLogEngine.openGarage(cloudFile);
         //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(null, DialogType.CONFIRM, appId);
     }
     

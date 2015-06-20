@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Component;
 import java.awt.Toolkit;
@@ -26,7 +26,7 @@ import org.jdatepicker.impl.UtilDateModel;
  * @author Mark
  */
 public class NewMaintenanceActionWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
 
     /**
      * Creates new form NewMaintenanceActionWindow
@@ -38,10 +38,10 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
      /**
      * Creates new form NewMaintenanceActionWindow
      */
-    public NewMaintenanceActionWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public NewMaintenanceActionWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine= incomingMotoGarageMechanicEngine;
-        Vehicle currentVehicle = this.motoGarageNotebookEngine.getCurrentVehicle();
+        this.motoLogEngine= incomingMotoLogEngine;
+        Vehicle currentVehicle = this.motoLogEngine.getCurrentVehicle();
         initComponents();
         //this.setLocationRelativeTo(incomingParent);
         this.currentVehicleTextField.setText(currentVehicle.toString());
@@ -53,9 +53,9 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
         this.datePerformedDatePicker.setDate(currentDate);
         
         // maintenance types stuff
-        if(this.motoGarageNotebookEngine.getMaintenaceTypeArray(currentVehicle.getVehicleModel().getVehicleType()).length>0){
+        if(this.motoLogEngine.getMaintenaceTypeArray(currentVehicle.getVehicleModel().getVehicleType()).length>0){
             // time to ensure it gets the right vehicle type here....
-            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getMaintenaceTypeArray(currentVehicle.getVehicleModel().getVehicleType())));
+            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoLogEngine.getMaintenaceTypeArray(currentVehicle.getVehicleModel().getVehicleType())));
  
             // end testing
             this.maintenanceTypeJComboBox.setEnabled(true);
@@ -70,7 +70,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
         // vehicle specific stuff
         if(!currentVehicle.getVehicleModel().getVehicleMaintenanceTypesList().isEmpty()){
             VehicleModel currentVehicleModel = currentVehicle.getVehicleModel();
-            vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel)));
+            vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoLogEngine.getVehicleMaintenanceTypesArray(currentVehicleModel)));
 
             this.vehicleMaintenanceTypeJComboBox.setEnabled(true);
             this.modelSpecificRadioButton.setEnabled(true);
@@ -84,7 +84,8 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     /**
@@ -142,7 +143,7 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
 
         jLabel5.setText("Vehicle ");
 
-        mechanicTextField.setText(motoGarageNotebookEngine.getCurrentMechanic().toString());
+        mechanicTextField.setText(motoLogEngine.getCurrentMechanic().toString());
         mechanicTextField.setEditable(false);
         mechanicTextField.setFocusable(false);
 
@@ -303,27 +304,27 @@ public class NewMaintenanceActionWindow extends javax.swing.JDialog {
             return;
         }else{
             if(this.generalRadioButton.isSelected()){
-                MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageNotebookEngine.getCurrentMechanic(),this.motoGarageNotebookEngine.getCurrentVehicle(),
+                MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoLogEngine.getCurrentMechanic(),this.motoLogEngine.getCurrentVehicle(),
                 (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem(),
                 Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.datePerformedDatePicker.getDate(),this.maintenanceActionNotesTextArea.getText());
-                this.motoGarageNotebookEngine.addMaintenanceAction(newMaintenanceAction);
-                if(this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
-                    this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
-                        + this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+                this.motoLogEngine.addMaintenanceAction(newMaintenanceAction);
+                if(this.motoLogEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
+                    this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.motoLogEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
                     newMaintenanceAction.getOdometer().toString() + " miles.");
-                    this.motoGarageNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
+                    this.motoLogEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
                 }
             }else if(this.modelSpecificRadioButton.isSelected()){
                 //VehicleModel currentVehicleModel = this.motoGarageNotebookEngine.getCurrentVehicle().getVehicleModel();
-                MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoGarageNotebookEngine.getCurrentMechanic(),this.motoGarageNotebookEngine.getCurrentVehicle(),
+                MaintenanceAction newMaintenanceAction = new MaintenanceAction(this.motoLogEngine.getCurrentMechanic(),this.motoLogEngine.getCurrentVehicle(),
                 (VehicleMaintenanceType)this.vehicleMaintenanceTypeJComboBox.getSelectedItem(),
                 Integer.parseInt(this.maintenenaceActionMileageTextField.getText()),this.datePerformedDatePicker.getDate(),this.maintenanceActionNotesTextArea.getText());
-                this.motoGarageNotebookEngine.addMaintenanceAction(newMaintenanceAction);
-                if(this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
-                    this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
-                        + this.motoGarageNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+                this.motoLogEngine.addMaintenanceAction(newMaintenanceAction);
+                if(this.motoLogEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
+                    this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.motoLogEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
                     newMaintenanceAction.getOdometer().toString() + " miles.");
-                    this.motoGarageNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
+                    this.motoLogEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
                 }
         }
 

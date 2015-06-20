@@ -5,7 +5,8 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
+import java.awt.Toolkit;
 
 
 /**
@@ -13,16 +14,16 @@ import engine.MotoGarageNotebookEngine;
  * @author Mark
  */
 public class VehicleInformationGraphs extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine mechanicsNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     
     /**
      * Creates new form VehicleInformationGraphs
      */
-    public VehicleInformationGraphs(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public VehicleInformationGraphs(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
-        
+        this.setIcon();
         //this.fuelMileageGraph.setInputEnabled(false);
         //Point2D origin = new Point2D.Double(0.0d, 0.0d);
         //Rectangle2D view = new Rectangle2D.Double(-1.0d, 1.0d, 2.0d, 2.0d);
@@ -33,7 +34,9 @@ public class VehicleInformationGraphs extends javax.swing.JDialog {
 
     }
     
-    
+    private void setIcon(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+    }
     
     /**
      * Creates new form VehicleInformationGraphs

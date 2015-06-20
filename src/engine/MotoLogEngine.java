@@ -67,7 +67,7 @@ import windows.WelcomeWindow;
  * MAIN engine for Mechanic's Notebook
  * @author Mark
  */
-public class MotoGarageNotebookEngine {
+public class MotoLogEngine {
     
     //Window Variables
     private MainWindow mainWindow;
@@ -105,7 +105,7 @@ public class MotoGarageNotebookEngine {
     String garageObjectId = null;
 
     
-    public MotoGarageNotebookEngine(){
+    public MotoLogEngine(){
         this.dialogFactory = new DialogFactory();
     }
     
@@ -117,6 +117,12 @@ public class MotoGarageNotebookEngine {
         return this.garageObjectId;
     }
     
+    public String getMotoLogIcon(){
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        String icon = "/motoLogIcon16x16.png";
+        return icon;
+    }
+    
     /**
      * @param args the command line arguments
      * MAIN PROGRAM ENTRY POINT!
@@ -124,7 +130,7 @@ public class MotoGarageNotebookEngine {
      */
     public static void main(String[] args) throws ParseException {
         // TODO code application logic here
-        MotoGarageNotebookEngine mechanicsNotebookEngine = new MotoGarageNotebookEngine();
+        MotoLogEngine mechanicsNotebookEngine = new MotoLogEngine();
         // create a DEFAULT GARAGE as program just opened
         mechanicsNotebookEngine.createDefaultGarage();
         //add some maintenance TYPES
@@ -1060,7 +1066,7 @@ public class MotoGarageNotebookEngine {
             this.aboutWindow.setLocationRelativeTo(incomingComponent);
             this.aboutWindow.setVisible(true);
         } catch (URISyntaxException ex) {
-            Logger.getLogger(MotoGarageNotebookEngine.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MotoLogEngine.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
     

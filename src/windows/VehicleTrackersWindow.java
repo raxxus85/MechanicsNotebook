@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.Toolkit;
 
 /**
@@ -13,23 +13,23 @@ import java.awt.Toolkit;
  * @author Mark
  */
 public class VehicleTrackersWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     
     
      /**
      * Creates new form VehicleTrackersWindow
      */
-    public VehicleTrackersWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public VehicleTrackersWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         this.setTitle("Vehicle Trackers");
 
-        this.fuelEntriesCheckBox.setSelected(this.motoGarageNotebookEngine.getFuelEntriesEnabled());
-        this.warrantiesCheckBox.setSelected(this.motoGarageNotebookEngine.getWarrantiesEnabled());
-        this.modificationsCheckBox.setSelected(this.motoGarageNotebookEngine.getModificationsEnabled());
-        this.dragStripSlipsCheckBox.setSelected(this.motoGarageNotebookEngine.getDragStripSlipsEnabled()
+        this.fuelEntriesCheckBox.setSelected(this.motoLogEngine.getFuelEntriesEnabled());
+        this.warrantiesCheckBox.setSelected(this.motoLogEngine.getWarrantiesEnabled());
+        this.modificationsCheckBox.setSelected(this.motoLogEngine.getModificationsEnabled());
+        this.dragStripSlipsCheckBox.setSelected(this.motoLogEngine.getDragStripSlipsEnabled()
         
         );
         
@@ -44,7 +44,9 @@ public class VehicleTrackersWindow extends javax.swing.JDialog {
 
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -186,14 +188,14 @@ public class VehicleTrackersWindow extends javax.swing.JDialog {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         //fuel warranties mods drag
-        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
-        this.motoGarageNotebookEngine.setFuelEntriesEnabled(this.fuelEntriesCheckBox.isSelected());
-        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
-        this.motoGarageNotebookEngine.setWarrantiesEnabled(this.warrantiesCheckBox.isSelected());
-        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
-        this.motoGarageNotebookEngine.setModificationsEnabled(this.modificationsCheckBox.isSelected());
-        this.motoGarageNotebookEngine.setVehicleTrackersChanged(true);
-        this.motoGarageNotebookEngine.setDragStripSlipsEnabled(this.dragStripSlipsCheckBox.isSelected());
+        this.motoLogEngine.setVehicleTrackersChanged(true);
+        this.motoLogEngine.setFuelEntriesEnabled(this.fuelEntriesCheckBox.isSelected());
+        this.motoLogEngine.setVehicleTrackersChanged(true);
+        this.motoLogEngine.setWarrantiesEnabled(this.warrantiesCheckBox.isSelected());
+        this.motoLogEngine.setVehicleTrackersChanged(true);
+        this.motoLogEngine.setModificationsEnabled(this.modificationsCheckBox.isSelected());
+        this.motoLogEngine.setVehicleTrackersChanged(true);
+        this.motoLogEngine.setDragStripSlipsEnabled(this.dragStripSlipsCheckBox.isSelected());
         
         this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed

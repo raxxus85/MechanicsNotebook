@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -18,7 +18,7 @@ import objectmodels.VehicleModel;
  */
 
 public class VehicleModelsMainWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
 
     /**
      * Creates new form VehicleModelsMainWindow
@@ -30,9 +30,9 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
          /**
      * Creates new form MaintenanceTypesMainWindow
      */
-    public VehicleModelsMainWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public VehicleModelsMainWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         this.setTitle("Vehicle Models");
@@ -41,7 +41,9 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+
     }
     
         /**
@@ -58,8 +60,8 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
             model.removeRow(i);
         }
         
-        if(this.motoGarageNotebookEngine.getVehicleModelArray().length>0){
-            VehicleModel[] vehicleModels = this.motoGarageNotebookEngine.getVehicleModelArray();
+        if(this.motoLogEngine.getVehicleModelArray().length>0){
+            VehicleModel[] vehicleModels = this.motoLogEngine.getVehicleModelArray();
             int newRowCount = vehicleModels.length;
             for (int i = 0  ; i <newRowCount ; i++) {
                 Object[]VehicleModelObject = vehicleModels[i].getVehicleModelObject();
@@ -207,18 +209,18 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
 
     private void vehicleModelAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelAddButtonActionPerformed
         // TODO add your handling code here:
-        this.motoGarageNotebookEngine.startNewVehicleModelWindow(this);
+        this.motoLogEngine.startNewVehicleModelWindow(this);
     }//GEN-LAST:event_vehicleModelAddButtonActionPerformed
 
     private void vehicleModelEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleModelEditButtonActionPerformed
         // TODO add your handling code here:
         int rowSelected = this.vehicleModelsJTable.getSelectedRow();
         if(rowSelected>-1){
-            VehicleModel[] vehicleModels = this.motoGarageNotebookEngine.getVehicleModelArray();
+            VehicleModel[] vehicleModels = this.motoLogEngine.getVehicleModelArray();
             VehicleModel selectedVehicleModel = vehicleModels[rowSelected];
-            this.motoGarageNotebookEngine.startUpdateVehicleModelWindow(this, selectedVehicleModel);
+            this.motoLogEngine.startUpdateVehicleModelWindow(this, selectedVehicleModel);
         }else{
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to edit.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to edit.");
         }
         
     }//GEN-LAST:event_vehicleModelEditButtonActionPerformed
@@ -229,18 +231,18 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
         int rowSelected = this.vehicleModelsJTable.getSelectedRow();
 
         if(rowSelected==-1){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to delete.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to delete.");
             return;
         }
-        boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Type? This is permanent!");
+        boolean sureToDelete = this.motoLogEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Type? This is permanent!");
         if(sureToDelete){
-            VehicleModel[] vehicleModel = this.motoGarageNotebookEngine.getVehicleModelArray();
+            VehicleModel[] vehicleModel = this.motoLogEngine.getVehicleModelArray();
             VehicleModel selectedVehicleModel = vehicleModel[rowSelected];
-            if(this.motoGarageNotebookEngine.deleteVehicleModel(selectedVehicleModel)){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Type deleted successfully!");
+            if(this.motoLogEngine.deleteVehicleModel(selectedVehicleModel)){
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Type deleted successfully!");
                 this.refreshVehicleModelTable();
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Vehicle Type! :( Please report!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Vehicle Type! :( Please report!");
             }
 //            
         }

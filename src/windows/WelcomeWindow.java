@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
  * @author Mark
  */
 public class WelcomeWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageMechanicEngine;
+    private MotoLogEngine motoLogEngine;
     private Image iconImage;
     private BufferedImage image;
     
@@ -34,10 +34,10 @@ public class WelcomeWindow extends javax.swing.JDialog {
      /**
      * Creates new form WelcomeWindow
      */
-    public WelcomeWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public WelcomeWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
         //this.getContentPane().setBackground(Color.black);
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         this.setTitle("MotoGarage Notebook");
@@ -45,7 +45,9 @@ public class WelcomeWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+
     }
 
     /**
@@ -60,7 +62,6 @@ public class WelcomeWindow extends javax.swing.JDialog {
         startButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         motoGarageLogo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -79,8 +80,6 @@ public class WelcomeWindow extends javax.swing.JDialog {
 
         motoGarageLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageLogoTrans.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanicsNotebookLogo.png"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,26 +87,20 @@ public class WelcomeWindow extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(motoGarageLogo))))
+                        .addGap(61, 61, 61)
+                        .addComponent(motoGarageLogo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(startButton)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(66, 66, 66)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(motoGarageLogo)
@@ -167,7 +160,6 @@ public class WelcomeWindow extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel motoGarageLogo;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables

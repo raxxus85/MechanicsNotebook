@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Component;
 import java.awt.Image;
@@ -27,7 +27,7 @@ import objectmodels.VehicleType;
  * @author Mark
  */
 public class VehicleWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     private ImageIcon imageIcon;
     boolean updateVehicle = false;
     
@@ -42,9 +42,9 @@ public class VehicleWindow extends javax.swing.JDialog {
     /**
      * Creates new form VehicleWindow, used for creating a Vehicle
      */
-    public VehicleWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public VehicleWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         //.this.setLocationRelativeTo(incomingParent);
         this.setIcon();
@@ -55,9 +55,9 @@ public class VehicleWindow extends javax.swing.JDialog {
     /**
      * Creates new form VehicleWindow, used for updating a Vehicle
      */
-    public VehicleWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
+    public VehicleWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoGarageMechanicEngine,Vehicle incomingVehicle) {
         super(parent, modal);
-        this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         //this.setLocationRelativeTo(incomingParent);
         this.setIcon();
@@ -67,7 +67,7 @@ public class VehicleWindow extends javax.swing.JDialog {
         
         // Vehicle Type
         VehicleModel currentVehicleModel = incomingVehicle.getVehicleModel();
-        Object[] testArray = motoGarageNotebookEngine.getVehicleModelArray();
+        Object[] testArray = motoLogEngine.getVehicleModelArray();
         DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
         this.vehicleModelComboBox.setModel(test1);
         this.vehicleModelComboBox.setSelectedItem(currentVehicleModel);
@@ -96,7 +96,9 @@ public class VehicleWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+
     }
 
     /**
@@ -199,7 +201,7 @@ public class VehicleWindow extends javax.swing.JDialog {
             }
         });
 
-        vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray()));
+        vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoLogEngine.getVehicleModelArray()));
         vehicleModelComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vehicleModelComboBoxActionPerformed(evt);
@@ -336,7 +338,7 @@ public class VehicleWindow extends javax.swing.JDialog {
             newVehicleYear = Integer.parseInt(this.vehicleYearTextField.getText());
             newVehicleOdometer = Integer.parseInt(this.vehicleOdometerTextField.getText());
         }catch(NumberFormatException ex){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
             return;
         }
         VehicleModel selectedVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
@@ -346,19 +348,19 @@ public class VehicleWindow extends javax.swing.JDialog {
         }
         // if updating...
         if(this.updateVehicle){
-            boolean vehicleUpdated = this.motoGarageNotebookEngine.updateVehicle(newVehicle);
+            boolean vehicleUpdated = this.motoLogEngine.updateVehicle(newVehicle);
             if(vehicleUpdated){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been updated!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been updated!");
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle was not updated!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle was not updated!");
             }
             this.dispose();
         }else{ // creating...
-            boolean vehicleCreated = this.motoGarageNotebookEngine.createNewVehicle(newVehicle);
+            boolean vehicleCreated = this.motoLogEngine.createNewVehicle(newVehicle);
             if(vehicleCreated){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been created!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "The Vehicle, " + newVehicle.toString() +", has been created!");
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle was not created!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle was not created!");
             }
             this.dispose();  
         }

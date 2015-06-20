@@ -6,7 +6,7 @@ package windows;
 
 import informationwindows.DialogType;
 import objectmodels.Mechanic;
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -30,7 +30,7 @@ import objectmodels.Attachment;
  * @author Mark
  */
 public class MechanicWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageMechanicEngine;
+    private MotoLogEngine motoLogEngine;
     private ImageIcon imageIcon;
     private boolean updateMechanic = false;
     private Mechanic currentMechanic;
@@ -47,9 +47,9 @@ public class MechanicWindow extends javax.swing.JDialog {
      * @param parent
      * @param incomingMotoGarageMechanicEngine
      */
-    public MechanicWindow(java.awt.Frame parent,boolean modal, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public MechanicWindow(java.awt.Frame parent,boolean modal, MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateMechanicButton.setText("Create Mechanic");
@@ -60,10 +60,10 @@ public class MechanicWindow extends javax.swing.JDialog {
     /**
      * Creates new form MechanicWindow for UPDATING Mechanic
      */
-    public MechanicWindow(java.awt.Frame parent,boolean modal, MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
+    public MechanicWindow(java.awt.Frame parent,boolean modal, MotoLogEngine incomingMotoGarageMechanicEngine, Mechanic incomingMechanic) {
         super(parent, modal);
         this.currentMechanic = incomingMechanic;
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateMechanicButton.setText("Update Mechanic");
@@ -93,7 +93,8 @@ public class MechanicWindow extends javax.swing.JDialog {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
     }
     
@@ -312,7 +313,7 @@ public class MechanicWindow extends javax.swing.JDialog {
         String incomingDescription = this.mechanicDescriptionTextArea.getText();
         
         if(this.mechanicFirstNameTextField.getText().equals("") || this.mechanicMiddleNameTextField.getText().equals("") || this.mechanicLastNameTextField.getText().equals("")){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "A Mechanic requires a first, middle, and last name! Please enter them and try again.");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "A Mechanic requires a first, middle, and last name! Please enter them and try again.");
                 return;
         }
         Mechanic newMechanic = new Mechanic(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
@@ -323,19 +324,19 @@ public class MechanicWindow extends javax.swing.JDialog {
         // DECIDE IF CREATING OR UPDATING MECHANIC
         // CREATING MECHANIC
         if(!this.updateMechanic){            
-            boolean mechanicCreated = this.motoGarageMechanicEngine.createNewMechanic(newMechanic);
+            boolean mechanicCreated = this.motoLogEngine.createNewMechanic(newMechanic);
             if(mechanicCreated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", created successfully!");
             } else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not create a Mechanic with that name!");
             }
             this.dispose();
         }else if(this.updateMechanic){
-            boolean mechanicUpdated = this.motoGarageMechanicEngine.updateMechanic(newMechanic);
+            boolean mechanicUpdated = this.motoLogEngine.updateMechanic(newMechanic);
             if(mechanicUpdated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", updated successfully!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Mechanic, " + newMechanic.toString() + ", updated successfully!");
             } else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not update a Mechanic with that name!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not update a Mechanic with that name!");
             }
             this.dispose();
         }

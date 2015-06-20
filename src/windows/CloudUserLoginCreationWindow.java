@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import org.parse4j.ParseUser;
@@ -15,7 +15,7 @@ import org.parse4j.ParseUser;
  * @author Mark
  */
 public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     
     /**
      * Creates new form CloudUserLoginCreationWindow
@@ -24,15 +24,16 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         initComponents();
     }
     
-    public CloudUserLoginCreationWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public CloudUserLoginCreationWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoGarageNotebookEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
+        this.motoLogEngine = incomingMotoGarageNotebookEngine;
         initComponents();
         this.setIcon();
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     /**
@@ -161,19 +162,19 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         String username = this.usernameTextField.getText();
         //String password = this.passwordTextField.getText();
         String password = new String(this.passwordTextField.getPassword());
-        ParseUser newUser = this.motoGarageNotebookEngine.signUpUser(this,username, password);
+        ParseUser newUser = this.motoLogEngine.signUpUser(this,username, password);
 
         if(newUser.isAuthenticated()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" has been created!");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" has been created!");
             // time to sign the user in
-            newUser = this.motoGarageNotebookEngine.signInUser(username, password);
+            newUser = this.motoLogEngine.signInUser(username, password);
             if(newUser.getSessionToken()!= null){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
-                this.motoGarageNotebookEngine.setCurrentParseUser(newUser);
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
+                this.motoLogEngine.setCurrentParseUser(newUser);
             }
             this.dispose();
         }else if(!newUser.isAuthenticated()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" has NOT been created! A user with this login already exists.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" has NOT been created! A user with this login already exists.");
         }
     }//GEN-LAST:event_createUserButtonActionPerformed
 
@@ -190,13 +191,13 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         // TODO add your handling code here:
         String username = this.usernameTextField.getText();
         String password = new String(this.passwordTextField.getPassword());
-        ParseUser newUser = this.motoGarageNotebookEngine.signInUser(username, password);
+        ParseUser newUser = this.motoLogEngine.signInUser(username, password);
         if(newUser.isAuthenticated()){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
-            this.motoGarageNotebookEngine.setCurrentParseUser(newUser);
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
+            this.motoLogEngine.setCurrentParseUser(newUser);
             this.dispose();
         }else{
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" can not login! Check your username and password and try again.");           
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" can not login! Check your username and password and try again.");           
         }
     }//GEN-LAST:event_loginUserButtonActionPerformed
 

@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -18,7 +18,7 @@ import objectmodels.VehicleModel;
  * @author Mark
  */
 public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     
         /**
      * Creates new form VehicleMaintenanceTypesMainWindow
@@ -31,9 +31,9 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
     /**
      * Creates new form VehicleMaintenanceTypesMainWindow
      */
-    public VehicleMaintenanceTypesMainWindow(java.awt.Frame parent, boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public VehicleMaintenanceTypesMainWindow(java.awt.Frame parent, boolean modal,MotoLogEngine incomingMotoGarageNotebookEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
+        this.motoLogEngine = incomingMotoGarageNotebookEngine;
         initComponents();
         this.setTitle("Vehicle Specific Maintenance Types");
         this.setIcon();
@@ -54,8 +54,8 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
             model.removeRow(i);
         }
         VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
-        if(this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel).length>0){
-            VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+        if(this.motoLogEngine.getVehicleMaintenanceTypesArray(currentVehicleModel).length>0){
+            VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoLogEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
             int newRowCount = vehicleMaintenanceTypes.length;
             for (int i = 0  ; i <newRowCount ; i++) {
                 Object[]vehicleMaintenanceTypeObject = vehicleMaintenanceTypes[i].getMaintenanceTypeObject();
@@ -67,7 +67,9 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+
     }
 
     /**
@@ -144,7 +146,7 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         vehicleMaintenanceTypesTable.getColumnModel().getColumn(1).setMaxWidth(60);
         jScrollPane1.setViewportView(vehicleMaintenanceTypesTable);
 
-        vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoGarageNotebookEngine.getVehicleModelArray()));
+        vehicleModelComboBox.setModel(new javax.swing.DefaultComboBoxModel(this.motoLogEngine.getVehicleModelArray()));
         vehicleModelComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vehicleModelComboBoxActionPerformed(evt);
@@ -223,7 +225,7 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
     private void vehicleMaintenanceTypeAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleMaintenanceTypeAddButtonActionPerformed
         // TODO add your handling code here:
         VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
-        this.motoGarageNotebookEngine.startNewVehicleMaintenanceTypeWindow(this,currentVehicleModel);
+        this.motoLogEngine.startNewVehicleMaintenanceTypeWindow(this,currentVehicleModel);
     }//GEN-LAST:event_vehicleMaintenanceTypeAddButtonActionPerformed
 
     private void updateVehicleMaintenanceTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateVehicleMaintenanceTypeButtonActionPerformed
@@ -233,11 +235,11 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
         int rowSelected = this.vehicleMaintenanceTypesTable.getSelectedRow();
         if(rowSelected>-1){            
-            VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+            VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoLogEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
             VehicleMaintenanceType selectedVehicleMaintenanceType = vehicleMaintenanceTypes[rowSelected];
-            this.motoGarageNotebookEngine.startUpdateVehicleMaintenanceTypeWindow(this,selectedVehicleMaintenanceType,currentVehicleModel);
+            this.motoLogEngine.startUpdateVehicleMaintenanceTypeWindow(this,selectedVehicleMaintenanceType,currentVehicleModel);
         }else{
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to edit.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to edit.");
         }
         
     }//GEN-LAST:event_updateVehicleMaintenanceTypeButtonActionPerformed
@@ -247,19 +249,19 @@ public class VehicleMaintenanceTypesMainWindow extends javax.swing.JDialog {
         VehicleModel currentVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
         int rowSelected = this.vehicleMaintenanceTypesTable.getSelectedRow();
         if(rowSelected==-1){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to delete.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to delete.");
             return;
         }
-        boolean sureToDelete = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Specific Maintenance Type? This is permanent!");
+        boolean sureToDelete = this.motoLogEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Specific Maintenance Type? This is permanent!");
         if(sureToDelete){
             if(rowSelected>-1){            
-                VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoGarageNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+                VehicleMaintenanceType[] vehicleMaintenanceTypes = this.motoLogEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
                 VehicleMaintenanceType selectedVehicleMaintenanceType = vehicleMaintenanceTypes[rowSelected];
-                this.motoGarageNotebookEngine.deleteVehicleMaintenanceType(selectedVehicleMaintenanceType, currentVehicleModel);
+                this.motoLogEngine.deleteVehicleMaintenanceType(selectedVehicleMaintenanceType, currentVehicleModel);
                 this.refreshVehicleMaintenanceTypesTable();
                 //this.motoGarageNotebookEngine.startUpdateVehicleMaintenanceTypeWindow(this,selectedVehicleMaintenanceType,currentVehicleModel);
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to delete.");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Specific Maintenance Type to delete.");
             }
         }
     }//GEN-LAST:event_deleteVehicleMaintenanceTypeButtonActionPerformed

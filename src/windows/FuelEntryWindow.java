@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import java.util.Date;
@@ -17,7 +17,7 @@ import objectmodels.FuelEntry;
  * @author Mark
  */
 public class FuelEntryWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine mechanicsNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     private boolean addFuelEntryBoolean;
     private FuelEntry originalFuelEntry;
     
@@ -25,9 +25,9 @@ public class FuelEntryWindow extends javax.swing.JDialog {
      * Creates new form FuelEntryWindow, for NEW FUEL ENTRY
      * @param incomingMechanicsNotebookEngine
      */
-    public FuelEntryWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public FuelEntryWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMechanicsNotebookEngine) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.addOrUpdateButton.setText("Add Fuel Entry");
         this.setTitle("Add Fuel Entry");
@@ -43,9 +43,9 @@ public class FuelEntryWindow extends javax.swing.JDialog {
      * @param incomingMechanicsNotebookEngine
      * @param incomingFuelEntry
      */
-    public FuelEntryWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, FuelEntry incomingFuelEntry) {
+    public FuelEntryWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine, FuelEntry incomingFuelEntry) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         this.originalFuelEntry = incomingFuelEntry;
         initComponents();
         this.addOrUpdateButton.setText("Edit Fuel Entry");
@@ -68,7 +68,8 @@ public class FuelEntryWindow extends javax.swing.JDialog {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     /**
@@ -205,18 +206,18 @@ public class FuelEntryWindow extends javax.swing.JDialog {
         }else{
             if(addFuelEntryBoolean){
             FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()), this.datePicker.getDate(),Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));           
-            this.mechanicsNotebookEngine.addFuelEntry(newFuelEntry);
-            if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newFuelEntry.getOdometer())){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
-                        + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+            this.motoLogEngine.addFuelEntry(newFuelEntry);
+            if(this.motoLogEngine.getCurrentVehicle().getOdometer()<(newFuelEntry.getOdometer())){
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.motoLogEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
                 newFuelEntry.getOdometer().toString() + " miles.");
-                this.mechanicsNotebookEngine.updateVehicleMileage(newFuelEntry.getOdometer());
+                this.motoLogEngine.updateVehicleMileage(newFuelEntry.getOdometer());
             }
             this.dispose();
             }else{
                 FuelEntry newFuelEntry = new FuelEntry(Integer.parseInt(this.odometerTextField.getText()),this.datePicker.getDate(), Float.parseFloat(this.gallonsTextField.getText()), Float.parseFloat(this.costPerGallonTextField.getText()));
                         
-                this.mechanicsNotebookEngine.editFuelEntry(originalFuelEntry, newFuelEntry);
+                this.motoLogEngine.editFuelEntry(originalFuelEntry, newFuelEntry);
                 this.dispose();
             }
         }

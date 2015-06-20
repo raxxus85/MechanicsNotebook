@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import objectmodels.VehicleModel;
@@ -16,7 +16,7 @@ import objectmodels.VehicleType;
  * @author Mark
  */
 public class VehicleModelsWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     private VehicleModelsMainWindow vehicleModelsMainWindow;
     private boolean updatingVehicleModel = false;
     private VehicleModel originalVehicleModel = null;
@@ -36,9 +36,9 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
      * Creates new form vehicleModelsWindow
      */
     public VehicleModelsWindow(java.awt.Frame parent,boolean modal,VehicleModelsMainWindow incomingVehicleModelsMainWindow 
-            ,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+            ,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoGarageNotebookEngine= incomingMotoGarageNotebookEngine;
+        this.motoLogEngine= incomingMotoLogEngine;
         this.vehicleModelsMainWindow = incomingVehicleModelsMainWindow;
         initComponents();
         this.setIcon();
@@ -54,9 +54,9 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
      * <li> used when UPDATING vehicle model
      */
     public VehicleModelsWindow(java.awt.Frame parent,boolean modal,VehicleModelsMainWindow incomingVehicleModelsMainWindow 
-            ,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine, VehicleModel incomingVehicleModel) {
+            ,MotoLogEngine incomingMotoGarageNotebookEngine, VehicleModel incomingVehicleModel) {
         super(parent, modal);
-        this.motoGarageNotebookEngine= incomingMotoGarageNotebookEngine;
+        this.motoLogEngine= incomingMotoGarageNotebookEngine;
         this.vehicleModelsMainWindow = incomingVehicleModelsMainWindow;
         initComponents();
         this.setIcon();
@@ -81,7 +81,9 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
 
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,7 +218,7 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
         // TODO add your handling code here:
         // Basic Checks
         if(this.makeTextField.getText().equals("")|| this.modelTextField.getText().equals("")){
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "A Vehicle Model requires a Make and Model.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "A Vehicle Model requires a Make and Model.");
             return;
         }
         String newMake = this.makeTextField.getText();
@@ -231,18 +233,18 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
         VehicleModel newVehicleModel = new VehicleModel(newMake,newModel,vehicleType);       
         // onto create / update
         if(this.updatingVehicleModel){
-            boolean updatedVehicleModel = this.motoGarageNotebookEngine.updateVehicleModel(originalVehicleModel, newVehicleModel);
+            boolean updatedVehicleModel = this.motoLogEngine.updateVehicleModel(originalVehicleModel, newVehicleModel);
         
             if(updatedVehicleModel){
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Model has been updated!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Model has been updated!");
                 this.vehicleModelsMainWindow.refreshVehicleModelTable();
             }else{
-                this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Vehicle Model!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "An error occured attempting to update the Vehicle Model!");
             }
             this.dispose();
         }else{
-            this.motoGarageNotebookEngine.createNewVehicleModel(newVehicleModel);
-            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Vehicle Model," + newVehicleModel.toString() + ", has been created!");
+            this.motoLogEngine.createNewVehicleModel(newVehicleModel);
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "New Vehicle Model," + newVehicleModel.toString() + ", has been created!");
             // REFRESH
             this.vehicleModelsMainWindow.refreshVehicleModelTable();
             this.dispose();

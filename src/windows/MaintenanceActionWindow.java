@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
 import java.text.DateFormat;
@@ -25,7 +25,7 @@ import objectmodels.VehicleType;
  * @author Mark
  */
 public class MaintenanceActionWindow extends javax.swing.JDialog {
-    MotoGarageNotebookEngine mechanicsNotebookEngine;
+    MotoLogEngine motoLogEngine;
     MaintenanceAction maintenanceAction;
     
     /**
@@ -38,9 +38,9 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
     /**
      * Creates new form MaintenanceActionWindow
      */
-    public MaintenanceActionWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, MaintenanceAction incomingMaintenanceAction) {
+    public MaintenanceActionWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine, MaintenanceAction incomingMaintenanceAction) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         this.maintenanceAction = incomingMaintenanceAction;
         initComponents();
         this.setIcon();
@@ -54,8 +54,8 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         
 
         // maintenance types stuff
-        if(this.mechanicsNotebookEngine.getMaintenaceTypeArray(vehicleType).length>0){
-            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getMaintenaceTypeArray(vehicleType)));
+        if(this.motoLogEngine.getMaintenaceTypeArray(vehicleType).length>0){
+            maintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoLogEngine.getMaintenaceTypeArray(vehicleType)));
             this.maintenanceTypeJComboBox.setEnabled(true);
             this.generalRadioButton.setEnabled(true);
         }else{
@@ -64,9 +64,9 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
             this.generalRadioButton.setSelected(false);
         }
         // vehicle specific stuff
-        if(!this.mechanicsNotebookEngine.getCurrentVehicle().getVehicleModel().getVehicleMaintenanceTypesList().isEmpty()){
-            VehicleModel currentVehicleModel = this.mechanicsNotebookEngine.getCurrentVehicle().getVehicleModel();
-            vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(mechanicsNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel)));
+        if(!this.motoLogEngine.getCurrentVehicle().getVehicleModel().getVehicleMaintenanceTypesList().isEmpty()){
+            VehicleModel currentVehicleModel = this.motoLogEngine.getCurrentVehicle().getVehicleModel();
+            vehicleMaintenanceTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(motoLogEngine.getVehicleMaintenanceTypesArray(currentVehicleModel)));
 
             this.vehicleMaintenanceTypeJComboBox.setEnabled(true);
             this.modelSpecificRadioButton.setEnabled(true);
@@ -79,8 +79,8 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         boolean isVehicleMaintenanceAction = incomingMaintenanceAction.getMaintenanceType() instanceof VehicleMaintenanceType;
         if(isVehicleMaintenanceAction){
             VehicleMaintenanceType currentVehicleMaintenanceType = (VehicleMaintenanceType)incomingMaintenanceAction.getMaintenanceType();
-            VehicleModel currentVehicleModel = this.mechanicsNotebookEngine.getCurrentVehicle().getVehicleModel();
-            Object[] testArray = mechanicsNotebookEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
+            VehicleModel currentVehicleModel = this.motoLogEngine.getCurrentVehicle().getVehicleModel();
+            Object[] testArray = motoLogEngine.getVehicleMaintenanceTypesArray(currentVehicleModel);
             DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
             this.vehicleMaintenanceTypeJComboBox.setModel(test1);
             this.vehicleMaintenanceTypeJComboBox.setSelectedItem(currentVehicleMaintenanceType);
@@ -89,7 +89,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         }else{
             // general maintenance type
             MaintenanceType currentMaintenanceType = incomingMaintenanceAction.getMaintenanceType();
-            Object[] testArray = mechanicsNotebookEngine.getMaintenaceTypeArray(vehicleType);
+            Object[] testArray = motoLogEngine.getMaintenaceTypeArray(vehicleType);
             DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(testArray);
             //DefaultComboBoxModel test1 = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
             this.maintenanceTypeJComboBox.setModel(test1);
@@ -102,7 +102,7 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         
         // mechanic
         Mechanic currentMechanic = incomingMaintenanceAction.getMechanic();
-        DefaultComboBoxModel test = new javax.swing.DefaultComboBoxModel<>(mechanicsNotebookEngine.getMechanicArray());
+        DefaultComboBoxModel test = new javax.swing.DefaultComboBoxModel<>(motoLogEngine.getMechanicArray());
         this.mechanicJComboBox.setModel(test);
         this.mechanicJComboBox.setSelectedItem(currentMechanic);
         
@@ -112,7 +112,8 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     /**
@@ -321,19 +322,19 @@ public class MaintenanceActionWindow extends javax.swing.JDialog {
         if(this.generalRadioButton.isSelected()){
             MaintenanceType newMaintenanceType = (MaintenanceType)this.maintenanceTypeJComboBox.getSelectedItem();
             newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newMaintenanceType,newOdometer,newDate,newNotes );
-            this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
+            this.motoLogEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
         }else{
             VehicleMaintenanceType newVehicleMaintenanceType = (VehicleMaintenanceType)this.vehicleMaintenanceTypeJComboBox.getSelectedItem();
             newMaintenanceAction = new MaintenanceAction(newMechanic, newVehicle,newVehicleMaintenanceType,newOdometer,newDate,newNotes );
-            this.mechanicsNotebookEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
+            this.motoLogEngine.editMaintenanceAction(maintenanceAction, newMaintenanceAction);
         } 
 
 
-        if(this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
-                this.mechanicsNotebookEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
-                        + this.mechanicsNotebookEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
+        if(this.motoLogEngine.getCurrentVehicle().getOdometer()<(newMaintenanceAction.getOdometer())){
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Odometer updated from " 
+                        + this.motoLogEngine.getCurrentVehicle().getOdometer().toString() + " miles to " +
                 newMaintenanceAction.getOdometer().toString() + " miles.");
-                this.mechanicsNotebookEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
+                this.motoLogEngine.updateVehicleMileage(newMaintenanceAction.getOdometer());
         }
         this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed

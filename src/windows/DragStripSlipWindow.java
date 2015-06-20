@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,18 +18,18 @@ import objectmodels.DragStripSlip;
  * @author Mark
  */
 public class DragStripSlipWindow extends javax.swing.JDialog {
-    MotoGarageNotebookEngine motoGarageNotebookEngine;
+    MotoLogEngine motoLogEngine;
     private Boolean addDragStripSlip;
     private DragStripSlip originalDragStripSlip;
     
     /**
      * Creates new form DragStripSlipWindow, for ADDING
      */
-    public DragStripSlipWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public DragStripSlipWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
         initComponents();
+        this.motoLogEngine = incomingMotoLogEngine;
         this.setIcon();
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         addDragStripSlip = true;
         this.addOrUpdateButton.setText("Add");
         this.setTitle("Add Drag Strip Slip");
@@ -39,14 +39,13 @@ public class DragStripSlipWindow extends javax.swing.JDialog {
     
     /**
      * Creates new form DragStripSlipWindow, for Updating
-     * @param incomingMotoGarageNotebookEngine
      * @param incomingDragStripSlip
      */
-    public DragStripSlipWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine, DragStripSlip incomingDragStripSlip) {
+    public DragStripSlipWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine, DragStripSlip incomingDragStripSlip) {
         super(parent, modal);
         initComponents();
+        this.motoLogEngine = incomingMotoLogEngine;
         this.setIcon();
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
         addDragStripSlip = false;
         this.originalDragStripSlip = incomingDragStripSlip;
         this.addOrUpdateButton.setText("Edit");
@@ -75,7 +74,11 @@ public class DragStripSlipWindow extends javax.swing.JDialog {
 
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        System.out.println("UHHH");
+        System.out.println(this.motoLogEngine.getMotoLogIcon());
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -266,9 +269,9 @@ public class DragStripSlipWindow extends javax.swing.JDialog {
                     Float.parseFloat(this.quarterMileSpeedTextField.getText()));
         if(this.addDragStripSlip){
             // STILL NOT DOING DATE PROPERLY!!!           
-            this.motoGarageNotebookEngine.addDragStripSlip(newDragStripSlip);
+            this.motoLogEngine.addDragStripSlip(newDragStripSlip);
         }else{
-            this.motoGarageNotebookEngine.editDragStripSlip(originalDragStripSlip, newDragStripSlip);
+            this.motoLogEngine.editDragStripSlip(originalDragStripSlip, newDragStripSlip);
         }
         this.dispose();
     }//GEN-LAST:event_addOrUpdateButtonActionPerformed

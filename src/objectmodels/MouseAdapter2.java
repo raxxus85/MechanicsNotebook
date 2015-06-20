@@ -1,6 +1,6 @@
 package objectmodels;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,9 +12,9 @@ import java.awt.event.MouseWheelListener;
  * @author Mark
  */
 public abstract class MouseAdapter2 implements MouseListener, MouseWheelListener, MouseMotionListener {
-    private MotoGarageNotebookEngine mechanicsNotebookEngine;
+    private MotoLogEngine mechanicsNotebookEngine;
     
-    public MouseAdapter2(MotoGarageNotebookEngine incomingMechanicsNotebookEngine){
+    public MouseAdapter2(MotoLogEngine incomingMechanicsNotebookEngine){
         this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
     }
     

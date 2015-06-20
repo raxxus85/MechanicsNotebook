@@ -4,7 +4,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Component;
 import java.awt.Image;
@@ -25,7 +25,7 @@ import objectmodels.Customer;
  * @author Mark
  */
 public class CustomerWindow extends JDialog {
-    private MotoGarageNotebookEngine motoGarageMechanicEngine;
+    private MotoLogEngine motoLogEngine;
     private ImageIcon imageIcon;
     private boolean updateCustomer = false;
     /**
@@ -40,9 +40,9 @@ public class CustomerWindow extends JDialog {
      * Main constructor, used when creating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine) {
+    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoGarageMechanicEngine) {
         super(parent, modal);
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Create Customer");
@@ -53,9 +53,9 @@ public class CustomerWindow extends JDialog {
      * Main constructor, used when updating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
+    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoGarageMechanicEngine, Customer incomingCustomer) {
         super(parent, modal);
-        this.motoGarageMechanicEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoGarageMechanicEngine;
         initComponents();
         //this.setLocationRelativeTo(incomingParent);
         this.setIcon();
@@ -79,7 +79,8 @@ public class CustomerWindow extends JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     /**
@@ -277,7 +278,7 @@ public class CustomerWindow extends JDialog {
         String incomingLastName = this.customerLastNameTextField.getText();
         String incomingDescription = this.customerDescriptionTextArea.getText();
         if(this.customerFirstNameTextField.getText().equals("") || this.customerMiddleNameTextField.getText().equals("") || this.customerLastNameTextField.getText().equals("")){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "A Customer requires a first, middle, and last name! Please enter them and try again.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "A Customer requires a first, middle, and last name! Please enter them and try again.");
             return;
         }
         Customer newCustomer = new Customer(incomingFirstName,incomingMiddleInitial,incomingLastName,incomingDescription);
@@ -287,12 +288,12 @@ public class CustomerWindow extends JDialog {
         // DECIDE IF CREATING OR UPDATING CUSTOMER
         // CREATING CUSTOMER
         if(!this.updateCustomer){
-        boolean customerCreated = this.motoGarageMechanicEngine.createNewCustomer(newCustomer);
+        boolean customerCreated = this.motoLogEngine.createNewCustomer(newCustomer);
 
         if(customerCreated){
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", created successfully!");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", created successfully!");
         } else{
-            this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not create a Customer with that name!");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not create a Customer with that name!");
         }
         this.dispose();
         } else if(this.updateCustomer){
@@ -301,11 +302,11 @@ public class CustomerWindow extends JDialog {
                 newCustomer.setImageIcon(imageIcon);
             }
             System.out.println("attempting to update with " + newCustomer.toString());
-            boolean customerUpdated = this.motoGarageMechanicEngine.updateCustomer(newCustomer);
+            boolean customerUpdated = this.motoLogEngine.updateCustomer(newCustomer);
             if(customerUpdated){
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", updated successfully!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Customer, " + newCustomer.toString() + ", updated successfully!");
             } else{
-                this.motoGarageMechanicEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not updated a Customer with that name!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Can not updated a Customer with that name!");
             }
             this.dispose();
         }

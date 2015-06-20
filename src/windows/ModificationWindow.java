@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -16,7 +16,7 @@ import objectmodels.Modification;
  * @author Mark
  */
 public class ModificationWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine mechanicsNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     private Boolean addModification;
     private Modification originalModification;
     
@@ -24,9 +24,9 @@ public class ModificationWindow extends javax.swing.JDialog {
     /**
      * Creates new form ModificationWindow, for ADDING
      */
-    public ModificationWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine) {
+    public ModificationWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         addModification=true;
@@ -40,9 +40,9 @@ public class ModificationWindow extends javax.swing.JDialog {
     /**
      * Creates new form ModificationWindow, for UPDATING
      */
-    public ModificationWindow(java.awt.Frame parent,boolean modal,MotoGarageNotebookEngine incomingMechanicsNotebookEngine, Modification incomingModification) {
+    public ModificationWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMechanicsNotebookEngine, Modification incomingModification) {
         super(parent, modal);
-        this.mechanicsNotebookEngine = incomingMechanicsNotebookEngine;
+        this.motoLogEngine = incomingMechanicsNotebookEngine;
         initComponents();
         this.setIcon();
         addModification = false;
@@ -81,7 +81,8 @@ public class ModificationWindow extends javax.swing.JDialog {
     }
     
     private void setIcon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
     /**
      * Creates new form ModificationWindow
@@ -276,11 +277,11 @@ public class ModificationWindow extends javax.swing.JDialog {
             
             Modification newModification = new Modification(this.partTextField.getText(), this.datePicker.getDate(), 
             this.warrantyDurationTextField.getText(),this.descriptionTextField.getText(), Float.parseFloat(this.costTextField.getText()));
-            this.mechanicsNotebookEngine.addModification(newModification);
+            this.motoLogEngine.addModification(newModification);
         }else{
             Modification newModification = new Modification(this.partTextField.getText(), this.datePicker.getDate(), 
             this.warrantyDurationTextField.getText(),this.descriptionTextField.getText(), Float.parseFloat(this.costTextField.getText()));
-            this.mechanicsNotebookEngine.editModification(this.originalModification, newModification);
+            this.motoLogEngine.editModification(this.originalModification, newModification);
         }
         this.dispose();
     }//GEN-LAST:event_addOrUpdateButtonActionPerformed

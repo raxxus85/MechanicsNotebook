@@ -5,7 +5,7 @@
  */
 package windows;
 
-import engine.MotoGarageNotebookEngine;
+import engine.MotoLogEngine;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -21,7 +21,7 @@ import objectmodels.Vehicle;
  * @author Mark
  */
 public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
-    private MotoGarageNotebookEngine motoGarageNotebookEngine;
+    private MotoLogEngine motoLogEngine;
     
     /**
      * Creates new form MaintenanceReminderWindow
@@ -34,16 +34,16 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
     /**
      * Creates new form MaintenanceReminderWindow
      */
-    public MaintenanceActionsOverdueWindow(java.awt.Frame parent, boolean modal,MotoGarageNotebookEngine incomingMotoGarageNotebookEngine) {
+    public MaintenanceActionsOverdueWindow(java.awt.Frame parent, boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
         initComponents();
-        this.motoGarageNotebookEngine = incomingMotoGarageNotebookEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         this.setIcon();
         this.setTitle("Maintenance Actions Currently Overdue");
         
         // time to mess with jtree
         //create the root node
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.motoGarageNotebookEngine.getCurrentCustomer().toString());
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.motoLogEngine.getCurrentCustomer().toString());
         //create the child nodes
         //DefaultMutableTreeNode vegetableNode = new DefaultMutableTreeNode("Vegetables");
         //DefaultMutableTreeNode fruitNode = new DefaultMutableTreeNode("Fruits");
@@ -64,16 +64,16 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
     }
 
     private void updateMaintenanceActionsOverdueJTree(){
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.motoGarageNotebookEngine.getCurrentCustomer().toString());
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.motoLogEngine.getCurrentCustomer().toString());
         DefaultTreeModel model = (DefaultTreeModel) overdueMaintenanceActionsJTree.getModel();
         model.setRoot(root);
         
-        for(Vehicle vehicle :this.motoGarageNotebookEngine.getCurrentCustomer().getVehicles()){
-            if(this.motoGarageNotebookEngine.vehicleHasOverDueMaintenanceActions(vehicle)){
+        for(Vehicle vehicle :this.motoLogEngine.getCurrentCustomer().getVehicles()){
+            if(this.motoLogEngine.vehicleHasOverDueMaintenanceActions(vehicle)){
                 // vehicle has overdue maintenance actions!!
                 DefaultMutableTreeNode vehicleNode = new DefaultMutableTreeNode(vehicle.toString());
                 // GET OVER DUE MAINTENANCE ACTIONS FOR THIS VEHICLE NOW
-                ArrayList<MaintenanceAction> overDueMaintenanceActions = this.motoGarageNotebookEngine.getOverDueMaintenanceActions(vehicle);
+                ArrayList<MaintenanceAction> overDueMaintenanceActions = this.motoLogEngine.getOverDueMaintenanceActions(vehicle);
                 // time to add them to the vehicle node here
                 for(MaintenanceAction temp : overDueMaintenanceActions){
                     int testInt = vehicle.getOdometer() - (temp.getOdometer() + temp.getMaintenanceType().getMileageInterval());
@@ -92,7 +92,8 @@ public class MaintenanceActionsOverdueWindow extends javax.swing.JDialog {
     
     private void setIcon(){
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
     
     //ImageIcon imageIcon = new ImageIcon(getClass().getResource("/maintenanceAction32x32ALERT.png"));
