@@ -56,7 +56,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("MotoGarage Cloud Login");
+        setTitle("MotoLog Cloud Login");
         setResizable(false);
 
         createUserButton.setText("Create User");

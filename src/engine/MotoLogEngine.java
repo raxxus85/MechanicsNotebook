@@ -98,6 +98,7 @@ public class MotoLogEngine {
     private Garage currentGarage;
     private final DialogFactory dialogFactory;
     private Boolean saved;
+    private double version = 0.4;
     
     // Parse.com variables
     ParseEngine parseEngine = new ParseEngine(this);
@@ -121,6 +122,14 @@ public class MotoLogEngine {
         //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
         String icon = "/motoLogIcon16x16.png";
         return icon;
+    }
+    
+    public double getVersion(){
+        return this.version;
+    }
+    
+    public String getTitle(){
+        return "MotoLog Version " + this.getVersion();
     }
     
     /**
@@ -163,7 +172,7 @@ public class MotoLogEngine {
     
     public void signOutUser() throws ParseException{
         this.parseEngine.signOutUser();
-        this.mainWindow.setTitle("MotoLog");
+        this.mainWindow.setTitle(this.getTitle());
         this.mainWindow.refresh();
     }
     
@@ -185,7 +194,7 @@ public class MotoLogEngine {
     
     public void setCurrentParseUser(ParseUser incomingParseUser){
         this.parseEngine.setParseUser(incomingParseUser);
-        this.mainWindow.setTitle("MotoLog - Current Cloud User: " + incomingParseUser.getUsername().toString());
+        this.mainWindow.setTitle(this.getTitle() + " | Cloud User : " + incomingParseUser.getUsername());
         this.mainWindow.refresh();
     }
     

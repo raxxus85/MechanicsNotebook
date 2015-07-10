@@ -95,6 +95,9 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(MotoLogEngine incomingMotoGarageMechanicEngine) throws URISyntaxException{
         
         this.motoGarageNotebookEngine = incomingMotoGarageMechanicEngine;
+        
+        // update version on title
+        this.setTitle(this.motoGarageNotebookEngine.getTitle());
         //TESTING
         //ImagePanel panel = new ImagePanel(new ImageIcon("images/background.png").getImage());
 //        ImageIcon test = new javax.swing.ImageIcon(getClass().getResource("/motoGarageLogoTrans.png"));
@@ -1034,7 +1037,6 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("MotoLog");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
@@ -1395,7 +1397,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(loadFromCloudButton);
 
         saveToCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageCloud32x32UPLOAD.png"))); // NOI18N
-        saveToCloudButton.setToolTipText("Save Garage to Cloud");
+        saveToCloudButton.setToolTipText("Save Current Garage to Cloud");
         saveToCloudButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveToCloudButtonActionPerformed(evt);
@@ -1429,7 +1431,7 @@ public class MainWindow extends javax.swing.JFrame {
         vehicleMaintenanceTypeButton.setFocusable(false);
         vehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         vehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        vehicleMaintenanceTypeButton.setToolTipText("View and Edit Vehicle Model Specific Maintenance Types");
+        vehicleMaintenanceTypeButton.setToolTipText("View / Edit Vehicle Model Specific Maintenance Types");
         vehicleMaintenanceTypeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vehicleMaintenanceTypeButtonActionPerformed(evt);

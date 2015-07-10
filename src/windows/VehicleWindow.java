@@ -50,6 +50,14 @@ public class VehicleWindow extends javax.swing.JDialog {
         this.setIcon();
         this.createOrUpdateVehicleButton.setText("Create Vehicle");
         this.setTitle("Create Vehicle");
+        
+        // setting the icon based on the pre-selected vehicle model....
+        VehicleModel currentSelectedVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
+        if(currentSelectedVehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noCar100x100.png")));
+        }else{
+            this.vehiclePictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noMotorcycle100x100.png")));
+        }
     }
     
     /**

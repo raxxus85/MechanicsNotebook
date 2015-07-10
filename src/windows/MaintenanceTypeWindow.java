@@ -130,10 +130,13 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
      * <li> for Vehicle Specific Maintenance Types!
      * @param parent
      * @param modal
+     * @param incomingVehicleMaintenanceTypesMainWindow
      * @param incomingVehicleMaintenanceType
      * @param incomingMechanicsNotebookEngine
+     * @param incomingVehicleModel
      */
-    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,VehicleMaintenanceTypesMainWindow incomingVehicleMaintenanceTypesMainWindow,MotoLogEngine incomingMechanicsNotebookEngine, VehicleMaintenanceType incomingVehicleMaintenanceType, VehicleModel incomingVehicleModel) {
+    public MaintenanceTypeWindow(java.awt.Frame parent,boolean modal,VehicleMaintenanceTypesMainWindow incomingVehicleMaintenanceTypesMainWindow,MotoLogEngine incomingMechanicsNotebookEngine, 
+            VehicleMaintenanceType incomingVehicleMaintenanceType, VehicleModel incomingVehicleModel) {
         super(parent, modal);
         this.motoLogEngine= incomingMechanicsNotebookEngine;
         this.vehicleMaintenanceTypesMainWindow = incomingVehicleMaintenanceTypesMainWindow;
@@ -149,6 +152,17 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         this.maintenanceTypeNameTextField.setText(incomingVehicleMaintenanceType.getMaintenanceTypeName());
         this.maintenanceTypeIntervalTextField.setText(incomingVehicleMaintenanceType.getMileageInterval().toString());
         this.maintenanceTypeDescriptionTextArea.setText(incomingVehicleMaintenanceType.getDescription());
+        
+        // disable bubbles
+        if(incomingVehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.carTruckButton.setSelected(true);
+            this.motorcycleRadioButton.setEnabled(false);
+            this.carTruckButton.setEnabled(false);
+        }else{
+            this.motorcycleRadioButton.setSelected(true);
+            this.motorcycleRadioButton.setEnabled(false);
+            this.carTruckButton.setEnabled(false);
+        }
         
         // recurring stuff
         if(incomingVehicleMaintenanceType.getMileageInterval()== 0){
