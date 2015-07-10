@@ -163,6 +163,7 @@ public class MotoLogEngine {
     
     public void signOutUser() throws ParseException{
         this.parseEngine.signOutUser();
+        this.mainWindow.setTitle("MotoLog");
         this.mainWindow.refresh();
     }
     
@@ -184,6 +185,7 @@ public class MotoLogEngine {
     
     public void setCurrentParseUser(ParseUser incomingParseUser){
         this.parseEngine.setParseUser(incomingParseUser);
+        this.mainWindow.setTitle("MotoLog - Current Cloud User: " + incomingParseUser.getUsername().toString());
         this.mainWindow.refresh();
     }
     

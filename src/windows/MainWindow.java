@@ -1016,10 +1016,13 @@ public class MainWindow extends javax.swing.JFrame {
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        exitMenuItem = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         loginMenuItem = new javax.swing.JMenuItem();
         logoutMenuItem = new javax.swing.JMenuItem();
         fileMenuSeparator = new javax.swing.JPopupMenu.Separator();
-        exitMenuItem = new javax.swing.JMenuItem();
+        loadFromCloudMenuItem = new javax.swing.JMenuItem();
+        saveToCloudMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
         VehicleTrackersMenuItem = new javax.swing.JMenuItem();
         viewEditMaintenanceTypesMenuItem = new javax.swing.JMenuItem();
@@ -1358,11 +1361,11 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.setRollover(true);
         mainToolBar.setFloatable(false);
 
-        openGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarage32x32OPEN.png"))); // NOI18N
+        openGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/open32x32.png"))); // NOI18N
         openGarageButton.setFocusable(false);
         openGarageButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         openGarageButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        openGarageButton.setToolTipText("Open a Garage");
+        openGarageButton.setToolTipText("Load a Garage");
         openGarageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openGarageButtonActionPerformed(evt);
@@ -1370,7 +1373,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(openGarageButton);
 
-        saveGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarage32x32SAVE.png"))); // NOI18N
+        saveGarageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save32x32.png"))); // NOI18N
         saveGarageButton.setFocusable(false);
         saveGarageButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         saveGarageButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1401,7 +1404,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(saveToCloudButton);
         mainToolBar.add(jSeparator7);
 
-        editVehicleModelsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32EDIT.png"))); // NOI18N
+        editVehicleModelsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32.png"))); // NOI18N
         editVehicleModelsButton.setFocusable(false);
         editVehicleModelsButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         editVehicleModelsButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1414,7 +1417,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainToolBar.add(editVehicleModelsButton);
 
         editMaintenanceTypesButton.setToolTipText("View / Edit General Maintenance Types");
-        editMaintenanceTypesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"))); // NOI18N
+        editMaintenanceTypesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maintenanceType32x32.png"))); // NOI18N
         editMaintenanceTypesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMaintenanceTypesButtonActionPerformed(evt);
@@ -1422,7 +1425,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(editMaintenanceTypesButton);
 
-        vehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32EDIT.png"))); // NOI18N
+        vehicleMaintenanceTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleMaintenanceType32x32.png"))); // NOI18N
         vehicleMaintenanceTypeButton.setFocusable(false);
         vehicleMaintenanceTypeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         vehicleMaintenanceTypeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1861,25 +1864,6 @@ public class MainWindow extends javax.swing.JFrame {
         fileMenu.add(saveAsMenuItem);
         fileMenu.add(jSeparator4);
 
-        loginMenuItem.setText("Login");
-        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginMenuItemActionPerformed(evt);
-            }
-        });
-        loginMenuItem.setEnabled(true);
-        fileMenu.add(loginMenuItem);
-
-        logoutMenuItem.setText("Logout");
-        logoutMenuItem.setEnabled(true);
-        logoutMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(logoutMenuItem);
-        fileMenu.add(fileMenuSeparator);
-
         exitMenuItem.setText("Exit");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1889,6 +1873,45 @@ public class MainWindow extends javax.swing.JFrame {
         fileMenu.add(exitMenuItem);
 
         mechanicsNotebookMenuBar.add(fileMenu);
+
+        jMenu1.setText("Cloud");
+
+        loginMenuItem.setText("Login");
+        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginMenuItemActionPerformed(evt);
+            }
+        });
+        loginMenuItem.setEnabled(true);
+        jMenu1.add(loginMenuItem);
+
+        logoutMenuItem.setText("Logout");
+        logoutMenuItem.setEnabled(true);
+        logoutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(logoutMenuItem);
+        jMenu1.add(fileMenuSeparator);
+
+        loadFromCloudMenuItem.setText("Load from Cloud");
+        loadFromCloudMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadFromCloudMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(loadFromCloudMenuItem);
+
+        saveToCloudMenuItem.setText("Save to Cloud");
+        saveToCloudMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToCloudMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(saveToCloudMenuItem);
+
+        mechanicsNotebookMenuBar.add(jMenu1);
 
         optionsMenu.setText("Options");
 
@@ -2265,23 +2288,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
         
-        
-        //JFileChooser chooser = new JFileChooser();
-        //chooser.setDialogTitle("Import Garage");
-        
-        
-        //chooser.showOpenDialog(this);
-        //File testFile = chooser.getSelectedFile();
-        
-        //if(testFile != null){
-        //    String filePath = testFile.getAbsolutePath();
-        //    try {
-        //        System.out.println(filePath);
-        //    } catch (Exception ex) {
-        //        ex.printStackTrace();
-        //    }
-        //    this.motoGarageNotebookEngine.openGarage(testFile);
-        //}
     }//GEN-LAST:event_loadFromCloudButtonActionPerformed
 
     /**
@@ -2301,9 +2307,7 @@ public class MainWindow extends javax.swing.JFrame {
                         
                         if(sureToUpload){
                             //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
-//            if(1==1){
-//                return;
-//            }     
+   
                             //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
                             this.motoGarageNotebookEngine.saveToCloud();
                         }
@@ -2321,21 +2325,7 @@ public class MainWindow extends javax.swing.JFrame {
             System.out.println("User is NULL?!");
             this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "There is no Cloud User logged in to save a Garage to the MotoGarage Cloud!");
         }
-        //JFileChooser chooser = new JFileChooser();
-        //chooser.setDialogTitle("Export Garage");
-        //chooser.showSaveDialog(this);
-        
-        //if(chooser.getSelectedFile() != null){
-        //    File testFile = chooser.getSelectedFile();
-        //    String filePath = testFile.getAbsolutePath();
-        //    try {
-        //        System.out.println(filePath);
-        //    } catch (Exception ex) {
-        //        System.out.println("dialog must have closed?");
-        //        ex.printStackTrace();
-        //    }
-        //    this.motoGarageNotebookEngine.saveGarage(testFile);
-        //}
+
     }//GEN-LAST:event_saveToCloudButtonActionPerformed
 
     private void fuelEntryAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelEntryAddButtonActionPerformed
@@ -2620,6 +2610,51 @@ public class MainWindow extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_saveGarageButtonActionPerformed
 
+    private void loadFromCloudMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFromCloudMenuItemActionPerformed
+        // TODO add your handling code here:
+        if(this.motoGarageNotebookEngine.getCurrentParseUser()==null){
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "There is no Cloud User logged in to import a Garage from the MotoGarage Cloud!");
+        }else{
+            boolean sureToDownload = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Downloading from the cloud will erase any unsaved progress. Do you wish to continue?");
+            if(sureToDownload){
+                this.motoGarageNotebookEngine.openFromCloud();
+            }
+        }
+    }//GEN-LAST:event_loadFromCloudMenuItemActionPerformed
+
+    private void saveToCloudMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToCloudMenuItemActionPerformed
+        // TODO add your handling code here:
+        
+        if(this.motoGarageNotebookEngine.getCurrentParseUser()!=null){
+            // ensure there is a valid session token
+            if(this.motoGarageNotebookEngine.getCurrentParseUser().getSessionToken()!=null){
+                try {
+                    //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
+                    try {
+                        boolean sureToUpload = this.motoGarageNotebookEngine.getDialogFactory().createConfirmMessage(this,"Uploading to the cloud will update and overwrite your current garage. Do you wish to continue?");
+                        
+                        if(sureToUpload){
+                            //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
+   
+                            //this.motoGarageNotebookEngine.startProgressDialogWindow("Uploading...");
+                            this.motoGarageNotebookEngine.saveToCloud();
+                        }
+                        
+                    } catch (FileNotFoundException | ClassNotFoundException ex) {
+                        //Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (IOException | ParseException ex) {
+                    //Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                System.out.println("User doesn't have session token?");
+            }
+        }else{
+            System.out.println("User is NULL?!");
+            this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "There is no Cloud User logged in to save a Garage to the MotoGarage Cloud!");
+        }
+    }//GEN-LAST:event_saveToCloudMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2705,6 +2740,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton helpButton;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem helpMenuItem;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2722,6 +2758,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JButton loadFromCloudButton;
+    private javax.swing.JMenuItem loadFromCloudMenuItem;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JTabbedPane mainTabbedPane;
@@ -2751,6 +2788,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton saveGarageButton;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JButton saveToCloudButton;
+    private javax.swing.JMenuItem saveToCloudMenuItem;
     private javax.swing.JLabel sixOdoLabel;
     private javax.swing.JLabel threeOdoLabel;
     private javax.swing.JLabel twoOdoLabel;

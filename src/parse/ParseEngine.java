@@ -270,9 +270,10 @@ public class ParseEngine {
                     //startProgressDialog("Downloading...");
                     try {
                         byte[] testBytes = garageFile.getData();                       
+
+                        setGarage(testBytes);
                         printMessage("File downloaded from the cloud successfully.");
                         //System.out.println(" DID WE DOWNLOAD IT? SIZE IS..." + testBytes.length);
-                        setGarage(testBytes);
                         //stopProgressDialog();
   
                     } catch (ParseException ex) {
@@ -294,7 +295,9 @@ public class ParseEngine {
         //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(null, DialogType.CONFIRM, appId);
     }
     
-    
+    /**
+     * NOTE: QUERY TAKES TOO LONG?
+     */
     public void openUsersGarage(){
         // first, list the garages the user has...
         if(this.currentUser!=null){
@@ -309,7 +312,7 @@ public class ParseEngine {
                         //TODO should inform user tthere is no cloud garage
                         printMessage("The user does not have a garage in the Cloud.");
                     }else if(garageList.size()==1){
-                        System.out.println("User has ONE garage. this is a good thing......................");
+                        System.out.println("User has ONE garage. this is a good thing.");
                         ParseObject garage = garageList.get(0);
                         openGarage(garage);
                     }else{
