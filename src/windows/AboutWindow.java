@@ -4,6 +4,7 @@
  */
 package windows;
 
+import engine.MotoLogEngine;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Toolkit;
@@ -23,22 +24,42 @@ import javax.swing.JFrame;
 public class AboutWindow extends javax.swing.JDialog {
     // BUTTON WEB PAGE LINK!!!
     final URI uri = new URI("http://www.motogaragechi.com");
+    MotoLogEngine motoLogEngine;
     class OpenUrlAction implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 open(uri);
             }
         }
+    
     /**
-     * Creates new form AboutWindow
+     * Creates new form AboutWindow DON'T USE
      * @param parent
      */
     public AboutWindow(java.awt.Frame parent,boolean modal) throws URISyntaxException{
         super(parent, modal);
         initComponents();
+
         this.setIcon();
         //this.getContentPane().setBackground(Color.black);
         this.setTitle("About MotoGarage Notebook");
+        
+        // BUTTON WEB PAGE LINK!!!
+  
+    }
+    
+    /**
+     * Creates new form AboutWindow
+     * @param parent
+     */
+    public AboutWindow(java.awt.Frame parent,boolean modal, MotoLogEngine incomingMotoLogEngine) throws URISyntaxException{
+        super(parent, modal);
+        motoLogEngine = incomingMotoLogEngine;
+        initComponents();
+        
+        this.setIcon();
+        //this.getContentPane().setBackground(Color.black);
+        this.setTitle("About MotoLog");
         
         // BUTTON WEB PAGE LINK!!!
   
@@ -91,12 +112,12 @@ public class AboutWindow extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanicShrunkLogo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoLogShrunk.png"))); // NOI18N
         jLabel1.setToolTipText("");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel4.setText("Version 0.1");
+        jLabel4.setText("Version " + this.motoLogEngine.getVersion());
 
         jLabel3.setText("Created by Mark Milford(mark.p.milford@gmail.com)");
 

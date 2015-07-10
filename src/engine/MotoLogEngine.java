@@ -98,7 +98,7 @@ public class MotoLogEngine {
     private Garage currentGarage;
     private final DialogFactory dialogFactory;
     private Boolean saved;
-    private double version = 0.4;
+    private double version;
     
     // Parse.com variables
     ParseEngine parseEngine = new ParseEngine(this);
@@ -108,6 +108,7 @@ public class MotoLogEngine {
     
     public MotoLogEngine(){
         this.dialogFactory = new DialogFactory();
+        this.version = 0.4;
     }
     
     public void setGarageObjectId(String incomingGarageObjectId){
@@ -1073,7 +1074,7 @@ public class MotoLogEngine {
     
     public void startAboutWindow(Component incomingComponent){
         try {
-            this.aboutWindow = new AboutWindow(new JFrame(),true);
+            this.aboutWindow = new AboutWindow(new JFrame(),true,this);
             this.aboutWindow.setLocationRelativeTo(incomingComponent);
             this.aboutWindow.setVisible(true);
         } catch (URISyntaxException ex) {
