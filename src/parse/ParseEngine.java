@@ -90,6 +90,7 @@ public class ParseEngine {
             user.signUp();
             this.currentUser = user;                   
         } catch (ParseException ex) {
+            System.out.println(this.currentUser);
             //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
             //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, ex.toString());
@@ -129,8 +130,10 @@ public class ParseEngine {
         user.setPassword(password);    
         try {
             //user.signUp();
+            
             user = user.login(userName,password);
             
+            //user.get
             //System.out.println(user.getSessionToken().toString());
             //user.signUp()
             user.save();

@@ -1021,9 +1021,11 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        createUserMenuItem = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
         loginMenuItem = new javax.swing.JMenuItem();
         logoutMenuItem = new javax.swing.JMenuItem();
-        fileMenuSeparator = new javax.swing.JPopupMenu.Separator();
+        cloudMenuSeperator2 = new javax.swing.JPopupMenu.Separator();
         loadFromCloudMenuItem = new javax.swing.JMenuItem();
         saveToCloudMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
@@ -1878,6 +1880,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu1.setText("Cloud");
 
+        createUserMenuItem.setText("Create User");
+        createUserMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createUserMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(createUserMenuItem);
+        jMenu1.add(jSeparator8);
+
         loginMenuItem.setText("Login");
         loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1895,7 +1906,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jMenu1.add(logoutMenuItem);
-        jMenu1.add(fileMenuSeparator);
+        jMenu1.add(cloudMenuSeperator2);
 
         loadFromCloudMenuItem.setText("Load from Cloud");
         loadFromCloudMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -2657,6 +2668,11 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveToCloudMenuItemActionPerformed
 
+    private void createUserMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserMenuItemActionPerformed
+        // TODO add your handling code here:
+        this.motoGarageNotebookEngine.startCloudCreateUserWindow(this);
+    }//GEN-LAST:event_createUserMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2700,6 +2716,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton addMaintenanceActionButtonToolBar;
     private javax.swing.JButton addModificationButton;
     private javax.swing.JButton addWarrantyButton;
+    private javax.swing.JPopupMenu.Separator cloudMenuSeperator2;
+    private javax.swing.JMenuItem createUserMenuItem;
     private javax.swing.JPanel currentCustomerPanel;
     private javax.swing.JPanel currentMechanicPanel;
     private javax.swing.JLabel currentVehicleOdometerLabel;
@@ -2728,7 +2746,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton editWarrantyButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JPopupMenu.Separator fileMenuSeparator;
     private javax.swing.JLabel fiveOdoLabel;
     private javax.swing.JLabel fourOdoLabel;
     private javax.swing.JPanel fuelEntriesPanel;
@@ -2759,6 +2776,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JButton loadFromCloudButton;
     private javax.swing.JMenuItem loadFromCloudMenuItem;
     private javax.swing.JMenuItem loginMenuItem;

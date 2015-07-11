@@ -8,6 +8,9 @@ package windows;
 import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
 
 /**
@@ -32,7 +35,6 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
     }
     
     private void setIcon(){
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
@@ -45,7 +47,6 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        createUserButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         loginUserButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -54,17 +55,11 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        forgotPasswordButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MotoLog Cloud Login");
         setResizable(false);
-
-        createUserButton.setText("Create User");
-        createUserButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createUserButtonActionPerformed(evt);
-            }
-        });
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,20 +88,20 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(112, 112, 112))))
+                        .addGap(112, 112, 112))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(passwordLabel)
+                            .addComponent(usernameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(passwordTextField))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,21 +119,29 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        forgotPasswordButton.setText("Forgot Password");
+        forgotPasswordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forgotPasswordButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginUserButton)
+                .addGap(26, 26, 26)
+                .addComponent(forgotPasswordButton)
+                .addGap(27, 27, 27)
+                .addComponent(cancelButton)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(createUserButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(loginUserButton)
-                        .addGap(34, 34, 34)
-                        .addComponent(cancelButton))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,36 +150,15 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createUserButton)
                     .addComponent(loginUserButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(forgotPasswordButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
-        // TODO add your handling code here:
-        String username = this.usernameTextField.getText();
-        //String password = this.passwordTextField.getText();
-        String password = new String(this.passwordTextField.getPassword());
-        ParseUser newUser = this.motoLogEngine.signUpUser(this,username, password);
-
-        if(newUser.isAuthenticated()){
-            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" has been created!");
-            // time to sign the user in
-            newUser = this.motoLogEngine.signInUser(username, password);
-            if(newUser.getSessionToken()!= null){
-                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
-                this.motoLogEngine.setCurrentParseUser(newUser);
-            }
-            this.dispose();
-        }else if(!newUser.isAuthenticated()){
-            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" has NOT been created! A user with this login already exists.");
-        }
-    }//GEN-LAST:event_createUserButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -200,6 +182,36 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
             this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" can not login! Check your username and password and try again.");           
         }
     }//GEN-LAST:event_loginUserButtonActionPerformed
+
+    private void forgotPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotPasswordButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.usernameTextField.getText().isEmpty()){
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "Please put in your e-mail address you want your password reset instructions sent.");
+        }else{
+            try {
+                ParseUser.requestPasswordReset(this.usernameTextField.getText());
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "Your password reset instructions have been sent to your e-mail.");
+                this.dispose();
+            } catch (ParseException ex) {
+                //Logger.getLogger(CloudUserLoginCreationWindow.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("CloudUserLoginCreationWindow - Line 195 - " + ex.toString());
+                int parseExceptionCode = ex.getCode();
+                // Go over exceptions when attempting to get password via Forgot Password
+                switch (parseExceptionCode) {
+                    case 101:
+                        this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.WARNING_MESSAGE, "Invalid Login Parameters.");
+                        break;
+                    case 125:
+                        this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.WARNING_MESSAGE, "Invalid Email Address.");
+                        break;
+                    case 205:
+                        this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.WARNING_MESSAGE, "No user found with that email address.");
+                        break;    
+                }
+                
+            }
+        }
+    }//GEN-LAST:event_forgotPasswordButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,7 +250,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton createUserButton;
+    private javax.swing.JButton forgotPasswordButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginUserButton;

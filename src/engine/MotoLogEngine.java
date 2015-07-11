@@ -41,6 +41,7 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
 import parse.ParseEngine;
 import windows.AboutWindow;
+import windows.CloudCreateUserWindow;
 import windows.CloudUserLoginCreationWindow;
 import windows.MainWindow;
 import windows.MaintenanceActionWindow;
@@ -93,6 +94,7 @@ public class MotoLogEngine {
     private ProgressDialog progressDialogWindow;
     private VehicleMaintenanceTypesMainWindow vehicleMaintenanceTypesMainWindow;
     private MaintenanceActionsOverdueWindow maintenanceActionsOverdueWindow;
+    private CloudCreateUserWindow cloudCreateUserWindow;
     
     //Other Variables
     private Garage currentGarage;
@@ -500,6 +502,10 @@ public class MotoLogEngine {
     
     public boolean updateVehicleModel(VehicleModel originalVehicleModel, VehicleModel updatedVehicleModel){
         boolean updatedType =this.getGarage().updateVehicleModel(originalVehicleModel, updatedVehicleModel);
+        
+        // this is where we might want to go through each CUSTOMER and update vehicle models?
+        //TODO        
+        
         this.mainWindow.refresh();
         return updatedType;
     }
@@ -1002,6 +1008,12 @@ public class MotoLogEngine {
         this.vehicleWindow.setVisible(true);       
     }
     
+    public void startCloudCreateUserWindow(Component incomingParent){
+        this.cloudCreateUserWindow = new CloudCreateUserWindow(new JFrame(), true, this);
+        this.cloudCreateUserWindow.setLocationRelativeTo(incomingParent);
+        this.cloudCreateUserWindow.setVisible(true);
+    }
+    
     public void startUpdateVehicleWindow(Component incomingParent){
         this.vehicleWindow = new VehicleWindow(new JFrame(),true,this, this.getCurrentVehicle());
         this.vehicleWindow.setLocationRelativeTo(incomingParent);
@@ -1175,6 +1187,7 @@ public class MotoLogEngine {
         this.warrantyWindow.setLocationRelativeTo(incomingParent);
         this.warrantyWindow.setVisible(true);
     }
+    
     
     
     

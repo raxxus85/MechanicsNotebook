@@ -67,6 +67,16 @@
             <Property name="text" type="java.lang.String" value="Cloud"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="createUserMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Create User"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createUserMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator8">
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="loginMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Login"/>
@@ -89,7 +99,7 @@
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="logoutMenuItem.setEnabled(true);"/>
               </AuxValues>
             </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="fileMenuSeparator">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="cloudMenuSeperator2">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="loadFromCloudMenuItem">
               <Properties>
