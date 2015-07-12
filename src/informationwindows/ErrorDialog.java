@@ -22,7 +22,7 @@ public class ErrorDialog implements DialogInterface{
         dialog.setAlwaysOnTop(true);
         dialog.setModal(true);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/motoLogIcon16x16.png")));
         dialog.setLocationRelativeTo(incomingParent);
 
         dialog.setVisible(true);

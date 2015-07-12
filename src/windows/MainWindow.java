@@ -1389,7 +1389,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(saveGarageButton);
 
-        loadFromCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageCloud32x32DOWNLOAD.png"))); // NOI18N
+        loadFromCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoLogCloud32x32DOWNLOAD.png"))); // NOI18N
         loadFromCloudButton.setToolTipText("Load Garage from Cloud");
         loadFromCloudButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1398,7 +1398,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         mainToolBar.add(loadFromCloudButton);
 
-        saveToCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageCloud32x32UPLOAD.png"))); // NOI18N
+        saveToCloudButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoLogCloud32x32UPLOAD.png"))); // NOI18N
         saveToCloudButton.setToolTipText("Save Current Garage to Cloud");
         saveToCloudButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

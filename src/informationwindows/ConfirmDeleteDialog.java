@@ -43,7 +43,6 @@ public class ConfirmDeleteDialog{
         }else{
             return false;
         }
-        
         //JDialog dialog = jOptionPane.createDialog("Are you sure you wish to perform this action?");
         //dialog.setAlwaysOnTop(true);
         //dialog.setModal(true);

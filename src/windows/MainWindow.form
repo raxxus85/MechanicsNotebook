@@ -852,7 +852,7 @@
         <Component class="javax.swing.JButton" name="loadFromCloudButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/motoGarageCloud32x32DOWNLOAD.png"/>
+              <Image iconType="3" name="/motoLogCloud32x32DOWNLOAD.png"/>
             </Property>
           </Properties>
           <Events>
@@ -865,7 +865,7 @@
         <Component class="javax.swing.JButton" name="saveToCloudButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/motoGarageCloud32x32UPLOAD.png"/>
+              <Image iconType="3" name="/motoLogCloud32x32UPLOAD.png"/>
             </Property>
           </Properties>
           <Events>

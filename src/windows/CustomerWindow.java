@@ -40,9 +40,9 @@ public class CustomerWindow extends JDialog {
      * Main constructor, used when creating Customer
      * @param incomingMotoGarageMechanicEngine 
      */
-    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoGarageMechanicEngine) {
+    public CustomerWindow(java.awt.Frame parent,boolean modal,MotoLogEngine incomingMotoLogEngine) {
         super(parent, modal);
-        this.motoLogEngine = incomingMotoGarageMechanicEngine;
+        this.motoLogEngine = incomingMotoLogEngine;
         initComponents();
         this.setIcon();
         this.createOrUpdateCustomerButton.setText("Create Customer");

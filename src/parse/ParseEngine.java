@@ -2,6 +2,7 @@ package parse;
 
 import engine.MotoLogEngine;
 import informationwindows.DialogType;
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -42,7 +43,7 @@ public class ParseEngine {
         Parse.initialize(appId, restApiAppId);
     }
     
-    public ParseEngine(){
+    public ParseEngine(String NONONO){
         Parse.initialize(appId, restApiAppId);
     }
     
@@ -78,9 +79,12 @@ public class ParseEngine {
      * Method to sing up a Parse.com user
      * @param userName, username which should be EMAIL 
      * @param password
+     * @param incomingComponent
      * @return ParseUser
+     * Error Codes
+     * 202 - email already taken
      */
-    public ParseUser signUpUser(String userName, String password){
+    public ParseUser signUpUser(Component incomingComponent,String userName, String password){
         ParseUser user = new ParseUser();
         user.setUsername(userName);
         user.setEmail(userName);
@@ -90,15 +94,52 @@ public class ParseEngine {
             user.signUp();
             this.currentUser = user;                   
         } catch (ParseException ex) {
-            System.out.println(this.currentUser);
-            //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
-            //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, ex.toString());
-            if(ex.getCode() == 202){
-                //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Username " + userName + " is already taken! Please try another.");
+            int parseExceptionCode = ex.getCode();
+            switch (parseExceptionCode) {
+                case 202:
+                    this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "Email address already taken!");
+                    user = null;
+                    break;
             }
+
         }        
         return user;
+    }
+    
+    /**
+     * Method called when password is forgotten
+     * <li> also handles parse exceptions
+     * @param incomingComponent
+     * @param userName
+     * @return 1 if successful
+     */
+    public int forgotCloudPassword(Component incomingComponent,String userName){
+        int returnCode = 0;
+        try {
+            ParseUser.requestPasswordReset(userName);
+            this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.INFORMATION_MESSAGE, "Your password reset instructions have been sent to your e-mail.");
+            returnCode = 1;
+            } catch (ParseException ex) {
+                //Logger.getLogger(CloudUserLoginCreationWindow.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("ParseEngine - Line 117 - " + ex.toString());
+                int parseExceptionCode = ex.getCode();
+                // Go over exceptions when attempting to get password via Forgot Password
+                switch (parseExceptionCode) {
+                    case 101:
+                        this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "Invalid Login Parameters.");
+                        break;
+                    case 125:
+                        this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "Invalid Email Address.");
+                        break;
+                    case 205:
+                        this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "No user found with that email address.");
+                        break;    
+                    default:
+                        this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "An error occured attempting to recover lost password." + ex.toString());                        
+                }
+                
+            }
+        return returnCode;
     }
     
     public void signOutUser() throws ParseException{
@@ -108,6 +149,7 @@ public class ParseEngine {
         }
 
         try {
+
             this.currentUser.logout();
             this.currentUser = null; // REMOVE WHEN WE USE SESSION TOKENS FOR REALS
         } catch (ParseException ex) {
@@ -119,20 +161,19 @@ public class ParseEngine {
     
     /**
      * Method to sign in a Parse.com user
+     * @param incomingComponent
      * @param userName
      * @param password
      * @return ParseUser
      */
-    public ParseUser signInUser(String userName,String password){
+    public ParseUser signInUser(Component incomingComponent, String userName,String password){
         ParseUser user = new ParseUser();
         user.setUsername(userName);
         //user.setEmail(email);
         user.setPassword(password);    
         try {
             //user.signUp();
-            
             user = user.login(userName,password);
-            
             //user.get
             //System.out.println(user.getSessionToken().toString());
             //user.signUp()
@@ -142,14 +183,18 @@ public class ParseEngine {
             this.currentUser = user;
             //user.logout();                  
         } catch (ParseException ex) {
-            //Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
-            System.out.println("poopies");
-            //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, ex.toString());
-            if(ex.getCode()==101){
-                //this.motoGarageNotebookEngine.getDialogFactory().createDialogMessage(DialogType.WARNING_MESSAGE, "Invalid login parameters. Either your username or password is incorrect");
+            int parseExceptionCode = ex.getCode();
+            switch (parseExceptionCode) {
+                case 101:
+                    this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "Invalid login parameters! Check your login and password and try again.");
+                    break;
+                case 100:
+                    this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "An error occured attempting to reach MotoLog Cloud Servers. Please check your internet connection and try again. If problem persists, please contact MotoLog Support.");
+                    break;
+                default:
+                    this.motoLogEngine.getDialogFactory().createDialogMessage(incomingComponent, DialogType.WARNING_MESSAGE, "An error occured attempting to login, please report." + ex.toString());
             }
-
+  
         }    
         return user;
     }

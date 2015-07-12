@@ -51,6 +51,8 @@ public class AboutWindow extends javax.swing.JDialog {
     /**
      * Creates new form AboutWindow
      * @param parent
+     * @param modal
+     * @param incomingMotoLogEngine
      */
     public AboutWindow(java.awt.Frame parent,boolean modal, MotoLogEngine incomingMotoLogEngine) throws URISyntaxException{
         super(parent, modal);
@@ -78,8 +80,7 @@ public class AboutWindow extends javax.swing.JDialog {
     }
     
     private void setIcon(){
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 
     

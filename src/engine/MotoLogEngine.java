@@ -180,14 +180,18 @@ public class MotoLogEngine {
     }
     
     public ParseUser signUpUser(Component incomingComponent,String username, String password){
-        ParseUser newUser = this.parseEngine.signUpUser(username, password);
+        ParseUser newUser = this.parseEngine.signUpUser(incomingComponent,username, password);
 
         //this.currentParseUser = newUser;
         return newUser;
     }
     
-    public ParseUser signInUser(String username, String password){
-        ParseUser signedInUser = this.parseEngine.signInUser(username, password);
+    public int forgotCloudPassword(Component incomingComponent, String incomingUserName){
+        return this.parseEngine.forgotCloudPassword(incomingComponent, incomingUserName);
+    }
+    
+    public ParseUser signInUser(Component incomingComponent, String username, String password){
+        ParseUser signedInUser = this.parseEngine.signInUser(incomingComponent,username, password);
         return signedInUser;
     }
 
@@ -346,6 +350,9 @@ public class MotoLogEngine {
             // set garage save file
             this.currentGarage.setSaveFile(fileToSaveAs);
             this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.INFORMATION_MESSAGE, "File saved successfully.");
+
+            long fileSizeInKB = (fileToSaveAs.length() / 1024 ) ;
+            this.getDialogFactory().createDialogMessage(this.mainWindow, DialogType.INFORMATION_MESSAGE, "File size : " + fileSizeInKB + " kilobytes.");
             System.out.print("Garage saved locally to:");
             System.out.println(trimmedFilePath);
         }catch(IOException ex){

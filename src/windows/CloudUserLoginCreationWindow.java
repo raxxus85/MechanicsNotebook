@@ -81,7 +81,7 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
 
         passwordLabel.setText("Password");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoGarageCloud.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/motoLogCloud.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,44 +173,30 @@ public class CloudUserLoginCreationWindow extends javax.swing.JDialog {
         // TODO add your handling code here:
         String username = this.usernameTextField.getText();
         String password = new String(this.passwordTextField.getPassword());
-        ParseUser newUser = this.motoLogEngine.signInUser(username, password);
+        ParseUser newUser = this.motoLogEngine.signInUser(this,username, password);
         if(newUser.isAuthenticated()){
             this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Cloud user " + newUser.getUsername() +" is logged in!");
             this.motoLogEngine.setCurrentParseUser(newUser);
             this.dispose();
-        }else{
-            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "Cloud user " + newUser.getUsername() +" can not login! Check your username and password and try again.");           
         }
     }//GEN-LAST:event_loginUserButtonActionPerformed
 
+    /**
+     * Method used when a user hits forgot password
+     * @param evt 
+     */
     private void forgotPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotPasswordButtonActionPerformed
         // TODO add your handling code here:
         if(this.usernameTextField.getText().isEmpty()){
             this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "Please put in your e-mail address you want your password reset instructions sent.");
         }else{
-            try {
-                ParseUser.requestPasswordReset(this.usernameTextField.getText());
-                this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.INFORMATION_MESSAGE, "Your password reset instructions have been sent to your e-mail.");
+            int returnedCode = this.motoLogEngine.forgotCloudPassword(this, this.usernameTextField.getText());
+            if(returnedCode==1){
                 this.dispose();
-            } catch (ParseException ex) {
-                //Logger.getLogger(CloudUserLoginCreationWindow.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("CloudUserLoginCreationWindow - Line 195 - " + ex.toString());
-                int parseExceptionCode = ex.getCode();
-                // Go over exceptions when attempting to get password via Forgot Password
-                switch (parseExceptionCode) {
-                    case 101:
-                        this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.WARNING_MESSAGE, "Invalid Login Parameters.");
-                        break;
-                    case 125:
-                        this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.WARNING_MESSAGE, "Invalid Email Address.");
-                        break;
-                    case 205:
-                        this.motoLogEngine.getDialogFactory().createDialogMessage(this, DialogType.WARNING_MESSAGE, "No user found with that email address.");
-                        break;    
-                }
-                
             }
         }
+            
+        
     }//GEN-LAST:event_forgotPasswordButtonActionPerformed
 
     /**
