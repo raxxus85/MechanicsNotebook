@@ -362,6 +362,9 @@ public class ParseEngine {
                     }else if(garageList.size()==1){
                         System.out.println("User has ONE garage. this is a good thing.");
                         ParseObject garage = garageList.get(0);
+                        
+                        // what the heck happens here that causes the index array out of bounds/!?!?
+                        
                         openGarage(garage);
                     }else{
                         System.out.println("Retrieved " + garageList.size() + " garages!!!!!!!!!");

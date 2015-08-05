@@ -8,6 +8,8 @@ import informationwindows.DialogFactory;
 import informationwindows.DialogType;
 import informationwindows.ProgressDialog;
 import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,7 +27,11 @@ import java.util.Collections;
 import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import objectmodels.Customer;
 import objectmodels.DragStripSlip;
 import objectmodels.FuelEntry;
@@ -596,6 +602,32 @@ public class MotoLogEngine {
             return false;
         }
     }
+    
+    /**
+     * Test Method used to open an imageIcon in a SEPERATE JDialog 
+     * <li> this would allow, in theory, HUGE images... investigating
+     * @param incomingImageIcon 
+     */
+    public void openImageIcon(ImageIcon incomingImageIcon){
+        JPanel pan=new JPanel();
+            pan.setLayout(new FlowLayout());
+            JLabel newLabel = new JLabel();
+            //newLabel.setIcon(null);
+            ImageIcon imageIcon = incomingImageIcon;
+            newLabel.setIcon(imageIcon);
+            Image image = imageIcon.getImage();
+            
+            
+            pan.add(newLabel);
+            JDialog jd=new JDialog();
+            int height = imageIcon.getIconHeight();
+            int width = imageIcon.getIconWidth();
+            jd.setSize(width, height);
+  
+            jd.add(pan);
+            jd.setVisible(true);
+    }
+    
     
     /**
      * Method to check to see if we have any maintenance Types

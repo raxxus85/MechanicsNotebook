@@ -106,6 +106,15 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         this.maintenanceTypeIntervalTextField.setText(incomingMaintenanceType.getMileageInterval().toString());
         this.maintenanceTypeDescriptionTextArea.setText(incomingMaintenanceType.getDescription());
 
+        if(incomingMaintenanceType.getVehicleType().equals(VehicleType.CARORTRUCK)){
+            this.carTruckButton.setSelected(true);
+            this.motorcycleRadioButton.setEnabled(false);
+            this.carTruckButton.setEnabled(false);
+        }else{
+            this.motorcycleRadioButton.setSelected(true);
+            this.motorcycleRadioButton.setEnabled(false);
+            this.carTruckButton.setEnabled(false);
+        }
         // recurring stuff
         if(incomingMaintenanceType.getMileageInterval()== 0){
             this.updateRecurring();
@@ -154,6 +163,7 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
         this.maintenanceTypeDescriptionTextArea.setText(incomingVehicleMaintenanceType.getDescription());
         
         // disable bubbles
+
         if(incomingVehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
             this.carTruckButton.setSelected(true);
             this.motorcycleRadioButton.setEnabled(false);
@@ -171,8 +181,6 @@ public class MaintenanceTypeWindow extends javax.swing.JDialog {
     }
     
     private void setIcon(){
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/mechanicIcon.png")));
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/MGFavicon.png")));
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.motoLogEngine.getMotoLogIcon())));
     }
 

@@ -220,7 +220,7 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
             VehicleModel selectedVehicleModel = vehicleModels[rowSelected];
             this.motoLogEngine.startUpdateVehicleModelWindow(this, selectedVehicleModel);
         }else{
-            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to edit.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Model to edit.");
         }
         
     }//GEN-LAST:event_vehicleModelEditButtonActionPerformed
