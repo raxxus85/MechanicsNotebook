@@ -231,18 +231,18 @@ public class VehicleModelsMainWindow extends javax.swing.JDialog {
         int rowSelected = this.vehicleModelsJTable.getSelectedRow();
 
         if(rowSelected==-1){
-            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Type to delete.");
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "You need to select a Vehicle Model to delete.");
             return;
         }
-        boolean sureToDelete = this.motoLogEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Type? This is permanent!");
+        boolean sureToDelete = this.motoLogEngine.getDialogFactory().createConfirmMessage(this,"Are you sure you wish to delete the Vehicle Model? This is permanent!");
         if(sureToDelete){
             VehicleModel[] vehicleModel = this.motoLogEngine.getVehicleModelArray();
             VehicleModel selectedVehicleModel = vehicleModel[rowSelected];
             if(this.motoLogEngine.deleteVehicleModel(selectedVehicleModel)){
-                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Type deleted successfully!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.INFORMATION_MESSAGE, "Vehicle Model deleted successfully!");
                 this.refreshVehicleModelTable();
             }else{
-                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Vehicle Type! :( Please report!");
+                this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.ERROR_MESSAGE, "Error attempting to delete Vehicle Model! :( Please report!");
             }
 //            
         }

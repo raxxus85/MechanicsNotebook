@@ -357,8 +357,9 @@ public class MotoLogEngine {
             this.currentGarage.setSaveFile(fileToSaveAs);
             this.getDialogFactory().createDialogMessage(this.mainWindow,DialogType.INFORMATION_MESSAGE, "File saved successfully.");
 
-            long fileSizeInKB = (fileToSaveAs.length() / 1024 ) ;
-            this.getDialogFactory().createDialogMessage(this.mainWindow, DialogType.INFORMATION_MESSAGE, "File size : " + fileSizeInKB + " kilobytes.");
+            //long fileSizeInKB = (fileToSaveAs.length() / 1024 ) ;
+            System.out.println("The size of the file saved is " + fileToSaveAs.length());
+            //this.getDialogFactory().createDialogMessage(this.mainWindow, DialogType.INFORMATION_MESSAGE, "File size : " + fileSizeInKB + " kilobytes.");
             System.out.print("Garage saved locally to:");
             System.out.println(trimmedFilePath);
         }catch(IOException ex){

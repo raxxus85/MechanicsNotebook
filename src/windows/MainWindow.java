@@ -62,7 +62,7 @@ public class MainWindow extends javax.swing.JFrame {
     int maxColumnWidth = 80;
     
     // INFO for Help Button
-    final URI uri = new URI("http://www.motogaragechi.com/motogarage-notebook-help/");
+    final URI uri = new URI("http://www.motogaragechi.com/motolog-help/");
     class OpenUrlAction implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -2582,7 +2582,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoLog Save Files", "mnb");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showDialog(this, "Load Garage");
 
@@ -2610,7 +2610,7 @@ public class MainWindow extends javax.swing.JFrame {
 
             // .mnb FILTER
             // Set extension filter
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoLog Save Files", "mnb");
             chooser.setFileFilter(filter);
 
             int returnVal = chooser.showDialog(this, "Save Garage");

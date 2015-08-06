@@ -344,11 +344,21 @@ public class VehicleWindow extends javax.swing.JDialog {
         // now try the year
         try{
             newVehicleYear = Integer.parseInt(this.vehicleYearTextField.getText());
-            newVehicleOdometer = Integer.parseInt(this.vehicleOdometerTextField.getText());
         }catch(NumberFormatException ex){
             this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Vehicle Year must be an Integer(ie 1997)!");
             return;
         }
+        
+        try{
+            newVehicleOdometer = Integer.parseInt(this.vehicleOdometerTextField.getText());
+        }catch(NumberFormatException ex){
+            this.motoLogEngine.getDialogFactory().createDialogMessage(this,DialogType.WARNING_MESSAGE, "The Odometer must be an Integer(ie 10591)!");
+            return;
+        }
+        
+        
+        
+        
         VehicleModel selectedVehicleModel = (VehicleModel)this.vehicleModelComboBox.getSelectedItem();
         Vehicle newVehicle = new Vehicle(selectedVehicleModel,newVehicleYear,newVehicleColor, newVehicleVIN,newVehicleOdometer,newVehicleDescription);
         if(this.imageIcon!=null){
