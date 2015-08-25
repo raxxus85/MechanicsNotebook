@@ -14,6 +14,7 @@ public class InformationDialog implements DialogInterface{
     /**
      * //Method to create an information dialog box!
      * 
+     * @param incomingParent
      * @param message 
      */
     public void create(Component incomingParent,String message){

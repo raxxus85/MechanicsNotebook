@@ -69,6 +69,11 @@ public class VehicleModelsWindow extends javax.swing.JDialog {
         this.makeTextField.setText(incomingVehicleModel.getMake());
         this.modelTextField.setText(incomingVehicleModel.getModel());
         
+        // disable buttons on UPDATE ( DONT WANT TO ALLOW UPDATING TYPE HERE!
+        
+        this.motorcycleRadioButton.setEnabled(false);
+        this.carTruckRadioButton.setEnabled(false);
+        
         if(incomingVehicleModel.getVehicleType().equals(VehicleType.CARORTRUCK)){
             this.motorcycleRadioButton.setSelected(false);
             this.carTruckRadioButton.setSelected(true);

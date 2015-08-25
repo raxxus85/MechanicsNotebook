@@ -261,7 +261,7 @@ public class Garage implements Serializable{
         // this.getVehicleModelArrayList().set(originalIndex, updatedVehicleModel); possible bad .4 code
         this.getVehicleModelArrayList().get(originalIndex).setMake(updatedVehicleModel.getMake());
         this.getVehicleModelArrayList().get(originalIndex).setModel(updatedVehicleModel.getModel());
-        this.getVehicleModelArrayList().get(originalIndex).setVehicleType(updatedVehicleModel.getVehicleType());
+        //this.getVehicleModelArrayList().get(originalIndex).setVehicleType(updatedVehicleModel.getVehicleType());
         
         //if(!this.getVehicleModelArrayList().contains(originalVehicleModel)){
         //    return true;

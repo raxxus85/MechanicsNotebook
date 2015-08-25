@@ -7,6 +7,7 @@ package informationwindows;
 import java.awt.Component;
 import java.awt.Toolkit;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -33,9 +34,14 @@ public class ConfirmDeleteDialog{
 
         Object[] options = { "Confirm", "Cancel" };
         
+        //Icon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/motoLogIcon16x16.png")));
+
+        
+        
         int choice = jOptionPane.showOptionDialog(incomingParent,message, "Warning!",
         jOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
         null, options, options[0]); 
+        //jOptionPane.setIcon(icon);
         //jOptionPane.setLocation(incomingParent.getLocation());
         // 0 is delete, 1 is CANCEL
         if(choice == 0){
