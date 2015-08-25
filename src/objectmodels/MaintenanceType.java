@@ -14,8 +14,6 @@ public class MaintenanceType extends BaseObjectModel implements Serializable{
     private String maintenanceTypeName;
     private String description;
     private Integer mileageInterval;
-    // testing
-    
     private VehicleType vehicleType;
     // private Date timeInterval?
     

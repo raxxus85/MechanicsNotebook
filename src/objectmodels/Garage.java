@@ -189,12 +189,19 @@ public class Garage implements Serializable{
      */
     public boolean updateMaintenanceType(MaintenanceType originalMaintenanceType, MaintenanceType updatedMaintenanceType){
         Integer originalIndex = this.getMaintenanceTypeArrayList().indexOf(originalMaintenanceType);
-        this.getMaintenanceTypeArrayList().set(originalIndex, updatedMaintenanceType);
-        if(!this.getMaintenanceTypeArrayList().contains(originalMaintenanceType)){
-            return true;
-        }else{
-            return false;
-        }
+        // this.getMaintenanceTypeArrayList().set(originalIndex, updatedMaintenanceType); bad code from version .4
+        this.getMaintenanceTypeArrayList().get(originalIndex).setMaintenanceTypeName(updatedMaintenanceType.getMaintenanceTypeName());
+        this.getMaintenanceTypeArrayList().get(originalIndex).setDescription(updatedMaintenanceType.getDescription());
+        this.getMaintenanceTypeArrayList().get(originalIndex).setMileageInterval(updatedMaintenanceType.getMileageInterval());
+        this.getMaintenanceTypeArrayList().get(originalIndex).setVehicleType(updatedMaintenanceType.getVehicleType());
+        
+        //if(!this.getMaintenanceTypeArrayList().contains(originalMaintenanceType)){
+        //    return true;
+        //}else{
+        //    return false;
+        //}
+        //TODO resolve this
+        return true;
     }
     
         /**
