@@ -116,7 +116,7 @@ public class MotoLogEngine {
     
     public MotoLogEngine(){
         this.dialogFactory = new DialogFactory();
-        this.version = 0.4;
+        this.version = 0.5;
     }
     
     public void setGarageObjectId(String incomingGarageObjectId){
