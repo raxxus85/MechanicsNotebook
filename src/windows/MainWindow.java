@@ -2016,7 +2016,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
         JFileChooser chooser = new JFileChooser();
         
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoLog Save Files", "mnb");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showDialog(this, "Load Garage");
 
@@ -2062,7 +2062,7 @@ public class MainWindow extends javax.swing.JFrame {
 
             // .mnb FILTER
             // Set extension filter
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoLog Save Files", "mnb");
             chooser.setFileFilter(filter);
 
             int returnVal = chooser.showDialog(this, "Save Garage");
@@ -2539,7 +2539,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         
         
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoGarage Notebook Save Files", "mnb");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("MotoLog Save Files", "mnb");
         chooser.setFileFilter(filter);
         
         int returnVal = chooser.showDialog(this, "Save Garage");
