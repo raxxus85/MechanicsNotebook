@@ -22,7 +22,7 @@ public class VehicleModel implements Serializable{
         this.vehicleType = incomingVehicleType;
     }
     
-    public void editVehicleType(VehicleType incomingVehicleType){
+    public void setVehicleType(VehicleType incomingVehicleType){
         this.vehicleType = incomingVehicleType;
     }
     
