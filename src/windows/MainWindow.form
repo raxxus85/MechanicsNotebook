@@ -7,6 +7,8 @@
         <Property name="text" type="java.lang.String" value="jMenuItem1"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator9">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="mechanicsNotebookMenuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileMenu">
@@ -875,7 +877,7 @@
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="saveToCloudButton.setToolTipText(&quot;Save Current Garage to Cloud&quot;);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator7">
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator10">
         </Component>
         <Component class="javax.swing.JButton" name="editVehicleModelsButton">
           <Properties>

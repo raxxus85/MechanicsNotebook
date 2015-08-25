@@ -12,6 +12,7 @@ import engine.MotoLogEngine;
 import informationwindows.DialogType;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -829,6 +830,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JSeparator();
         mainTabbedPane = new javax.swing.JTabbedPane();
         vehicleMaintenanceActionsPanel = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -888,7 +890,7 @@ public class MainWindow extends javax.swing.JFrame {
         saveGarageButton = new javax.swing.JButton();
         loadFromCloudButton = new javax.swing.JButton();
         saveToCloudButton = new javax.swing.JButton();
-        jSeparator7 = new javax.swing.JToolBar.Separator();
+        jSeparator10 = new javax.swing.JToolBar.Separator();
         editVehicleModelsButton = new javax.swing.JButton();
         ImageIcon maintenanceTypeEdit = new ImageIcon(getClass().getResource("/maintenanceType32x32EDIT.png"));
         Action actionMaintenanceTypeEdit = new AbstractAction("New", maintenanceTypeEdit) {
@@ -1406,7 +1408,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         mainToolBar.add(saveToCloudButton);
-        mainToolBar.add(jSeparator7);
+        mainToolBar.add(jSeparator10);
 
         editVehicleModelsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vehicleModel32x32.png"))); // NOI18N
         editVehicleModelsButton.setFocusable(false);
@@ -2770,13 +2772,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
-    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JButton loadFromCloudButton;
     private javax.swing.JMenuItem loadFromCloudMenuItem;
     private javax.swing.JMenuItem loginMenuItem;

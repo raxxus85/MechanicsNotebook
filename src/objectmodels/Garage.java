@@ -241,15 +241,27 @@ public class Garage implements Serializable{
     
     
     
-    
+    /**
+     * Method to update the vehicle model
+     * <li> BUGGED as of version .4
+     * <li> Theory, we are REPLACING IT, not actually UPDATING, lets try UPDATING...
+     * @param originalVehicleModel
+     * @param updatedVehicleModel
+     * @return 
+     */
     public boolean updateVehicleModel(VehicleModel originalVehicleModel, VehicleModel updatedVehicleModel){
         Integer originalIndex = this.getVehicleModelArrayList().indexOf(originalVehicleModel);
-        this.getVehicleModelArrayList().set(originalIndex, updatedVehicleModel);
-        if(!this.getVehicleModelArrayList().contains(originalVehicleModel)){
-            return true;
-        }else{
-            return false;
-        }
+        // this.getVehicleModelArrayList().set(originalIndex, updatedVehicleModel); possible bad .4 code
+        this.getVehicleModelArrayList().get(originalIndex).setMake(updatedVehicleModel.getMake());
+        this.getVehicleModelArrayList().get(originalIndex).setModel(updatedVehicleModel.getModel());
+        
+        //if(!this.getVehicleModelArrayList().contains(originalVehicleModel)){
+        //    return true;
+        //}else{
+        //    return false;
+        //}
+        
+        return true; // FIND A WAY TO TEST!!
     }
     
     /**

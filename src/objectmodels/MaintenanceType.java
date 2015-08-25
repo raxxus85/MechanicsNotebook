@@ -45,10 +45,6 @@ public class MaintenanceType extends BaseObjectModel implements Serializable{
         this.vehicleType = incomingVehicleType;
     }
     
-    public void setVehicleType(VehicleType incomingVehicleType){
-        this.vehicleType = incomingVehicleType;
-    }
-    
     public VehicleType getVehicleType(){
         return this.vehicleType;
     }
@@ -94,6 +90,10 @@ public class MaintenanceType extends BaseObjectModel implements Serializable{
         this.mileageInterval = incomingMileageInterval;
     }
     
+    public void setVehicleType(VehicleType incomingVehicleType){
+        this.vehicleType = incomingVehicleType;
+    }
+        
     @Override
     public String toString(){
         String returnString = this.getMaintenanceTypeName();
