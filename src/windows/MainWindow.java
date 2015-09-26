@@ -2119,6 +2119,10 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_vehicleAddButtonNewActionPerformed
 
+    /**
+     * Method calls when user presses the add mechanic button
+     * @param evt 
+     */
     private void mechanicAddButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mechanicAddButtonNewActionPerformed
         // User hit create new Mechanic button, let's do it!
         this.motoGarageNotebookEngine.startNewMechanicWindow(this);

@@ -385,6 +385,10 @@ public class MechanicWindow extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_openMechanicPictureButtonActionPerformed
 
+    /**
+     * Method used to clear the current picture of the mechanic
+     * @param evt 
+     */
     private void clearPictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPictureButtonActionPerformed
         // TODO add your handling code here:
         this.imageIcon=null;
